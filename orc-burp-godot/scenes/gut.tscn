@@ -212,3 +212,7 @@ shape = SubResource("CapsuleShape2D_dhrd0")
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=931936357]
 position = Vector2(3, 1)
 stream = ExtResource("3_u2ds8")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=826353914]
+limit_left = 0
+limit_top = 0

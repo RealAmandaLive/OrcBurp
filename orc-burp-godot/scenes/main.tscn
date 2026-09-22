@@ -24,6 +24,7 @@ script = ExtResource("1_0wfyh")
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1644095330]
 
 [node name="ApplesCollected" type="Panel" parent="HUD" unique_id=2040360600]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
