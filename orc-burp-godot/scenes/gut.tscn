@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cve250a1lqjtf" path="res://assets/Gut32x32.png" id="1_aej5v"]
 [ext_resource type="Script" uid="uid://c4dvcr37ef1cy" path="res://scripts/gut.gd" id="1_mq6y6"]
 [ext_resource type="AudioStream" uid="uid://bsg4e2tfcmqe" path="res://assets/deathSound.wav" id="3_u2ds8"]
+[ext_resource type="Shader" uid="uid://chftu8fyqea61" path="res://scripts/knockback_shockwave.gdshader" id="4_8a87c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mq6y6"]
 atlas = ExtResource("1_aej5v")
@@ -195,6 +196,16 @@ animations = [{
 radius = 16.0
 height = 58.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2ds8"]
+shader = ExtResource("4_8a87c")
+shader_parameter/shockwave_angle = 0.0
+shader_parameter/shockwave_width = 0.7630000362425
+shader_parameter/shockwave_thickness = 25.0
+shader_parameter/shockwave_depth = 0.13
+shader_parameter/shockwave_speed = 3.0
+shader_parameter/shockwave_strength = 0.250000011875
+shader_parameter/pixellize_size = 45.0
+
 [node name="Gut" type="CharacterBody2D" unique_id=1676850674]
 script = ExtResource("1_mq6y6")
 
@@ -216,3 +227,17 @@ stream = ExtResource("3_u2ds8")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=826353914]
 limit_left = 0
 limit_top = 0
+
+[node name="ShockwaveEffect" type="ColorRect" parent="." unique_id=1608988107]
+material = SubResource("ShaderMaterial_u2ds8")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
