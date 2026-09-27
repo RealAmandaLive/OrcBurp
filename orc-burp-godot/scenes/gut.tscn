@@ -5,6 +5,14 @@
 [ext_resource type="AudioStream" uid="uid://bsg4e2tfcmqe" path="res://assets/deathSound.wav" id="3_u2ds8"]
 [ext_resource type="Shader" uid="uid://chftu8fyqea61" path="res://scripts/knockback_shockwave.gdshader" id="4_8a87c"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3hgr"]
+atlas = ExtResource("2_8a87c")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btsf0"]
+atlas = ExtResource("2_8a87c")
+region = Rect2(32, 64, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a87c"]
 atlas = ExtResource("2_8a87c")
 region = Rect2(128, 192, 32, 32)
@@ -95,6 +103,17 @@ region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dhrd0"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3hgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btsf0")
+}],
+"loop": 1,
+"name": &"climbing",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8a87c")
@@ -206,14 +225,14 @@ shader_parameter/shockwave_speed = 3.0
 shader_parameter/shockwave_strength = 0.250000011875
 shader_parameter/pixellize_size = 45.0
 
-[node name="Gut" type="CharacterBody2D" unique_id=1676850674]
+[node name="Gut" type="CharacterBody2D" unique_id=1676850674 groups=["Player"]]
 script = ExtResource("1_mq6y6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=89753032]
 position = Vector2(3, 4)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dhrd0")
-animation = &"running"
+animation = &"climbing"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2112153789]

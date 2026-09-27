@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Tilemap32x32.png" id="1_g2h75"]
 [ext_resource type="Texture2D" uid="uid://cqcooocdmyuv8" path="res://assets/plain_grey.png" id="1_m7ahb"]
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="3_m7ahb"]
+[ext_resource type="Script" uid="uid://bih6h3jpesq1u" path="res://scripts/ladder.gd" id="4_dwgg1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wwpf4"]
 texture = ExtResource("1_g2h75")
@@ -184,6 +185,9 @@ sources/0 = SubResource("TileSetAtlasSource_wwpf4")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxf03"]
+size = Vector2(62, 421)
+
 [node name="levelRoot" type="Node2D" unique_id=867802413]
 metadata/_edit_vertical_guides_ = [640.0]
 
@@ -212,3 +216,11 @@ position = Vector2(1076, 634)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=1799567898]
 position = Vector2(21.5, -14)
 shape = SubResource("RectangleShape2D_m7ahb")
+
+[node name="Ladder" type="Area2D" parent="." unique_id=1597068453]
+position = Vector2(1189, 451)
+script = ExtResource("4_dwgg1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder" unique_id=1770394869]
+position = Vector2(0, -19.5)
+shape = SubResource("RectangleShape2D_yxf03")
