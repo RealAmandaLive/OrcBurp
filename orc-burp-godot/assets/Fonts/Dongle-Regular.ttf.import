@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://ca8my7a8fa3tx"
-path="res://.godot/imported/Dongle-Regular.ttf-77e7496edbac0b0fc76986982d77cc6c.fontdata"
+path="res://.godot/imported/Dongle-Regular.ttf-c1409a909a0c8eca32f2668715f695ac.fontdata"
 
 [deps]
 
-source_file="res://assets/Dongle-Regular.ttf"
-dest_files=["res://.godot/imported/Dongle-Regular.ttf-77e7496edbac0b0fc76986982d77cc6c.fontdata"]
+source_file="res://assets/Fonts/Dongle-Regular.ttf"
+dest_files=["res://.godot/imported/Dongle-Regular.ttf-c1409a909a0c8eca32f2668715f695ac.fontdata"]
 
 [params]
 

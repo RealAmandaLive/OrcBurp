@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b42gki46ugfvw"
-path="res://.godot/imported/toot-deep.wav-e88c5dc9f9dd2514a3a1738bef734997.sample"
+path="res://.godot/imported/toot-deep.wav-4b6eb3818f77720ea4fff8ad5b42dec7.sample"
 
 [deps]
 
-source_file="res://assets/orc-sounds/toot-deep.wav"
-dest_files=["res://.godot/imported/toot-deep.wav-e88c5dc9f9dd2514a3a1738bef734997.sample"]
+source_file="res://assets/Player/orc-sounds/toot-deep.wav"
+dest_files=["res://.godot/imported/toot-deep.wav-4b6eb3818f77720ea4fff8ad5b42dec7.sample"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3tc23ulx5jii"
-path="res://.godot/imported/gut_32_burp.png-c8e04e56a8b3d026a7060fbbd1720868.ctex"
+uid="uid://0n213whtk5d"
+path="res://.godot/imported/heartLoss.png-9a1789a507773c2a4a595c5582fbc7ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gut_32_burp.png"
-dest_files=["res://.godot/imported/gut_32_burp.png-c8e04e56a8b3d026a7060fbbd1720868.ctex"]
+source_file="res://assets/HUD/heartLoss.png"
+dest_files=["res://.godot/imported/heartLoss.png-9a1789a507773c2a4a595c5582fbc7ea.ctex"]
 
 [params]
 

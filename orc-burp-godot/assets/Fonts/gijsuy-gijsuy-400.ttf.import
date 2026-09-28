@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://psrbjtoc002x"
-path="res://.godot/imported/gijsuy-gijsuy-400.ttf-807d00a469ef4d943d14cbaaed66eb72.fontdata"
+path="res://.godot/imported/gijsuy-gijsuy-400.ttf-7a8f73359fbbca006b29cd6265b6884f.fontdata"
 
 [deps]
 
-source_file="res://assets/gijsuy-gijsuy-400.ttf"
-dest_files=["res://.godot/imported/gijsuy-gijsuy-400.ttf-807d00a469ef4d943d14cbaaed66eb72.fontdata"]
+source_file="res://assets/Fonts/gijsuy-gijsuy-400.ttf"
+dest_files=["res://.godot/imported/gijsuy-gijsuy-400.ttf-7a8f73359fbbca006b29cd6265b6884f.fontdata"]
 
 [params]
 

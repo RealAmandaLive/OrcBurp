@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c85ri8voce3r8"]
 
 [ext_resource type="Script" uid="uid://pgx4vl5p3adu" path="res://scripts/apple.gd" id="1_3dmh2"]
-[ext_resource type="Texture2D" uid="uid://c5bb4swe57jpa" path="res://assets/collected.png" id="1_7vr8k"]
-[ext_resource type="Texture2D" uid="uid://cxrl15owlvrpq" path="res://assets/apple.png" id="2_3dmh2"]
+[ext_resource type="Texture2D" uid="uid://vfhvif1whr01" path="res://assets/Items/collectedAnimation.png" id="1_7vr8k"]
+[ext_resource type="Texture2D" uid="uid://cxrl15owlvrpq" path="res://assets/Items/apple.png" id="2_3dmh2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pg1xk"]
 atlas = ExtResource("1_7vr8k")

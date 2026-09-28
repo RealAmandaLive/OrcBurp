@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://l7t82ao0x5mu"
-path="res://.godot/imported/burp-jump.wav-33180c94cb2329451e56667d514d3c96.sample"
+path="res://.godot/imported/burp-jump.wav-ba1a1e48f4b2cb7e1a6bf8b144120c81.sample"
 
 [deps]
 
-source_file="res://assets/orc-sounds/burp-jump.wav"
-dest_files=["res://.godot/imported/burp-jump.wav-33180c94cb2329451e56667d514d3c96.sample"]
+source_file="res://assets/Player/orc-sounds/burp-jump.wav"
+dest_files=["res://.godot/imported/burp-jump.wav-ba1a1e48f4b2cb7e1a6bf8b144120c81.sample"]
 
 [params]
 

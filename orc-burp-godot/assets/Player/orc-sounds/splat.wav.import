@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bsg4e2tfcmqe"
-path="res://.godot/imported/deathSound.wav-3e97a3e46155f9747ae4181322138273.sample"
+uid="uid://b3d3wkyhfft3f"
+path="res://.godot/imported/splat.wav-517e8e92620ae44ff06837d2e067a514.sample"
 
 [deps]
 
-source_file="res://assets/deathSound.wav"
-dest_files=["res://.godot/imported/deathSound.wav-3e97a3e46155f9747ae4181322138273.sample"]
+source_file="res://assets/Player/orc-sounds/splat.wav"
+dest_files=["res://.godot/imported/splat.wav-517e8e92620ae44ff06837d2e067a514.sample"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d33f44nrmcgpq"
-path="res://.godot/imported/burp-wide.wav-88c3c20219f70eda19c3cc5ea11c8539.sample"
+path="res://.godot/imported/burp-wide.wav-9439d19fd0fc9b6439c7d63896486ce9.sample"
 
 [deps]
 
-source_file="res://assets/orc-sounds/burp-wide.wav"
-dest_files=["res://.godot/imported/burp-wide.wav-88c3c20219f70eda19c3cc5ea11c8539.sample"]
+source_file="res://assets/Player/orc-sounds/burp-wide.wav"
+dest_files=["res://.godot/imported/burp-wide.wav-9439d19fd0fc9b6439c7d63896486ce9.sample"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhl14dcsdpdm4"
-path="res://.godot/imported/ghostPlaceholder.png-2fa5b8fa93714016940f4887e457a11c.ctex"
+uid="uid://d3tc23ulx5jii"
+path="res://.godot/imported/gut_32_burp.png-0d05d24711a43b3037b40a087808194f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ghostPlaceholder.png"
-dest_files=["res://.godot/imported/ghostPlaceholder.png-2fa5b8fa93714016940f4887e457a11c.ctex"]
+source_file="res://assets/Player/gut_32_burp.png"
+dest_files=["res://.godot/imported/gut_32_burp.png-0d05d24711a43b3037b40a087808194f.ctex"]
 
 [params]
 
