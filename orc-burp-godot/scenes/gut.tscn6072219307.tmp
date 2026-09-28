@@ -92,10 +92,6 @@ region = Rect2(128, 96, 32, 32)
 atlas = ExtResource("2_8a87c")
 region = Rect2(160, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_u2ds8"]
-atlas = ExtResource("2_8a87c")
-region = Rect2(0, 64, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_iv4gk"]
 atlas = ExtResource("2_8a87c")
 region = Rect2(64, 64, 32, 32)
@@ -204,14 +200,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_u2ds8")
-}],
-"loop": 1,
-"name": &"onLadder",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_iv4gk")
 }, {
 "duration": 1.0,
@@ -243,7 +231,7 @@ script = ExtResource("1_mq6y6")
 position = Vector2(3, 4)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dhrd0")
-animation = &"jumpFront"
+animation = &"climbing"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2112153789]
