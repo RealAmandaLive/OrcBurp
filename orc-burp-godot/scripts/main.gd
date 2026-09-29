@@ -109,6 +109,7 @@ func _setup_level(level_root: Node) -> void:
 	if players:
 		for node in players:
 			if node is Player:
+				node.collected_apple.connect(on_apple_collected)
 				node.died.connect(_on_gut_died)
 	
 	p("level setup done.")
@@ -139,7 +140,7 @@ func _on_exit_body_entered(body: Node2D) -> void:
 # --------
 # COLLECTING
 # --------
-func increase_applesCollected() -> void:
+func on_apple_collected() -> void:
 	if is_changing_level:
 		push_warning("Apple collected while level changing. Check if this is intended behavior")
 	

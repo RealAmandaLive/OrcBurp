@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 signal died
-signal collected_apple(new_health: int)
+signal collected_apple
 
 enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER}
 
@@ -106,7 +106,7 @@ func take_damage(amount: int) -> void:
 
 func collect_apple(health_increased: int) -> void:
 	health = mini(MAX_HEALTH, health + health_increased)
-	collected_apple.emit(health)
+	collected_apple.emit()
 	p("collected an apple for %d health; new current health is %d." % [health_increased, health])
 
 func die() -> void:
