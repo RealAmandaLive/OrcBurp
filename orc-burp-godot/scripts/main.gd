@@ -1,16 +1,30 @@
-extends Node2D
-@onready var apple_label: Label = $HUD/ApplesCollected/appleLabel
-@onready var fade: ColorRect = $HUD/fade
+class_name Main extends Node2D
 
+static var instance: Main
+static func get_instance() -> Main:
+	assert(instance)
+	return instance
+
+var applesCollected: int = 0
 
 var level: int = 1
-var applesCollected: int = 0
 var current_level_root: Node = null
+var is_changing_level: bool = false
 
-# Called when the node enters the scene tree for the first time.
+@onready var hud: HUD = %HUD
+
+func _enter_tree() -> void:
+	assert(not instance)
+	instance = self
+
+func _exit_tree() -> void:
+	assert(instance == self)
+	instance = null
+
+
 func _ready() -> void:
 	#setup level
-	fade.modulate.a = 1.0
+	hud.force_screen_faded()
 	current_level_root = get_node("levelRoot")
 	await _load_level(level, true)
 
@@ -19,22 +33,39 @@ func _ready() -> void:
 # LEVEL MANAGE
 #-------------
 
+## Loads a level and fires a signal when finished.
 func _load_level(level_number: int, first_load: bool) -> void:
+	is_changing_level = true
+	set_player_frozen(true) ## freeze current scene Gut
+	
 	#fadeout
 	if not first_load:
-		await _fade(1.0)
+		await hud.fade_to(1.0).finished
 	
 	if current_level_root:
 		current_level_root.queue_free()
 		
 	#changes level
 	var level_path = "res://scenes/level%s.tscn" % level_number
+	assert(FileAccess.file_exists(level_path), "Not a valid file path to load.")
+	
 	current_level_root = load(level_path).instantiate()
 	add_child(current_level_root)
 	current_level_root.name = "levelRoot"
 	_setup_level(current_level_root)
+	
+	## Freeze our new scene's Gut
+	## I'm leaving this commented out because I'm not sure it's desired. I think
+	## it's good when leaving the scene but it feels sticky when entering one.
+	## It also causes a bug with the camera waiting for the fade to end before
+	## clicking into position in the new scene.
+	#set_player_frozen(true) 
+	
 	#fade in
-	await _fade(0.0)
+	await hud.fade_to(0.0).finished
+	
+	is_changing_level = false
+	set_player_frozen(false)
 
 func _setup_level(level_root: Node) -> void:
 	#connect exit
@@ -54,15 +85,27 @@ func _setup_level(level_root: Node) -> void:
 		for enemy in enemies.get_children():
 			enemy.gut_died.connect(_on_gut_died)
 			
-			
+
+func set_player_frozen(toot: bool) -> void:
+	const PLAYER_GROUP: StringName = &"Player"
+	for n: Node in get_tree().get_nodes_in_group(PLAYER_GROUP):
+		n.process_mode = Node.PROCESS_MODE_DISABLED if toot else Node.PROCESS_MODE_INHERIT
+
 # ---------
 # SIGNAL HANDLERS
 # ---------
 func _on_gut_died(body):
+	if is_changing_level:
+		push_warning("Gut died while level changing. Check if this is intended behavior")
+	
 	body.die()
 	await _load_level(level, false)
 	
 func _on_exit_body_entered(body: Node2D) -> void:
+	if is_changing_level:
+		## Prevent double firing
+		return
+	
 	if body.name == "Gut":
 		level += 1
 		body.can_move = false
@@ -72,14 +115,8 @@ func _on_exit_body_entered(body: Node2D) -> void:
 # COLLECTING
 # --------
 func increase_applesCollected() -> void:
-	applesCollected += 1
-	apple_label.text = "Apples Collected: %s" % applesCollected
+	if is_changing_level:
+		push_warning("Apple collected while level changing. Check if this is intended behavior")
 	
-#------
-# FADE
-#------
-
-func _fade(to_alpha: float) -> void:
-	var tween := create_tween()
-	tween.tween_property(fade, "modulate:a", to_alpha, 1.5)
-	await tween.finished
+	applesCollected += 1
+	hud.on_apples_collected_changed(applesCollected)
