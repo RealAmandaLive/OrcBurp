@@ -27,9 +27,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	if direction == 1.0:
+	
+	if signf(direction) == 1.0:
 		animated_sprite_2d.flip_h = false
-	elif direction == -1.0:
+	elif signf(direction) == -1.0:
 		animated_sprite_2d.flip_h = true
 	
 	## JUMPING
