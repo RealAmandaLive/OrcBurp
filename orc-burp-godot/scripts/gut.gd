@@ -13,7 +13,7 @@ const DESCENDING_SPEED = 400
 const STARTING_HEALTH: int = 1 ## change me! TODO persistent state between level changes
 const MAX_HEALTH: int = 3 ## change me!
 
-var player_state = PlayerStates.IDLE
+var player_state = PlayerStates.IDLE: set = _set_state
 var alive = true
 var can_move = true
 var can_climb = false
@@ -76,25 +76,27 @@ func _physics_process(delta: float) -> void:
 		player_state = PlayerStates.ON_LADDER
 
 	move_and_slide()
+
+
+func _set_state(state: PlayerStates) -> void:
+	player_state = state
 	
-	_animate_sprite()
+	match player_state:
+		PlayerStates.IDLE: 
+			animated_sprite_2d.animation = "idle"
+		PlayerStates.WALKING:
+			animated_sprite_2d.animation = "running"
+		PlayerStates.JUMPING:
+			if velocity.x > 1 or velocity.x < -1:
+				animated_sprite_2d.animation = "jumpRunning"
+			else:
+				animated_sprite_2d.animation = "jumpFront"
+		PlayerStates.CLIMBING:
+			animated_sprite_2d.animation = "climbing"
+		PlayerStates.ON_LADDER:
+			animated_sprite_2d.animation = 'onLadder'
+	
 
-
-func _animate_sprite() -> void:
-		match player_state:
-			PlayerStates.IDLE: 
-				animated_sprite_2d.animation = "idle"
-			PlayerStates.WALKING:
-				animated_sprite_2d.animation = "running"
-			PlayerStates.JUMPING:
-				if velocity.x > 1 or velocity.x < -1:
-					animated_sprite_2d.animation = "jumpRunning"
-				else:
-					animated_sprite_2d.animation = "jumpFront"
-			PlayerStates.CLIMBING:
-				animated_sprite_2d.animation = "climbing"
-			PlayerStates.ON_LADDER:
-				animated_sprite_2d.animation = 'onLadder'
 
 func take_damage(amount: int) -> void:
 	if not alive: return
