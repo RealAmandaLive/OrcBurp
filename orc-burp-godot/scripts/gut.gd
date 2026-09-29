@@ -1,12 +1,17 @@
 class_name Player
 extends CharacterBody2D
 
+signal died
+signal collected_apple(new_health: int)
+
 enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER}
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
 const CLIMBING_SPEED = -300
 const DESCENDING_SPEED = 400
+const STARTING_HEALTH: int = 1 ## change me! TODO persistent state between level changes
+const MAX_HEALTH: int = 3 ## change me!
 
 var player_state = PlayerStates.IDLE
 var alive = true
@@ -14,8 +19,12 @@ var can_move = true
 var can_climb = false
 var climbing = false
 
+var health: int = STARTING_HEALTH
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer2D = $DeathSound
+
+func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
 func _physics_process(delta: float) -> void:
 	if !alive:
@@ -87,12 +96,28 @@ func _animate_sprite() -> void:
 			PlayerStates.ON_LADDER:
 				animated_sprite_2d.animation = 'onLadder'
 
+func take_damage(amount: int) -> void:
+	if not alive: return
+	
+	health = maxi(0, health-amount)
+	p("took %d damage, new health is %d." % [amount, health])
+	if health == 0:
+		die()
+
+func collect_apple(health_increased: int) -> void:
+	health = mini(MAX_HEALTH, health + health_increased)
+	collected_apple.emit(health)
+	p("collected an apple for %d health; new current health is %d." % [health_increased, health])
 
 func die() -> void:
+	if not alive: return
+	
 	death_sound.play()
 	animated_sprite_2d.animation = "hitFront"
 	alive = false
-
+	died.emit()
+	p("died.")
+	
 
 func enable_climbing() -> void:
 	can_climb = true

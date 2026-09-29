@@ -1,13 +1,20 @@
 extends Area2D
+
+@export var health_given_when_collected: int = 1
+
+var collected: bool = false
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-signal collected
-
 func _on_body_entered(_body: Node2D) -> void:
-	animated_sprite_2d.animation = "collected"
-	collected.emit()
-	call_deferred("_disable_collision")
+	if collected:
+		return
+	if _body is Player:
+		collected = true
+		_body.collect_apple(health_given_when_collected)
+		animated_sprite_2d.animation = "collected"
+		call_deferred("_disable_collision")
 	
 
 func _disable_collision() -> void:

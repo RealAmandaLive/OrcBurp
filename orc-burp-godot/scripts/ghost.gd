@@ -1,8 +1,7 @@
 extends Area2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-signal gut_died
-
+const DAMAGE: int = 1
 const SPEED = 100
 var direction = -1.0
 
@@ -19,5 +18,5 @@ func _on_timer_timeout() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Gut" and body.alive:
-		emit_signal("gut_died", body)
+	if body is Player:
+		body.take_damage(DAMAGE)
