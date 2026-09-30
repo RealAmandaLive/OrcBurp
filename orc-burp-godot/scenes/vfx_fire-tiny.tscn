@@ -1,5 +1,13 @@
 [gd_scene format=3 uid="uid://c60yffkq7g188"]
 
+[sub_resource type="Gradient" id="Gradient_xa7n4"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ep0u"]
+gradient = SubResource("Gradient_xa7n4")
+width = 1
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yxw76"]
 lifetime_randomness = 0.15
 particle_flag_disable_z = true
@@ -16,6 +24,7 @@ color = Color(1, 0.92156863, 0.34117648, 1)
 
 [node name="TinyFireVFX" type="GPUParticles2D" unique_id=1669307931]
 amount = 6
+texture = SubResource("GradientTexture1D_6ep0u")
 lifetime = 1.2
 fixed_fps = 15
 process_material = SubResource("ParticleProcessMaterial_yxw76")
