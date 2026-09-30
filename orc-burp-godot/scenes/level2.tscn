@@ -1,10 +1,11 @@
 [gd_scene format=4 uid="uid://dfsv82ujl0obr"]
 
-[ext_resource type="Texture2D" uid="uid://cqcooocdmyuv8" path="res://assets/plain_grey.png" id="1_yqkch"]
-[ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Tilemap32x32.png" id="2_6ep0u"]
+[ext_resource type="Texture2D" uid="uid://cqcooocdmyuv8" path="res://assets/Environment/plain_grey.png" id="1_yqkch"]
+[ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="2_6ep0u"]
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="3_hrcei"]
 [ext_resource type="PackedScene" uid="uid://bflsgfeaj3op" path="res://scenes/ghost.tscn" id="4_xa7n4"]
 [ext_resource type="PackedScene" uid="uid://c85ri8voce3r8" path="res://scenes/apple.tscn" id="5_bo4dx"]
+[ext_resource type="Script" uid="uid://b1v47klesm0x1" path="res://scripts/area-ko-player.gd" id="6_yqkch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wwpf4"]
 texture = ExtResource("2_6ep0u")
@@ -176,6 +177,8 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wwpf4")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6ep0u"]
+
 [node name="levelRoot" type="Node2D" unique_id=867802413]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2067434519]
@@ -214,5 +217,13 @@ position = Vector2(624, 542)
 
 [node name="apple4" parent="Apples" unique_id=1442932782 instance=ExtResource("5_bo4dx")]
 position = Vector2(993, 415)
+
+[node name="FallBoundary" type="Area2D" parent="." unique_id=528512273]
+position = Vector2(0, 1024)
+script = ExtResource("6_yqkch")
+metadata/_custom_type_script = "uid://b1v47klesm0x1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallBoundary" unique_id=271377038]
+shape = SubResource("WorldBoundaryShape2D_6ep0u")
 
 [connection signal="body_entered" from="Enemies/ghost" to="Gut" method="_on_ghost_body_entered"]
