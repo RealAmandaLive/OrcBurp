@@ -19,11 +19,16 @@ const STOP_SPEED = 5000.0
 
 var grabbed := false
 var last_collision := Vector2.INF
+var puzzle: GridLockPuzzle
+
 
 func _ready() -> void:
 	collision_particles.emitting = false
 	collision_particles.one_shot = true
-
+	var p = get_parent()
+	while p and not p is GridLockPuzzle:
+		p = p.get_parent()
+	puzzle = p
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -34,6 +39,8 @@ func _input(event: InputEvent) -> void:
 			grabbed = false
 
 func _physics_process(delta: float) -> void:
+	if puzzle and not puzzle.active:
+		return
 	if velocity.length() > 0:
 		if move_and_slide():
 			var col := get_slide_collision(0)

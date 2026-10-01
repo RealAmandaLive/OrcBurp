@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://dcj8sudacr0hx"]
 
 [ext_resource type="Script" uid="uid://16k0qopps38g" path="res://scripts/gridlock_piece.gd" id="1_50bm2"]
+[ext_resource type="Script" uid="uid://ct1dsosdmg4iv" path="res://scripts/gridlock_puzzle.gd" id="1_j8qjq"]
 [ext_resource type="AudioStream" uid="uid://bprg1j15j4n4k" path="res://assets/Player/orc-sounds/toot-tiny.wav" id="2_6osue"]
+[ext_resource type="AudioStream" uid="uid://b3d3wkyhfft3f" path="res://assets/Player/orc-sounds/splat.wav" id="3_ui5xj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7t1d"]
-size = Vector2(80, 120)
+size = Vector2(303, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iynve"]
 size = Vector2(40, 720)
@@ -20,6 +22,17 @@ size = Vector2(160, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q6gc"]
 size = Vector2(160, 80)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6osue"]
+friction = 0.0
+rough = true
+bounce = 0.72
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5rmh"]
+size = Vector2(500, 380)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8x2s"]
+size = Vector2(380, 500)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_50bm2"]
 size = Vector2(80, 240)
@@ -43,7 +56,176 @@ size = Vector2(520, 80)
 offsets = PackedFloat32Array(0.012345679, 0.6851852, 1)
 colors = PackedColorArray(1, 1, 1, 0.5137255, 1, 1, 1, 0.21913582, 1, 1, 1, 0)
 
-[node name="GridLock" type="Node2D" unique_id=608569186]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iynve"]
+height = 40.0
+
+[sub_resource type="Gradient" id="Gradient_6osue"]
+colors = PackedColorArray(0.75271696, 0.4928245, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l7t1d"]
+gradient = SubResource("Gradient_6osue")
+width = 20
+height = 40
+
+[sub_resource type="Animation" id="Animation_ui5xj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Winning/Label The:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-600, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Winning/Label Key:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(934, 352)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Winning/AnimatedKey:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(945, 511)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Winning/AnimatedKey:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Winning/AnimatedKey:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j8qjq"]
+resource_name = "win"
+length = 10.0
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Winning/Label The:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(7, 1),
+"update": 0,
+"values": [Vector2(-616, -8), Vector2(80, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Winning/Label Key:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75, 1.5),
+"transitions": PackedFloat32Array(7, 1),
+"update": 0,
+"values": [Vector2(832, 384), Vector2(104, 352)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Winning/AnimatedKey:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5, 2.1666667),
+"transitions": PackedFloat32Array(6, 1),
+"update": 0,
+"values": [Vector2(945, 511), Vector2(400, 328)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Winning/AnimatedKey:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.5, 2.1666667),
+"transitions": PackedFloat32Array(6, 1),
+"update": 0,
+"values": [0.0, -2.1240656]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Winning/AnimatedKey:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.5, 2.1666667),
+"transitions": PackedFloat32Array(6, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(9, 9)]
+}
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Winning/WinSound2")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_ui5xj")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_ui5xj")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_ui5xj")
+}],
+"times": PackedFloat32Array(0.6666667, 1.4166667, 2.0833335)
+}
+tracks/5/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ui5xj"]
+_data = {
+&"RESET": SubResource("Animation_ui5xj"),
+&"win": SubResource("Animation_j8qjq")
+}
+
+[node name="GridLockPuzzle" type="Node2D" unique_id=608569186]
+script = ExtResource("1_j8qjq")
 
 [node name="Background" type="ColorRect" parent="." unique_id=778727991]
 custom_minimum_size = Vector2(720, 720)
@@ -55,6 +237,7 @@ color = Color(0.22490484, 0.22490484, 0.22490484, 1)
 position = Vector2(760, 360)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoalZone" unique_id=1801698794]
+position = Vector2(198.5, 0)
 shape = SubResource("RectangleShape2D_l7t1d")
 
 [node name="Walls" type="Node2D" parent="." unique_id=1671603673]
@@ -134,6 +317,82 @@ texture = SubResource("PlaceholderTexture2D_iynve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/MainPiece" unique_id=1999716319]
 shape = SubResource("RectangleShape2D_2q6gc")
+
+[node name="Left Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1630438038]
+position = Vector2(-80, -40)
+collision_layer = 2
+collision_mask = 2
+collision_priority = 10.0
+physics_material_override = SubResource("PhysicsMaterial_6osue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/MainPiece/Left Side" unique_id=953575969]
+visible = false
+position = Vector2(-240, 40)
+shape = SubResource("RectangleShape2D_h5rmh")
+debug_color = Color(0, 0.6, 0.69803923, 0.078431375)
+
+[node name="ColorRect2" type="ColorRect" parent="Pieces/MainPiece/Left Side" unique_id=99152184]
+custom_minimum_size = Vector2(10, 80)
+offset_right = 10.0
+offset_bottom = 80.0
+color = Color(0.54509807, 0.83137256, 1, 1)
+
+[node name="Right Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1905964320]
+position = Vector2(70, -40)
+collision_layer = 2
+collision_mask = 2
+collision_priority = 10.0
+physics_material_override = SubResource("PhysicsMaterial_6osue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/MainPiece/Right Side" unique_id=533428242]
+visible = false
+position = Vector2(250, 40)
+shape = SubResource("RectangleShape2D_h5rmh")
+debug_color = Color(0, 0.6, 0.69803923, 0.078431375)
+
+[node name="ColorRect2" type="ColorRect" parent="Pieces/MainPiece/Right Side" unique_id=1503090300]
+custom_minimum_size = Vector2(10, 80)
+offset_right = 10.0
+offset_bottom = 80.0
+color = Color(0.54509807, 0.83137256, 1, 1)
+
+[node name="Top Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=2022556452]
+position = Vector2(-80, -40)
+collision_layer = 2
+collision_mask = 2
+collision_priority = 10.0
+physics_material_override = SubResource("PhysicsMaterial_6osue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/MainPiece/Top Side" unique_id=793134538]
+visible = false
+position = Vector2(80, -240)
+shape = SubResource("RectangleShape2D_e8x2s")
+debug_color = Color(0, 0.6, 0.69803923, 0.078431375)
+
+[node name="ColorRect2" type="ColorRect" parent="Pieces/MainPiece/Top Side" unique_id=1096385443]
+custom_minimum_size = Vector2(160, 10)
+offset_right = 160.0
+offset_bottom = 10.0
+color = Color(0.54509807, 0.83137256, 1, 1)
+
+[node name="Bottom Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1742572903]
+position = Vector2(-80, 30)
+collision_layer = 2
+collision_mask = 2
+collision_priority = 10.0
+physics_material_override = SubResource("PhysicsMaterial_6osue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/MainPiece/Bottom Side" unique_id=201629336]
+visible = false
+position = Vector2(80, 250)
+shape = SubResource("RectangleShape2D_e8x2s")
+debug_color = Color(0, 0.6, 0.69803923, 0.078431375)
+
+[node name="ColorRect2" type="ColorRect" parent="Pieces/MainPiece/Bottom Side" unique_id=369233275]
+custom_minimum_size = Vector2(160, 10)
+offset_right = 160.0
+offset_bottom = 10.0
+color = Color(0.54509807, 0.83137256, 1, 1)
 
 [node name="Piece1" type="CharacterBody2D" parent="Pieces" unique_id=46163032]
 modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
@@ -272,3 +531,57 @@ color_ramp = SubResource("Gradient_iynve")
 [node name="CollisionSound" type="AudioStreamPlayer2D" parent="." unique_id=836726963]
 unique_name_in_owner = true
 stream = ExtResource("2_6osue")
+pitch_scale = 0.4
+
+[node name="Key" type="RigidBody2D" parent="." unique_id=1033252304]
+position = Vector2(104, 354)
+collision_layer = 2
+collision_mask = 2
+collision_priority = 10.0
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key" unique_id=2111656914]
+shape = SubResource("CapsuleShape2D_iynve")
+
+[node name="Sprite2D" type="Sprite2D" parent="Key" unique_id=246510603]
+texture = SubResource("GradientTexture2D_l7t1d")
+
+[node name="Winning" type="Node2D" parent="." unique_id=1803625257]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Winning" unique_id=1791493293]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_ui5xj")
+playback_auto_capture = false
+
+[node name="WinSound" type="AudioStreamPlayer2D" parent="Winning" unique_id=2137763356]
+stream = ExtResource("2_6osue")
+pitch_scale = 0.5
+
+[node name="WinSound2" type="AudioStreamPlayer2D" parent="Winning" unique_id=325861561]
+pitch_scale = 0.5
+
+[node name="AnimatedKey" type="Sprite2D" parent="Winning" unique_id=357926528]
+position = Vector2(945, 511)
+texture = SubResource("GradientTexture2D_l7t1d")
+
+[node name="Label The" type="Label" parent="Winning" unique_id=1027575457]
+offset_left = -600.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 352.0
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 263
+text = "THE"
+
+[node name="Label Key" type="Label" parent="Winning" unique_id=709854832]
+offset_left = 934.0
+offset_top = 352.0
+offset_right = 1469.0005
+offset_bottom = 712.0083
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 263
+text = "KEY"
+
+[connection signal="body_entered" from="GoalZone" to="." method="_on_puzzle_complete"]
