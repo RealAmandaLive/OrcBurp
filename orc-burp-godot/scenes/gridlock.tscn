@@ -38,6 +38,10 @@ size = Vector2(520, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ui5xj"]
 size = Vector2(520, 80)
 
+[sub_resource type="Gradient" id="Gradient_iynve"]
+offsets = PackedFloat32Array(0.012345679, 0.6851852, 1)
+colors = PackedColorArray(1, 1, 1, 0.5137255, 1, 1, 1, 0.21913582, 1, 1, 1, 0)
+
 [node name="GridLock" type="Node2D" unique_id=608569186]
 
 [node name="Background" type="ColorRect" parent="." unique_id=778727991]
@@ -245,3 +249,21 @@ texture = SubResource("PlaceholderTexture2D_j8qjq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece7" unique_id=1675061314]
 shape = SubResource("RectangleShape2D_ui5xj")
+
+[node name="CollisionParticles" type="CPUParticles2D" parent="." unique_id=2002646759]
+unique_name_in_owner = true
+position = Vector2(-173, 155)
+amount = 25
+lifetime = 0.4
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(1, 20)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 120.0
+damping_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+color_ramp = SubResource("Gradient_iynve")
