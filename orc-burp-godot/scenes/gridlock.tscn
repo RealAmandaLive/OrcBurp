@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dcj8sudacr0hx"]
 
 [ext_resource type="Script" uid="uid://16k0qopps38g" path="res://scripts/gridlock_piece.gd" id="1_50bm2"]
+[ext_resource type="AudioStream" uid="uid://bprg1j15j4n4k" path="res://assets/Player/orc-sounds/toot-tiny.wav" id="2_6osue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7t1d"]
 size = Vector2(80, 120)
@@ -267,3 +268,7 @@ damping_max = 50.0
 scale_amount_min = 2.0
 scale_amount_max = 8.0
 color_ramp = SubResource("Gradient_iynve")
+
+[node name="CollisionSound" type="AudioStreamPlayer2D" parent="." unique_id=836726963]
+unique_name_in_owner = true
+stream = ExtResource("2_6osue")

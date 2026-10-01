@@ -15,6 +15,7 @@ const STOP_SPEED = 5000.0
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var collision_particles: CPUParticles2D = %CollisionParticles
+@onready var collision_sound: AudioStreamPlayer2D = %CollisionSound
 
 var grabbed := false
 var last_collision := Vector2.INF
@@ -39,6 +40,7 @@ func _physics_process(delta: float) -> void:
 			var colrect: Rect2 = collision_shape.shape.get_rect()
 			if collision_particles and not col.get_position().is_equal_approx(last_collision):
 				collision_particles.global_position = col.get_position()
+				collision_sound.global_position = col.get_position()
 				if movement == PieceDir.HORIZONTAL:
 					collision_particles.emission_rect_extents = Vector2(1.0, colrect.size.y / 2.0)
 					collision_particles.global_position.y = global_position.y
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 					collision_particles.emission_rect_extents = Vector2(colrect.size.x / 2.0, 1.0)
 					collision_particles.global_position.x = global_position.x
 				collision_particles.restart()
+				collision_sound.play()
 				last_collision = col.get_position()
 		else:
 			last_collision = Vector2.INF			
