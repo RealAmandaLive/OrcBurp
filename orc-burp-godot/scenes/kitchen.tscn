@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://bqkoh4m2umysk"]
 
+[ext_resource type="Script" uid="uid://mtmq8a2d5rww" path="res://scenes/kitchen_minigame.gd" id="1_58u3k"]
 [ext_resource type="Texture2D" uid="uid://cqcooocdmyuv8" path="res://assets/Environment/plain_grey.png" id="1_g3o0j"]
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="2_58u3k"]
 [ext_resource type="PackedScene" uid="uid://c60yffkq7g188" path="res://scenes/vfx_fire-tiny.tscn" id="3_ibrlr"]
@@ -205,6 +206,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ottg"]
+radius = 31.016125
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
 
@@ -323,6 +327,27 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(367.5, 713)
 scale = Vector2(0.5, 0.5)
 
+[node name="KitchenMinigame" type="Node2D" parent="." unique_id=1565980499 node_paths=PackedStringArray("seats", "oven", "entrance")]
+script = ExtResource("1_58u3k")
+seats = [NodePath("Seat1"), NodePath("Seat2")]
+oven = NodePath("Oven")
+entrance = NodePath("Entrance")
+
+[node name="Seat1" type="Marker2D" parent="KitchenMinigame" unique_id=884420578]
+position = Vector2(291, 612)
+
+[node name="Seat2" type="Marker2D" parent="KitchenMinigame" unique_id=1214026584]
+position = Vector2(483, 613)
+
+[node name="Entrance" type="Marker2D" parent="KitchenMinigame" unique_id=986416034]
+position = Vector2(164, 558)
+
+[node name="Oven" type="Area2D" parent="KitchenMinigame" unique_id=309606043]
+position = Vector2(1062, 599)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenMinigame/Oven" unique_id=1428522603]
+shape = SubResource("CircleShape2D_6ottg")
+
 [node name="Enemies" type="Node2D" parent="." unique_id=153438615]
 position = Vector2(830, 546)
 scale = Vector2(2, 2)
@@ -331,7 +356,7 @@ scale = Vector2(2, 2)
 position = Vector2(597, 484)
 
 [node name="exit" type="Area2D" parent="." unique_id=1569906749]
-position = Vector2(1076, 634)
+position = Vector2(143, 571)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=1799567898]
 position = Vector2(21.5, -14)
