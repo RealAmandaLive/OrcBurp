@@ -18,5 +18,5 @@ func collect_one():
 			return
 	
 	debouncer = create_tween()
-	debouncer.tween_interval(0.5)
+	debouncer.tween_interval(0.15)
 	collected.emit(self)

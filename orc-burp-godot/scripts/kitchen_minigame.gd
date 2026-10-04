@@ -248,7 +248,13 @@ func _on_ingredient_collected(ingredient: KitchenIngredient):
 	p("Player collected one %s." % ingredient.name)
 	
 	player_inventory.append(ingredient.name)
-	temp_popup_label(ingredient.global_position + UI_OFFSET, "Got %s" % ingredient.name, 1.0)
+	
+	var text: String = "Got %s" % ingredient.name
+	var number_of: int = player_inventory.count(ingredient.name)
+	if number_of > 1:
+		text = text + "(%d)" % number_of
+	
+	temp_popup_label(ingredient.global_position + UI_OFFSET, text, 1.0)
 
 func _on_oven_interacted():
 	const UI_OFFSET = Vector2(-36.0, -96.0)
@@ -258,6 +264,7 @@ func _on_oven_interacted():
 	
 	if items.is_empty():
 		## Run the oven or get its contents
+		
 		if oven.output:
 			var output: Array[String] = oven.empty()
 			player_inventory.append(output)
@@ -272,10 +279,13 @@ func _on_oven_interacted():
 			else:
 				temp_popup_label(oven.global_position + UI_OFFSET, "It's empty!", 0.8)
 	else:
-		var item = items.pop_back()
-		player_inventory.erase(item)
-		oven.add_ingredient(item)
-		temp_popup_label(oven.global_position + UI_OFFSET, "Added %s" % item, 2.0)
+		## Add ingredients
+		## Prevent too many ingredients added
+		if not oven.ingredients.size() >= Desire.MAX_INGREDIENTS:
+			var item = items.pop_back()
+			player_inventory.erase(item)
+			oven.add_ingredient(item)
+			temp_popup_label(oven.global_position + UI_OFFSET, "Added %s" % item, 2.0)
 	
 func _on_customer_interacted(customer: Customer):
 	if customer.received_order: return # unlikely but
