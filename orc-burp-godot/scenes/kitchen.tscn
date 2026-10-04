@@ -1,11 +1,13 @@
 [gd_scene format=4 uid="uid://bqkoh4m2umysk"]
 
-[ext_resource type="Script" uid="uid://mtmq8a2d5rww" path="res://scenes/kitchen_minigame.gd" id="1_58u3k"]
+[ext_resource type="Script" uid="uid://mtmq8a2d5rww" path="res://scripts/kitchen_minigame.gd" id="1_58u3k"]
 [ext_resource type="Texture2D" uid="uid://cqcooocdmyuv8" path="res://assets/Environment/plain_grey.png" id="1_g3o0j"]
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="2_58u3k"]
 [ext_resource type="PackedScene" uid="uid://c60yffkq7g188" path="res://scenes/vfx_fire-tiny.tscn" id="3_ibrlr"]
 [ext_resource type="PackedScene" uid="uid://dt05y8puojmjs" path="res://scenes/vfx_fire-with-smoke.tscn" id="4_mwmjw"]
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="5_cwf2y"]
+[ext_resource type="Script" uid="uid://mns2srnlqhyw" path="res://scripts/kitchen_ingredient.gd" id="6_ibrlr"]
+[ext_resource type="Script" uid="uid://cpvubvvsi45pe" path="res://scripts/kitchen_oven.gd" id="6_mwmjw"]
 [ext_resource type="Script" uid="uid://bih6h3jpesq1u" path="res://scripts/ladder.gd" id="6_vpxcu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wwpf4"]
@@ -209,6 +211,9 @@ fill_to = Vector2(0.5, 0)
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ottg"]
 radius = 31.016125
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_isupx"]
+radius = 24.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
 
@@ -327,11 +332,12 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(367.5, 713)
 scale = Vector2(0.5, 0.5)
 
-[node name="KitchenMinigame" type="Node2D" parent="." unique_id=1565980499 node_paths=PackedStringArray("seats", "oven", "entrance")]
+[node name="KitchenMinigame" type="Node2D" parent="." unique_id=1565980499 node_paths=PackedStringArray("seats", "oven", "entrance", "ingredients")]
 script = ExtResource("1_58u3k")
 seats = [NodePath("Seat1"), NodePath("Seat2")]
 oven = NodePath("Oven")
 entrance = NodePath("Entrance")
+ingredients = [NodePath("Broth"), NodePath("Meat"), NodePath("Tallow"), NodePath("Roots"), NodePath("Fruits")]
 
 [node name="Seat1" type="Marker2D" parent="KitchenMinigame" unique_id=884420578]
 position = Vector2(291, 612)
@@ -344,9 +350,105 @@ position = Vector2(164, 558)
 
 [node name="Oven" type="Area2D" parent="KitchenMinigame" unique_id=309606043]
 position = Vector2(1062, 599)
+script = ExtResource("6_mwmjw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenMinigame/Oven" unique_id=1428522603]
 shape = SubResource("CircleShape2D_6ottg")
+
+[node name="Broth" type="Area2D" parent="KitchenMinigame" unique_id=1322844680]
+position = Vector2(807, 1054)
+script = ExtResource("6_ibrlr")
+metadata/_custom_type_script = "uid://mns2srnlqhyw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenMinigame/Broth" unique_id=1483978763]
+shape = SubResource("CircleShape2D_isupx")
+
+[node name="PanelContainer" type="PanelContainer" parent="KitchenMinigame/Broth" unique_id=1422042272]
+offset_left = -22.0
+offset_top = -75.0
+offset_right = 22.0
+offset_bottom = -35.0
+
+[node name="Label" type="Label" parent="KitchenMinigame/Broth/PanelContainer" unique_id=58151240]
+layout_mode = 2
+text = "Broth"
+horizontal_alignment = 1
+
+[node name="Meat" type="Area2D" parent="KitchenMinigame" unique_id=1999326261]
+position = Vector2(230, 876)
+script = ExtResource("6_ibrlr")
+metadata/_custom_type_script = "uid://mns2srnlqhyw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenMinigame/Meat" unique_id=140073178]
+shape = SubResource("CircleShape2D_isupx")
+
+[node name="PanelContainer" type="PanelContainer" parent="KitchenMinigame/Meat" unique_id=1305709383]
+offset_left = -23.0
+offset_top = 39.0
+offset_right = 21.0
+offset_bottom = 79.0
+
+[node name="Label" type="Label" parent="KitchenMinigame/Meat/PanelContainer" unique_id=1438773322]
+layout_mode = 2
+text = "Meat"
+horizontal_alignment = 1
+
+[node name="Tallow" type="Area2D" parent="KitchenMinigame" unique_id=1526005464]
+position = Vector2(165, 875)
+script = ExtResource("6_ibrlr")
+metadata/_custom_type_script = "uid://mns2srnlqhyw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenMinigame/Tallow" unique_id=722915717]
+shape = SubResource("CircleShape2D_isupx")
+
+[node name="PanelContainer" type="PanelContainer" parent="KitchenMinigame/Tallow" unique_id=1085037580]
+offset_left = -23.0
+offset_top = 39.0
+offset_right = 21.0
+offset_bottom = 79.0
+
+[node name="Label" type="Label" parent="KitchenMinigame/Tallow/PanelContainer" unique_id=648299089]
+layout_mode = 2
+text = "Tallow"
+horizontal_alignment = 1
+
+[node name="Roots" type="Area2D" parent="KitchenMinigame" unique_id=746595145]
+position = Vector2(676, 875)
+script = ExtResource("6_ibrlr")
+metadata/_custom_type_script = "uid://mns2srnlqhyw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenMinigame/Roots" unique_id=1646043324]
+shape = SubResource("CircleShape2D_isupx")
+
+[node name="PanelContainer" type="PanelContainer" parent="KitchenMinigame/Roots" unique_id=1182752893]
+offset_left = -20.0
+offset_top = 38.0
+offset_right = 24.0
+offset_bottom = 78.0
+
+[node name="Label" type="Label" parent="KitchenMinigame/Roots/PanelContainer" unique_id=1810017967]
+layout_mode = 2
+text = "Roots"
+horizontal_alignment = 1
+
+[node name="Fruits" type="Area2D" parent="KitchenMinigame" unique_id=417064800]
+position = Vector2(936, 876)
+script = ExtResource("6_ibrlr")
+metadata/_custom_type_script = "uid://mns2srnlqhyw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenMinigame/Fruits" unique_id=100805161]
+shape = SubResource("CircleShape2D_isupx")
+
+[node name="PanelContainer" type="PanelContainer" parent="KitchenMinigame/Fruits" unique_id=2084829396]
+offset_left = -24.0
+offset_top = 38.0
+offset_right = 21.0
+offset_bottom = 78.0
+
+[node name="Label" type="Label" parent="KitchenMinigame/Fruits/PanelContainer" unique_id=2120485027]
+layout_mode = 2
+text = "Fruits"
+horizontal_alignment = 1
 
 [node name="Enemies" type="Node2D" parent="." unique_id=153438615]
 position = Vector2(830, 546)

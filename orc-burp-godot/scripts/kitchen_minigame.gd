@@ -3,10 +3,11 @@ class_name KitchenGame extends Node2D
 const STARTING_WAVE_INTERVAL: float = 20.0
 
 @export var seats: Array[Node2D]
-@export var oven: Node2D
+@export var oven: KitchenOven
 @export var entrance: Node2D
+@export var ingredients: Array[KitchenIngredient]
 
-var customers: Array[Customer]
+var player_inventory: Array
 
 var spawner: Timer
 var current_interval: float
@@ -17,12 +18,16 @@ func p(args): print_rich("[bgcolor=ORANGE][color=BLACK]Kitchen Game: ", args)
 
 #region Customer class
 class Customer extends Node2D:
+	signal player_interacted
+	signal ready_to_leave
+	
 	const META_INTERACT_ENTER = &"on_interact_enter"
 	const META_INTERACT_EXIT = &"on_interact_exit"
 	var RED_INDICATOR_COLOR: Color:
 		get: return Color.RED.lightened(0.35) ## hack bc I'm too lazy to write down a constant value
 	
-	var desire
+	var desire: Desire
+	var received_order: bool = false
 	
 	var moving: Tween
 	var interaction: Area2D
@@ -36,6 +41,16 @@ class Customer extends Node2D:
 		add_child(sprite)
 		
 		name = "Customer"
+		
+	func _unhandled_input(event: InputEvent) -> void:
+		if not interaction:
+			return
+		if event.is_action_pressed(&"interact"):
+			var player = get_tree().get_first_node_in_group(Main.PLAYER_GROUP)
+			if not player: return
+			if player in interaction.get_overlapping_bodies():
+				player_interacted.emit()
+				get_viewport().set_input_as_handled()
 	
 	## Sit at a seat, then get ready to order.
 	func sit_at(seat: Node2D):
@@ -45,8 +60,20 @@ class Customer extends Node2D:
 		if moving:
 			moving.kill()
 		moving = create_tween()
+		moving.tween_property(self, ^"modulate", Color.WHITE, 1.0).from(Color.BLACK)
 		moving.tween_property(self, ^"global_position", seat.global_position, distance / SPEED)
 		moving.tween_callback(_just_seated)
+	
+	func exit_at(exit: Node2D):
+		const SPEED: int = 64 ## pixels per second
+		var distance: float = (exit.global_position - self.global_position).length()
+		
+		if moving:
+			moving.kill()
+		moving = create_tween()
+		moving.tween_property(self, ^"global_position", exit.global_position, distance / SPEED)
+		moving.tween_property(self, ^"modulate", Color.BLACK, 1.0)
+		moving.tween_callback(queue_free)
 	
 	## Fancy countdown with visible progress bar
 	func think_then_do(callback: Callable, duration: float):
@@ -87,9 +114,14 @@ class Customer extends Node2D:
 			display_text_label.get_parent().hide()
 	
 	func ready_to_order():
-		desire = ["hock of prey", "filled goblet", "bowl of kibbles", "stringed beast", "cheese stew"].pick_random()
 		display_text("!", 2.0, RED_INDICATOR_COLOR, false)
 		_generate_interact_box(_display_order, _display_indicator)
+		
+	func deliver_order():
+		received_order = true
+		interaction.free()
+		display_text("*satisfied*")
+		think_then_do(ready_to_leave.emit, randfn(5.0 * desire.ingredients.size(), 3.0))
 	
 	func _just_seated():
 		think_then_do(ready_to_order, randfn(9.0, 4.5))
@@ -127,6 +159,29 @@ class Customer extends Node2D:
 	
 #endregion
 
+#region Desire (recipe) class
+class Desire:
+	const MAX_INGREDIENTS: int = 5
+	var ingredients: Array[String] = []
+	
+	func _init(available_ingredients: Array):
+		assert(not available_ingredients.is_empty())
+		var number_to_pick: int = randi_range(1, MAX_INGREDIENTS)
+		
+		for i in number_to_pick:
+			ingredients.append(available_ingredients.pick_random())
+	
+	func _to_string() -> String:
+		var to_return: String = ""
+		for ing in ingredients:
+			if not to_return.is_empty():
+				to_return += ", "
+			to_return += "%s" % ing
+		to_return = "(" + to_return + ")"
+		return to_return
+	
+#endregion
+
 func _ready():
 	await create_tween().tween_interval(3.0).finished
 	start_game()
@@ -134,9 +189,15 @@ func _ready():
 func start_game():
 	const MISSING = "Missing a required node. Check export properties"
 	assert(seats, MISSING)
-	#assert(oven, MISSING)
+	assert(oven, MISSING)
 	assert(entrance, MISSING)
+	assert(ingredients, MISSING)
 	assert(not spawner)
+	
+	for ing: KitchenIngredient in ingredients:
+		ing.collected.connect(_on_ingredient_collected)
+		
+	oven.player_interacted.connect(_on_oven_interacted)
 	
 	_seated.clear()
 	spawn_customer()
@@ -162,6 +223,15 @@ func spawn_customer():
 	var new_customer = Customer.new()
 	_seated[seat] = new_customer
 	
+	## Convert our ingredient list into strings
+	var available: Array[String]
+	for i in ingredients:
+		available.append(i.name)
+	new_customer.desire = Desire.new(available)
+	
+	new_customer.player_interacted.connect(_on_customer_interacted.bind(new_customer))
+	new_customer.ready_to_leave.connect(_on_customer_ready_to_leave.bind(new_customer))
+	
 	new_customer.global_position = entrance.global_position
 	add_child(new_customer)
 	
@@ -169,6 +239,58 @@ func spawn_customer():
 	new_customer.sit_at(seat)
 
 func _on_spawner_timeout():
-	if not customers.size() >= seats.size():
+	if not _seated.size() >= seats.size():
 		spawn_customer()
 	spawner.start(current_interval)
+	
+func _on_ingredient_collected(ingredient: KitchenIngredient):
+	p("Player collected one %s." % ingredient.name)
+	player_inventory.append(ingredient.name)
+
+func _on_oven_interacted():
+	p("Player interacted with oven.")
+	if player_inventory.is_empty():
+		## Run the oven or get its contents
+		if oven.output:
+			var output: Array[String] = oven.empty()
+			player_inventory.append(output)
+		else:
+			oven.bake()
+	else:
+		oven.add_ingredient(player_inventory.pop_back())
+	
+func _on_customer_interacted(customer: Customer):
+	if customer.received_order: return # unlikely but
+	
+	p("Player interacted with %s." % customer)
+	## Check if we have something to give to this guy
+	if player_inventory.is_empty():
+		## Nope
+		customer.display_text("..?")
+		return
+	else:
+		for item in player_inventory:
+			if item is Array:
+				if item.size() == customer.desire.ingredients.size():
+					var matches: bool = true
+					
+					var to_match := customer.desire.ingredients.duplicate()
+					for i in item:
+						if to_match.has(i):
+							to_match.erase(i)
+					
+					if to_match.is_empty():
+						## Yes
+						customer.deliver_order()
+						player_inventory.erase(item)
+						p("Player delivered order to %s." % customer)
+						return
+		
+		customer.display_text("That's not what I ordered...")
+		p("Customer desires %s; player has %s" % [customer.desire, player_inventory])
+
+func _on_customer_ready_to_leave(customer: Customer):
+	_seated.erase(
+		_seated.find_key(customer)
+	)
+	customer.exit_at(entrance)
