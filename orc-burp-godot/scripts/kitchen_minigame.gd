@@ -54,7 +54,7 @@ class Customer extends Node2D:
 	
 	## Sit at a seat, then get ready to order.
 	func sit_at(seat: Node2D):
-		const SPEED: int = 64 ## pixels per second
+		const SPEED: int = 96 ## pixels per second
 		var distance: float = (seat.global_position - self.global_position).length()
 		
 		if moving:
@@ -65,7 +65,7 @@ class Customer extends Node2D:
 		moving.tween_callback(_just_seated)
 	
 	func exit_at(exit: Node2D):
-		const SPEED: int = 64 ## pixels per second
+		const SPEED: int = 96 ## pixels per second
 		var distance: float = (exit.global_position - self.global_position).length()
 		
 		if moving:
@@ -244,20 +244,38 @@ func _on_spawner_timeout():
 	spawner.start(current_interval)
 	
 func _on_ingredient_collected(ingredient: KitchenIngredient):
+	const UI_OFFSET = Vector2(-36.0, -64.0)
 	p("Player collected one %s." % ingredient.name)
+	
 	player_inventory.append(ingredient.name)
+	temp_popup_label(ingredient.global_position + UI_OFFSET, "Got %s" % ingredient.name, 1.0)
 
 func _on_oven_interacted():
+	const UI_OFFSET = Vector2(-36.0, -96.0)
 	p("Player interacted with oven.")
-	if player_inventory.is_empty():
+	
+	var items = player_inventory.filter(func(v): return not v is Array)
+	
+	if items.is_empty():
 		## Run the oven or get its contents
 		if oven.output:
 			var output: Array[String] = oven.empty()
 			player_inventory.append(output)
+			temp_popup_label(oven.global_position + UI_OFFSET, "Took cooked item:\n" + str(output), 2.0)
 		else:
-			oven.bake()
+			if not oven.ingredients.is_empty():
+				if oven.baking:
+					if oven.baking.is_running():
+						return
+				oven.bake()
+				temp_popup_label(oven.global_position + UI_OFFSET, "Baking...", 2.0)
+			else:
+				temp_popup_label(oven.global_position + UI_OFFSET, "It's empty!", 0.8)
 	else:
-		oven.add_ingredient(player_inventory.pop_back())
+		var item = items.pop_back()
+		player_inventory.erase(item)
+		oven.add_ingredient(item)
+		temp_popup_label(oven.global_position + UI_OFFSET, "Added %s" % item, 2.0)
 	
 func _on_customer_interacted(customer: Customer):
 	if customer.received_order: return # unlikely but
@@ -272,8 +290,6 @@ func _on_customer_interacted(customer: Customer):
 		for item in player_inventory:
 			if item is Array:
 				if item.size() == customer.desire.ingredients.size():
-					var matches: bool = true
-					
 					var to_match := customer.desire.ingredients.duplicate()
 					for i in item:
 						if to_match.has(i):
@@ -284,6 +300,8 @@ func _on_customer_interacted(customer: Customer):
 						customer.deliver_order()
 						player_inventory.erase(item)
 						p("Player delivered order to %s." % customer)
+						
+						temp_popup_label(customer.global_position + Vector2(-32.0, -96.0), "Delivered!", 3.0)
 						return
 		
 		customer.display_text("That's not what I ordered...")
@@ -294,3 +312,18 @@ func _on_customer_ready_to_leave(customer: Customer):
 		_seated.find_key(customer)
 	)
 	customer.exit_at(entrance)
+
+
+func temp_popup_label(global_location: Vector2, text: String, duration: float):
+	var pc := PanelContainer.new()
+	var label := Label.new()
+	pc.add_child(label)
+	label.text = text
+	pc.global_position = global_location
+	
+	add_child(pc)
+	
+	var t := pc.create_tween()
+	t.tween_interval(duration)
+	t.tween_property(pc, ^"modulate", Color.TRANSPARENT, 1.25)
+	t.tween_callback(pc.queue_free)
