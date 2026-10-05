@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b3d3wkyhfft3f"
-path="res://.godot/imported/splat.wav-517e8e92620ae44ff06837d2e067a514.sample"
+path="res://.godot/imported/splat.wav-63a76edccb78a86f33757ce22312b95a.sample"
 
 [deps]
 
-source_file="res://assets/Player/orc-sounds/splat.wav"
-dest_files=["res://.godot/imported/splat.wav-517e8e92620ae44ff06837d2e067a514.sample"]
+source_file="res://assets/Audio/splat.wav"
+dest_files=["res://.godot/imported/splat.wav-63a76edccb78a86f33757ce22312b95a.sample"]
 
 [params]
 

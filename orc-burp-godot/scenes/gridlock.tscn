@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://16k0qopps38g" path="res://scripts/gridlock_piece.gd" id="1_50bm2"]
 [ext_resource type="Script" uid="uid://ct1dsosdmg4iv" path="res://scripts/gridlock_puzzle.gd" id="1_j8qjq"]
 [ext_resource type="AudioStream" uid="uid://bprg1j15j4n4k" path="res://assets/Player/orc-sounds/toot-tiny.wav" id="2_6osue"]
-[ext_resource type="AudioStream" uid="uid://b3d3wkyhfft3f" path="res://assets/Player/orc-sounds/splat.wav" id="3_ui5xj"]
+[ext_resource type="AudioStream" uid="uid://b3d3wkyhfft3f" path="res://assets/Audio/splat.wav" id="3_ui5xj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7t1d"]
 size = Vector2(303, 120)

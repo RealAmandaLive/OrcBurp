@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://coi27kgmmu0b0"
-path="res://.godot/imported/throw-woosh-b.wav-99f8b0dea72ecbc59974d38b2c715509.sample"
+path="res://.godot/imported/throw-woosh-b.wav-d90acf18477415ce4c55263cc46eccb4.sample"
 
 [deps]
 
-source_file="res://assets/Player/orc-sounds/throw-woosh-b.wav"
-dest_files=["res://.godot/imported/throw-woosh-b.wav-99f8b0dea72ecbc59974d38b2c715509.sample"]
+source_file="res://assets/Audio/throw-woosh-b.wav"
+dest_files=["res://.godot/imported/throw-woosh-b.wav-d90acf18477415ce4c55263cc46eccb4.sample"]
 
 [params]
 
