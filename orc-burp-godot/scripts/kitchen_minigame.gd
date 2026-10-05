@@ -11,6 +11,8 @@ func p(args): print_rich("[bgcolor=ORANGE][color=BLACK]Kitchen Game: ", args)
 @export var queue_line: Node2D
 @export var ingredients: Array[KitchenIngredient]
 
+@export var hud_inventory_list: VBoxContainer
+
 var customers_satisfied: int = 0:
 	set(v):
 		customers_satisfied = v
@@ -316,6 +318,16 @@ func temp_popup_label(global_location: Vector2, text: String, duration: float):
 	t.tween_property(pc, ^"modulate", Color.TRANSPARENT, 1.25)
 	t.tween_callback(pc.queue_free)
 
+func update_inventory_hud():
+	if not hud_inventory_list: return
+	for child in hud_inventory_list.get_children():
+		child.queue_free()
+	for item in player_inventory:
+		var l = Label.new()
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD
+		l.text = str(item)
+		hud_inventory_list.add_child(l)
+
 func _on_spawner_timeout():
 	if (not _seated.size() >= seats.size()) or ALLOW_QUEUEING:
 		spawn_customer()
@@ -327,6 +339,7 @@ func _on_ingredient_collected(ingredient: KitchenIngredient):
 	p("Player collected one %s." % ingredient.name)
 	
 	player_inventory.append(ingredient.name)
+	update_inventory_hud()
 	
 	var text: String = "Got %s" % ingredient.name
 	var number_of: int = player_inventory.count(ingredient.name)
@@ -347,7 +360,10 @@ func _on_oven_interacted():
 	
 	if oven.output:
 		var output: Array[String] = oven.empty()
+		
 		player_inventory.append(output)
+		update_inventory_hud()
+		
 		temp_popup_label(oven.global_position + UI_OFFSET, "Took cooked item:\n" + str(output), 2.0)
 	
 	elif items.is_empty():
@@ -364,7 +380,10 @@ func _on_oven_interacted():
 		## Prevent too many ingredients added
 		if oven.ingredients.size() < Desire.MAX_INGREDIENTS:
 			var item = items.pop_back()
+			
 			player_inventory.erase(item)
+			update_inventory_hud()
+			
 			oven.add_ingredient(item)
 			temp_popup_label(oven.global_position + UI_OFFSET, "Added %s" % item, 2.0)
 	
@@ -398,7 +417,10 @@ func _on_customer_interacted(customer: Customer):
 							tips_text = "tipped +%d" % tip
 						
 						customer.deliver_order()
+						
 						player_inventory.erase(item)
+						update_inventory_hud()
+						
 						p("Player delivered order to %s." % customer)
 						
 						temp_popup_label(customer.global_position + Vector2(-32.0, -96.0), "Delivered!\n" + tips_text, 3.0)

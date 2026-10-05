@@ -164,13 +164,33 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(367.5, 713)
 scale = Vector2(0.5, 0.5)
 
-[node name="KitchenMinigame" type="Node2D" parent="." unique_id=1565980499 node_paths=PackedStringArray("seats", "oven", "entrance", "queue_line", "ingredients")]
+[node name="KitchenMinigame" type="Node2D" parent="." unique_id=1565980499 node_paths=PackedStringArray("seats", "oven", "entrance", "queue_line", "ingredients", "hud_inventory_list")]
 script = ExtResource("1_58u3k")
 seats = [NodePath("Seat1"), NodePath("Seat2")]
 oven = NodePath("Oven")
 entrance = NodePath("Entrance")
 queue_line = NodePath("QueueLine")
 ingredients = [NodePath("Broth"), NodePath("Meat"), NodePath("Tallow"), NodePath("Roots"), NodePath("Fruits")]
+hud_inventory_list = NodePath("HUD/PanelContainer/VBoxContainer/VBoxContainer")
+
+[node name="HUD" type="CanvasLayer" parent="KitchenMinigame" unique_id=381856512]
+
+[node name="PanelContainer" type="PanelContainer" parent="KitchenMinigame/HUD" unique_id=1566022733]
+custom_minimum_size = Vector2(256, 0)
+custom_maximum_size = Vector2(256, -1)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="KitchenMinigame/HUD/PanelContainer" unique_id=195568934]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="KitchenMinigame/HUD/PanelContainer/VBoxContainer" unique_id=581498320]
+layout_mode = 2
+text = "Held items:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="KitchenMinigame/HUD/PanelContainer/VBoxContainer" unique_id=1691599933]
+layout_mode = 2
 
 [node name="Seat1" type="Marker2D" parent="KitchenMinigame" unique_id=884420578]
 position = Vector2(292, 599)
