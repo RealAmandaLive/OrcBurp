@@ -332,11 +332,12 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(367.5, 713)
 scale = Vector2(0.5, 0.5)
 
-[node name="KitchenMinigame" type="Node2D" parent="." unique_id=1565980499 node_paths=PackedStringArray("seats", "oven", "entrance", "ingredients")]
+[node name="KitchenMinigame" type="Node2D" parent="." unique_id=1565980499 node_paths=PackedStringArray("seats", "oven", "entrance", "queue_line", "ingredients")]
 script = ExtResource("1_58u3k")
 seats = [NodePath("Seat1"), NodePath("Seat2")]
 oven = NodePath("Oven")
 entrance = NodePath("Entrance")
+queue_line = NodePath("QueueLine")
 ingredients = [NodePath("Broth"), NodePath("Meat"), NodePath("Tallow"), NodePath("Roots"), NodePath("Fruits")]
 
 [node name="Seat1" type="Marker2D" parent="KitchenMinigame" unique_id=884420578]
@@ -449,6 +450,9 @@ offset_bottom = 78.0
 layout_mode = 2
 text = "Fruits"
 horizontal_alignment = 1
+
+[node name="QueueLine" type="Marker2D" parent="KitchenMinigame" unique_id=439033482]
+position = Vector2(113, 609)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=153438615]
 position = Vector2(830, 546)

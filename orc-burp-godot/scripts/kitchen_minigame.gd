@@ -1,25 +1,45 @@
 class_name KitchenGame extends Node2D
 
 const STARTING_WAVE_INTERVAL: float = 20.0
+const ALLOW_QUEUEING: bool = true
+
+func p(args): print_rich("[bgcolor=ORANGE][color=BLACK]Kitchen Game: ", args)
 
 @export var seats: Array[Node2D]
 @export var oven: KitchenOven
 @export var entrance: Node2D
+@export var queue_line: Node2D
 @export var ingredients: Array[KitchenIngredient]
+
+var customers_satisfied: int = 0:
+	set(v):
+		customers_satisfied = v
+		p("-- %d total satisfied customers." % customers_satisfied)
+	
+var customers_abandoned: int = 0:
+	set(v):
+		customers_abandoned = v
+		p("-- %d total unhappy customers." % customers_abandoned)
+
+var tips_earned: int = 0:
+	set(v):
+		tips_earned = v
+		p("-- %d total tips earned." % tips_earned)
 
 var player_inventory: Array
 
 var spawner: Timer
 var current_interval: float
+var queue: Array[Customer]
 
 var _seated: Dictionary[Node2D, Customer] = {}
 
-func p(args): print_rich("[bgcolor=ORANGE][color=BLACK]Kitchen Game: ", args)
 
 #region Customer class
 class Customer extends Node2D:
 	signal player_interacted
 	signal ready_to_leave
+	signal lost_patience
 	
 	const META_INTERACT_ENTER = &"on_interact_enter"
 	const META_INTERACT_EXIT = &"on_interact_exit"
@@ -27,6 +47,7 @@ class Customer extends Node2D:
 		get: return Color.RED.lightened(0.35) ## hack bc I'm too lazy to write down a constant value
 	
 	var desire: Desire
+	var patience: ProgressBar
 	var received_order: bool = false
 	
 	var moving: Tween
@@ -76,7 +97,7 @@ class Customer extends Node2D:
 		moving.tween_callback(queue_free)
 	
 	## Fancy countdown with visible progress bar
-	func think_then_do(callback: Callable, duration: float):
+	func think_then_do(callback: Callable, duration: float) -> Tween:
 		const THINKER_SIZE := Vector2(64.0, 8.0)
 		var thinker = ProgressBar.new()
 		thinker.position.y = -64.0
@@ -88,12 +109,32 @@ class Customer extends Node2D:
 		thinking.tween_property(thinker, ^"value", 100.0, duration)
 		thinking.tween_callback(thinker.queue_free)
 		thinking.tween_callback(callback)
+		return thinking
+	
+	func start_patience(duration: float):
+		if patience:
+			patience.queue_free()
+		
+		const THINKER_SIZE := Vector2(64.0, 8.0)
+		patience = ProgressBar.new()
+		patience.position.y = -64.0
+		patience.position.x -= THINKER_SIZE.x / 2.0
+		patience.custom_minimum_size = THINKER_SIZE
+		patience.show_percentage = false
+		patience.modulate = RED_INDICATOR_COLOR
+		add_child(patience)
+		
+		var thinking := patience.create_tween()
+		thinking.tween_property(patience, ^"value", 0.0, duration).from(100.0)
+		thinking.tween_callback(patience.queue_free)
+		thinking.tween_callback(_ran_out_of_patience)
+		return thinking
 	
 	func display_text(text: String, resize: float = 1.0, recolor: Color = Color.WHITE, show_panel: bool = true):
 		if not display_text_label:
 			## Make a panel with a label
 			var display_text_panel := PanelContainer.new()
-			display_text_panel.position.y = -96.0
+			display_text_panel.position.y = -110.0
 			display_text_panel.position.x = -2.0
 			
 			display_text_label = Label.new()
@@ -116,15 +157,22 @@ class Customer extends Node2D:
 	func ready_to_order():
 		display_text("!", 2.0, RED_INDICATOR_COLOR, false)
 		_generate_interact_box(_display_order, _display_indicator)
+		start_patience(25.0 + (desire.ingredients.size() * 10.0))
 		
 	func deliver_order():
 		received_order = true
+		if patience: patience.queue_free()
 		interaction.free()
 		display_text("*satisfied*")
 		think_then_do(ready_to_leave.emit, randfn(5.0 * desire.ingredients.size(), 3.0))
 	
 	func _just_seated():
 		think_then_do(ready_to_order, randfn(9.0, 4.5))
+		
+	func _ran_out_of_patience():
+		if received_order: return ## fluke
+		lost_patience.emit()
+		ready_to_leave.emit()
 		
 	func _display_order():
 		display_text("I'll have a %s." % desire)
@@ -179,8 +227,8 @@ class Desire:
 			to_return += "%s" % ing
 		to_return = "(" + to_return + ")"
 		return to_return
-	
 #endregion
+
 
 func _ready():
 	await create_tween().tween_interval(3.0).finished
@@ -190,6 +238,7 @@ func start_game():
 	const MISSING = "Missing a required node. Check export properties"
 	assert(seats, MISSING)
 	assert(oven, MISSING)
+	assert(queue_line, MISSING)
 	assert(entrance, MISSING)
 	assert(ingredients, MISSING)
 	assert(not spawner)
@@ -206,41 +255,71 @@ func start_game():
 	spawner.timeout.connect(_on_spawner_timeout)
 	spawner.start(STARTING_WAVE_INTERVAL)
 	p("Started spawner.")
-
-func spawn_customer():
-	p("Spawning a customer")
 	
+func find_seat() -> Node2D:
 	var empty_seats: Array[Node2D] = seats.filter(
 		func(v: Node2D):
 			return not (v in _seated.keys())
 	)
-	
 	if empty_seats.is_empty():
-		p("Couldn't find an available seat.")
-		return
+		return null
+	else:
+		return empty_seats.pick_random()
+
+func spawn_customer():
+	p("Spawning a customer")
 	
-	var seat = empty_seats.pick_random()
+	var seat = find_seat()
+	var queueing: bool = (seat == null)
+	
 	var new_customer = Customer.new()
-	_seated[seat] = new_customer
 	
 	## Convert our ingredient list into strings
 	var available: Array[String]
 	for i in ingredients:
 		available.append(i.name)
+	
 	new_customer.desire = Desire.new(available)
 	
 	new_customer.player_interacted.connect(_on_customer_interacted.bind(new_customer))
 	new_customer.ready_to_leave.connect(_on_customer_ready_to_leave.bind(new_customer))
+	new_customer.lost_patience.connect(_on_customer_lost_patience.bind(new_customer))
 	
 	new_customer.global_position = entrance.global_position
 	add_child(new_customer)
 	
 	await create_tween().tween_interval(0.5).finished
-	new_customer.sit_at(seat)
+	
+	if not queueing:
+		_seated[seat] = new_customer
+		new_customer.sit_at(seat)
+	else:
+		var t = new_customer.create_tween()
+		t.tween_property(
+			new_customer,
+			^"global_position",
+			queue_line.global_position + (queue.size() * 16.0 * Vector2.RIGHT),
+			1.2)
+		queue.append(new_customer)
+
+func temp_popup_label(global_location: Vector2, text: String, duration: float):
+	var pc := PanelContainer.new()
+	var label := Label.new()
+	pc.add_child(label)
+	label.text = text
+	pc.global_position = global_location
+	pc.light_mask = 0;  pc.top_level = true
+	add_child(pc)
+	
+	var t := pc.create_tween()
+	t.tween_interval(duration)
+	t.tween_property(pc, ^"modulate", Color.TRANSPARENT, 1.25)
+	t.tween_callback(pc.queue_free)
 
 func _on_spawner_timeout():
-	if not _seated.size() >= seats.size():
+	if (not _seated.size() >= seats.size()) or ALLOW_QUEUEING:
 		spawn_customer()
+	current_interval *= 0.94
 	spawner.start(current_interval)
 	
 func _on_ingredient_collected(ingredient: KitchenIngredient):
@@ -262,26 +341,28 @@ func _on_oven_interacted():
 	
 	var items = player_inventory.filter(func(v): return not v is Array)
 	
-	if items.is_empty():
-		## Run the oven or get its contents
-		
-		if oven.output:
-			var output: Array[String] = oven.empty()
-			player_inventory.append(output)
-			temp_popup_label(oven.global_position + UI_OFFSET, "Took cooked item:\n" + str(output), 2.0)
+	if oven.baking:
+		if oven.baking.is_running():
+			return
+	
+	if oven.output:
+		var output: Array[String] = oven.empty()
+		player_inventory.append(output)
+		temp_popup_label(oven.global_position + UI_OFFSET, "Took cooked item:\n" + str(output), 2.0)
+	
+	elif items.is_empty():
+		if not oven.ingredients.is_empty():
+			## Run the oven
+			oven.bake()
+			temp_popup_label(oven.global_position + UI_OFFSET, "Baking...", 2.0)
 		else:
-			if not oven.ingredients.is_empty():
-				if oven.baking:
-					if oven.baking.is_running():
-						return
-				oven.bake()
-				temp_popup_label(oven.global_position + UI_OFFSET, "Baking...", 2.0)
-			else:
-				temp_popup_label(oven.global_position + UI_OFFSET, "It's empty!", 0.8)
+			## We got nothin
+			temp_popup_label(oven.global_position + UI_OFFSET, "It's empty!", 0.8)
+	
 	else:
 		## Add ingredients
 		## Prevent too many ingredients added
-		if not oven.ingredients.size() >= Desire.MAX_INGREDIENTS:
+		if oven.ingredients.size() < Desire.MAX_INGREDIENTS:
 			var item = items.pop_back()
 			player_inventory.erase(item)
 			oven.add_ingredient(item)
@@ -307,33 +388,38 @@ func _on_customer_interacted(customer: Customer):
 					
 					if to_match.is_empty():
 						## Yes
+						customers_satisfied += 1
+						var tip: int = randi_range(0, item.size())
+						tips_earned += tip
+						var tips_text: String
+						if not tips_earned:
+							tips_text = "(no gratuity)"
+						else:
+							tips_text = "tipped +%d" % tip
+						
 						customer.deliver_order()
 						player_inventory.erase(item)
 						p("Player delivered order to %s." % customer)
 						
-						temp_popup_label(customer.global_position + Vector2(-32.0, -96.0), "Delivered!", 3.0)
+						temp_popup_label(customer.global_position + Vector2(-32.0, -96.0), "Delivered!\n" + tips_text, 3.0)
 						return
 		
 		customer.display_text("That's not what I ordered...")
 		p("Customer desires %s; player has %s" % [customer.desire, player_inventory])
 
 func _on_customer_ready_to_leave(customer: Customer):
-	_seated.erase(
-		_seated.find_key(customer)
-	)
 	customer.exit_at(entrance)
-
-
-func temp_popup_label(global_location: Vector2, text: String, duration: float):
-	var pc := PanelContainer.new()
-	var label := Label.new()
-	pc.add_child(label)
-	label.text = text
-	pc.global_position = global_location
+	_seated.erase(_seated.find_key(customer))
 	
-	add_child(pc)
-	
-	var t := pc.create_tween()
-	t.tween_interval(duration)
-	t.tween_property(pc, ^"modulate", Color.TRANSPARENT, 1.25)
-	t.tween_callback(pc.queue_free)
+	if not queue.is_empty():
+		var seat = find_seat()
+		if not seat:
+			return
+		
+		var first_in: Customer = queue.pop_front()
+		_seated[seat] = first_in
+		first_in.sit_at(seat)
+		
+
+func _on_customer_lost_patience(_customer: Customer):
+	customers_abandoned += 1
