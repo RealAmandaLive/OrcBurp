@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://ct1dsosdmg4iv" path="res://scripts/gridlock_puzzle.gd" id="1_j8qjq"]
 [ext_resource type="AudioStream" uid="uid://bprg1j15j4n4k" path="res://assets/Player/orc-sounds/toot-tiny.wav" id="2_6osue"]
 [ext_resource type="AudioStream" uid="uid://b3d3wkyhfft3f" path="res://assets/Audio/splat.wav" id="3_ui5xj"]
+[ext_resource type="Texture2D" uid="uid://cb5wu7xj2ln44" path="res://assets/Items/key.png" id="4_h5rmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7t1d"]
 size = Vector2(303, 120)
@@ -57,15 +58,7 @@ offsets = PackedFloat32Array(0.012345679, 0.6851852, 1)
 colors = PackedColorArray(1, 1, 1, 0.5137255, 1, 1, 1, 0.21913582, 1, 1, 1, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iynve"]
-height = 40.0
-
-[sub_resource type="Gradient" id="Gradient_6osue"]
-colors = PackedColorArray(0.75271696, 0.4928245, 0, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_l7t1d"]
-gradient = SubResource("Gradient_6osue")
-width = 20
-height = 40
+height = 34.0
 
 [sub_resource type="Animation" id="Animation_ui5xj"]
 length = 0.001
@@ -535,6 +528,7 @@ pitch_scale = 0.4
 
 [node name="Key" type="RigidBody2D" parent="." unique_id=1033252304]
 position = Vector2(104, 354)
+rotation = -2.4889321
 collision_layer = 2
 collision_mask = 2
 collision_priority = 10.0
@@ -546,7 +540,7 @@ max_contacts_reported = 1
 shape = SubResource("CapsuleShape2D_iynve")
 
 [node name="Sprite2D" type="Sprite2D" parent="Key" unique_id=246510603]
-texture = SubResource("GradientTexture2D_l7t1d")
+texture = ExtResource("4_h5rmh")
 
 [node name="Winning" type="Node2D" parent="." unique_id=1803625257]
 
@@ -564,7 +558,7 @@ pitch_scale = 0.5
 
 [node name="AnimatedKey" type="Sprite2D" parent="Winning" unique_id=357926528]
 position = Vector2(945, 511)
-texture = SubResource("GradientTexture2D_l7t1d")
+texture = ExtResource("4_h5rmh")
 
 [node name="Label The" type="Label" parent="Winning" unique_id=1027575457]
 offset_left = -600.0
