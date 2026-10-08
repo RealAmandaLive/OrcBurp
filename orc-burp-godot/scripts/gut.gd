@@ -19,6 +19,7 @@ var can_move = true
 var can_climb = false
 var climbing = false
 var was_on_floor_last_frame = false # to detect landings
+var can_throw_traps: bool = true
 
 var health: int = STARTING_HEALTH
 
@@ -32,6 +33,10 @@ var health: int = STARTING_HEALTH
 @onready var burpSounds: AudioStreamPlayer2D = $BurpSounds
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_released(&"throw") and can_throw_traps:
+		throw_trap()
 
 func _physics_process(delta: float) -> void:
 	if !alive:
@@ -117,17 +122,22 @@ func _set_state(state: PlayerStates) -> void:
 	match player_state:
 		PlayerStates.IDLE: 
 			animated_sprite_2d.animation = "idle"
+			can_throw_traps = true
 		PlayerStates.WALKING:
 			animated_sprite_2d.animation = "running"
+			can_throw_traps = true
 		PlayerStates.JUMPING:
 			if velocity.x > 1 or velocity.x < -1:
 				animated_sprite_2d.animation = "jumpRunning"
 			else:
 				animated_sprite_2d.animation = "jumpFront"
+			can_throw_traps = true
 		PlayerStates.CLIMBING:
 			animated_sprite_2d.animation = "climbing"
+			can_throw_traps = false
 		PlayerStates.ON_LADDER:
 			animated_sprite_2d.animation = 'onLadder'
+			can_throw_traps = false
 	
 
 
@@ -143,6 +153,69 @@ func collect_apple(health_increased: int) -> void:
 	health = mini(MAX_HEALTH, health + health_increased)
 	collected_apple.emit()
 	p("collected an apple for %d health; new current health is %d." % [health_increased, health])
+
+
+func throw_trap() -> void:
+	const THROW_IMPULSE_VELOCITY: float = 768.0 ## pixels per second
+	const THROWN_COLLISION_RADIUS: float = 16.0 ## pixels; we could also just get this from the sprite...
+	
+	var node_to_parent_trap: Node = Main.get_instance().current_level_root
+	
+	## Make a physics object to throw in that direction, which will carry the trap.
+	var trap_physics := RigidBody2D.new()
+	var collider := CollisionShape2D.new();  var shape := CircleShape2D.new()
+	collider.shape = shape;  shape.radius = THROWN_COLLISION_RADIUS
+	trap_physics.add_child(collider)
+	
+	## Don't roll around
+	trap_physics.lock_rotation = true
+	
+	## Set the collision mask to only collide with the walls and floor.
+	## -- See "res://assets/ tile_set.tres "
+	trap_physics.set_collision_mask_value(1, false)
+	trap_physics.set_collision_mask_value(5, true)
+	
+	trap_physics.set_collision_layer_value(1, false)
+	
+	## Contact monitoring to stop the physics upon landing.
+	trap_physics.contact_monitor = true
+	trap_physics.max_contacts_reported = 2
+	
+	## Make the Trap object itself which has the logic for hurting enemies or the player.
+	#var trap := Trap.new()
+	var trap = preload("uid://0iaf024fbyk8").instantiate() ## HACK TESTING
+	trap_physics.add_child(trap)
+	
+	## Lambda function to remove physics behavior but retain the Trap node.
+	var reparent_trap: Callable = func():
+		trap.reparent(node_to_parent_trap)
+		if trap_physics:
+			trap_physics.queue_free()
+		print("Reparented trap")
+	
+	## When the trap is triggered, remove the physics behavior.
+	trap.triggered.connect(reparent_trap.unbind(1))
+	
+	## When the physics object has collision with ground/wall,
+	## preserve the Trap itself by reparenting it, and remove physics behavior.
+	trap_physics.body_entered.connect(reparent_trap.unbind(1))
+	
+	
+	var throw_direction: float = 1.0 ## HACK TESTING
+	var starting_position: Vector2 = Vector2(THROWN_COLLISION_RADIUS * throw_direction * 2.5, 0.0) ## HACK TESTING
+	var impulse: Vector2 = Vector2(THROW_IMPULSE_VELOCITY * throw_direction, 0.0).rotated(-PI/4) ## HACK TESTING
+	
+	trap_physics.global_position = self.global_position + starting_position
+	node_to_parent_trap.add_child(trap_physics)
+	trap_physics.apply_central_impulse(impulse)
+
+## Return a target within a bounding box using the current facing direction.
+## If no target is found, returns [Vector2.ZERO].
+func find_throw_target(distance: float) -> Vector2:
+	var current_facing_direction: float = signf(velocity.x)
+	
+	return Vector2.ZERO
+
 
 func die() -> void:
 	if not alive: return

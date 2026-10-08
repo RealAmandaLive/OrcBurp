@@ -48,6 +48,7 @@ scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_l5lq6")
+metadata/trappable = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2117043791]
 sprite_frames = SubResource("SpriteFrames_luolt")
@@ -63,6 +64,8 @@ shape = SubResource("CapsuleShape2D_r0xws")
 [node name="Timer" type="Timer" parent="." unique_id=1519552195]
 wait_time = 2.0
 autostart = true
+
+[node name="Trappable" type="Node2D" parent="." unique_id=907219492]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
