@@ -6,6 +6,8 @@ const SCANNED_MASK_LAYERS: int = 6 ## bitmask layers 2 and 3 (Player, Enemies)
 const TRAPPABLE_META: StringName = &"trappable"
 const TRAP_TIME: float = 2.5
 
+@export var lifetime: float = 5.0
+
 @export var sprite: Sprite2D ## for animations
 @export var number_of_sprite_frames: int = 0
 @export var framerate: float = 6.0
@@ -14,9 +16,14 @@ const TRAP_TIME: float = 2.5
 
 var animation: Tween
 var stuck_to_node: Node2D
+var _lifetime: Tween
 
 func _ready() -> void:
 	collision_mask = SCANNED_MASK_LAYERS ## enforced
+	
+	_lifetime = create_tween()
+	_lifetime.tween_interval(lifetime)
+	_lifetime.tween_callback(queue_free)
 
 func _process(_delta: float) -> void:
 	if stuck_to_node:
@@ -46,9 +53,11 @@ func stick_to(collider: Node) -> void:
 	else:
 		return
 	
+	animate()
+	_lifetime.kill()
 	stuck_to_node = collider
 	triggered.emit(collider)
-	animate()
+	
 
 func trap_physics_body(collider: CollisionObject2D) -> void:
 	var original_process_mode = collider.process_mode
