@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://cisg4cu7a5uax" path="res://assets/Audio/bump.wav" id="5_j6fd1"]
 [ext_resource type="AudioStream" uid="uid://dg5h6ipw5v1nl" path="res://assets/Player/orc-sounds/toot-small.wav" id="6_lcva8"]
 [ext_resource type="AudioStream" uid="uid://dqci48bo8ys4x" path="res://assets/Audio/footstep.wav" id="7_uy3vc"]
+[ext_resource type="AudioStream" uid="uid://ccolqgqc6emw4" path="res://assets/Player/all_toot_sounds.tres" id="8_3ao6n"]
+[ext_resource type="AudioStream" uid="uid://ch3ndpipgbxim" path="res://assets/Player/all_burp_sounds.tres" id="9_4k4mm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhrd0"]
 radius = 16.0
@@ -100,3 +102,11 @@ volume_db = -10.0
 position = Vector2(3, 1)
 stream = SubResource("AudioStreamRandomizer_krm34")
 volume_db = -25.0
+
+[node name="TootSounds" type="AudioStreamPlayer2D" parent="." unique_id=1458196425]
+position = Vector2(3, 1)
+stream = ExtResource("8_3ao6n")
+
+[node name="BurpSounds" type="AudioStreamPlayer2D" parent="." unique_id=1726292481]
+position = Vector2(3, 1)
+stream = ExtResource("9_4k4mm")

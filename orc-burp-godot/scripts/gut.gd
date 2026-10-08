@@ -28,6 +28,8 @@ var health: int = STARTING_HEALTH
 @onready var landingSound: AudioStreamPlayer2D = $LandingSound
 @onready var jumpingSound: AudioStreamPlayer2D = $JumpingSound
 @onready var walkingSound: AudioStreamPlayer2D = $WalkingSound
+@onready var tootSounds: AudioStreamPlayer2D = $TootSounds
+@onready var burpSounds: AudioStreamPlayer2D = $BurpSounds
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
@@ -85,6 +87,17 @@ func _physics_process(delta: float) -> void:
 	if player_state == PlayerStates.WALKING and is_on_floor_now:
 		if not walkingSound.playing: # don't play too often
 			walkingSound.play() # uses random pitch variation
+			
+	## TOOTS
+	## todo: spawn particles, check hitboxes, etc maybe in their own scene we instantiate
+	## for now this just plays a random toot sound from a pool
+	if Input.is_action_just_pressed("toot"):
+		tootSounds.play()
+
+	## BURPS
+	## todo: implement gameplay as above
+	if Input.is_action_just_pressed("burp"):
+		burpSounds.play()
 
 	## GRAVITY
 	if not can_climb:

@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://ch3ndpipgbxim"]
+
+[ext_resource type="AudioStream" uid="uid://l7t82ao0x5mu" path="res://assets/Player/orc-sounds/burp-jump.wav" id="1_wdpo1"]
+[ext_resource type="AudioStream" uid="uid://d33f44nrmcgpq" path="res://assets/Player/orc-sounds/burp-wide.wav" id="2_xe6te"]
+
+[resource]
+streams_count = 2
+stream_0/stream = ExtResource("1_wdpo1")
+stream_1/stream = ExtResource("2_xe6te")

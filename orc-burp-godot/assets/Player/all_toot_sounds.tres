@@ -1,0 +1,24 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://ccolqgqc6emw4"]
+
+[ext_resource type="AudioStream" uid="uid://j5sybmq3tpha" path="res://assets/Player/orc-sounds/toot-low.wav" id="1_6x37b"]
+[ext_resource type="AudioStream" uid="uid://du6scwm0evtkm" path="res://assets/Player/orc-sounds/toot-wet.wav" id="2_gjd20"]
+[ext_resource type="AudioStream" uid="uid://b42gki46ugfvw" path="res://assets/Player/orc-sounds/toot-deep.wav" id="3_vy8df"]
+[ext_resource type="AudioStream" uid="uid://bprg1j15j4n4k" path="res://assets/Player/orc-sounds/toot-tiny.wav" id="4_k6202"]
+[ext_resource type="AudioStream" uid="uid://dg5h6ipw5v1nl" path="res://assets/Player/orc-sounds/toot-small.wav" id="5_i6ebw"]
+[ext_resource type="AudioStream" uid="uid://c4bw1qcnp6ywp" path="res://assets/Player/orc-sounds/toot-high-a.wav" id="6_t16v6"]
+[ext_resource type="AudioStream" uid="uid://cx2tb20ph8f2l" path="res://assets/Player/orc-sounds/toot-medium.wav" id="7_2rb86"]
+[ext_resource type="AudioStream" uid="uid://ixpd5qa7keu3" path="res://assets/Player/orc-sounds/toot-powerful.wav" id="8_4cd0v"]
+[ext_resource type="AudioStream" uid="uid://kmhgiufp7rd0" path="res://assets/Player/orc-sounds/toot-satisfying.wav" id="9_hmp4j"]
+
+[resource]
+random_pitch = 1.122462
+streams_count = 9
+stream_0/stream = ExtResource("1_6x37b")
+stream_1/stream = ExtResource("2_gjd20")
+stream_2/stream = ExtResource("3_vy8df")
+stream_3/stream = ExtResource("4_k6202")
+stream_4/stream = ExtResource("5_i6ebw")
+stream_5/stream = ExtResource("6_t16v6")
+stream_6/stream = ExtResource("7_2rb86")
+stream_7/stream = ExtResource("8_4cd0v")
+stream_8/stream = ExtResource("9_hmp4j")
