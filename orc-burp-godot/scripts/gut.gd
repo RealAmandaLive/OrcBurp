@@ -18,11 +18,15 @@ var alive = true
 var can_move = true
 var can_climb = false
 var climbing = false
+var was_on_floor_last_frame = false # to detect landings
 
 var health: int = STARTING_HEALTH
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer2D = $DeathSound
+
+@onready var landingFX: CPUParticles2D = $LandingFX
+@onready var landingSound: AudioStreamPlayer2D = $LandingSound
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
@@ -42,9 +46,16 @@ func _physics_process(delta: float) -> void:
 	elif signf(direction) == -1.0:
 		animated_sprite_2d.flip_h = true
 	
+	var is_on_floor_now = is_on_floor()
+	
 	## JUMPING
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor_now:
 		velocity.y = JUMP_VELOCITY
+		
+	## LANDING
+	if not was_on_floor_last_frame and is_on_floor_now:
+		landingSound.play()
+		landingFX.restart()
 
 	## CLIMBING
 	if Input.is_action_pressed("climb") and can_climb:
@@ -76,6 +87,8 @@ func _physics_process(delta: float) -> void:
 		player_state = PlayerStates.ON_LADDER
 
 	move_and_slide()
+	
+	was_on_floor_last_frame = is_on_floor_now
 
 
 func _set_state(state: PlayerStates) -> void:

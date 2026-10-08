@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://c4dvcr37ef1cy" path="res://scripts/gut.gd" id="1_mq6y6"]
 [ext_resource type="PackedScene" uid="uid://bbxk1xg5yi17m" path="res://scenes/gut_sprite.tscn" id="2_u2ds8"]
 [ext_resource type="Shader" uid="uid://chftu8fyqea61" path="res://scripts/knockback_shockwave.gdshader" id="4_8a87c"]
+[ext_resource type="Texture2D" uid="uid://bpyyhgt1vf7sj" path="res://assets/Particles/dust-cloud.png" id="4_j6fd1"]
+[ext_resource type="AudioStream" uid="uid://cisg4cu7a5uax" path="res://assets/Audio/bump.wav" id="5_j6fd1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhrd0"]
 radius = 16.0
@@ -17,6 +19,14 @@ shader_parameter/shockwave_depth = 0.13
 shader_parameter/shockwave_speed = 3.0
 shader_parameter/shockwave_strength = 0.250000011875
 shader_parameter/pixellize_size = 45.0
+
+[sub_resource type="Curve" id="Curve_kdu0b"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_vpsdc"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Gut" type="CharacterBody2D" unique_id=1676850674 groups=["Player"]]
 script = ExtResource("1_mq6y6")
@@ -49,3 +59,27 @@ offset_right = 128.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="LandingFX" type="CPUParticles2D" parent="." unique_id=314591769]
+position = Vector2(0, 32)
+emitting = false
+amount = 16
+texture = ExtResource("4_j6fd1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+direction = Vector2(0, -1)
+spread = 60.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_kdu0b")
+color_ramp = SubResource("Gradient_vpsdc")
+
+[node name="LandingSound" type="AudioStreamPlayer2D" parent="." unique_id=757189220]
+position = Vector2(3, 1)
+stream = ExtResource("5_j6fd1")
+volume_db = -20.0
