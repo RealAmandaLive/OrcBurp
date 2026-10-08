@@ -65,6 +65,7 @@ position = Vector2(597, 484)
 
 [node name="exit" type="Area2D" parent="." unique_id=1569906749]
 position = Vector2(1076, 634)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=1799567898]
 position = Vector2(21.5, -14)
@@ -72,6 +73,7 @@ shape = SubResource("RectangleShape2D_m7ahb")
 
 [node name="Ladder" type="Area2D" parent="." unique_id=1597068453]
 position = Vector2(1189, 451)
+collision_mask = 2
 script = ExtResource("4_dwgg1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder" unique_id=1770394869]

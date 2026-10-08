@@ -203,6 +203,7 @@ position = Vector2(164, 558)
 
 [node name="Oven" type="Area2D" parent="KitchenMinigame" unique_id=309606043]
 position = Vector2(1062, 599)
+collision_mask = 2
 script = ExtResource("6_mwmjw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenMinigame/Oven" unique_id=1428522603]
@@ -210,6 +211,7 @@ shape = SubResource("CircleShape2D_6ottg")
 
 [node name="Broth" type="Area2D" parent="KitchenMinigame" unique_id=1322844680]
 position = Vector2(807, 1054)
+collision_mask = 2
 script = ExtResource("6_ibrlr")
 metadata/_custom_type_script = "uid://mns2srnlqhyw"
 
@@ -229,6 +231,7 @@ horizontal_alignment = 1
 
 [node name="Meat" type="Area2D" parent="KitchenMinigame" unique_id=1999326261]
 position = Vector2(230, 876)
+collision_mask = 2
 script = ExtResource("6_ibrlr")
 metadata/_custom_type_script = "uid://mns2srnlqhyw"
 
@@ -248,6 +251,7 @@ horizontal_alignment = 1
 
 [node name="Tallow" type="Area2D" parent="KitchenMinigame" unique_id=1526005464]
 position = Vector2(165, 875)
+collision_mask = 2
 script = ExtResource("6_ibrlr")
 metadata/_custom_type_script = "uid://mns2srnlqhyw"
 
@@ -267,6 +271,7 @@ horizontal_alignment = 1
 
 [node name="Roots" type="Area2D" parent="KitchenMinigame" unique_id=746595145]
 position = Vector2(676, 875)
+collision_mask = 2
 script = ExtResource("6_ibrlr")
 metadata/_custom_type_script = "uid://mns2srnlqhyw"
 
@@ -286,6 +291,7 @@ horizontal_alignment = 1
 
 [node name="Fruits" type="Area2D" parent="KitchenMinigame" unique_id=417064800]
 position = Vector2(936, 876)
+collision_mask = 2
 script = ExtResource("6_ibrlr")
 metadata/_custom_type_script = "uid://mns2srnlqhyw"
 
@@ -315,6 +321,7 @@ position = Vector2(700, 571)
 
 [node name="exit" type="Area2D" parent="." unique_id=1569906749]
 position = Vector2(143, 571)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=1799567898]
 position = Vector2(21.5, -14)
@@ -322,6 +329,7 @@ shape = SubResource("RectangleShape2D_m7ahb")
 
 [node name="Ladder" type="Area2D" parent="." unique_id=1597068453]
 position = Vector2(1189, 858)
+collision_mask = 2
 script = ExtResource("6_vpxcu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder" unique_id=1770394869]

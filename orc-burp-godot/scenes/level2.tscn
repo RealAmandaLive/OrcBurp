@@ -60,6 +60,7 @@ position = Vector2(993, 415)
 
 [node name="FallBoundary" type="Area2D" parent="." unique_id=528512273]
 position = Vector2(0, 1024)
+collision_mask = 2
 script = ExtResource("6_yqkch")
 metadata/_custom_type_script = "uid://b1v47klesm0x1"
 

@@ -38,6 +38,7 @@ streams_count = 1
 stream_0/stream = ExtResource("7_uy3vc")
 
 [node name="Gut" type="CharacterBody2D" unique_id=1676850674 groups=["Player"]]
+collision_layer = 2
 script = ExtResource("1_mq6y6")
 
 [node name="AnimatedSprite2D" parent="." unique_id=253259514 instance=ExtResource("2_u2ds8")]

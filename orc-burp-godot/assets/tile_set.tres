@@ -176,5 +176,5 @@ texture_region_size = Vector2i(32, 32)
 
 [resource]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 17
 sources/0 = SubResource("TileSetAtlasSource_wwpf4")
