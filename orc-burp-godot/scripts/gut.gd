@@ -27,6 +27,7 @@ var health: int = STARTING_HEALTH
 @onready var landingFX: CPUParticles2D = $LandingFX
 @onready var landingSound: AudioStreamPlayer2D = $LandingSound
 @onready var jumpingSound: AudioStreamPlayer2D = $JumpingSound
+@onready var walkingSound: AudioStreamPlayer2D = $WalkingSound
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
@@ -79,6 +80,11 @@ func _physics_process(delta: float) -> void:
 		player_state = PlayerStates.JUMPING
 	elif velocity.y != 0 and climbing:
 		player_state = PlayerStates.CLIMBING
+
+	## FOOTSTEPS
+	if player_state == PlayerStates.WALKING and is_on_floor_now:
+		if not walkingSound.playing: # don't play too often
+			walkingSound.play() # uses random pitch variation
 
 	## GRAVITY
 	if not can_climb:

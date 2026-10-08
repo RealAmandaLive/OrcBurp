@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpyyhgt1vf7sj" path="res://assets/Particles/dust-cloud.png" id="4_j6fd1"]
 [ext_resource type="AudioStream" uid="uid://cisg4cu7a5uax" path="res://assets/Audio/bump.wav" id="5_j6fd1"]
 [ext_resource type="AudioStream" uid="uid://dg5h6ipw5v1nl" path="res://assets/Player/orc-sounds/toot-small.wav" id="6_lcva8"]
+[ext_resource type="AudioStream" uid="uid://dqci48bo8ys4x" path="res://assets/Audio/footstep.wav" id="7_uy3vc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhrd0"]
 radius = 16.0
@@ -28,6 +29,11 @@ metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_vpsdc"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_krm34"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("7_uy3vc")
 
 [node name="Gut" type="CharacterBody2D" unique_id=1676850674 groups=["Player"]]
 script = ExtResource("1_mq6y6")
@@ -89,3 +95,8 @@ volume_db = -20.0
 position = Vector2(3, 1)
 stream = ExtResource("6_lcva8")
 volume_db = -10.0
+
+[node name="WalkingSound" type="AudioStreamPlayer2D" parent="." unique_id=472872458]
+position = Vector2(3, 1)
+stream = SubResource("AudioStreamRandomizer_krm34")
+volume_db = -25.0
