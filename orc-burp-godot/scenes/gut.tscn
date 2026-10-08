@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://chftu8fyqea61" path="res://scripts/knockback_shockwave.gdshader" id="4_8a87c"]
 [ext_resource type="Texture2D" uid="uid://bpyyhgt1vf7sj" path="res://assets/Particles/dust-cloud.png" id="4_j6fd1"]
 [ext_resource type="AudioStream" uid="uid://cisg4cu7a5uax" path="res://assets/Audio/bump.wav" id="5_j6fd1"]
+[ext_resource type="AudioStream" uid="uid://dg5h6ipw5v1nl" path="res://assets/Player/orc-sounds/toot-small.wav" id="6_lcva8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhrd0"]
 radius = 16.0
@@ -83,3 +84,8 @@ color_ramp = SubResource("Gradient_vpsdc")
 position = Vector2(3, 1)
 stream = ExtResource("5_j6fd1")
 volume_db = -20.0
+
+[node name="JumpingSound" type="AudioStreamPlayer2D" parent="." unique_id=404341627]
+position = Vector2(3, 1)
+stream = ExtResource("6_lcva8")
+volume_db = -10.0

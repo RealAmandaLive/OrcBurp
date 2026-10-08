@@ -24,9 +24,9 @@ var health: int = STARTING_HEALTH
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer2D = $DeathSound
-
 @onready var landingFX: CPUParticles2D = $LandingFX
 @onready var landingSound: AudioStreamPlayer2D = $LandingSound
+@onready var jumpingSound: AudioStreamPlayer2D = $JumpingSound
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
@@ -50,6 +50,7 @@ func _physics_process(delta: float) -> void:
 	
 	## JUMPING
 	if Input.is_action_just_pressed("jump") and is_on_floor_now:
+		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 		
 	## LANDING
