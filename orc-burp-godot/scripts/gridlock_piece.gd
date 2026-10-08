@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 				collision_sound.play()
 				last_collision = col.get_position()
 		else:
-			last_collision = Vector2.INF			
+			last_collision = Vector2.INF
 	if grabbed:
 		velocity = (get_global_mouse_position() - global_position) * PIECE_SPEED
 		if movement == PieceDir.HORIZONTAL:

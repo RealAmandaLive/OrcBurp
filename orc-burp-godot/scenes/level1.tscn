@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="3_m7ahb"]
 [ext_resource type="PackedScene" uid="uid://dt05y8puojmjs" path="res://scenes/vfx_fire-with-smoke.tscn" id="3_ru4tf"]
 [ext_resource type="Script" uid="uid://bih6h3jpesq1u" path="res://scripts/ladder.gd" id="4_dwgg1"]
+[ext_resource type="PackedScene" uid="uid://dienwbqy3rey4" path="res://scenes/gridlock_trigger_tile.tscn" id="7_ejswk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
@@ -55,6 +56,9 @@ scale = Vector2(0.5, 0.5)
 [node name="Enemies" type="Node2D" parent="." unique_id=153438615]
 position = Vector2(830, 546)
 scale = Vector2(2, 2)
+
+[node name="GridlockTriggerTile" parent="." unique_id=905078554 instance=ExtResource("7_ejswk")]
+position = Vector2(743, 483)
 
 [node name="Gut" parent="." unique_id=1676850674 instance=ExtResource("3_m7ahb")]
 position = Vector2(597, 484)

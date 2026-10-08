@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dienwbqy3rey4"]
+
+[ext_resource type="Script" uid="uid://cifkxjtf0boej" path="res://scripts/gridlock_trigger_tile.gd" id="1_rknjc"]
+[ext_resource type="PackedScene" uid="uid://dcj8sudacr0hx" path="res://scenes/gridlock_puzzle.tscn" id="2_wn0pv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iynve"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iynve"]
+radius = 56.0
+
+[node name="GridlockTriggerTile" type="Node2D" unique_id=905078554]
+process_mode = 3
+script = ExtResource("1_rknjc")
+puzzle_scene = ExtResource("2_wn0pv")
+sprite_flash_color = Color(18.892, 18.892, 18.892, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=469718621]
+texture = SubResource("PlaceholderTexture2D_iynve")
+
+[node name="Label" type="Label" parent="." unique_id=1037337675]
+offset_left = -48.0
+offset_top = -88.0
+offset_right = 46.0
+offset_bottom = -65.0
+text = "E to interact"
+
+[node name="InteractionZone" type="Area2D" parent="." unique_id=1098633144]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone" unique_id=526895726]
+shape = SubResource("CircleShape2D_iynve")
+
+[node name="PulseTimer" type="Timer" parent="." unique_id=253221847]
+wait_time = 10.0
+autostart = true
+
+[node name="GameCanvasLayer" type="CanvasLayer" parent="." unique_id=1515180566]
+visible = false
+
+[node name="GameContainer" type="Control" parent="GameCanvasLayer" unique_id=411546101]
+unique_name_in_owner = true
+visible = false
+clip_children = 2
+z_index = 10
+clip_contents = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundScreen" type="ColorRect" parent="GameCanvasLayer" unique_id=1553795803]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7137255)
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="InteractionZone" to="." method="_on_interaction_zone_body_entered"]
+[connection signal="body_exited" from="InteractionZone" to="." method="_on_interaction_zone_body_exited"]
+[connection signal="timeout" from="PulseTimer" to="." method="_on_pulse_timer_timeout"]

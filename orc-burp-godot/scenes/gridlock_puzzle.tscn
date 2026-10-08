@@ -218,6 +218,7 @@ _data = {
 }
 
 [node name="GridLockPuzzle" type="Node2D" unique_id=608569186]
+process_mode = 3
 script = ExtResource("1_j8qjq")
 
 [node name="Background" type="ColorRect" parent="." unique_id=778727991]
