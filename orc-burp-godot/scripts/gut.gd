@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal died
 signal collected_apple
 
-enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER}
+enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING}
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
@@ -20,6 +20,7 @@ var can_climb = false
 var climbing = false
 var was_on_floor_last_frame = false # to detect landings
 var can_throw_traps: bool = true
+var can_double_jump = true
 
 var health: int = STARTING_HEALTH
 
@@ -61,11 +62,19 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor_now:
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
+	
+	## DOUBLE JUMP
+	if Input.is_action_just_pressed("jump") and not is_on_floor_now and can_double_jump and not climbing:
+		jumpingSound.play()
+		velocity.y = JUMP_VELOCITY
+		can_double_jump = false
+		player_state = PlayerStates.DOUBLEJUMPING
 		
 	## LANDING
 	if not was_on_floor_last_frame and is_on_floor_now:
 		landingSound.play()
 		landingFX.restart()
+		can_double_jump = true
 
 	## CLIMBING
 	if Input.is_action_pressed("climb") and can_climb:
@@ -86,6 +95,8 @@ func _physics_process(delta: float) -> void:
 		player_state = PlayerStates.WALKING
 	elif velocity.y != 0 and not climbing: 
 		player_state = PlayerStates.JUMPING
+	elif velocity.y != 0 and can_double_jump: 
+		player_state = PlayerStates.DOUBLEJUMPING
 	elif velocity.y != 0 and climbing:
 		player_state = PlayerStates.CLIMBING
 
@@ -139,6 +150,12 @@ func _set_state(state: PlayerStates) -> void:
 		PlayerStates.ON_LADDER:
 			animated_sprite_2d.animation = 'onLadder'
 			can_throw_traps = false
+		PlayerStates.DOUBLEJUMPING:
+			if velocity.x > 1 or velocity.x < -1:
+				animated_sprite_2d.animation = "jumpRunning"
+			else:
+				animated_sprite_2d.animation = "jumpFront"
+				can_throw_traps = true
 	
 
 
