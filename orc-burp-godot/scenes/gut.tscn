@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://chftu8fyqea61" path="res://scripts/knockback_shockwave.gdshader" id="4_8a87c"]
 [ext_resource type="Texture2D" uid="uid://bpyyhgt1vf7sj" path="res://assets/Particles/dust-cloud.png" id="4_j6fd1"]
 [ext_resource type="AudioStream" uid="uid://cisg4cu7a5uax" path="res://assets/Audio/bump.wav" id="5_j6fd1"]
+[ext_resource type="AudioStream" uid="uid://b0m06n8adkodc" path="res://assets/Audio/eatApple.wav" id="6_kwhhm"]
 [ext_resource type="AudioStream" uid="uid://dg5h6ipw5v1nl" path="res://assets/Player/orc-sounds/toot-small.wav" id="6_lcva8"]
 [ext_resource type="AudioStream" uid="uid://dqci48bo8ys4x" path="res://assets/Audio/footstep.wav" id="7_uy3vc"]
 [ext_resource type="AudioStream" uid="uid://ccolqgqc6emw4" path="res://assets/Player/all_toot_sounds.tres" id="8_3ao6n"]
@@ -93,6 +94,10 @@ color_ramp = SubResource("Gradient_vpsdc")
 position = Vector2(3, 1)
 stream = ExtResource("5_j6fd1")
 volume_db = -20.0
+
+[node name="EatAppleSound" type="AudioStreamPlayer2D" parent="." unique_id=658300300]
+position = Vector2(3, 1)
+stream = ExtResource("6_kwhhm")
 
 [node name="JumpingSound" type="AudioStreamPlayer2D" parent="." unique_id=404341627]
 position = Vector2(3, 1)

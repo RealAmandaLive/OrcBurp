@@ -31,6 +31,7 @@ var health: int = STARTING_HEALTH
 @onready var walkingSound: AudioStreamPlayer2D = $WalkingSound
 @onready var tootSounds: AudioStreamPlayer2D = $TootSounds
 @onready var burpSounds: AudioStreamPlayer2D = $BurpSounds
+@onready var eatAppleSound: AudioStreamPlayer2D = $EatAppleSound
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
@@ -153,6 +154,7 @@ func collect_apple(health_increased: int) -> void:
 	health = mini(MAX_HEALTH, health + health_increased)
 	collected_apple.emit()
 	p("collected an apple for %d health; new current health is %d." % [health_increased, health])
+	eatAppleSound.play()
 
 
 func throw_trap() -> void:
