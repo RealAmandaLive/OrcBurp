@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cb5wu7xj2ln44" path="res://assets/Items/key.png" id="4_h5rmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7t1d"]
-size = Vector2(303, 120)
+size = Vector2(500, 500)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iynve"]
 size = Vector2(40, 720)
@@ -125,7 +125,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_j8qjq"]
 resource_name = "win"
-length = 10.0
+length = 3.0
 step = 0.083333336
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -228,7 +228,9 @@ offset_bottom = 40.0
 color = Color(0.22490484, 0.22490484, 0.22490484, 1)
 
 [node name="GoalZone" type="Area2D" parent="." unique_id=1048620607]
-position = Vector2(760, 360)
+position = Vector2(800, 360)
+collision_layer = 32768
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoalZone" unique_id=1801698794]
 position = Vector2(198.5, 0)
@@ -237,6 +239,8 @@ shape = SubResource("RectangleShape2D_l7t1d")
 [node name="Walls" type="Node2D" parent="." unique_id=1671603673]
 
 [node name="Wall - left" type="StaticBody2D" parent="Walls" unique_id=1856858987]
+collision_layer = 32768
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall - left" unique_id=758371396]
 position = Vector2(20, 360)
@@ -249,6 +253,8 @@ offset_bottom = 720.0
 
 [node name="Wall - right" type="StaticBody2D" parent="Walls" unique_id=818201269]
 position = Vector2(680, 0)
+collision_layer = 32768
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall - right" unique_id=1234164021]
 position = Vector2(20, 150)
@@ -261,6 +267,8 @@ offset_bottom = 300.0
 
 [node name="Wall - right2" type="StaticBody2D" parent="Walls" unique_id=1980284821]
 position = Vector2(680, 420)
+collision_layer = 32768
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall - right2" unique_id=190330896]
 position = Vector2(20, 150)
@@ -272,6 +280,8 @@ offset_right = 20.0
 offset_bottom = 300.0
 
 [node name="Wall - top" type="StaticBody2D" parent="Walls" unique_id=1756001055]
+collision_layer = 32768
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall - top" unique_id=1141353151]
 position = Vector2(360, 20)
@@ -284,6 +294,8 @@ offset_bottom = 40.0
 
 [node name="Wall - bottom" type="StaticBody2D" parent="Walls" unique_id=1410769595]
 position = Vector2(0, 680)
+collision_layer = 32768
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall - bottom" unique_id=783798172]
 position = Vector2(360, 20)
@@ -296,8 +308,10 @@ offset_bottom = 20.0
 
 [node name="Pieces" type="Node2D" parent="." unique_id=1665171088]
 
-[node name="MainPiece" type="CharacterBody2D" parent="Pieces" unique_id=1121982186]
+[node name="MainPiece" type="CharacterBody2D" parent="Pieces" unique_id=1121982186 groups=["gridlock_pieces"]]
 position = Vector2(120, 360)
+collision_layer = 32768
+collision_mask = 32768
 input_pickable = true
 motion_mode = 1
 slide_on_ceiling = false
@@ -314,8 +328,8 @@ shape = SubResource("RectangleShape2D_2q6gc")
 
 [node name="Left Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1630438038]
 position = Vector2(-80, -40)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 16384
+collision_mask = 16384
 collision_priority = 10.0
 physics_material_override = SubResource("PhysicsMaterial_6osue")
 
@@ -333,8 +347,8 @@ color = Color(0.54509807, 0.83137256, 1, 1)
 
 [node name="Right Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1905964320]
 position = Vector2(70, -40)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 16384
+collision_mask = 16384
 collision_priority = 10.0
 physics_material_override = SubResource("PhysicsMaterial_6osue")
 
@@ -352,8 +366,8 @@ color = Color(0.54509807, 0.83137256, 1, 1)
 
 [node name="Top Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=2022556452]
 position = Vector2(-80, -40)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 16384
+collision_mask = 16384
 collision_priority = 10.0
 physics_material_override = SubResource("PhysicsMaterial_6osue")
 
@@ -371,8 +385,8 @@ color = Color(0.54509807, 0.83137256, 1, 1)
 
 [node name="Bottom Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1742572903]
 position = Vector2(-80, 30)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 16384
+collision_mask = 16384
 collision_priority = 10.0
 physics_material_override = SubResource("PhysicsMaterial_6osue")
 
@@ -388,9 +402,11 @@ offset_right = 160.0
 offset_bottom = 10.0
 color = Color(0.54509807, 0.83137256, 1, 1)
 
-[node name="Piece1" type="CharacterBody2D" parent="Pieces" unique_id=46163032]
+[node name="Piece1" type="CharacterBody2D" parent="Pieces" unique_id=46163032 groups=["gridlock_pieces"]]
 modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
 position = Vector2(360, 360)
+collision_layer = 32768
+collision_mask = 32768
 input_pickable = true
 motion_mode = 1
 slide_on_ceiling = false
@@ -405,9 +421,11 @@ texture = SubResource("PlaceholderTexture2D_50bm2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece1" unique_id=956691481]
 shape = SubResource("RectangleShape2D_6osue")
 
-[node name="Piece2" type="CharacterBody2D" parent="Pieces" unique_id=1641569370]
+[node name="Piece2" type="CharacterBody2D" parent="Pieces" unique_id=1641569370 groups=["gridlock_pieces"]]
 modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
 position = Vector2(260, 160)
+collision_layer = 32768
+collision_mask = 32768
 input_pickable = true
 motion_mode = 1
 slide_on_ceiling = false
@@ -422,9 +440,11 @@ texture = SubResource("PlaceholderTexture2D_50bm2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece2" unique_id=2082672883]
 shape = SubResource("RectangleShape2D_6osue")
 
-[node name="Piece6" type="CharacterBody2D" parent="Pieces" unique_id=360762373]
+[node name="Piece6" type="CharacterBody2D" parent="Pieces" unique_id=360762373 groups=["gridlock_pieces"]]
 modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
 position = Vector2(100, 540)
+collision_layer = 32768
+collision_mask = 32768
 input_pickable = true
 motion_mode = 1
 slide_on_ceiling = false
@@ -439,9 +459,11 @@ texture = SubResource("PlaceholderTexture2D_50bm2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece6" unique_id=1473956244]
 shape = SubResource("RectangleShape2D_6osue")
 
-[node name="Piece3" type="CharacterBody2D" parent="Pieces" unique_id=1365428289]
+[node name="Piece3" type="CharacterBody2D" parent="Pieces" unique_id=1365428289 groups=["gridlock_pieces"]]
 modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
 position = Vector2(620, 162)
+collision_layer = 32768
+collision_mask = 32768
 input_pickable = true
 motion_mode = 1
 slide_on_ceiling = false
@@ -456,9 +478,11 @@ texture = SubResource("PlaceholderTexture2D_50bm2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece3" unique_id=1254535784]
 shape = SubResource("RectangleShape2D_6osue")
 
-[node name="Piece4" type="CharacterBody2D" parent="Pieces" unique_id=1402332821]
+[node name="Piece4" type="CharacterBody2D" parent="Pieces" unique_id=1402332821 groups=["gridlock_pieces"]]
 modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
 position = Vector2(440, 180)
+collision_layer = 32768
+collision_mask = 32768
 input_pickable = true
 motion_mode = 1
 slide_on_ceiling = false
@@ -472,9 +496,11 @@ texture = SubResource("PlaceholderTexture2D_6osue")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece4" unique_id=2103495495]
 shape = SubResource("RectangleShape2D_j8qjq")
 
-[node name="Piece5" type="CharacterBody2D" parent="Pieces" unique_id=476830234]
+[node name="Piece5" type="CharacterBody2D" parent="Pieces" unique_id=476830234 groups=["gridlock_pieces"]]
 modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
 position = Vector2(280, 540)
+collision_layer = 32768
+collision_mask = 32768
 input_pickable = true
 motion_mode = 1
 slide_on_ceiling = false
@@ -488,9 +514,11 @@ texture = SubResource("PlaceholderTexture2D_6osue")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece5" unique_id=16779545]
 shape = SubResource("RectangleShape2D_j8qjq")
 
-[node name="Piece7" type="CharacterBody2D" parent="Pieces" unique_id=744934546]
+[node name="Piece7" type="CharacterBody2D" parent="Pieces" unique_id=744934546 groups=["gridlock_pieces"]]
 modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
 position = Vector2(420, 640)
+collision_layer = 32768
+collision_mask = 32768
 input_pickable = true
 motion_mode = 1
 slide_on_ceiling = false
@@ -530,8 +558,8 @@ pitch_scale = 0.4
 [node name="Key" type="RigidBody2D" parent="." unique_id=1033252304]
 position = Vector2(104, 354)
 rotation = -2.4889321
-collision_layer = 2
-collision_mask = 2
+collision_layer = 16384
+collision_mask = 16384
 collision_priority = 10.0
 continuous_cd = 2
 contact_monitor = true
