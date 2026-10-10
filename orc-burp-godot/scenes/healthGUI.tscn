@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dg20u65m3dgde"]
+
+[ext_resource type="Script" uid="uid://tj3px67t4q7e" path="res://scripts/health_gui.gd" id="1_86nxf"]
+[ext_resource type="Texture2D" uid="uid://bogtvnjdl4ytq" path="res://assets/HUD/heartGUI/fullHeart.png" id="1_162x1"]
+
+[node name="healthGUI" type="CanvasLayer" unique_id=598769528]
+script = ExtResource("1_86nxf")
+
+[node name="heartContainer" type="HBoxContainer" parent="." unique_id=492639490]
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Heart1" type="TextureRect" parent="heartContainer" unique_id=1995442199]
+layout_mode = 2
+texture = ExtResource("1_162x1")
+
+[node name="Heart2" type="TextureRect" parent="heartContainer" unique_id=1286077804]
+layout_mode = 2
+texture = ExtResource("1_162x1")
+
+[node name="Heart3" type="TextureRect" parent="heartContainer" unique_id=382677494]
+layout_mode = 2
+texture = ExtResource("1_162x1")
+
+[node name="Heart4" type="TextureRect" parent="heartContainer" unique_id=1267321530]
+layout_mode = 2
+texture = ExtResource("1_162x1")
+
+[node name="Heart5" type="TextureRect" parent="heartContainer" unique_id=775698305]
+layout_mode = 2
+texture = ExtResource("1_162x1")

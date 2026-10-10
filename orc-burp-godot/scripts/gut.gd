@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal died
 signal collected_apple
+signal health_changed(new_health: int)
 
 enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING}
 
@@ -10,8 +11,8 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
 const CLIMBING_SPEED = -300
 const DESCENDING_SPEED = 400
-const STARTING_HEALTH: int = 1 ## change me! TODO persistent state between level changes
-const MAX_HEALTH: int = 3 ## change me!
+const STARTING_HEALTH: int = 5 ## change me! TODO persistent state between level changes
+const MAX_HEALTH: int = 5 ## change me!
 
 var player_state = PlayerStates.IDLE: set = _set_state
 var alive = true
@@ -164,6 +165,7 @@ func take_damage(amount: int) -> void:
 	
 	health = maxi(0, health-amount)
 	p("took %d damage, new health is %d." % [amount, health])
+	emit_signal("health_changed", health) ##TO HEART GUI
 	if health == 0:
 		die()
 

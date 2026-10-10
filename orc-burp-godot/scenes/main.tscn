@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://beo12qtqt2ps2" path="res://scenes/level1.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://ck34npalynw2v" path="res://scripts/hud.gd" id="3_jyhfs"]
 [ext_resource type="FontFile" uid="uid://psrbjtoc002x" path="res://assets/Fonts/gijsuy-gijsuy-400.ttf" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://dg20u65m3dgde" path="res://scenes/healthGUI.tscn" id="4_tbgi4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhrd0"]
 bg_color = Color(0.80784315, 0.16862746, 0.14117648, 1)
@@ -25,6 +26,19 @@ script = ExtResource("1_0wfyh")
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1644095330]
 unique_name_in_owner = true
 script = ExtResource("3_jyhfs")
+
+[node name="fade" type="ColorRect" parent="HUD" unique_id=976992011]
+modulate = Color(1, 1, 1, 0)
+light_mask = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="healthGUI" parent="HUD" unique_id=598769528 instance=ExtResource("4_tbgi4")]
 
 [node name="ApplesCollected" type="Panel" parent="HUD" unique_id=2040360600]
 visible = false
@@ -54,14 +68,3 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_sugp2")
 theme_override_font_sizes/font_size = 24
 text = "Apples Collected: 0"
-
-[node name="fade" type="ColorRect" parent="HUD" unique_id=976992011]
-modulate = Color(1, 1, 1, 0)
-light_mask = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
