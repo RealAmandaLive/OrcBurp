@@ -118,3 +118,13 @@ stream = ExtResource("8_3ao6n")
 [node name="BurpSounds" type="AudioStreamPlayer2D" parent="." unique_id=1726292481]
 position = Vector2(3, 1)
 stream = ExtResource("9_4k4mm")
+
+[node name="TootTimer" type="Timer" parent="." unique_id=625050423]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="BurpTimer" type="Timer" parent="." unique_id=990167523]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true

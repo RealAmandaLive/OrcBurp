@@ -14,6 +14,8 @@ const DESCENDING_SPEED = 400
 const STARTING_HEALTH: int = 5 ## change me! TODO persistent state between level changes
 const MAX_HEALTH: int = 5 ## change me!
 
+@export var speed_boost := 200
+
 var player_state = PlayerStates.IDLE: set = _set_state
 var alive = true
 var can_move = true
@@ -22,8 +24,12 @@ var climbing = false
 var was_on_floor_last_frame = false # to detect landings
 var can_throw_traps: bool = true
 var can_double_jump = true
+var can_toot = true
+var can_burp = true
 
 var health: int = STARTING_HEALTH
+var current_speed_boost := 0
+
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer2D = $DeathSound
@@ -37,6 +43,10 @@ var health: int = STARTING_HEALTH
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
+func _ready() -> void:
+	%TootTimer.timeout.connect(_on_toot_timer_timeout)
+	%BurpTimer.timeout.connect(_on_burp_timer_timeout)
+
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_released(&"throw") and can_throw_traps:
 		throw_trap()
@@ -48,7 +58,7 @@ func _physics_process(delta: float) -> void:
 	## DIRECTION
 	var direction := Input.get_axis("left", "right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * (SPEED + current_speed_boost)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
@@ -107,15 +117,12 @@ func _physics_process(delta: float) -> void:
 			walkingSound.play() # uses random pitch variation
 			
 	## TOOTS
-	## todo: spawn particles, check hitboxes, etc maybe in their own scene we instantiate
-	## for now this just plays a random toot sound from a pool
-	if Input.is_action_just_pressed("toot"):
-		tootSounds.play()
+	if Input.is_action_just_pressed("toot") and can_toot:
+		toot()
 
 	## BURPS
-	## todo: implement gameplay as above
-	if Input.is_action_just_pressed("burp"):
-		burpSounds.play()
+	if Input.is_action_just_pressed("burp") and can_burp:
+		burp()
 
 	## GRAVITY
 	if not can_climb:
@@ -254,3 +261,28 @@ func enable_climbing() -> void:
 func disable_climbing() -> void:
 	can_climb = false
 	climbing = false
+
+
+func toot() -> void:
+	## todo: spawn particles, check hitboxes, etc maybe in their own scene we instantiate
+	## for now this just plays a random toot sound from a pool
+	can_toot = false
+	tootSounds.play()
+	current_speed_boost = speed_boost
+	%TootTimer.start()
+
+
+func _on_toot_timer_timeout() -> void:
+	can_toot = true
+	current_speed_boost = 0
+
+
+func burp() -> void:
+	## todo: implement gameplay as above
+	can_burp = false
+	burpSounds.play()
+	%BurpTimer.start()
+
+
+func _on_burp_timer_timeout() -> void:
+	can_burp = true
