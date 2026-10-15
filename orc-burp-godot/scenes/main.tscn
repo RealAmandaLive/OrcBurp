@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ck34npalynw2v" path="res://scripts/hud.gd" id="3_jyhfs"]
 [ext_resource type="FontFile" uid="uid://psrbjtoc002x" path="res://assets/Fonts/gijsuy-gijsuy-400.ttf" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dg20u65m3dgde" path="res://scenes/healthGUI.tscn" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://c5d8byhbqnra1" path="res://scripts/debug_stats.gd" id="6_tefeu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhrd0"]
 bg_color = Color(0.80784315, 0.16862746, 0.14117648, 1)
@@ -68,3 +69,14 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_sugp2")
 theme_override_font_sizes/font_size = 24
 text = "Apples Collected: 0"
+
+[node name="DebugStats" type="Label" parent="HUD" unique_id=163348262]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -468.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Debug: 0 burps, 0 toots, 0 jumps, 0 doubles, 0 traps, 0 deaths"
+horizontal_alignment = 2
+script = ExtResource("6_tefeu")
