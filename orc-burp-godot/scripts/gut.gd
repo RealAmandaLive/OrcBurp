@@ -30,6 +30,20 @@ var can_burp = true
 var health: int = STARTING_HEALTH
 var current_speed_boost := 0
 
+## fun stats and counters we can optionally just ignore
+## todo: persist in game state / use for high scores?
+var jumpCount = 0
+var doubleJumpCount = 0
+var burpCount = 0
+var tootCount = 0
+var eatCount = 0
+var drinkCount = 0
+var chestCount = 0
+var goldCount = 0
+var gemCount = 0
+var deathCount = 0
+var trapCount = 0
+var killCount = 0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer2D = $DeathSound
@@ -71,11 +85,13 @@ func _physics_process(delta: float) -> void:
 	
 	## JUMPING
 	if Input.is_action_just_pressed("jump") and is_on_floor_now:
+		jumpCount += 1
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 	
 	## DOUBLE JUMP
 	if Input.is_action_just_pressed("jump") and not is_on_floor_now and can_double_jump and not climbing:
+		doubleJumpCount += 1
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 		can_double_jump = false
@@ -118,10 +134,12 @@ func _physics_process(delta: float) -> void:
 			
 	## TOOTS
 	if Input.is_action_just_pressed("toot") and can_toot:
+		tootCount += 1
 		toot()
 
 	## BURPS
 	if Input.is_action_just_pressed("burp") and can_burp:
+		burpCount += 1
 		burp()
 
 	## GRAVITY
@@ -181,6 +199,7 @@ func collect_apple(health_increased: int) -> void:
 	collected_apple.emit()
 	p("collected an apple for %d health; new current health is %d." % [health_increased, health])
 	eatAppleSound.play()
+	eatCount += 1
 
 
 func throw_trap() -> void:
@@ -236,6 +255,8 @@ func throw_trap() -> void:
 	trap_physics.global_position = self.global_position + starting_position
 	node_to_parent_trap.add_child(trap_physics)
 	trap_physics.apply_central_impulse(impulse)
+	trapCount += 1
+
 
 ## Return a target within a bounding box using the current facing direction.
 ## If no target is found, returns [Vector2.ZERO].
@@ -247,7 +268,7 @@ func find_throw_target(distance: float) -> Vector2:
 
 func die() -> void:
 	if not alive: return
-	
+	deathCount += 1
 	death_sound.play()
 	animated_sprite_2d.animation = "hitFront"
 	alive = false
