@@ -5,7 +5,7 @@ signal died
 signal collected_apple
 signal health_changed(new_health: int)
 
-enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING}
+enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING, TOOTING, BURPING}
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
@@ -57,9 +57,12 @@ var killCount = 0
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
+
 func _ready() -> void:
 	%TootTimer.timeout.connect(_on_toot_timer_timeout)
 	%BurpTimer.timeout.connect(_on_burp_timer_timeout)
+	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
+
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_released(&"throw") and can_throw_traps:
@@ -116,7 +119,9 @@ func _physics_process(delta: float) -> void:
 		climbing = false
 
 	## STATE DETERMINATION
-	if velocity == Vector2.ZERO:
+	if player_state == PlayerStates.TOOTING or player_state == PlayerStates.BURPING:
+		pass
+	elif velocity == Vector2.ZERO:
 		player_state = PlayerStates.IDLE
 	elif velocity.x != 0 and velocity.y == 0:
 		player_state = PlayerStates.WALKING
@@ -134,12 +139,10 @@ func _physics_process(delta: float) -> void:
 			
 	## TOOTS
 	if Input.is_action_just_pressed("toot") and can_toot:
-		tootCount += 1
 		toot()
 
 	## BURPS
 	if Input.is_action_just_pressed("burp") and can_burp:
-		burpCount += 1
 		burp()
 
 	## GRAVITY
@@ -159,30 +162,34 @@ func _set_state(state: PlayerStates) -> void:
 	
 	match player_state:
 		PlayerStates.IDLE: 
-			animated_sprite_2d.animation = "idle"
+			#animated_sprite_2d.animation = "idle"
+			%AnimatedSprite2D.play("idle")
 			can_throw_traps = true
 		PlayerStates.WALKING:
-			animated_sprite_2d.animation = "running"
+			%AnimatedSprite2D.play("running")
 			can_throw_traps = true
 		PlayerStates.JUMPING:
 			if velocity.x > 1 or velocity.x < -1:
-				animated_sprite_2d.animation = "jumpRunning"
+				%AnimatedSprite2D.play("jumpRunning")
 			else:
-				animated_sprite_2d.animation = "jumpFront"
+				%AnimatedSprite2D.play("jumpFront")
 			can_throw_traps = true
 		PlayerStates.CLIMBING:
-			animated_sprite_2d.animation = "climbing"
+			%AnimatedSprite2D.play("climbing")
 			can_throw_traps = false
 		PlayerStates.ON_LADDER:
-			animated_sprite_2d.animation = 'onLadder'
+			%AnimatedSprite2D.play('onLadder')
 			can_throw_traps = false
 		PlayerStates.DOUBLEJUMPING:
 			if velocity.x > 1 or velocity.x < -1:
-				animated_sprite_2d.animation = "jumpRunning"
+				%AnimatedSprite2D.play("jumpRunning")
 			else:
-				animated_sprite_2d.animation = "jumpFront"
+				%AnimatedSprite2D.play("jumpFront")
 				can_throw_traps = true
-	
+		PlayerStates.TOOTING:
+			%AnimatedSprite2D.play("tooting")
+		PlayerStates.BURPING:
+			%AnimatedSprite2D.play("burping")
 
 
 func take_damage(amount: int) -> void:
@@ -291,6 +298,8 @@ func toot() -> void:
 	tootSounds.play()
 	current_speed_boost = speed_boost
 	%TootTimer.start()
+	tootCount += 1
+	player_state = PlayerStates.TOOTING
 
 
 func _on_toot_timer_timeout() -> void:
@@ -303,7 +312,14 @@ func burp() -> void:
 	can_burp = false
 	burpSounds.play()
 	%BurpTimer.start()
+	burpCount += 1
+	player_state = PlayerStates.BURPING
 
 
 func _on_burp_timer_timeout() -> void:
 	can_burp = true
+
+
+func _on_animation_finished() -> void:
+	if player_state == PlayerStates.TOOTING or player_state == PlayerStates.BURPING:
+		player_state = PlayerStates.IDLE
