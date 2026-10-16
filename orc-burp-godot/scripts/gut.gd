@@ -186,6 +186,7 @@ func take_damage(amount: int) -> void:
 func collect_apple(health_increased: int) -> void:
 	Main.data.playerHealth = mini(GameData.MAX_HEALTH, Main.data.playerHealth + health_increased)
 	collected_apple.emit()
+	health_changed.emit(Main.data.playerHealth)
 	p("collected an apple for %d health; new current health is %d." % [health_increased, Main.data.playerHealth])
 	eatAppleSound.play()
 	Main.data.eatCount += 1
