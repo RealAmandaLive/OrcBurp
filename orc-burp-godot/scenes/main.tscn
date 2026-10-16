@@ -40,6 +40,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="healthGUI" parent="HUD" unique_id=598769528 instance=ExtResource("4_tbgi4")]
+unique_name_in_owner = true
 
 [node name="ApplesCollected" type="Panel" parent="HUD" unique_id=2040360600]
 visible = false

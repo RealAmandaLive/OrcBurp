@@ -1,3 +1,4 @@
+class_name HealthGUI
 extends CanvasLayer
 
 var player

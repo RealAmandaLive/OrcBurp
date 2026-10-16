@@ -11,8 +11,6 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
 const CLIMBING_SPEED = -300
 const DESCENDING_SPEED = 400
-const STARTING_HEALTH: int = 5 ## change me! TODO persistent state between level changes
-const MAX_HEALTH: int = 5 ## change me!
 
 @export var speed_boost := 200
 
@@ -27,23 +25,7 @@ var can_double_jump = true
 var can_toot = true
 var can_burp = true
 
-var health: int = STARTING_HEALTH
 var current_speed_boost := 0
-
-## fun stats and counters we can optionally just ignore
-## todo: persist in game state / use for high scores?
-var jumpCount = 0
-var doubleJumpCount = 0
-var burpCount = 0
-var tootCount = 0
-var eatCount = 0
-var drinkCount = 0
-var chestCount = 0
-var goldCount = 0
-var gemCount = 0
-var deathCount = 0
-var trapCount = 0
-var killCount = 0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer2D = $DeathSound
@@ -88,13 +70,13 @@ func _physics_process(delta: float) -> void:
 	
 	## JUMPING
 	if Input.is_action_just_pressed("jump") and is_on_floor_now:
-		jumpCount += 1
+		Main.data.jumpCount += 1
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 	
 	## DOUBLE JUMP
 	if Input.is_action_just_pressed("jump") and not is_on_floor_now and can_double_jump and not climbing:
-		doubleJumpCount += 1
+		Main.data.doubleJumpCount += 1
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 		can_double_jump = false
@@ -195,18 +177,18 @@ func _set_state(state: PlayerStates) -> void:
 func take_damage(amount: int) -> void:
 	if not alive: return
 	
-	health = maxi(0, health-amount)
-	p("took %d damage, new health is %d." % [amount, health])
-	emit_signal("health_changed", health) ##TO HEART GUI
-	if health == 0:
+	Main.data.playerHealth = maxi(0, Main.data.playerHealth-amount)
+	p("took %d damage, new health is %d." % [amount, Main.data.playerHealth])
+	emit_signal("health_changed", Main.data.playerHealth) ##TO HEART GUI
+	if Main.data.playerHealth == 0:
 		die()
 
 func collect_apple(health_increased: int) -> void:
-	health = mini(MAX_HEALTH, health + health_increased)
+	Main.data.playerHealth = mini(GameData.MAX_HEALTH, Main.data.playerHealth + health_increased)
 	collected_apple.emit()
-	p("collected an apple for %d health; new current health is %d." % [health_increased, health])
+	p("collected an apple for %d health; new current health is %d." % [health_increased, Main.data.playerHealth])
 	eatAppleSound.play()
-	eatCount += 1
+	Main.data.eatCount += 1
 
 
 func throw_trap() -> void:
@@ -262,7 +244,7 @@ func throw_trap() -> void:
 	trap_physics.global_position = self.global_position + starting_position
 	node_to_parent_trap.add_child(trap_physics)
 	trap_physics.apply_central_impulse(impulse)
-	trapCount += 1
+	Main.data.trapCount += 1
 
 
 ## Return a target within a bounding box using the current facing direction.
@@ -275,7 +257,7 @@ func find_throw_target(distance: float) -> Vector2:
 
 func die() -> void:
 	if not alive: return
-	deathCount += 1
+	Main.data.deathCount += 1
 	death_sound.play()
 	animated_sprite_2d.animation = "hitFront"
 	alive = false
@@ -298,7 +280,7 @@ func toot() -> void:
 	tootSounds.play()
 	current_speed_boost = speed_boost
 	%TootTimer.start()
-	tootCount += 1
+	Main.data.tootCount += 1
 	player_state = PlayerStates.TOOTING
 
 
@@ -312,7 +294,7 @@ func burp() -> void:
 	can_burp = false
 	burpSounds.play()
 	%BurpTimer.start()
-	burpCount += 1
+	Main.data.burpCount += 1
 	player_state = PlayerStates.BURPING
 
 
