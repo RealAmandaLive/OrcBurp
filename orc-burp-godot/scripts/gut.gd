@@ -2,8 +2,6 @@ class_name Player
 extends CharacterBody2D
 
 signal died
-signal collected_apple
-signal health_changed(new_health: int)
 
 enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING, TOOTING, BURPING}
 
@@ -70,13 +68,13 @@ func _physics_process(delta: float) -> void:
 	
 	## JUMPING
 	if Input.is_action_just_pressed("jump") and is_on_floor_now:
-		Main.data.jumpCount += 1
+		Main.data.inc("jumpCount")
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 	
 	## DOUBLE JUMP
 	if Input.is_action_just_pressed("jump") and not is_on_floor_now and can_double_jump and not climbing:
-		Main.data.doubleJumpCount += 1
+		Main.data.inc("doubleJumpCount")
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 		can_double_jump = false
@@ -177,19 +175,16 @@ func _set_state(state: PlayerStates) -> void:
 func take_damage(amount: int) -> void:
 	if not alive: return
 	
-	Main.data.playerHealth = maxi(0, Main.data.playerHealth-amount)
+	Main.data.playerHealth -= amount
 	p("took %d damage, new health is %d." % [amount, Main.data.playerHealth])
-	emit_signal("health_changed", Main.data.playerHealth) ##TO HEART GUI
 	if Main.data.playerHealth == 0:
 		die()
 
 func collect_apple(health_increased: int) -> void:
-	Main.data.playerHealth = mini(GameData.MAX_HEALTH, Main.data.playerHealth + health_increased)
-	collected_apple.emit()
-	health_changed.emit(Main.data.playerHealth)
+	Main.data.playerHealth += health_increased
+	Main.data.inc("applesCollected")
 	p("collected an apple for %d health; new current health is %d." % [health_increased, Main.data.playerHealth])
 	eatAppleSound.play()
-	Main.data.eatCount += 1
 
 
 func throw_trap() -> void:
@@ -245,7 +240,7 @@ func throw_trap() -> void:
 	trap_physics.global_position = self.global_position + starting_position
 	node_to_parent_trap.add_child(trap_physics)
 	trap_physics.apply_central_impulse(impulse)
-	Main.data.trapCount += 1
+	Main.data.inc("trapCount")
 
 
 ## Return a target within a bounding box using the current facing direction.
@@ -258,7 +253,7 @@ func find_throw_target(distance: float) -> Vector2:
 
 func die() -> void:
 	if not alive: return
-	Main.data.deathCount += 1
+	Main.data.inc("deathCount")
 	death_sound.play()
 	animated_sprite_2d.animation = "hitFront"
 	alive = false
@@ -281,7 +276,7 @@ func toot() -> void:
 	tootSounds.play()
 	current_speed_boost = speed_boost
 	%TootTimer.start()
-	Main.data.tootCount += 1
+	Main.data.inc("tootCount")
 	player_state = PlayerStates.TOOTING
 
 
@@ -295,7 +290,7 @@ func burp() -> void:
 	can_burp = false
 	burpSounds.play()
 	%BurpTimer.start()
-	Main.data.burpCount += 1
+	Main.data.inc("burpCount")
 	player_state = PlayerStates.BURPING
 
 

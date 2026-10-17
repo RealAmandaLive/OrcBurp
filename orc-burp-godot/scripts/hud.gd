@@ -8,6 +8,14 @@ class_name HUD extends CanvasLayer
 #------
 var _fade_tween: Tween
 
+func _ready() -> void:
+	Main.data.changed.connect(_on_data_changed)
+
+
+func _on_data_changed() -> void:
+	prints("data changed")
+	apple_label.text = "Apples Collected: %s" % Main.data.applesCollected
+
 ## Used to set the screen to e.g. full-black.
 ## Primary use case is for starting the game scene.
 func force_screen_faded() -> void:
@@ -27,6 +35,3 @@ func fade_to(alpha: float) -> Tween:
 	## by returning the tween so you actually see the "finished" verbiage
 	return _fade_tween
 	
-
-func on_apples_collected_changed(new_value: int) -> void:
-	apple_label.text = "Apples Collected: %s" % new_value

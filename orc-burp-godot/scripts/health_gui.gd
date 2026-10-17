@@ -3,18 +3,16 @@ extends CanvasLayer
 
 var player: Player
 
-const HEART_SIZE: int = 1
+const HEART_SIZE: int = 2
 const HEART_FULL = preload("res://assets/HUD/heartGUI/fullHeart.png")
 const HEART_HALF = preload("res://assets/HUD/heartGUI/halfHeart.png")
 const HEART_EMPTY = preload("res://assets/HUD/heartGUI/emptyHeart.png")
 
 @onready var heart_container: HBoxContainer = $heartContainer
 
-func set_player(p: Player) -> void:
-	player = p
-	p.health_changed.connect(_update_health)
-	_update_health(Main.data.playerHealth)
-
+func _ready() -> void:
+	Main.data.health_changed.connect(_update_health)
+	
 func _update_health(new_health: int) -> void:
 	var hearts = heart_container.get_children()
 	var max_hearts = len(hearts)
