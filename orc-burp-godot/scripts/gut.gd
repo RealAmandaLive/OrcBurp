@@ -273,11 +273,12 @@ func toot() -> void:
 	## todo: spawn particles, check hitboxes, etc maybe in their own scene we instantiate
 	## for now this just plays a random toot sound from a pool
 	can_toot = false
-	tootSounds.play()
-	current_speed_boost = speed_boost
 	%TootTimer.start()
-	Main.data.inc("tootCount")
 	player_state = PlayerStates.TOOTING
+	current_speed_boost = speed_boost
+	Main.data.inc("tootCount")
+	await get_tree().create_timer(0.5).timeout
+	tootSounds.play()
 
 
 func _on_toot_timer_timeout() -> void:
@@ -288,10 +289,11 @@ func _on_toot_timer_timeout() -> void:
 func burp() -> void:
 	## todo: implement gameplay as above
 	can_burp = false
-	burpSounds.play()
 	%BurpTimer.start()
-	Main.data.inc("burpCount")
 	player_state = PlayerStates.BURPING
+	Main.data.inc("burpCount")
+	await get_tree().create_timer(0.2).timeout
+	burpSounds.play()
 
 
 func _on_burp_timer_timeout() -> void:
