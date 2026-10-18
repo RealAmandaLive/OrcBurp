@@ -10,6 +10,8 @@ const JUMP_VELOCITY = -850.0
 const CLIMBING_SPEED = -300
 const DESCENDING_SPEED = 400
 
+const BURP_CLOUD = preload("uid://pk1n1jjrqdji")
+
 @export var speed_boost := 200
 
 var player_state = PlayerStates.IDLE: set = _set_state
@@ -34,6 +36,7 @@ var current_speed_boost := 0
 @onready var tootSounds: AudioStreamPlayer2D = $TootSounds
 @onready var burpSounds: AudioStreamPlayer2D = $BurpSounds
 @onready var eatAppleSound: AudioStreamPlayer2D = $EatAppleSound
+
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
@@ -123,7 +126,7 @@ func _physics_process(delta: float) -> void:
 
 	## BURPS
 	if Input.is_action_just_pressed("burp") and can_burp:
-		burp()
+		burp(direction)
 
 	## GRAVITY
 	if not can_climb:
@@ -273,11 +276,12 @@ func toot() -> void:
 	## todo: spawn particles, check hitboxes, etc maybe in their own scene we instantiate
 	## for now this just plays a random toot sound from a pool
 	can_toot = false
-	tootSounds.play()
-	current_speed_boost = speed_boost
 	%TootTimer.start()
-	Main.data.inc("tootCount")
 	player_state = PlayerStates.TOOTING
+	current_speed_boost = speed_boost
+	Main.data.inc("tootCount")
+	await get_tree().create_timer(0.5).timeout
+	tootSounds.play()
 
 
 func _on_toot_timer_timeout() -> void:
@@ -285,13 +289,20 @@ func _on_toot_timer_timeout() -> void:
 	current_speed_boost = 0
 
 
-func burp() -> void:
+func burp(direction: float) -> void:
 	## todo: implement gameplay as above
 	can_burp = false
-	burpSounds.play()
 	%BurpTimer.start()
-	Main.data.inc("burpCount")
 	player_state = PlayerStates.BURPING
+	Main.data.inc("burpCount")
+	await get_tree().create_timer(0.2).timeout
+	burpSounds.play()
+	var burp_instance = BURP_CLOUD.instantiate()
+	burp_instance.global_position = global_position
+	add_sibling(burp_instance)
+	if signf(direction) >= 0.0:
+		burp_instance.rotation = PI
+		burp_instance.direction = 1.0
 
 
 func _on_burp_timer_timeout() -> void:

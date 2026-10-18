@@ -6,6 +6,8 @@
 [ext_resource type="FontFile" uid="uid://psrbjtoc002x" path="res://assets/Fonts/gijsuy-gijsuy-400.ttf" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dg20u65m3dgde" path="res://scenes/healthGUI.tscn" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://c5d8byhbqnra1" path="res://scripts/debug_stats.gd" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://c4xanjeq74cpd" path="res://scripts/pause_node.gd" id="7_tipki"]
+[ext_resource type="Script" uid="uid://b6a7a13ftdbup" path="res://scripts/inventory_node.gd" id="8_85g3d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhrd0"]
 bg_color = Color(0.80784315, 0.16862746, 0.14117648, 1)
@@ -81,3 +83,11 @@ grow_horizontal = 0
 text = "Debug: 0 burps, 0 toots, 0 jumps, 0 doubles, 0 traps, 0 deaths"
 horizontal_alignment = 2
 script = ExtResource("6_tefeu")
+
+[node name="PauseNode" type="Node" parent="." unique_id=93329242]
+process_mode = 3
+script = ExtResource("7_tipki")
+
+[node name="InventoryNode" type="Node" parent="." unique_id=1182704168]
+process_mode = 3
+script = ExtResource("8_85g3d")

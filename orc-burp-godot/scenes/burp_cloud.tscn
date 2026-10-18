@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://pk1n1jjrqdji"]
+
+[ext_resource type="Script" uid="uid://ckun11ev2sofc" path="res://scripts/burp_cloud.gd" id="1_uic2d"]
+[ext_resource type="Shader" uid="uid://chftu8fyqea61" path="res://scripts/knockback_shockwave.gdshader" id="1_vbkno"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uic2d"]
+shader = ExtResource("1_vbkno")
+shader_parameter/shockwave_angle = 0.0
+shader_parameter/shockwave_width = 0.7630000362425
+shader_parameter/shockwave_thickness = 25.0
+shader_parameter/shockwave_depth = 0.13
+shader_parameter/shockwave_speed = 3.0
+shader_parameter/shockwave_strength = 0.250000011875
+shader_parameter/pixellize_size = 45.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_le5v6"]
+size = Vector2(32, 32)
+
+[node name="BurpCloud" type="Area2D" unique_id=647644205]
+script = ExtResource("1_uic2d")
+
+[node name="ShockwaveEffect" type="ColorRect" parent="." unique_id=8719665]
+material = SubResource("ShaderMaterial_uic2d")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=370479490]
+shape = SubResource("RectangleShape2D_le5v6")
+
+[node name="Timer" type="Timer" parent="." unique_id=835396629]
+wait_time = 3.0
+one_shot = true
+autostart = true
