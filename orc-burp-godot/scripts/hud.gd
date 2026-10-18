@@ -11,9 +11,7 @@ var _fade_tween: Tween
 func _ready() -> void:
 	Main.data.changed.connect(_on_data_changed)
 
-
 func _on_data_changed() -> void:
-	prints("data changed")
 	apple_label.text = "Apples Collected: %s" % Main.data.applesCollected
 
 ## Used to set the screen to e.g. full-black.

@@ -58,7 +58,12 @@ offsets = PackedFloat32Array(0.012345679, 0.6851852, 1)
 colors = PackedColorArray(1, 1, 1, 0.5137255, 1, 1, 1, 0.21913582, 1, 1, 1, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iynve"]
-height = 34.0
+radius = 8.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_673tn"]
+radius = 3.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_ui5xj"]
 length = 0.001
@@ -565,11 +570,17 @@ continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 1
 
+[node name="Sprite2D" type="Sprite2D" parent="Key" unique_id=246510603]
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("4_h5rmh")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Key" unique_id=2111656914]
+position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_iynve")
 
-[node name="Sprite2D" type="Sprite2D" parent="Key" unique_id=246510603]
-texture = ExtResource("4_h5rmh")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Key" unique_id=1180874263]
+position = Vector2(0, 7)
+shape = SubResource("CapsuleShape2D_673tn")
 
 [node name="Winning" type="Node2D" parent="." unique_id=1803625257]
 

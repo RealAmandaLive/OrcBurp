@@ -126,7 +126,7 @@ func _on_gut_died():
 		push_warning("Gut died while level changing. Check if this is intended behavior")
 		
 	await _load_level(level, false)
-	
+
 func _on_exit_body_entered(body: Node2D) -> void:
 	if is_changing_level:
 		## Prevent double firing
@@ -136,4 +136,3 @@ func _on_exit_body_entered(body: Node2D) -> void:
 		level += 1
 		body.can_move = false
 		await _load_level(level, false)
-	
