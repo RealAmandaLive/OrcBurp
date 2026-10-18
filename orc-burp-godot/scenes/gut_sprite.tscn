@@ -179,7 +179,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"burping",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -347,11 +347,13 @@ animations = [{
 }],
 "loop": 0,
 "name": &"tooting",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=253259514]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dhrd0")
-animation = &"tooting"
+animation = &"burping"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0

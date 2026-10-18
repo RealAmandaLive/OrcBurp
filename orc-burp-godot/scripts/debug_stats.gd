@@ -1,10 +1,9 @@
 extends Label
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	var player = get_tree().get_first_node_in_group(Main.PLAYER_GROUP)
-	if not player: return
+func _ready() -> void:
+	Main.data.changed.connect(_on_data_changed)
+	
+func _on_data_changed() -> void:
 	text = "Debug: %d burps, %d toots, %d jumps, %d doubles, %d traps, %d deaths" % [
 		Main.data.burpCount,
 		Main.data.tootCount,

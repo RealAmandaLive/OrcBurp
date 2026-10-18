@@ -110,9 +110,7 @@ func _setup_level(level_root: Node) -> void:
 	if players:
 		for node in players:
 			if node is Player:
-				node.collected_apple.connect(on_apple_collected)
 				node.died.connect(_on_gut_died)
-				health_gui.set_player(node)
 	
 	p("level setup done.")
 
@@ -139,12 +137,3 @@ func _on_exit_body_entered(body: Node2D) -> void:
 		body.can_move = false
 		await _load_level(level, false)
 	
-# --------
-# COLLECTING
-# --------
-func on_apple_collected() -> void:
-	if is_changing_level:
-		push_warning("Apple collected while level changing. Check if this is intended behavior")
-	
-	data.applesCollected += 1
-	hud.on_apples_collected_changed(data.applesCollected)

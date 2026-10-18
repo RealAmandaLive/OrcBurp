@@ -2,8 +2,6 @@ class_name Player
 extends CharacterBody2D
 
 signal died
-signal collected_apple
-signal health_changed(new_health: int)
 
 enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING, TOOTING, BURPING}
 
@@ -11,6 +9,8 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
 const CLIMBING_SPEED = -300
 const DESCENDING_SPEED = 400
+
+const BURP_CLOUD = preload("uid://pk1n1jjrqdji")
 
 @export var speed_boost := 200
 
@@ -36,6 +36,7 @@ var current_speed_boost := 0
 @onready var tootSounds: AudioStreamPlayer2D = $TootSounds
 @onready var burpSounds: AudioStreamPlayer2D = $BurpSounds
 @onready var eatAppleSound: AudioStreamPlayer2D = $EatAppleSound
+
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 
@@ -70,13 +71,13 @@ func _physics_process(delta: float) -> void:
 	
 	## JUMPING
 	if Input.is_action_just_pressed("jump") and is_on_floor_now:
-		Main.data.jumpCount += 1
+		Main.data.inc("jumpCount")
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 	
 	## DOUBLE JUMP
 	if Input.is_action_just_pressed("jump") and not is_on_floor_now and can_double_jump and not climbing:
-		Main.data.doubleJumpCount += 1
+		Main.data.inc("doubleJumpCount")
 		jumpingSound.play()
 		velocity.y = JUMP_VELOCITY
 		can_double_jump = false
@@ -125,7 +126,7 @@ func _physics_process(delta: float) -> void:
 
 	## BURPS
 	if Input.is_action_just_pressed("burp") and can_burp:
-		burp()
+		burp(direction)
 
 	## GRAVITY
 	if not can_climb:
@@ -177,19 +178,16 @@ func _set_state(state: PlayerStates) -> void:
 func take_damage(amount: int) -> void:
 	if not alive: return
 	
-	Main.data.playerHealth = maxi(0, Main.data.playerHealth-amount)
+	Main.data.playerHealth -= amount
 	p("took %d damage, new health is %d." % [amount, Main.data.playerHealth])
-	emit_signal("health_changed", Main.data.playerHealth) ##TO HEART GUI
 	if Main.data.playerHealth == 0:
 		die()
 
 func collect_apple(health_increased: int) -> void:
-	Main.data.playerHealth = mini(GameData.MAX_HEALTH, Main.data.playerHealth + health_increased)
-	collected_apple.emit()
-	health_changed.emit(Main.data.playerHealth)
+	Main.data.playerHealth += health_increased
+	Main.data.inc("applesCollected")
 	p("collected an apple for %d health; new current health is %d." % [health_increased, Main.data.playerHealth])
 	eatAppleSound.play()
-	Main.data.eatCount += 1
 
 
 func throw_trap() -> void:
@@ -245,7 +243,7 @@ func throw_trap() -> void:
 	trap_physics.global_position = self.global_position + starting_position
 	node_to_parent_trap.add_child(trap_physics)
 	trap_physics.apply_central_impulse(impulse)
-	Main.data.trapCount += 1
+	Main.data.inc("trapCount")
 
 
 ## Return a target within a bounding box using the current facing direction.
@@ -258,7 +256,7 @@ func find_throw_target(distance: float) -> Vector2:
 
 func die() -> void:
 	if not alive: return
-	Main.data.deathCount += 1
+	Main.data.inc("deathCount")
 	death_sound.play()
 	animated_sprite_2d.animation = "hitFront"
 	alive = false
@@ -278,11 +276,12 @@ func toot() -> void:
 	## todo: spawn particles, check hitboxes, etc maybe in their own scene we instantiate
 	## for now this just plays a random toot sound from a pool
 	can_toot = false
-	tootSounds.play()
-	current_speed_boost = speed_boost
 	%TootTimer.start()
-	Main.data.tootCount += 1
 	player_state = PlayerStates.TOOTING
+	current_speed_boost = speed_boost
+	Main.data.inc("tootCount")
+	await get_tree().create_timer(0.5).timeout
+	tootSounds.play()
 
 
 func _on_toot_timer_timeout() -> void:
@@ -290,13 +289,20 @@ func _on_toot_timer_timeout() -> void:
 	current_speed_boost = 0
 
 
-func burp() -> void:
+func burp(direction: float) -> void:
 	## todo: implement gameplay as above
 	can_burp = false
-	burpSounds.play()
 	%BurpTimer.start()
-	Main.data.burpCount += 1
 	player_state = PlayerStates.BURPING
+	Main.data.inc("burpCount")
+	await get_tree().create_timer(0.2).timeout
+	burpSounds.play()
+	var burp_instance = BURP_CLOUD.instantiate()
+	burp_instance.global_position = global_position
+	add_sibling(burp_instance)
+	if signf(direction) >= 0.0:
+		burp_instance.rotation = PI
+		burp_instance.direction = 1.0
 
 
 func _on_burp_timer_timeout() -> void:
