@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://phl2ejbd72da"]
 
-[ext_resource type="Script" uid="uid://dl4g2a5hqsoge" path="res://scripts/ghost.gd" id="1_77a1s"]
+[ext_resource type="Script" uid="uid://dym5oqaoig4vm" path="res://scenes/rat.gd" id="1_acf8p"]
 [ext_resource type="Texture2D" uid="uid://dfsrv1q14uewh" path="res://assets/Enemies/ratIdle.png" id="2_acf8p"]
 [ext_resource type="Texture2D" uid="uid://d0tc70fj3qlxn" path="res://assets/Enemies/ratRunning.png" id="3_3csnj"]
 
@@ -77,11 +77,11 @@ animations = [{
 radius = 8.0
 height = 24.0
 
-[node name="ghost" type="Area2D" unique_id=605315991]
+[node name="rat" type="Area2D" unique_id=605315991]
 scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 2
-script = ExtResource("1_77a1s")
+script = ExtResource("1_acf8p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2117043791]
 sprite_frames = SubResource("SpriteFrames_luolt")
