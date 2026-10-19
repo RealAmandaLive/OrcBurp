@@ -13,7 +13,7 @@ config_version=5
 config/name="OrcBurp"
 run/main_scene="uid://bae77lli1yk6o"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dx0l3igha4652"
 
 [display]
 
