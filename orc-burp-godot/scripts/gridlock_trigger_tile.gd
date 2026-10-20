@@ -30,7 +30,7 @@ func _ready() -> void:
 
 
 func _on_interaction_zone_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and not Main.data.has_level_key():
 		player = body
 		label.show()
 
@@ -58,6 +58,7 @@ func _input(event: InputEvent) -> void:
 func _on_puzzle_complete() -> void:
 	hide_puzzle()
 	puzzle_won.emit.call_deferred()
+	Main.data.record_level_key()
 
 
 func show_puzzle() -> void:
@@ -67,7 +68,7 @@ func show_puzzle() -> void:
 	if puzzle_instance:
 		return
 	puzzle_instance = puzzle_scene.instantiate()
-	puzzle_instance.completed.connect(hide_puzzle)
+	puzzle_instance.completed.connect(_on_puzzle_complete)
 	puzzle_instance.disable()
 	game_container.add_child(puzzle_instance)
 	

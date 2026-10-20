@@ -14,9 +14,11 @@ var playerHealth: int = STARTING_HEALTH :
 
 var applesCollected: int = 0
 
-# The key of the dictionary is the level_path
+# The key of the dictionary is the levelName
 # The value is a list of item paths that have already been collected
 var levelItems: Dictionary[String, Array] = {}
+# Key=levelName, Value=has the player collected the key?
+var levelKeys: Dictionary[String, bool] = {}
 
 var levelName: String
 
@@ -60,3 +62,11 @@ func record_item_taken(item_node: Node) -> void:
 	var item_key: String = _get_item_key(item_node)
 	if levelItems[levelName].find(item_key) < 0:
 		levelItems[levelName].append(item_key)
+
+
+func has_level_key() -> bool:
+	return levelKeys.get(levelName, false)
+
+
+func record_level_key() -> void:
+	levelKeys[levelName] = true
