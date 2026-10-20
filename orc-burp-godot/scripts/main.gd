@@ -11,7 +11,6 @@ static var data: GameData = GameData.new()
 
 @export_file_path("*.tscn") var first_level: String
 
-var current_level_name: String
 var current_level_path: String
 var current_level_root: Node = null
 var is_changing_level: bool = false
@@ -66,9 +65,9 @@ func load_level(level_path: String, first_load: bool) -> void:
 	#changes level
 	assert(FileAccess.file_exists(level_path), "Not a valid file path to load.")
 	current_level_path = level_path
-	current_level_name = level_path.get_file().get_basename()
+	Main.data.levelName = level_path.get_file().get_basename()
 	current_level_root = load(level_path).instantiate()
-	p("loaded %s (%s)" % [level_path, current_level_name])
+	p("loaded %s (%s)" % [level_path, Main.data.levelName])
 	
 	add_child(current_level_root)
 	current_level_root.name = "levelRoot"
@@ -89,7 +88,7 @@ func load_level(level_path: String, first_load: bool) -> void:
 
 func _setup_level(level_root: Node) -> void:
 	p("setting up level...")
-	
+
 	#connect apples
 	var apples = level_root.get_node_or_null("Apples")
 	if apples: 

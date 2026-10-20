@@ -14,6 +14,12 @@ var playerHealth: int = STARTING_HEALTH :
 
 var applesCollected: int = 0
 
+# The key of the dictionary is the level_path
+# The value is a list of item paths that have already been collected
+var levelItems: Dictionary[String, Array] = {}
+
+var levelName: String
+
 ## fun stats and counters we can optionally just ignore
 ## todo: persist in game state / use for high scores?
 var jumpCount: int = 0
@@ -35,3 +41,22 @@ func inc(property: StringName, by = 1) -> void:
 	var v = get(property)
 	set(property, int(v) + by)
 	emit_changed()
+
+
+func _get_item_key(item_node: Node) -> String:
+	return item_node.get_path().slice(3).get_concatenated_names()
+
+
+func is_item_taken(item_node: Node) -> bool:
+	if not levelItems.has(levelName):
+		levelItems[levelName] = []
+	var item_key: String = _get_item_key(item_node)
+	return levelItems[levelName].find(item_key) >= 0
+
+
+func record_item_taken(item_node: Node) -> void:
+	if not levelItems.has(levelName):
+		levelItems[levelName] = []
+	var item_key: String = _get_item_key(item_node)
+	if levelItems[levelName].find(item_key) < 0:
+		levelItems[levelName].append(item_key)

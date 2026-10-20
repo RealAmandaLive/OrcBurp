@@ -7,15 +7,22 @@ var collected: bool = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
+
+func _ready() -> void:
+	if Main.data.is_item_taken(self):
+		hide()
+		queue_free()
+
 func _on_body_entered(_body: Node2D) -> void:
 	if collected:
 		return
 	if _body is Player:
 		collected = true
 		_body.collect_apple(health_given_when_collected)
+		Main.data.record_item_taken(self)
 		animated_sprite_2d.animation = "collected"
 		call_deferred("_disable_collision")
-	
+
 
 func _disable_collision() -> void:
 	collision_shape_2d.disabled = true
