@@ -9,7 +9,10 @@ static func get_instance() -> Main:
 
 static var data: GameData = GameData.new()
 
-var level: int = 1
+@export_file_path("*.tscn") var first_level: String
+
+var current_level_name: String
+var current_level_path: String
 var current_level_root: Node = null
 var is_changing_level: bool = false
 
@@ -33,7 +36,7 @@ func _ready() -> void:
 	current_level_root = get_node("levelRoot")
 	## NOTE we are loading the level twice here--levelRoot is a scene in Main with the level
 	## then we run load level which discards it and loads it again.
-	await _load_level(level, true)
+	await load_level(first_level, true)
 
 
 #--------
@@ -41,7 +44,7 @@ func _ready() -> void:
 #-------------
 
 ## Loads a level and fires a signal when finished.
-func _load_level(level_number: int, first_load: bool) -> void:
+func load_level(level_path: String, first_load: bool) -> void:
 	if is_changing_level:
 		push_error("Load Level called while already changing levels.")
 		return
@@ -61,11 +64,11 @@ func _load_level(level_number: int, first_load: bool) -> void:
 	await get_tree().process_frame ## Wait for the objects to be freed
 	
 	#changes level
-	var level_path = "res://scenes/level%s.tscn" % level_number
 	assert(FileAccess.file_exists(level_path), "Not a valid file path to load.")
-	
+	current_level_path = level_path
+	current_level_name = level_path.get_file().get_basename()
 	current_level_root = load(level_path).instantiate()
-	p("loaded %s" % level_path)
+	p("loaded %s (%s)" % [level_path, current_level_name])
 	
 	add_child(current_level_root)
 	current_level_root.name = "levelRoot"
@@ -86,10 +89,6 @@ func _load_level(level_number: int, first_load: bool) -> void:
 
 func _setup_level(level_root: Node) -> void:
 	p("setting up level...")
-	#connect exit
-	var exit = level_root.get_node_or_null("exit")
-	if exit:
-		exit.body_entered.connect(_on_exit_body_entered)
 	
 	#connect apples
 	var apples = level_root.get_node_or_null("Apples")
@@ -125,14 +124,4 @@ func _on_gut_died():
 	if is_changing_level:
 		push_warning("Gut died while level changing. Check if this is intended behavior")
 		
-	await _load_level(level, false)
-
-func _on_exit_body_entered(body: Node2D) -> void:
-	if is_changing_level:
-		## Prevent double firing
-		return
-	
-	if body.name == "Gut":
-		level += 1
-		body.can_move = false
-		await _load_level(level, false)
+	await load_level(current_level_path, false)

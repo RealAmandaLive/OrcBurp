@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="3_hrcei"]
 [ext_resource type="PackedScene" uid="uid://bflsgfeaj3op" path="res://scenes/ghost.tscn" id="4_xa7n4"]
 [ext_resource type="PackedScene" uid="uid://c85ri8voce3r8" path="res://scenes/apple.tscn" id="5_bo4dx"]
+[ext_resource type="Script" uid="uid://6qg0amtiyqjm" path="res://scripts/level_exit.gd" id="5_hrcei"]
 [ext_resource type="Script" uid="uid://b1v47klesm0x1" path="res://scripts/area-ko-player.gd" id="6_yqkch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ep0u"]
@@ -40,9 +41,12 @@ position = Vector2(367.5, 403)
 top_level = true
 position = Vector2(22, 541)
 
-[node name="exit" type="Area2D" parent="." unique_id=1263351990]
+[node name="exit" type="Area2D" parent="." unique_id=17583194]
 position = Vector2(1166, 569)
 collision_mask = 2
+script = ExtResource("5_hrcei")
+target_level = "res://scenes/level3.tscn"
+metadata/_custom_type_script = "uid://6qg0amtiyqjm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=1406801131]
 position = Vector2(21.5, -14)

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="3_m7ahb"]
 [ext_resource type="PackedScene" uid="uid://dt05y8puojmjs" path="res://scenes/vfx_fire-with-smoke.tscn" id="3_ru4tf"]
 [ext_resource type="Script" uid="uid://bih6h3jpesq1u" path="res://scripts/ladder.gd" id="4_dwgg1"]
+[ext_resource type="Script" uid="uid://6qg0amtiyqjm" path="res://scripts/level_exit.gd" id="7_bbk5w"]
 [ext_resource type="PackedScene" uid="uid://dienwbqy3rey4" path="res://scenes/gridlock_trigger_tile.tscn" id="7_ejswk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
@@ -66,6 +67,8 @@ position = Vector2(597, 484)
 [node name="exit" type="Area2D" parent="." unique_id=1569906749]
 position = Vector2(1076, 634)
 collision_mask = 2
+script = ExtResource("7_bbk5w")
+target_level = "res://scenes/level2.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=1799567898]
 position = Vector2(21.5, -14)

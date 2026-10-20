@@ -23,6 +23,7 @@ shadow_size = 5
 
 [node name="main" type="Node2D" unique_id=576664166]
 script = ExtResource("1_0wfyh")
+first_level = "res://scenes/level1.tscn"
 
 [node name="levelRoot" parent="." unique_id=867802413 instance=ExtResource("1_o5qli")]
 
