@@ -20,3 +20,7 @@ func _on_timer_timeout() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		body.take_damage(DAMAGE)
+
+
+func apply_knockback() -> void:
+	print("knockback applied")
