@@ -17,6 +17,8 @@ shader_parameter/pixellize_size = 45.0
 size = Vector2(32, 32)
 
 [node name="BurpCloud" type="Area2D" unique_id=647644205]
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("1_uic2d")
 
 [node name="ShockwaveEffect" type="ColorRect" parent="." unique_id=8719665]
