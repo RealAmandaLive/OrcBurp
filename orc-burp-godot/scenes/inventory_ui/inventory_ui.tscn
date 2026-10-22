@@ -1,0 +1,1175 @@
+[gd_scene format=3 uid="uid://b6fea3qf5x286"]
+
+[ext_resource type="Texture2D" uid="uid://d5ls5qk70nnq" path="res://assets/UI/scroll_roll.png" id="1_uwj4j"]
+[ext_resource type="FontFile" uid="uid://txmaua63f8vq" path="res://assets/Fonts/Jersey10-Regular.ttf" id="2_1dxi5"]
+[ext_resource type="Texture2D" uid="uid://dlpgdfhvinqep" path="res://assets/UI/scroll_paper.png" id="3_dqfnd"]
+[ext_resource type="Texture2D" uid="uid://b7pdhr5x1trla" path="res://assets/UI/slot.png" id="4_ngbl7"]
+[ext_resource type="Texture2D" uid="uid://ta6jdq5f40x1" path="res://assets/UI/slot_selected_overlay.png" id="5_8wyaw"]
+[ext_resource type="FontFile" uid="uid://cw5y4r8r2q73b" path="res://assets/Fonts/VT323-Regular.ttf" id="6_cwdri"]
+[ext_resource type="Texture2D" uid="uid://bxc0yqer2jh5o" path="res://assets/UI/button_primary_lg.png" id="7_rg5pf"]
+[ext_resource type="Texture2D" uid="uid://c53ra2xyq2gj2" path="res://assets/UI/button_secondary_lg.png" id="8_rmxcj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ibdg1"]
+font = ExtResource("2_1dxi5")
+font_size = 90
+font_color = Color(0.7176471, 0.4509804, 0.23529412, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_34amj"]
+font = ExtResource("2_1dxi5")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_3avjn"]
+font = ExtResource("2_1dxi5")
+font_size = 39
+font_color = Color(0.6, 0.33333334, 0.11764706, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jkv2x"]
+font = ExtResource("2_1dxi5")
+font_size = 28
+font_color = Color(0.6, 0.33333334, 0.11764706, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aig6x"]
+font = ExtResource("6_cwdri")
+font_size = 27
+font_color = Color(0.7176471, 0.4509804, 0.23529412, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2l65a"]
+font = ExtResource("2_1dxi5")
+font_size = 27
+outline_size = 8
+outline_color = Color(0.0627451, 0.4862745, 0.7254902, 0.70980394)
+
+[sub_resource type="LabelSettings" id="LabelSettings_muem4"]
+font = ExtResource("2_1dxi5")
+font_size = 27
+outline_size = 8
+outline_color = Color(0.7921569, 0.5882353, 0.14901961, 0.77254903)
+
+[node name="Inventory" type="CanvasLayer" unique_id=596564707]
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=285303783]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6156863)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=247858419]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=209136055]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="InventoryScroll" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1832905580]
+custom_maximum_size = Vector2(920, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = -72
+
+[node name="Roll" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll" unique_id=13886910]
+z_index = 1
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_uwj4j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Roll" unique_id=1216258039]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -33.0
+offset_right = 192.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+pivot_offset = Vector2(124, 38)
+text = "inventory"
+label_settings = SubResource("LabelSettings_ibdg1")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Page" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll" unique_id=531908259]
+custom_minimum_size = Vector2(780, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_dqfnd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page" unique_id=367177017]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -10.0
+offset_right = -1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 110
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 43
+theme_override_constants/margin_bottom = 120
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer" unique_id=1326041155]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer" unique_id=1718683230]
+layout_mode = 2
+size_flags_vertical = 4
+offset_transform_visual_only = false
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 11
+columns = 3
+
+[node name="ItemSlot" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=733471004]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=983608633]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=1630952773]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=632601971]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemSlot2" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=2042013771]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot2" unique_id=1703667244]
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot2" unique_id=503209917]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot3" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=254334212]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot3" unique_id=1494332449]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot3" unique_id=137759778]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot4" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1815643848]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot4" unique_id=618782666]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot4" unique_id=436041111]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot5" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=2100146804]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot5" unique_id=559175852]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot5" unique_id=972455072]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot6" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=235568798]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot6" unique_id=1781235456]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot6" unique_id=77725778]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot7" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1795239532]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot7" unique_id=1214909427]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot7" unique_id=1120282759]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot8" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1886891971]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot8" unique_id=1630731146]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot8" unique_id=1605483466]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot9" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1789558148]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot9" unique_id=731254190]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot9" unique_id=1934733748]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Divider" type="ColorRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer" unique_id=1338051877]
+custom_minimum_size = Vector2(4, 420)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.9529412, 0.69803923, 0.49019608, 1)
+
+[node name="ItemDetails" type="VBoxContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer" unique_id=518032079]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails" unique_id=1744562637]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2" unique_id=2127000070]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2/HBoxContainer" unique_id=1923438387]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "ITem name"
+label_settings = SubResource("LabelSettings_3avjn")
+uppercase = true
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2/HBoxContainer" unique_id=943314582]
+layout_mode = 2
+size_flags_vertical = 8
+text = "x10"
+label_settings = SubResource("LabelSettings_jkv2x")
+vertical_alignment = 2
+uppercase = true
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2" unique_id=1357766983]
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 2
+text = "Brunch wolf tbh selfies hoodie jomo craft copper."
+label_settings = SubResource("LabelSettings_aig6x")
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails" unique_id=910719562]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ButtonPrimary" type="NinePatchRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer" unique_id=295983182]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("7_rg5pf")
+patch_margin_left = 14
+patch_margin_top = 10
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonPrimary" unique_id=867547339]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "use"
+label_settings = SubResource("LabelSettings_2l65a")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ButtonSecondary" type="NinePatchRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer" unique_id=870912305]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("8_rmxcj")
+patch_margin_left = 14
+patch_margin_top = 10
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonSecondary" unique_id=683771577]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "drop"
+label_settings = SubResource("LabelSettings_muem4")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="CostumesScroll" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1896243981]
+custom_maximum_size = Vector2(920, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = -72
+
+[node name="Roll" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll" unique_id=1741722789]
+z_index = 1
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_uwj4j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Roll" unique_id=2095530497]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -33.0
+offset_right = 192.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+pivot_offset = Vector2(124, 38)
+text = "costumes"
+label_settings = SubResource("LabelSettings_ibdg1")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Page" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll" unique_id=12117967]
+visible = false
+custom_minimum_size = Vector2(780, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_dqfnd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page" unique_id=477915492]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 110
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 43
+theme_override_constants/margin_bottom = 120
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer" unique_id=457982609]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=1458131286]
+layout_mode = 2
+size_flags_vertical = 4
+offset_transform_visual_only = false
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 11
+columns = 3
+
+[node name="ItemSlot" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1051322253]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=1519249141]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=1290070026]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot2" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1210755827]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot2" unique_id=1679578419]
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot2" unique_id=759015477]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot3" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1350191894]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot3" unique_id=1931400064]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot3" unique_id=280766771]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot4" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1425550698]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot4" unique_id=1986827750]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot4" unique_id=1211628353]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot5" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=882267595]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot5" unique_id=1275832465]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot5" unique_id=218316111]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot6" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=127340016]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot6" unique_id=1659516598]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot6" unique_id=923657438]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot7" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=2039319561]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot7" unique_id=1870039381]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot7" unique_id=1561129565]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot8" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1265515523]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot8" unique_id=178080597]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot8" unique_id=1736747608]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemSlot9" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=234033696]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_ngbl7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot9" unique_id=1600389881]
+visible = false
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8wyaw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot9" unique_id=952280676]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10"
+label_settings = SubResource("LabelSettings_34amj")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Divider" type="ColorRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=2090113882]
+custom_minimum_size = Vector2(4, 420)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.9529412, 0.69803923, 0.49019608, 1)
+
+[node name="ItemDetails" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=2101595998]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails" unique_id=1440339929]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2" unique_id=312484087]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2/HBoxContainer" unique_id=829978492]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "ITem name"
+label_settings = SubResource("LabelSettings_3avjn")
+uppercase = true
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2/HBoxContainer" unique_id=1174991706]
+layout_mode = 2
+size_flags_vertical = 8
+text = "x10"
+label_settings = SubResource("LabelSettings_jkv2x")
+vertical_alignment = 2
+uppercase = true
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2" unique_id=1386079225]
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 2
+text = "Brunch wolf tbh selfies hoodie jomo craft copper."
+label_settings = SubResource("LabelSettings_aig6x")
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails" unique_id=93290755]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ButtonPrimary" type="NinePatchRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer" unique_id=1523338310]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("7_rg5pf")
+patch_margin_left = 14
+patch_margin_top = 10
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonPrimary" unique_id=1569905467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "use"
+label_settings = SubResource("LabelSettings_2l65a")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ButtonSecondary" type="NinePatchRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer" unique_id=420715953]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("8_rmxcj")
+patch_margin_left = 14
+patch_margin_top = 10
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonSecondary" unique_id=1352620605]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "drop"
+label_settings = SubResource("LabelSettings_muem4")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
