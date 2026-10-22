@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cw6ck1obb3s12"]
+
+[ext_resource type="Script" uid="uid://idmb02gsp5ay" path="res://assets/Environment/swinging_hazard.gd" id="1_nj0kg"]
+[ext_resource type="Texture2D" uid="uid://w11bevxv4kdq" path="res://assets/Environment/swinging-hazard.png" id="2_yvilw"]
+
+[node name="swinging_hazard" type="Node2D" unique_id=611701400]
+script = ExtResource("1_nj0kg")
+
+[node name="chain" type="Sprite2D" parent="." unique_id=615429626]
+position = Vector2(0, 51)
+texture = ExtResource("2_yvilw")

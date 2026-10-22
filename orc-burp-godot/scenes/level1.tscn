@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bih6h3jpesq1u" path="res://scripts/ladder.gd" id="4_dwgg1"]
 [ext_resource type="Script" uid="uid://6qg0amtiyqjm" path="res://scripts/level_exit.gd" id="7_bbk5w"]
 [ext_resource type="PackedScene" uid="uid://dienwbqy3rey4" path="res://scenes/gridlock_trigger_tile.tscn" id="7_ejswk"]
+[ext_resource type="PackedScene" uid="uid://cw6ck1obb3s12" path="res://assets/Environment/swinging_hazard.tscn" id="9_conm7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
@@ -82,3 +83,6 @@ script = ExtResource("4_dwgg1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder" unique_id=1770394869]
 position = Vector2(0, -19.5)
 shape = SubResource("RectangleShape2D_yxf03")
+
+[node name="swinging_hazard" parent="." unique_id=611701400 instance=ExtResource("9_conm7")]
+position = Vector2(503, 135)
