@@ -1,8 +1,8 @@
 extends Node2D
 
-@export var swing_left_degrees = 90.0
+@export var swing_left_degrees = 80.0
 @export var swing_left_seconds = 1.5
-@export var swing_right_degrees = -90.0
+@export var swing_right_degrees = -80.0
 @export var swing_right_seconds = 1.5
 
 func _ready() -> void:

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://w11bevxv4kdq" path="res://assets/Environment/swinging-hazard.png" id="2_yvilw"]
 
 [node name="swinging_hazard" type="Node2D" unique_id=611701400]
+scale = Vector2(2, 2)
 script = ExtResource("1_nj0kg")
 
 [node name="chain" type="Sprite2D" parent="." unique_id=615429626]

@@ -85,4 +85,4 @@ position = Vector2(0, -19.5)
 shape = SubResource("RectangleShape2D_yxf03")
 
 [node name="swinging_hazard" parent="." unique_id=611701400 instance=ExtResource("9_conm7")]
-position = Vector2(503, 135)
+position = Vector2(330, 330)
