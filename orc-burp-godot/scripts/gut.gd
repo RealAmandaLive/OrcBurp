@@ -174,6 +174,10 @@ func _set_state(state: PlayerStates) -> void:
 		PlayerStates.BURPING:
 			%AnimatedSprite2D.play("burping")
 
+# called by hazardous_area2d swinging chains etc
+func get_bumped(amountVector) -> void:
+	print("player got bumped")
+	velocity += amountVector
 
 func take_damage(amount: int) -> void:
 	if not alive: return
