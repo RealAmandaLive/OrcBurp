@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://b1qx67dar5t4v"]
+
+[ext_resource type="Script" uid="uid://ct3erb2sm714j" path="res://assets/Environment/spinning_hazard.gd" id="1_fvrec"]
+[ext_resource type="Texture2D" uid="uid://uom3qshrs2cc" path="res://assets/Environment/swinging-hazard-short.png" id="2_c4x62"]
+[ext_resource type="Script" uid="uid://dpqs0jg1n4jy1" path="res://scripts/hazardous_area2D.gd" id="3_o5w7l"]
+[ext_resource type="AudioStream" uid="uid://dvcx2wlhnv52r" path="res://assets/Audio/throw-woosh-a.wav" id="4_imvic"]
+[ext_resource type="Texture2D" uid="uid://bpyyhgt1vf7sj" path="res://assets/Particles/dust-cloud.png" id="5_7y8s1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kdu0b"]
+radius = 12.0
+
+[sub_resource type="Curve" id="Curve_mum2l"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_vpefe"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="spinning_hazard" type="Node2D" unique_id=611701400]
+scale = Vector2(2, 2)
+script = ExtResource("1_fvrec")
+
+[node name="chain" type="Sprite2D" parent="." unique_id=615429626]
+position = Vector2(0, 28)
+texture = ExtResource("2_c4x62")
+
+[node name="Hazardous" type="Area2D" parent="chain" unique_id=1779552560]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("3_o5w7l")
+bumpPower = 2000
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chain/Hazardous" unique_id=1498568153]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_kdu0b")
+debug_color = Color(0.9607843, 0, 0.52156866, 0)
+
+[node name="triggerSound" type="AudioStreamPlayer2D" parent="chain/Hazardous" unique_id=1927254497]
+position = Vector2(0, -28)
+stream = ExtResource("4_imvic")
+volume_db = -15.0
+
+[node name="triggerParticles" type="CPUParticles2D" parent="chain/Hazardous" unique_id=65571845]
+position = Vector2(0, 16)
+emitting = false
+amount = 16
+texture = ExtResource("5_7y8s1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+direction = Vector2(0, -1)
+spread = 60.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_mum2l")
+color_ramp = SubResource("Gradient_vpefe")
+
+[connection signal="body_entered" from="chain/Hazardous" to="chain/Hazardous" method="_on_body_entered"]

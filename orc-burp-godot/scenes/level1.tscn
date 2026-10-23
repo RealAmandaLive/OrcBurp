@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dienwbqy3rey4" path="res://scenes/gridlock_trigger_tile.tscn" id="7_ejswk"]
 [ext_resource type="PackedScene" uid="uid://cw6ck1obb3s12" path="res://assets/Environment/swinging_hazard_long.tscn" id="9_conm7"]
 [ext_resource type="PackedScene" uid="uid://behk4qgqnf035" path="res://assets/Environment/swinging_hazard_short.tscn" id="10_d3jkd"]
+[ext_resource type="PackedScene" uid="uid://b1qx67dar5t4v" path="res://assets/Environment/spinning_hazard.tscn" id="11_u3awl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
@@ -90,3 +91,6 @@ position = Vector2(330, 330)
 
 [node name="swinging_hazard_short" parent="." unique_id=2040382496 instance=ExtResource("10_d3jkd")]
 position = Vector2(759, 140)
+
+[node name="spinning_hazard" parent="." unique_id=988105865 instance=ExtResource("11_u3awl")]
+position = Vector2(480, 200)
