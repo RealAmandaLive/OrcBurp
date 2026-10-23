@@ -19,9 +19,15 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		#print("PLAYER TOUCHED A HAZARD!")
 		
-		# nudge to the side just a little, for feedback/juice
-		# note: if it's too powerful, you to exit the trigger and get hit again and again
-		body.get_bumped(Vector2(body.position.x - global_position.x, bumpExtraUp).normalized() * bumpPower)
+		# push the player to the side and up just a little, for feedback/juice
+		# note: if it's the wrong strength, you might exit the trigger and get hit again the very next frame
+		var sign = 1;
+		if (global_position.x > body.position.x): sign = -1
+		var bumpImpulse = Vector2(sign * bumpPower, bumpExtraUp)
+		body.get_bumped(bumpImpulse)
+			
+		# old version: just a little hop
+		# body.get_bumped(Vector2(0, bumpExtraUp).normalized() * bumpPower)
 		
 		# a little puff of dust
 		if particleFX: particleFX.restart()

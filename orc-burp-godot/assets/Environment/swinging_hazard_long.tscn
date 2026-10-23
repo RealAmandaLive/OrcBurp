@@ -29,6 +29,7 @@ texture = ExtResource("2_yvilw")
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_3gp0e")
+bumpPower = 2000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="chain/Hazardous" unique_id=1056605588]
 position = Vector2(0, 38)
