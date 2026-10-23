@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://5ffw8vuki4an"]
+
+[ext_resource type="Script" uid="uid://b6rejhxehpm1e" path="res://scripts/chandelier.gd" id="1_6iikm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao1oa"]
+size = Vector2(52, 20)
+
+[node name="Chandelier" type="Area2D" unique_id=1884257748]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_6iikm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=845885171]
+shape = SubResource("RectangleShape2D_ao1oa")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1710493802]
+offset_left = -26.0
+offset_top = -10.0
+offset_right = 26.0
+offset_bottom = 10.0
+color = Color(0.71231997, 0.8086102, 1.3476611e-05, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

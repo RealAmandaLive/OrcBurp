@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://rbl6ykqsalcp"]
+
+[ext_resource type="Script" uid="uid://e8o6y8yvoi1e" path="res://scripts/hazard_trigger.gd" id="1_lhn5q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao1oa"]
+
+[node name="HazardTrigger" type="Area2D" unique_id=1507631385]
+collision_mask = 2
+script = ExtResource("1_lhn5q")
+metadata/_custom_type_script = "uid://e8o6y8yvoi1e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1448842378]
+shape = SubResource("RectangleShape2D_ao1oa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
