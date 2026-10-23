@@ -4,9 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://uom3qshrs2cc" path="res://assets/Environment/swinging-hazard-short.png" id="2_svekg"]
 [ext_resource type="Script" uid="uid://dpqs0jg1n4jy1" path="res://scripts/hazardous_area2D.gd" id="3_8pf4e"]
 [ext_resource type="AudioStream" uid="uid://dvcx2wlhnv52r" path="res://assets/Audio/throw-woosh-a.wav" id="4_v4qd1"]
+[ext_resource type="Texture2D" uid="uid://bpyyhgt1vf7sj" path="res://assets/Particles/dust-cloud.png" id="5_q7pjn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kdu0b"]
 radius = 12.0
+
+[sub_resource type="Curve" id="Curve_mum2l"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_vpefe"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="swinging_hazard_short" type="Node2D" unique_id=611701400]
 scale = Vector2(2, 2)
@@ -32,5 +41,24 @@ debug_color = Color(0.9607843, 0, 0.52156866, 0)
 position = Vector2(0, -28)
 stream = ExtResource("4_v4qd1")
 volume_db = -15.0
+
+[node name="triggerParticles" type="CPUParticles2D" parent="chain/Hazardous" unique_id=65571845]
+position = Vector2(0, 16)
+emitting = false
+amount = 16
+texture = ExtResource("5_q7pjn")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+direction = Vector2(0, -1)
+spread = 60.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_mum2l")
+color_ramp = SubResource("Gradient_vpefe")
 
 [connection signal="body_entered" from="chain/Hazardous" to="chain/Hazardous" method="_on_body_entered"]
