@@ -12,6 +12,7 @@ const STOP_SPEED = 5000.0
 
 @export var has_key := false
 @export var movement := PieceDir.HORIZONTAL
+@export var size: Vector2 = Vector2(80, 240)
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var collision_particles: CPUParticles2D = %CollisionParticles

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://l864t6lop0gt"]
+
+[ext_resource type="Script" uid="uid://16k0qopps38g" path="res://scripts/gridlock_piece.gd" id="1_tpe60"]
+[ext_resource type="Texture2D" uid="uid://dxtjvxnenlb8w" path="res://assets/Gridlock/GridlockBrickUntextured160x80.png" id="2_inykl"]
+[ext_resource type="Script" uid="uid://ceo5vks2o1cub" path="res://scenes/gridlock_editor_updater.gd" id="3_ylxrh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylxrh"]
+size = Vector2(80, 240)
+
+[node name="Piece1" type="CharacterBody2D" unique_id=809136505 groups=["gridlock_pieces"]]
+collision_layer = 32768
+collision_mask = 32768
+input_pickable = true
+motion_mode = 1
+slide_on_ceiling = false
+platform_on_leave = 2
+platform_floor_layers = 4294901760
+script = ExtResource("1_tpe60")
+movement = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1881989920]
+offset_left = -40.0
+offset_top = -120.0
+offset_right = 40.0
+offset_bottom = 120.0
+texture = ExtResource("2_inykl")
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=775376610]
+visible = false
+shape = SubResource("RectangleShape2D_ylxrh")
+
+[node name="EditorUpdater" type="Node" parent="." unique_id=1031117931]
+script = ExtResource("3_ylxrh")

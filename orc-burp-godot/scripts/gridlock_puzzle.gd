@@ -7,7 +7,7 @@ var active := true
 
 @onready var win_sound: AudioStreamPlayer2D = $Winning/WinSound
 @onready var animation_player: AnimationPlayer = $Winning/AnimationPlayer
-@onready var background: ColorRect = $Background
+@onready var background: TextureRect = $Background
 
 
 func disable() -> void:

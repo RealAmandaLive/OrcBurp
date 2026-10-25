@@ -3,8 +3,24 @@
 [ext_resource type="Script" uid="uid://16k0qopps38g" path="res://scripts/gridlock_piece.gd" id="1_50bm2"]
 [ext_resource type="Script" uid="uid://ct1dsosdmg4iv" path="res://scripts/gridlock_puzzle.gd" id="1_j8qjq"]
 [ext_resource type="AudioStream" uid="uid://bprg1j15j4n4k" path="res://assets/Player/orc-sounds/toot-tiny.wav" id="2_6osue"]
+[ext_resource type="PackedScene" uid="uid://l864t6lop0gt" path="res://scenes/gridlock_puzzle_piece.tscn" id="3_6ppqd"]
 [ext_resource type="AudioStream" uid="uid://b3d3wkyhfft3f" path="res://assets/Audio/splat.wav" id="3_ui5xj"]
 [ext_resource type="Texture2D" uid="uid://cb5wu7xj2ln44" path="res://assets/Items/key.png" id="4_h5rmh"]
+[ext_resource type="Texture2D" uid="uid://d0sbeqpj3ek8v" path="res://assets/Gridlock/GridlockBrickCrackOverlayA160x80.png" id="4_nff62"]
+[ext_resource type="Texture2D" uid="uid://crbnali4f3c05" path="res://assets/Gridlock/GridlockBrickCrackOverlayB160x80.png" id="5_n00mx"]
+
+[sub_resource type="Gradient" id="Gradient_cpjh3"]
+offsets = PackedFloat32Array(0.014450867, 1)
+colors = PackedColorArray(0.14175001, 0.15, 0.13350001, 1, 0.24840015, 0.24840018, 0.24840015, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n00mx"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nff62"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_n00mx")
+color_ramp = SubResource("Gradient_cpjh3")
+seamless = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7t1d"]
 size = Vector2(500, 500)
@@ -34,24 +50,6 @@ size = Vector2(500, 380)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8x2s"]
 size = Vector2(380, 500)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_50bm2"]
-size = Vector2(80, 240)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6osue"]
-size = Vector2(80, 240)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6osue"]
-size = Vector2(240, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8qjq"]
-size = Vector2(240, 80)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j8qjq"]
-size = Vector2(520, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui5xj"]
-size = Vector2(520, 80)
 
 [sub_resource type="Gradient" id="Gradient_iynve"]
 offsets = PackedFloat32Array(0.012345679, 0.6851852, 1)
@@ -226,11 +224,11 @@ _data = {
 process_mode = 3
 script = ExtResource("1_j8qjq")
 
-[node name="Background" type="ColorRect" parent="." unique_id=778727991]
+[node name="Background" type="TextureRect" parent="." unique_id=1358352426]
 custom_minimum_size = Vector2(720, 720)
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.22490484, 0.22490484, 0.22490484, 1)
+offset_right = 720.0
+offset_bottom = 720.0
+texture = SubResource("NoiseTexture2D_nff62")
 
 [node name="GoalZone" type="Area2D" parent="." unique_id=1048620607]
 position = Vector2(800, 360)
@@ -240,6 +238,16 @@ collision_mask = 32768
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoalZone" unique_id=1801698794]
 position = Vector2(198.5, 0)
 shape = SubResource("RectangleShape2D_l7t1d")
+
+[node name="Crack1" type="Sprite2D" parent="." unique_id=66677163]
+position = Vector2(488, 152)
+scale = Vector2(3, 3)
+texture = ExtResource("4_nff62")
+
+[node name="Crack2" type="Sprite2D" parent="." unique_id=788336770]
+position = Vector2(440, 544)
+scale = Vector2(3, 3)
+texture = ExtResource("5_n00mx")
 
 [node name="Walls" type="Node2D" parent="." unique_id=1671603673]
 
@@ -407,135 +415,32 @@ offset_right = 160.0
 offset_bottom = 10.0
 color = Color(0.54509807, 0.83137256, 1, 1)
 
-[node name="Piece1" type="CharacterBody2D" parent="Pieces" unique_id=46163032 groups=["gridlock_pieces"]]
-modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
+[node name="Piece1" parent="Pieces" unique_id=809136505 instance=ExtResource("3_6ppqd")]
 position = Vector2(360, 360)
-collision_layer = 32768
-collision_mask = 32768
-input_pickable = true
-motion_mode = 1
-slide_on_ceiling = false
-platform_on_leave = 2
-platform_floor_layers = 4294901760
-script = ExtResource("1_50bm2")
-movement = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Pieces/Piece1" unique_id=228508305]
-texture = SubResource("PlaceholderTexture2D_50bm2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece1" unique_id=956691481]
-shape = SubResource("RectangleShape2D_6osue")
-
-[node name="Piece2" type="CharacterBody2D" parent="Pieces" unique_id=1641569370 groups=["gridlock_pieces"]]
-modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
+[node name="Piece2" parent="Pieces" unique_id=1867055510 instance=ExtResource("3_6ppqd")]
 position = Vector2(260, 160)
-collision_layer = 32768
-collision_mask = 32768
-input_pickable = true
-motion_mode = 1
-slide_on_ceiling = false
-platform_on_leave = 2
-platform_floor_layers = 4294901760
-script = ExtResource("1_50bm2")
-movement = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Pieces/Piece2" unique_id=1289624958]
-texture = SubResource("PlaceholderTexture2D_50bm2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece2" unique_id=2082672883]
-shape = SubResource("RectangleShape2D_6osue")
-
-[node name="Piece6" type="CharacterBody2D" parent="Pieces" unique_id=360762373 groups=["gridlock_pieces"]]
-modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
-position = Vector2(100, 540)
-collision_layer = 32768
-collision_mask = 32768
-input_pickable = true
-motion_mode = 1
-slide_on_ceiling = false
-platform_on_leave = 2
-platform_floor_layers = 4294901760
-script = ExtResource("1_50bm2")
-movement = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="Pieces/Piece6" unique_id=1704704802]
-texture = SubResource("PlaceholderTexture2D_50bm2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece6" unique_id=1473956244]
-shape = SubResource("RectangleShape2D_6osue")
-
-[node name="Piece3" type="CharacterBody2D" parent="Pieces" unique_id=1365428289 groups=["gridlock_pieces"]]
-modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
+[node name="Piece3" parent="Pieces" unique_id=1252575673 instance=ExtResource("3_6ppqd")]
 position = Vector2(620, 162)
-collision_layer = 32768
-collision_mask = 32768
-input_pickable = true
-motion_mode = 1
-slide_on_ceiling = false
-platform_on_leave = 2
-platform_floor_layers = 4294901760
-script = ExtResource("1_50bm2")
-movement = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Pieces/Piece3" unique_id=340309275]
-texture = SubResource("PlaceholderTexture2D_50bm2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece3" unique_id=1254535784]
-shape = SubResource("RectangleShape2D_6osue")
-
-[node name="Piece4" type="CharacterBody2D" parent="Pieces" unique_id=1402332821 groups=["gridlock_pieces"]]
-modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
+[node name="Piece4" parent="Pieces" unique_id=1462237872 instance=ExtResource("3_6ppqd")]
 position = Vector2(440, 180)
-collision_layer = 32768
-collision_mask = 32768
-input_pickable = true
-motion_mode = 1
-slide_on_ceiling = false
-platform_on_leave = 2
-platform_floor_layers = 4294901760
-script = ExtResource("1_50bm2")
+movement = 0
+size = Vector2(240, 80)
 
-[node name="Sprite2D" type="Sprite2D" parent="Pieces/Piece4" unique_id=1774257486]
-texture = SubResource("PlaceholderTexture2D_6osue")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece4" unique_id=2103495495]
-shape = SubResource("RectangleShape2D_j8qjq")
-
-[node name="Piece5" type="CharacterBody2D" parent="Pieces" unique_id=476830234 groups=["gridlock_pieces"]]
-modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
+[node name="Piece5" parent="Pieces" unique_id=4897959 instance=ExtResource("3_6ppqd")]
 position = Vector2(280, 540)
-collision_layer = 32768
-collision_mask = 32768
-input_pickable = true
-motion_mode = 1
-slide_on_ceiling = false
-platform_on_leave = 2
-platform_floor_layers = 4294901760
-script = ExtResource("1_50bm2")
+movement = 0
+size = Vector2(240, 80)
 
-[node name="Sprite2D" type="Sprite2D" parent="Pieces/Piece5" unique_id=290070750]
-texture = SubResource("PlaceholderTexture2D_6osue")
+[node name="Piece6" parent="Pieces" unique_id=533807510 instance=ExtResource("3_6ppqd")]
+position = Vector2(100, 540)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece5" unique_id=16779545]
-shape = SubResource("RectangleShape2D_j8qjq")
-
-[node name="Piece7" type="CharacterBody2D" parent="Pieces" unique_id=744934546 groups=["gridlock_pieces"]]
-modulate = Color(0.12773594, 0.12773594, 0.12773594, 1)
+[node name="Piece7" parent="Pieces" unique_id=1728318221 instance=ExtResource("3_6ppqd")]
 position = Vector2(420, 640)
-collision_layer = 32768
-collision_mask = 32768
-input_pickable = true
-motion_mode = 1
-slide_on_ceiling = false
-platform_on_leave = 2
-platform_floor_layers = 4294901760
-script = ExtResource("1_50bm2")
-
-[node name="Sprite2D" type="Sprite2D" parent="Pieces/Piece7" unique_id=346291912]
-texture = SubResource("PlaceholderTexture2D_j8qjq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/Piece7" unique_id=1675061314]
-shape = SubResource("RectangleShape2D_ui5xj")
+movement = 0
+size = Vector2(520, 80)
 
 [node name="CollisionParticles" type="CPUParticles2D" parent="." unique_id=2002646759]
 unique_name_in_owner = true
