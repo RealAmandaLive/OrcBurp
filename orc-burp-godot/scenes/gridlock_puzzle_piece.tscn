@@ -4,6 +4,25 @@
 [ext_resource type="Texture2D" uid="uid://dxtjvxnenlb8w" path="res://assets/Gridlock/GridlockBrickUntextured160x80.png" id="2_inykl"]
 [ext_resource type="Script" uid="uid://ceo5vks2o1cub" path="res://scenes/gridlock_editor_updater.gd" id="3_ylxrh"]
 
+[sub_resource type="Gradient" id="Gradient_2q6gc"]
+offsets = PackedFloat32Array(0.58381504, 0.67919075)
+colors = PackedColorArray(0.41598046, 0.41598043, 0.4159804, 0, 0.27, 0.27, 0.27, 0.21176471)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l7t1d"]
+noise_type = 0
+seed = 4
+fractal_octaves = 4
+fractal_lacunarity = 3.0
+fractal_gain = 1.9
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iynve"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_l7t1d")
+color_ramp = SubResource("Gradient_2q6gc")
+seamless = true
+seamless_blend_skirt = 0.377
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylxrh"]
 size = Vector2(80, 240)
 
@@ -28,6 +47,29 @@ patch_margin_left = 18
 patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect" unique_id=1458498287]
+clip_children = 2
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 11
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 11
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer" unique_id=6418485]
+texture_filter = 1
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(4, 4)
+texture = SubResource("NoiseTexture2D_iynve")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=775376610]
 visible = false

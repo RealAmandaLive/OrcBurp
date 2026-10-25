@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://l864t6lop0gt" path="res://scenes/gridlock_puzzle_piece.tscn" id="3_6ppqd"]
 [ext_resource type="AudioStream" uid="uid://b3d3wkyhfft3f" path="res://assets/Audio/splat.wav" id="3_ui5xj"]
 [ext_resource type="Texture2D" uid="uid://cb5wu7xj2ln44" path="res://assets/Items/key.png" id="4_h5rmh"]
+[ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="4_n00mx"]
 [ext_resource type="Texture2D" uid="uid://d0sbeqpj3ek8v" path="res://assets/Gridlock/GridlockBrickCrackOverlayA160x80.png" id="4_nff62"]
 [ext_resource type="Texture2D" uid="uid://crbnali4f3c05" path="res://assets/Gridlock/GridlockBrickCrackOverlayB160x80.png" id="5_n00mx"]
 
@@ -28,11 +29,23 @@ size = Vector2(500, 500)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iynve"]
 size = Vector2(40, 720)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_iynve"]
+atlas = ExtResource("4_n00mx")
+region = Rect2(96, 96, 32, 64)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_50bm2"]
 size = Vector2(40, 300)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_n00mx"]
+atlas = ExtResource("4_n00mx")
+region = Rect2(104, 96, 32, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w07av"]
 size = Vector2(720, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpjh3"]
+atlas = ExtResource("4_n00mx")
+region = Rect2(96, 104, 32, 32)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iynve"]
 size = Vector2(160, 80)
@@ -240,11 +253,13 @@ position = Vector2(198.5, 0)
 shape = SubResource("RectangleShape2D_l7t1d")
 
 [node name="Crack1" type="Sprite2D" parent="." unique_id=66677163]
+visible = false
 position = Vector2(488, 152)
 scale = Vector2(3, 3)
 texture = ExtResource("4_nff62")
 
 [node name="Crack2" type="Sprite2D" parent="." unique_id=788336770]
+visible = false
 position = Vector2(440, 544)
 scale = Vector2(3, 3)
 texture = ExtResource("5_n00mx")
@@ -259,10 +274,12 @@ collision_mask = 32768
 position = Vector2(20, 360)
 shape = SubResource("RectangleShape2D_iynve")
 
-[node name="ColorRect2" type="ColorRect" parent="Walls/Wall - left" unique_id=1231291888]
+[node name="ColorRect2" type="TextureRect" parent="Walls/Wall - left" unique_id=1423425368]
 custom_minimum_size = Vector2(40, 720)
-offset_right = 20.0
+offset_right = 40.0
 offset_bottom = 720.0
+texture = SubResource("AtlasTexture_iynve")
+stretch_mode = 1
 
 [node name="Wall - right" type="StaticBody2D" parent="Walls" unique_id=818201269]
 position = Vector2(680, 0)
@@ -273,10 +290,12 @@ collision_mask = 32768
 position = Vector2(20, 150)
 shape = SubResource("RectangleShape2D_50bm2")
 
-[node name="ColorRect2" type="ColorRect" parent="Walls/Wall - right" unique_id=409252552]
+[node name="ColorRect2" type="TextureRect" parent="Walls/Wall - right" unique_id=2124431037]
 custom_minimum_size = Vector2(40, 300)
-offset_right = 20.0
+offset_right = 40.0
 offset_bottom = 300.0
+texture = SubResource("AtlasTexture_n00mx")
+stretch_mode = 1
 
 [node name="Wall - right2" type="StaticBody2D" parent="Walls" unique_id=1980284821]
 position = Vector2(680, 420)
@@ -287,10 +306,12 @@ collision_mask = 32768
 position = Vector2(20, 150)
 shape = SubResource("RectangleShape2D_50bm2")
 
-[node name="ColorRect2" type="ColorRect" parent="Walls/Wall - right2" unique_id=1514210274]
+[node name="ColorRect2" type="TextureRect" parent="Walls/Wall - right2" unique_id=1365854621]
 custom_minimum_size = Vector2(40, 300)
-offset_right = 20.0
+offset_right = 40.0
 offset_bottom = 300.0
+texture = SubResource("AtlasTexture_n00mx")
+stretch_mode = 1
 
 [node name="Wall - top" type="StaticBody2D" parent="Walls" unique_id=1756001055]
 collision_layer = 32768
@@ -300,10 +321,13 @@ collision_mask = 32768
 position = Vector2(360, 20)
 shape = SubResource("RectangleShape2D_w07av")
 
-[node name="ColorRect2" type="ColorRect" parent="Walls/Wall - top" unique_id=1605116075]
+[node name="ColorRect2" type="TextureRect" parent="Walls/Wall - top" unique_id=1359842451]
 custom_minimum_size = Vector2(720, 40)
+custom_maximum_size = Vector2(-1, 40)
 offset_right = 720.0
 offset_bottom = 40.0
+texture = SubResource("AtlasTexture_iynve")
+stretch_mode = 1
 
 [node name="Wall - bottom" type="StaticBody2D" parent="Walls" unique_id=1410769595]
 position = Vector2(0, 680)
@@ -314,10 +338,13 @@ collision_mask = 32768
 position = Vector2(360, 20)
 shape = SubResource("RectangleShape2D_w07av")
 
-[node name="ColorRect2" type="ColorRect" parent="Walls/Wall - bottom" unique_id=335651671]
+[node name="ColorRect2" type="TextureRect" parent="Walls/Wall - bottom" unique_id=1151801413]
 custom_minimum_size = Vector2(720, 40)
+custom_maximum_size = Vector2(-1, 40)
 offset_right = 720.0
-offset_bottom = 20.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_cpjh3")
+stretch_mode = 1
 
 [node name="Pieces" type="Node2D" parent="." unique_id=1665171088]
 
@@ -420,6 +447,10 @@ position = Vector2(360, 360)
 
 [node name="Piece2" parent="Pieces" unique_id=1867055510 instance=ExtResource("3_6ppqd")]
 position = Vector2(260, 160)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pieces/Piece2" unique_id=271755853]
+position = Vector2(-20, -80)
+texture = ExtResource("4_nff62")
 
 [node name="Piece3" parent="Pieces" unique_id=1252575673 instance=ExtResource("3_6ppqd")]
 position = Vector2(620, 162)
