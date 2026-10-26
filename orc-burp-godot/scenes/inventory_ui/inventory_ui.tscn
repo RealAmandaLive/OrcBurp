@@ -5,12 +5,12 @@
 [ext_resource type="FontFile" uid="uid://txmaua63f8vq" path="res://assets/Fonts/Jersey10-Regular.ttf" id="2_1dxi5"]
 [ext_resource type="Script" uid="uid://b6huxuja4fd8t" path="res://scripts/inventory_ui/inventory_scroll.gd" id="2_wu2pq"]
 [ext_resource type="Texture2D" uid="uid://dlpgdfhvinqep" path="res://assets/UI/scroll_paper.png" id="3_dqfnd"]
-[ext_resource type="Texture2D" uid="uid://b7pdhr5x1trla" path="res://assets/UI/slot.png" id="4_ngbl7"]
 [ext_resource type="PackedScene" uid="uid://dtdmcvmpvyhq1" path="res://scenes/inventory_ui/item_slot.tscn" id="4_t5bre"]
-[ext_resource type="Texture2D" uid="uid://ta6jdq5f40x1" path="res://assets/UI/slot_selected_overlay.png" id="5_8wyaw"]
 [ext_resource type="FontFile" uid="uid://cw5y4r8r2q73b" path="res://assets/Fonts/VT323-Regular.ttf" id="6_cwdri"]
 [ext_resource type="Texture2D" uid="uid://bxc0yqer2jh5o" path="res://assets/UI/button_primary_lg.png" id="7_rg5pf"]
 [ext_resource type="Texture2D" uid="uid://c53ra2xyq2gj2" path="res://assets/UI/button_secondary_lg.png" id="8_rmxcj"]
+[ext_resource type="Script" uid="uid://ca7gd5onqnsfi" path="res://scripts/inventory_ui/costumes_scroll.gd" id="10_4iaw1"]
+[ext_resource type="Texture2D" uid="uid://dx0l3igha4652" path="res://assets/UI/project-icon.png" id="12_2k7ee"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ibdg1"]
 font = ExtResource("2_1dxi5")
@@ -43,10 +43,6 @@ font = ExtResource("2_1dxi5")
 font_size = 27
 outline_size = 8
 outline_color = Color(0.7921569, 0.5882353, 0.14901961, 0.77254903)
-
-[sub_resource type="LabelSettings" id="LabelSettings_34amj"]
-font = ExtResource("2_1dxi5")
-font_size = 32
 
 [node name="Inventory" type="CanvasLayer" unique_id=596564707]
 process_mode = 3
@@ -115,6 +111,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Page" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll" unique_id=531908259]
+visible = false
 custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -150,32 +147,41 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 11
 columns = 3
 
-[node name="ItemSlot" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1630003035 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1630003035 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
-[node name="ItemSlot2" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=495728801 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot2" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=495728801 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
-[node name="ItemSlot3" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=177500999 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot3" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=177500999 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
-[node name="ItemSlot4" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=288598594 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot4" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=288598594 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
-[node name="ItemSlot5" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=682469258 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot5" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=682469258 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
-[node name="ItemSlot6" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=395099063 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot6" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=395099063 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
-[node name="ItemSlot7" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1060416963 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot7" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1060416963 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
-[node name="ItemSlot8" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1515906675 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot8" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1515906675 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
-[node name="ItemSlot9" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=370349495 instance=ExtResource("4_t5bre")]
+[node name="ItemSlot9" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=370349495 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
+root_parent = NodePath("../../../../..")
 
 [node name="Divider" type="ColorRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer" unique_id=1338051877]
 custom_minimum_size = Vector2(4, 420)
@@ -279,6 +285,7 @@ custom_maximum_size = Vector2(920, -1)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = -72
+script = ExtResource("10_4iaw1")
 
 [node name="Roll" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll" unique_id=1741722789]
 z_index = 1
@@ -311,7 +318,6 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Page" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll" unique_id=12117967]
-visible = false
 custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -345,387 +351,41 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 11
 columns = 3
 
-[node name="ItemSlot" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1051322253]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1467767772 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
+root_parent = NodePath("../../../../..")
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=1519249141]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=1290070026]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot2" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1210755827]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot2" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=842171268 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
+root_parent = NodePath("../../../../..")
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot2" unique_id=1679578419]
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot2" unique_id=759015477]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot3" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1350191894]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot3" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1532816788 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
+root_parent = NodePath("../../../../..")
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot3" unique_id=1931400064]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot3" unique_id=280766771]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot4" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1425550698]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot4" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=2024960075 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
+root_parent = NodePath("../../../../..")
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot4" unique_id=1986827750]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot4" unique_id=1211628353]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot5" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=882267595]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot5" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=573263505 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
+root_parent = NodePath("../../../../..")
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot5" unique_id=1275832465]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot5" unique_id=218316111]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot6" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=127340016]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot6" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1146994939 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
+root_parent = NodePath("../../../../..")
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot6" unique_id=1659516598]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot6" unique_id=923657438]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot7" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=2039319561]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot7" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=441760979 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
+root_parent = NodePath("../../../../..")
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot7" unique_id=1870039381]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot7" unique_id=1561129565]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot8" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1265515523]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot8" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1245687616 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
+root_parent = NodePath("../../../../..")
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot8" unique_id=178080597]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot8" unique_id=1736747608]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot9" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=234033696]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot9" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1434424399 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot9" unique_id=1600389881]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot9" unique_id=952280676]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
+root_parent = NodePath("../../../../..")
 
 [node name="Divider" type="ColorRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=2090113882]
 custom_minimum_size = Vector2(4, 420)
@@ -734,6 +394,7 @@ size_flags_vertical = 4
 color = Color(0.9529412, 0.69803923, 0.49019608, 1)
 
 [node name="ItemDetails" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=2101595998]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 28
@@ -817,3 +478,40 @@ label_settings = SubResource("LabelSettings_muem4")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="CharaPreview" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=1381192438]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview" unique_id=976173451]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+texture = ExtResource("12_2k7ee")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview" unique_id=767510716]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ItemSlot" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview/VBoxContainer" unique_id=326297913 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
+layout_mode = 2
+root_parent = NodePath("../../../../../..")
+
+[node name="ItemSlot2" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview/VBoxContainer" unique_id=973046549 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
+layout_mode = 2
+root_parent = NodePath("../../../../../..")
+
+[node name="ToggleButton" type="TextureButton" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer" unique_id=726708455]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("8_rmxcj")
+
+[connection signal="gui_input" from="MarginContainer/HBoxContainer/InventoryScroll" to="." method="_on_inventory_scroll_gui_input"]
+[connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll" to="." method="_on_costumes_scroll_gui_input"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/ToggleButton" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_toggle_button_toggled"]

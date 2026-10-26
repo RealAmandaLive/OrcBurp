@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CostumeData" format=3 uid="uid://dljqcbxl7gxki"]
+
+[ext_resource type="Script" uid="uid://bif87h15k681b" path="res://resources/CostumeData.gd" id="1_2grpo"]
+[ext_resource type="Texture2D" uid="uid://cm2mqcjxjyajm" path="res://assets/Player/hats/Fez.png" id="2_2grpo"]
+
+[resource]
+script = ExtResource("1_2grpo")
+id = "fez_hat"
+name = "Fez Hat"
+description = "It blooms on your head."
+texture = ExtResource("2_2grpo")
+metadata/_custom_type_script = "uid://bif87h15k681b"

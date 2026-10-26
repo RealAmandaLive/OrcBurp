@@ -3,6 +3,8 @@ class_name ItemSlot
 
 signal selected(node, data)
 
+@export var root_parent : Control
+
 @onready var amount_label = $AmountLabel
 @onready var item_texture_rect = $ItemTexture
 @onready var select_overlay = $SelectOverlay
@@ -12,8 +14,8 @@ var item_texture : Texture
 var item_data
 
 func _ready() -> void:
-	var inventory_root = get_tree().get_first_node_in_group("inventory")
-	selected.connect(inventory_root._on_item_slot_selected)
+	print(root_parent.has_method("_on_item_slot_selected"))
+	selected.connect(root_parent._on_item_slot_selected)
 
 func toggle():
 	is_selected = !is_selected
@@ -24,7 +26,8 @@ func toggle():
 
 func set_item_data(data):
 	item_data = data
-	amount_label.text = "%d" % item_data.amount
+	if item_data.has("amount"):
+		amount_label.text = "%d" % item_data.amount
 	item_texture_rect.texture = data.texture
 
 

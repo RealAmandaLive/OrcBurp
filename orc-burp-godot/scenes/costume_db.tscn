@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dcyjc17774ryp"]
+
+[ext_resource type="Script" uid="uid://c25nicongw3e1" path="res://scripts/costume_db.gd" id="1_omenb"]
+[ext_resource type="Script" uid="uid://bif87h15k681b" path="res://resources/CostumeData.gd" id="2_8rrvq"]
+[ext_resource type="Resource" uid="uid://bareotv8tqu6b" path="res://resources/costumes/top_hat.tres" id="3_ng6fx"]
+[ext_resource type="Resource" uid="uid://dljqcbxl7gxki" path="res://resources/costumes/fez_hat.tres" id="4_0lqmq"]
+[ext_resource type="Resource" uid="uid://1dq3pvtrygh7" path="res://resources/costumes/wizard_hat.tres" id="5_ick1t"]
+
+[node name="CostumeDb" type="Node" unique_id=1928764216]
+script = ExtResource("1_omenb")
+costumes = Array[ExtResource("2_8rrvq")]([ExtResource("3_ng6fx"), ExtResource("4_0lqmq"), ExtResource("5_ick1t")])

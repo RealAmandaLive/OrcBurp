@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CostumeData" format=3 uid="uid://bareotv8tqu6b"]
+
+[ext_resource type="Script" uid="uid://bif87h15k681b" path="res://resources/CostumeData.gd" id="1_toa1x"]
+[ext_resource type="Texture2D" uid="uid://bx5xek8oujiqq" path="res://assets/Player/hats/top_hat.png" id="2_hu1a5"]
+
+[resource]
+script = ExtResource("1_toa1x")
+id = "top_hat"
+name = "Top Hat"
+description = "Fancy long top hat. Makes you feel like a real magician."
+texture = ExtResource("2_hu1a5")
+metadata/_custom_type_script = "uid://bif87h15k681b"

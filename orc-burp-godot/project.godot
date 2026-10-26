@@ -18,6 +18,7 @@ config/icon="uid://dx0l3igha4652"
 [autoload]
 
 ItemDb="*uid://jdm4oxt1he5x"
+CostumeDb="*uid://dcyjc17774ryp"
 
 [display]
 

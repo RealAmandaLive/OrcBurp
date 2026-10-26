@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CostumeData" format=3 uid="uid://1dq3pvtrygh7"]
+
+[ext_resource type="Script" uid="uid://bif87h15k681b" path="res://resources/CostumeData.gd" id="1_klc45"]
+[ext_resource type="Texture2D" uid="uid://bsg168p11mxpo" path="res://assets/Player/hats/wizard_hat.png" id="2_klc45"]
+
+[resource]
+script = ExtResource("1_klc45")
+id = "wizard_hat"
+name = "Wizard Hat"
+description = "Legends said pointy hats grant you increadible powers. "
+texture = ExtResource("2_klc45")
+metadata/_custom_type_script = "uid://bif87h15k681b"

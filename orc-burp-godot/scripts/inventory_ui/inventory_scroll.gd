@@ -32,12 +32,22 @@ func _ready() -> void:
 	
 	reset()
 
+func fold():
+	$Page.hide()
+	reset()
+
+func unfold():
+	$Page.show()
+
 func reset():
 	item_name_label.text = ""
 	item_amount_label.text = ""
 	item_description_label.text = ""
 	button_primary.hide()
 	button_secondary.hide()
+	if selected_item:
+		selected_item.toggle()
+		selected_item = null
 
 func _on_item_slot_selected(item_slot: ItemSlot, data):
 	if selected_item:
@@ -53,4 +63,8 @@ func _on_item_slot_selected(item_slot: ItemSlot, data):
 		button_primary.show()
 		button_secondary.show()
 	else:
-		reset()
+		item_name_label.text = ""
+		item_amount_label.text = ""
+		item_description_label.text = ""
+		button_primary.hide()
+		button_secondary.hide()
