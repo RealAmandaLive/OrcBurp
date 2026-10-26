@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="4_n00mx"]
 [ext_resource type="Texture2D" uid="uid://d0sbeqpj3ek8v" path="res://assets/Gridlock/GridlockBrickCrackOverlayA160x80.png" id="4_nff62"]
 [ext_resource type="Texture2D" uid="uid://crbnali4f3c05" path="res://assets/Gridlock/GridlockBrickCrackOverlayB160x80.png" id="5_n00mx"]
+[ext_resource type="Texture2D" uid="uid://bpwlnphqwqns2" path="res://assets/Gridlock/GridlockKeybox160x80.png" id="6_cpjh3"]
 
 [sub_resource type="Gradient" id="Gradient_cpjh3"]
 offsets = PackedFloat32Array(0.014450867, 1)
@@ -47,11 +48,9 @@ size = Vector2(720, 40)
 atlas = ExtResource("4_n00mx")
 region = Rect2(96, 104, 32, 32)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iynve"]
-size = Vector2(160, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2q6gc"]
-size = Vector2(160, 80)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpjh3"]
+radius = 26.0
+height = 126.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6osue"]
 friction = 0.0
@@ -361,12 +360,15 @@ script = ExtResource("1_50bm2")
 has_key = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Pieces/MainPiece" unique_id=205470434]
-texture = SubResource("PlaceholderTexture2D_iynve")
+texture = ExtResource("6_cpjh3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pieces/MainPiece" unique_id=1999716319]
-shape = SubResource("RectangleShape2D_2q6gc")
+position = Vector2(-1, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_cpjh3")
 
 [node name="Left Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1630438038]
+visible = false
 position = Vector2(-80, -40)
 collision_layer = 16384
 collision_mask = 16384
@@ -386,6 +388,7 @@ offset_bottom = 80.0
 color = Color(0.54509807, 0.83137256, 1, 1)
 
 [node name="Right Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1905964320]
+visible = false
 position = Vector2(70, -40)
 collision_layer = 16384
 collision_mask = 16384
@@ -405,6 +408,7 @@ offset_bottom = 80.0
 color = Color(0.54509807, 0.83137256, 1, 1)
 
 [node name="Top Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=2022556452]
+visible = false
 position = Vector2(-80, -40)
 collision_layer = 16384
 collision_mask = 16384
@@ -424,6 +428,7 @@ offset_bottom = 10.0
 color = Color(0.54509807, 0.83137256, 1, 1)
 
 [node name="Bottom Side" type="StaticBody2D" parent="Pieces/MainPiece" unique_id=1742572903]
+visible = false
 position = Vector2(-80, 30)
 collision_layer = 16384
 collision_mask = 16384
