@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dtdmcvmpvyhq1"]
 
 [ext_resource type="Texture2D" uid="uid://b7pdhr5x1trla" path="res://assets/UI/slot.png" id="1_l0xgl"]
+[ext_resource type="Script" uid="uid://cxrkcf81rn8ie" path="res://scripts/inventory_ui/item_slot.gd" id="2_5jbtu"]
 [ext_resource type="Texture2D" uid="uid://ta6jdq5f40x1" path="res://assets/UI/slot_selected_overlay.png" id="2_fa8gv"]
 [ext_resource type="FontFile" uid="uid://txmaua63f8vq" path="res://assets/Fonts/Jersey10-Regular.ttf" id="3_ps388"]
 
@@ -13,6 +14,7 @@ custom_minimum_size = Vector2(100, 100)
 texture = ExtResource("1_l0xgl")
 expand_mode = 1
 stretch_mode = 5
+script = ExtResource("2_5jbtu")
 
 [node name="SelectOverlay" type="TextureRect" parent="." unique_id=1455981969]
 visible = false
@@ -44,7 +46,6 @@ offset_right = -11.0
 offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "10"
 label_settings = SubResource("LabelSettings_34amj")
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -63,3 +64,5 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 5
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

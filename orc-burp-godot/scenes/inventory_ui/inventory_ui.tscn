@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://b6fea3qf5x286"]
 
+[ext_resource type="Script" uid="uid://xahicjn73mfj" path="res://scripts/inventory_ui/inventory_ui.gd" id="1_dcfro"]
 [ext_resource type="Texture2D" uid="uid://d5ls5qk70nnq" path="res://assets/UI/scroll_roll.png" id="1_uwj4j"]
 [ext_resource type="FontFile" uid="uid://txmaua63f8vq" path="res://assets/Fonts/Jersey10-Regular.ttf" id="2_1dxi5"]
+[ext_resource type="Script" uid="uid://b6huxuja4fd8t" path="res://scripts/inventory_ui/inventory_scroll.gd" id="2_wu2pq"]
 [ext_resource type="Texture2D" uid="uid://dlpgdfhvinqep" path="res://assets/UI/scroll_paper.png" id="3_dqfnd"]
 [ext_resource type="Texture2D" uid="uid://b7pdhr5x1trla" path="res://assets/UI/slot.png" id="4_ngbl7"]
+[ext_resource type="PackedScene" uid="uid://dtdmcvmpvyhq1" path="res://scenes/inventory_ui/item_slot.tscn" id="4_t5bre"]
 [ext_resource type="Texture2D" uid="uid://ta6jdq5f40x1" path="res://assets/UI/slot_selected_overlay.png" id="5_8wyaw"]
 [ext_resource type="FontFile" uid="uid://cw5y4r8r2q73b" path="res://assets/Fonts/VT323-Regular.ttf" id="6_cwdri"]
 [ext_resource type="Texture2D" uid="uid://bxc0yqer2jh5o" path="res://assets/UI/button_primary_lg.png" id="7_rg5pf"]
@@ -13,10 +16,6 @@
 font = ExtResource("2_1dxi5")
 font_size = 90
 font_color = Color(0.7176471, 0.4509804, 0.23529412, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_34amj"]
-font = ExtResource("2_1dxi5")
-font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_3avjn"]
 font = ExtResource("2_1dxi5")
@@ -45,7 +44,13 @@ font_size = 27
 outline_size = 8
 outline_color = Color(0.7921569, 0.5882353, 0.14901961, 0.77254903)
 
+[sub_resource type="LabelSettings" id="LabelSettings_34amj"]
+font = ExtResource("2_1dxi5")
+font_size = 32
+
 [node name="Inventory" type="CanvasLayer" unique_id=596564707]
+process_mode = 3
+script = ExtResource("1_dcfro")
 
 [node name="Overlay" type="ColorRect" parent="." unique_id=285303783]
 anchors_preset = 15
@@ -71,11 +76,13 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="InventoryScroll" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1832905580]
+[node name="InventoryScroll" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1832905580 groups=["inventory"]]
+unique_name_in_owner = true
 custom_maximum_size = Vector2(920, -1)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = -72
+script = ExtResource("2_wu2pq")
 
 [node name="Roll" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll" unique_id=13886910]
 z_index = 1
@@ -134,7 +141,8 @@ theme_override_constants/margin_bottom = 120
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer" unique_id=1718683230]
+[node name="ItemsGrid" type="GridContainer" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer" unique_id=1718683230]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 offset_transform_visual_only = false
@@ -142,402 +150,32 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 11
 columns = 3
 
-[node name="ItemSlot" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=733471004]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1630003035 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=983608633]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=1630952773]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot" unique_id=632601971]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch_mode = 5
-
-[node name="ItemSlot2" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=2042013771]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot2" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=495728801 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot2" unique_id=1703667244]
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot2" unique_id=503209917]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot3" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=254334212]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot3" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=177500999 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot3" unique_id=1494332449]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot3" unique_id=137759778]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot4" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1815643848]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot4" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=288598594 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot4" unique_id=618782666]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot4" unique_id=436041111]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot5" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=2100146804]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot5" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=682469258 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot5" unique_id=559175852]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot5" unique_id=972455072]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot6" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=235568798]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot6" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=395099063 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot6" unique_id=1781235456]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot6" unique_id=77725778]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot7" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1795239532]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot7" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1060416963 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot7" unique_id=1214909427]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot7" unique_id=1120282759]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot8" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1886891971]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot8" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=1515906675 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot8" unique_id=1630731146]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot8" unique_id=1605483466]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ItemSlot9" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1789558148]
-custom_minimum_size = Vector2(100, 100)
+[node name="ItemSlot9" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemsGrid" unique_id=370349495 instance=ExtResource("4_t5bre")]
 layout_mode = 2
-texture = ExtResource("4_ngbl7")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="SelectOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot9" unique_id=731254190]
-visible = false
-custom_minimum_size = Vector2(100, 110)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -12.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_8wyaw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/GridContainer/ItemSlot9" unique_id=1934733748]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -38.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "10"
-label_settings = SubResource("LabelSettings_34amj")
-horizontal_alignment = 2
-vertical_alignment = 2
 
 [node name="Divider" type="ColorRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer" unique_id=1338051877]
 custom_minimum_size = Vector2(4, 420)
@@ -558,6 +196,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2/HBoxContainer" unique_id=1923438387]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -566,6 +205,7 @@ label_settings = SubResource("LabelSettings_3avjn")
 uppercase = true
 
 [node name="AmountLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2/HBoxContainer" unique_id=943314582]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 text = "x10"
@@ -574,6 +214,7 @@ vertical_alignment = 2
 uppercase = true
 
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer2" unique_id=1357766983]
+unique_name_in_owner = true
 custom_maximum_size = Vector2(250, -1)
 layout_mode = 2
 text = "Brunch wolf tbh selfies hoodie jomo craft copper."
@@ -585,6 +226,7 @@ layout_mode = 2
 theme_override_constants/separation = 6
 
 [node name="ButtonPrimary" type="NinePatchRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer" unique_id=295983182]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -608,6 +250,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="ButtonSecondary" type="NinePatchRect" parent="MarginContainer/HBoxContainer/InventoryScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer" unique_id=870912305]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -631,6 +274,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="CostumesScroll" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1896243981]
+unique_name_in_owner = true
 custom_maximum_size = Vector2(920, -1)
 layout_mode = 2
 size_flags_horizontal = 0

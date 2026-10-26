@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c5d8byhbqnra1" path="res://scripts/debug_stats.gd" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://c4xanjeq74cpd" path="res://scripts/pause_node.gd" id="7_tipki"]
 [ext_resource type="Script" uid="uid://b6a7a13ftdbup" path="res://scripts/inventory_node.gd" id="8_85g3d"]
+[ext_resource type="PackedScene" uid="uid://b6fea3qf5x286" path="res://scenes/inventory_ui/inventory_ui.tscn" id="9_85g3d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhrd0"]
 bg_color = Color(0.80784315, 0.16862746, 0.14117648, 1)
@@ -92,3 +93,6 @@ script = ExtResource("7_tipki")
 [node name="InventoryNode" type="Node" parent="." unique_id=1182704168]
 process_mode = 3
 script = ExtResource("8_85g3d")
+
+[node name="Inventory" parent="." unique_id=596564707 instance=ExtResource("9_85g3d")]
+visible = false
