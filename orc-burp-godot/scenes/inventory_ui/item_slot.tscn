@@ -51,6 +51,7 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="ItemTexture" type="TextureRect" parent="." unique_id=1591625464]
+custom_maximum_size = Vector2(40, 40)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -63,6 +64,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 stretch_mode = 5
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

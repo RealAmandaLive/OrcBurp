@@ -25,7 +25,7 @@ func toggle():
 func set_item_data(data):
 	item_data = data
 	amount_label.text = "%d" % item_data.amount
-	#item_texture_rect.texture = data.texture
+	item_texture_rect.texture = data.texture
 
 
 func _on_gui_input(event: InputEvent) -> void:

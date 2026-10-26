@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://jdm4oxt1he5x"]
+
+[ext_resource type="Script" uid="uid://c2nnwjt0cg7ok" path="res://scripts/item_db.gd" id="1_7t4ug"]
+[ext_resource type="Script" uid="uid://d34t1wwbfowtv" path="res://resources/ItemData.gd" id="2_j3cp2"]
+[ext_resource type="Resource" uid="uid://b5hv60akxici8" path="res://resources/items/key.tres" id="3_qby4j"]
+[ext_resource type="Resource" uid="uid://d074ed0tow40f" path="res://resources/items/potion.tres" id="4_0sgfb"]
+
+[node name="ItemDb" type="Node" unique_id=1928764216]
+script = ExtResource("1_7t4ug")
+items = Array[ExtResource("2_j3cp2")]([ExtResource("3_qby4j"), ExtResource("4_0sgfb")])

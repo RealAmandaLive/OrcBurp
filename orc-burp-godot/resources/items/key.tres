@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://b5hv60akxici8"]
+
+[ext_resource type="Script" uid="uid://d34t1wwbfowtv" path="res://resources/ItemData.gd" id="1_7ur50"]
+[ext_resource type="Texture2D" uid="uid://cb5wu7xj2ln44" path="res://assets/Items/key.png" id="2_ykwyx"]
+
+[resource]
+script = ExtResource("1_7ur50")
+id = "key"
+name = "Key"
+description = "A majestic key that looks like it can open a door (or a chest?)"
+texture = ExtResource("2_ykwyx")
+metadata/_custom_type_script = "uid://d34t1wwbfowtv"
