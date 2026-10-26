@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cw3c22e81pyar"]
+
+[ext_resource type="Script" uid="uid://e4l7axhtv480" path="res://scenes/steam_hazard.gd" id="1_8xl08"]
+[ext_resource type="Texture2D" uid="uid://d073f8sgt2iyu" path="res://assets/Environment/steamHazard160px.png" id="1_u5kyp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xl08"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nq2vi"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0mh8"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipyob"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(480, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5bom"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(640, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jgfb"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(800, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ky5a"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(960, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8qcr"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(1120, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv44r"]
+atlas = ExtResource("1_u5kyp")
+region = Rect2(1280, 0, 160, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xl08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nq2vi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0mh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipyob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5bom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jgfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ky5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8qcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv44r")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 4.0
+height = 86.0
+
+[node name="steamHazard" type="Area2D" unique_id=2018447066]
+script = ExtResource("1_8xl08")
+
+[node name="steamHazard" type="AnimatedSprite2D" parent="." unique_id=315045808]
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+autoplay = "default"
+frame_progress = 0.7851095
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708552823]
+position = Vector2(0, 11)
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://ctrkq22vo835m"]
+
+[ext_resource type="Script" uid="uid://doauv0hakv2ve" path="res://scenes/fire_hazard.gd" id="1_htsh3"]
+[ext_resource type="Texture2D" uid="uid://xdh5jsbhpvbs" path="res://assets/Environment/fireHazard160px.png" id="1_sq07j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htsh3"]
+atlas = ExtResource("1_sq07j")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4h3f"]
+atlas = ExtResource("1_sq07j")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug3sw"]
+atlas = ExtResource("1_sq07j")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q8i7"]
+atlas = ExtResource("1_sq07j")
+region = Rect2(480, 0, 160, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_htsh3")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_b4h3f")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_ug3sw")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_5q8i7")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 41.0
+height = 102.0
+
+[node name="fireHazard" type="Area2D" unique_id=2018447066]
+script = ExtResource("1_htsh3")
+
+[node name="FireHazard" type="AnimatedSprite2D" parent="." unique_id=315045808]
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+autoplay = "default"
+frame_progress = 0.8245531
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708552823]
+position = Vector2(0, 21)
+shape = SubResource("CapsuleShape2D_yf5fn")

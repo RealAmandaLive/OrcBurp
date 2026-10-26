@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c85ri8voce3r8" path="res://scenes/apple.tscn" id="5_bo4dx"]
 [ext_resource type="Script" uid="uid://6qg0amtiyqjm" path="res://scripts/level_exit.gd" id="5_hrcei"]
 [ext_resource type="Script" uid="uid://b1v47klesm0x1" path="res://scripts/area-ko-player.gd" id="6_yqkch"]
+[ext_resource type="PackedScene" uid="uid://cw3c22e81pyar" path="res://scenes/steamHazard.tscn" id="7_xa7n4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ep0u"]
 size = Vector2(57, 48)
@@ -57,7 +58,15 @@ position = Vector2(830, 546)
 scale = Vector2(2, 2)
 
 [node name="ghost" parent="Enemies" unique_id=605315991 instance=ExtResource("4_xa7n4")]
+position = Vector2(-203.5, -124.5)
 scale = Vector2(1, 1)
+
+[node name="Hazards" type="Node2D" parent="." unique_id=1505172853]
+position = Vector2(881, 535)
+scale = Vector2(2, 2)
+
+[node name="steamHazard" parent="Hazards" unique_id=2018447066 instance=ExtResource("7_xa7n4")]
+position = Vector2(-35, -32.5)
 
 [node name="Apples" type="Node2D" parent="." unique_id=1166098253]
 
