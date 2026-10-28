@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://c60yffkq7g188"]
 
+[ext_resource type="Texture2D" uid="uid://u7s1sfg2ai0s" path="res://assets/Environment/glow64.png" id="1_jvq43"]
+
 [sub_resource type="Gradient" id="Gradient_xa7n4"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(1, 1, 1, 1)
@@ -28,3 +30,8 @@ texture = SubResource("GradientTexture1D_6ep0u")
 lifetime = 1.2
 fixed_fps = 15
 process_material = SubResource("ParticleProcessMaterial_yxw76")
+
+[node name="glow" type="Sprite2D" parent="." unique_id=485134557]
+modulate = Color(1, 1, 0.8235294, 0.5647059)
+scale = Vector2(2, 2)
+texture = ExtResource("1_jvq43")
