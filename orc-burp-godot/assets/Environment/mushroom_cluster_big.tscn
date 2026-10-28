@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://btgtlq828wo4m"]
+
+[ext_resource type="Texture2D" uid="uid://bolypwmgr8yhq" path="res://assets/Environment/mushroom-big.png" id="1_bytlm"]
+[ext_resource type="Texture2D" uid="uid://cq7ibkuxcvjyo" path="res://assets/Environment/mushroom-small.png" id="2_0vp2y"]
+
+[node name="mushroom-cluster-big" type="Node2D" unique_id=1815278579]
+
+[node name="MushroomBig" type="Sprite2D" parent="." unique_id=1430404292]
+position = Vector2(6, -16)
+scale = Vector2(2, 2)
+texture = ExtResource("1_bytlm")
+
+[node name="MushroomSmall2" type="Sprite2D" parent="." unique_id=1874922134]
+position = Vector2(18, -6)
+scale = Vector2(-2, 2)
+texture = ExtResource("2_0vp2y")
+
+[node name="MushroomBig2" type="Sprite2D" parent="." unique_id=1093470972]
+position = Vector2(-20, -16)
+scale = Vector2(-2, 2)
+texture = ExtResource("1_bytlm")
+
+[node name="MushroomSmall3" type="Sprite2D" parent="." unique_id=1390677780]
+position = Vector2(-8, -8)
+scale = Vector2(2, 2)
+texture = ExtResource("2_0vp2y")
+
+[node name="MushroomSmall" type="Sprite2D" parent="." unique_id=1515248789]
+position = Vector2(2, -4)
+scale = Vector2(2, 2)
+texture = ExtResource("2_0vp2y")
