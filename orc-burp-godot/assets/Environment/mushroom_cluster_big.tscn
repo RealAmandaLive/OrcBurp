@@ -11,7 +11,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_bytlm")
 
 [node name="MushroomSmall2" type="Sprite2D" parent="." unique_id=1874922134]
-position = Vector2(24, -6)
+position = Vector2(18, -6)
 scale = Vector2(-2, 2)
 texture = ExtResource("2_0vp2y")
 
@@ -21,7 +21,7 @@ scale = Vector2(-2, 2)
 texture = ExtResource("1_bytlm")
 
 [node name="MushroomSmall3" type="Sprite2D" parent="." unique_id=1390677780]
-position = Vector2(-9, -11)
+position = Vector2(-8, -8)
 scale = Vector2(2, 2)
 texture = ExtResource("2_0vp2y")
 
