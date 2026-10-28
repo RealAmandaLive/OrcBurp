@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c60yffkq7g188"]
 
 [ext_resource type="Texture2D" uid="uid://u7s1sfg2ai0s" path="res://assets/Environment/glow64.png" id="1_jvq43"]
+[ext_resource type="Script" uid="uid://bl5cmwn1qxpwi" path="res://scripts/flicker-alpha.gd" id="2_q43t1"]
 
 [sub_resource type="Gradient" id="Gradient_xa7n4"]
 offsets = PackedFloat32Array(0)
@@ -35,3 +36,4 @@ process_material = SubResource("ParticleProcessMaterial_yxw76")
 modulate = Color(1, 1, 0.8235294, 0.5647059)
 scale = Vector2(2, 2)
 texture = ExtResource("1_jvq43")
+script = ExtResource("2_q43t1")
