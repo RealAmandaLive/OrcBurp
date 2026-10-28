@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b1qx67dar5t4v" path="res://assets/Environment/spinning_hazard.tscn" id="11_u3awl"]
 [ext_resource type="PackedScene" uid="uid://cw3c22e81pyar" path="res://scenes/steamHazard.tscn" id="12_f31uk"]
 [ext_resource type="PackedScene" uid="uid://btgtlq828wo4m" path="res://assets/Environment/mushroom_cluster_big.tscn" id="13_f31uk"]
+[ext_resource type="PackedScene" uid="uid://dw0bd77g064wy" path="res://assets/Environment/window_light_shaft.tscn" id="14_gnai3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
@@ -102,3 +103,17 @@ position = Vector2(947, 589)
 
 [node name="mushroom-cluster-big" parent="." unique_id=1815278579 instance=ExtResource("13_f31uk")]
 position = Vector2(471, 516)
+
+[node name="window light shafts" type="Node2D" parent="." unique_id=463019620]
+
+[node name="window-light-shaft" parent="window light shafts" unique_id=1434473305 instance=ExtResource("14_gnai3")]
+position = Vector2(297, 470)
+
+[node name="window-light-shaft2" parent="window light shafts" unique_id=565237629 instance=ExtResource("14_gnai3")]
+position = Vector2(169, 470)
+
+[node name="window-light-shaft3" parent="window light shafts" unique_id=878579065 instance=ExtResource("14_gnai3")]
+position = Vector2(937, 470)
+
+[node name="window-light-shaft4" parent="window light shafts" unique_id=1716078657 instance=ExtResource("14_gnai3")]
+position = Vector2(1065, 470)

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dw0bd77g064wy"]
+
+[ext_resource type="Texture2D" uid="uid://cmxmm1he4ql2i" path="res://assets/Environment/window-light-shaft.png" id="1_snisf"]
+
+[node name="window-light-shaft" type="Node2D" unique_id=1434473305]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=200407956]
+modulate = Color(1, 1, 1, 0.3137255)
+position = Vector2(0, 72)
+scale = Vector2(4, 4)
+texture = ExtResource("1_snisf")
