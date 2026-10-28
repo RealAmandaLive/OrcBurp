@@ -38,6 +38,41 @@ func _ready() -> void:
 	await load_level(first_level, true)
 
 
+#--------------
+# Save/load game
+#--------------
+
+const SAVE_FILE_PATH = "user://saved_game.tres"
+
+func has_saved_game() -> bool:
+	return ResourceLoader.exists(SAVE_FILE_PATH)
+
+func save_game() -> void:
+	p("Saving game")
+	ResourceSaver.save(data, SAVE_FILE_PATH)
+
+
+func load_game() -> void:
+	var new_data: GameData = ResourceLoader.load(SAVE_FILE_PATH)
+	# TODO: this isn't really safe if we start nesting levels, which someone will probably do eventually
+	var level_file: String = "res://scenes/%s.tscn" % [new_data.levelName]
+	for c in data.changed.get_connections():
+		new_data.changed.connect(c["callable"])
+	for c in data.health_changed.get_connections():
+		new_data.health_changed.connect(c["callable"])
+	data = new_data
+	load_level(level_file, false)
+	data.changed.emit()
+	data.health_changed.emit(data.playerHealth)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_pressed() and !event.is_echo() and event is InputEventKey and event.keycode == KEY_1:
+		save_game()
+	if event.is_pressed() and !event.is_echo() and event is InputEventKey and event.keycode == KEY_2:
+		p("Loading game")
+		load_game()
+
 #--------
 # LEVEL MANAGE
 #-------------

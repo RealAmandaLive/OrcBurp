@@ -6,7 +6,7 @@ signal health_changed(new_health: int)
 const STARTING_HEALTH = 10
 const MAX_HEALTH = 10
 
-var playerHealth: int = STARTING_HEALTH : 
+@export var playerHealth: int = STARTING_HEALTH : 
 	set(v):
 		playerHealth = clampi(v, 0, MAX_HEALTH)
 		emit_changed()
@@ -16,25 +16,25 @@ var applesCollected: int = 0
 
 # The key of the dictionary is the levelName
 # The value is a list of item paths that have already been collected
-var levelItems: Dictionary[String, Array] = {}
+@export var levelItems: Dictionary[String, Array] = {}
 # Key=levelName, Value=has the player collected the key?
-var levelKeys: Dictionary[String, bool] = {}
+@export var levelKeys: Dictionary[String, bool] = {}
 
-var levelName: String
+@export var levelName: String
 
 ## fun stats and counters we can optionally just ignore
 ## todo: persist in game state / use for high scores?
-var jumpCount: int = 0
-var doubleJumpCount: int = 0
-var burpCount: int = 0
-var tootCount: int = 0
-var drinkCount: int = 0
-var chestCount: int = 0
-var goldCount: int = 0
-var gemCount: int = 0
-var deathCount: int = 0
-var trapCount: int = 0
-var killCount: int = 0
+@export var jumpCount: int = 0
+@export var doubleJumpCount: int = 0
+@export var burpCount: int = 0
+@export var tootCount: int = 0
+@export var drinkCount: int = 0
+@export var chestCount: int = 0
+@export var goldCount: int = 0
+@export var gemCount: int = 0
+@export var deathCount: int = 0
+@export var trapCount: int = 0
+@export var killCount: int = 0
 
 # use this to increment counters and things
 # it will automatically emit the changed event, which will let
