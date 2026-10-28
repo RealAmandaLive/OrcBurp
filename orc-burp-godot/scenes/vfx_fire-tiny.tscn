@@ -34,6 +34,7 @@ process_material = SubResource("ParticleProcessMaterial_yxw76")
 
 [node name="glow" type="Sprite2D" parent="." unique_id=485134557]
 modulate = Color(1, 1, 0.8235294, 0.5647059)
+position = Vector2(-1, 0)
 scale = Vector2(2, 2)
 texture = ExtResource("1_jvq43")
 script = ExtResource("2_q43t1")
