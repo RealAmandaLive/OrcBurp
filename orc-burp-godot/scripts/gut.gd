@@ -6,8 +6,8 @@ signal died
 enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING, TOOTING, BURPING}
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -850.0
-const CLIMBING_SPEED = -300
+const JUMP_VELOCITY = -650.0
+const CLIMBING_SPEED = -400
 const DESCENDING_SPEED = 400
 
 const BURP_CLOUD = preload("uid://pk1n1jjrqdji")

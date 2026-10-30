@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cwxjo1h6jo177"]
+
+[ext_resource type="FontFile" uid="uid://ca8my7a8fa3tx" path="res://assets/Fonts/Dongle-Regular.ttf" id="1_o5w3v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font = ExtResource("1_o5w3v")
+font_size = 59
+
+[node name="controlsHUD" type="Control" unique_id=1941250957]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 19.0
+offset_top = 26.0
+offset_right = 59.0
+offset_bottom = 66.0
+scale = Vector2(0.5, 0.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1409799175]
+layout_mode = 0
+offset_left = -11.0
+offset_top = -42.0
+offset_right = 181.0
+offset_bottom = 318.0
+theme_override_constants/separation = -25
+
+[node name="burp" type="Label" parent="VBoxContainer" unique_id=391110794]
+layout_mode = 2
+text = "Burp: shift"
+label_settings = SubResource("LabelSettings_g4v7s")
+
+[node name="toot" type="Label" parent="VBoxContainer" unique_id=1492647171]
+layout_mode = 2
+text = "Toot: ctrl"
+label_settings = SubResource("LabelSettings_g4v7s")
+
+[node name="throw" type="Label" parent="VBoxContainer" unique_id=41777733]
+layout_mode = 2
+text = "Throw: G"
+label_settings = SubResource("LabelSettings_g4v7s")
+
+[node name="inventory" type="Label" parent="VBoxContainer" unique_id=1904572153]
+layout_mode = 2
+text = "Inventory: I"
+label_settings = SubResource("LabelSettings_g4v7s")

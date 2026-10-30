@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dfs2rbm7i8mfr"]
+
+[ext_resource type="Script" uid="uid://cjglre46aogfi" path="res://scripts/trap.gd" id="1_7b3c8"]
+[ext_resource type="Texture2D" uid="uid://dde3brad2vns3" path="res://assets/Items/basketTrap.png" id="2_7b3c8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_te5vy"]
+radius = 13.999712
+height = 49.98621
+
+[node name="BasketTrap" type="Area2D" unique_id=1861611448 node_paths=PackedStringArray("sprite")]
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+script = ExtResource("1_7b3c8")
+sprite = NodePath("Sprite2D")
+number_of_sprite_frames = 4
+offset_when_stuck_on_head = Vector2(0, -32)
+metadata/_custom_type_script = "uid://cjglre46aogfi"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=443275204]
+scale = Vector2(2, 2)
+texture = ExtResource("2_7b3c8")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2064779947]
+position = Vector2(0, 17)
+rotation = 1.577183
+shape = SubResource("CapsuleShape2D_te5vy")
