@@ -43,14 +43,18 @@ animations = [{
 radius = 41.0
 height = 102.0
 
-[node name="fireHazard" type="Area2D" unique_id=2018447066]
-script = ExtResource("1_htsh3")
+[node name="fireHazard" type="Node2D" unique_id=516825501]
 
 [node name="FireHazard" type="AnimatedSprite2D" parent="." unique_id=315045808]
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 autoplay = "default"
 frame_progress = 0.8245531
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708552823]
+[node name="hazardArea" type="Area2D" parent="FireHazard" unique_id=2018447066]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_htsh3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireHazard/hazardArea" unique_id=708552823]
 position = Vector2(0, 21)
 shape = SubResource("CapsuleShape2D_yf5fn")

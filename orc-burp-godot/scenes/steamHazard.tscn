@@ -78,16 +78,20 @@ animations = [{
 radius = 4.0
 height = 86.0
 
-[node name="steamHazard" type="Area2D" unique_id=2018447066]
-script = ExtResource("1_8xl08")
+[node name="steamHazard" type="Node2D" unique_id=195360368]
 
-[node name="steamHazard" type="AnimatedSprite2D" parent="." unique_id=315045808]
+[node name="steamCloud" type="AnimatedSprite2D" parent="." unique_id=315045808]
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 autoplay = "default"
 frame_progress = 0.7851095
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708552823]
+[node name="hazardArea" type="Area2D" parent="steamCloud" unique_id=2018447066]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_8xl08")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="steamCloud/hazardArea" unique_id=708552823]
 position = Vector2(0, 11)
 shape = SubResource("CapsuleShape2D_yf5fn")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="steamCloud/hazardArea" to="steamCloud/hazardArea" method="_on_body_entered"]

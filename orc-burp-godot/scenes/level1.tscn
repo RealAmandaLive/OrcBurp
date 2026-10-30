@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cw6ck1obb3s12" path="res://assets/Environment/swinging_hazard_long.tscn" id="9_conm7"]
 [ext_resource type="PackedScene" uid="uid://behk4qgqnf035" path="res://assets/Environment/swinging_hazard_short.tscn" id="10_d3jkd"]
 [ext_resource type="PackedScene" uid="uid://b1qx67dar5t4v" path="res://assets/Environment/spinning_hazard.tscn" id="11_u3awl"]
-[ext_resource type="PackedScene" uid="uid://cw3c22e81pyar" path="res://scenes/steamHazard.tscn" id="12_f31uk"]
+[ext_resource type="PackedScene" uid="uid://ctrkq22vo835m" path="res://scenes/fireHazard.tscn" id="12_gnai3"]
 [ext_resource type="PackedScene" uid="uid://btgtlq828wo4m" path="res://assets/Environment/mushroom_cluster_big.tscn" id="13_f31uk"]
 [ext_resource type="PackedScene" uid="uid://dw0bd77g064wy" path="res://assets/Environment/window_light_shaft.tscn" id="14_gnai3"]
 
@@ -98,8 +98,8 @@ position = Vector2(467, 127)
 [node name="spinning_hazard" parent="." unique_id=988105865 instance=ExtResource("11_u3awl")]
 position = Vector2(370, 123)
 
-[node name="steamHazard" parent="." unique_id=2018447066 instance=ExtResource("12_f31uk")]
-position = Vector2(947, 589)
+[node name="fireHazard" parent="." unique_id=516825501 instance=ExtResource("12_gnai3")]
+position = Vector2(953, 576)
 
 [node name="mushroom-cluster-big" parent="." unique_id=1815278579 instance=ExtResource("13_f31uk")]
 position = Vector2(471, 516)

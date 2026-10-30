@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://6qg0amtiyqjm" path="res://scripts/level_exit.gd" id="5_hrcei"]
 [ext_resource type="Script" uid="uid://b1v47klesm0x1" path="res://scripts/area-ko-player.gd" id="6_yqkch"]
 [ext_resource type="PackedScene" uid="uid://cw3c22e81pyar" path="res://scenes/steamHazard.tscn" id="7_xa7n4"]
+[ext_resource type="PackedScene" uid="uid://ckoodxpdp0v3e" path="res://scenes/falling_platform.tscn" id="10_bo4dx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ep0u"]
 size = Vector2(57, 48)
@@ -90,5 +91,23 @@ metadata/_custom_type_script = "uid://b1v47klesm0x1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallBoundary" unique_id=271377038]
 shape = SubResource("WorldBoundaryShape2D_6ep0u")
+
+[node name="fallingPlatform" parent="." unique_id=662641348 instance=ExtResource("10_bo4dx")]
+position = Vector2(404, 585)
+
+[node name="fallingPlatform2" parent="." unique_id=1020651585 instance=ExtResource("10_bo4dx")]
+position = Vector2(436, 585)
+
+[node name="fallingPlatform3" parent="." unique_id=375589730 instance=ExtResource("10_bo4dx")]
+position = Vector2(468, 585)
+
+[node name="fallingPlatform4" parent="." unique_id=65945589 instance=ExtResource("10_bo4dx")]
+position = Vector2(500, 585)
+
+[node name="fallingPlatform5" parent="." unique_id=1819600264 instance=ExtResource("10_bo4dx")]
+position = Vector2(532, 585)
+
+[node name="fallingPlatform6" parent="." unique_id=1982615442 instance=ExtResource("10_bo4dx")]
+position = Vector2(565, 585)
 
 [connection signal="body_entered" from="Enemies/ghost" to="Gut" method="_on_ghost_body_entered"]
