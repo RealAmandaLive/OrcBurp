@@ -1,152 +1,166 @@
 [gd_scene format=3 uid="uid://ccu50fhrnc0j8"]
 
+[ext_resource type="Script" uid="uid://dvkb104ariipx" path="res://assets/Particles/delete_after_delay.gd" id="1_4feuc"]
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="1_5y8kr"]
 [ext_resource type="Script" uid="uid://kqp3ngfs1nby" path="res://assets/Particles/fling.gd" id="1_tp2vf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdu0b"]
-size = Vector2(32, 32)
+size = Vector2(32, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51wqt"]
+size = Vector2(12, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtfpr"]
+size = Vector2(12, 10)
 
 [node name="exploding-barrel" type="Node2D" unique_id=13198126]
+script = ExtResource("1_4feuc")
 
-[node name="barrel-rigidbody" type="RigidBody2D" parent="." unique_id=740475398]
+[node name="top-lid" type="RigidBody2D" parent="." unique_id=1112674749]
+collision_layer = 32768
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody" unique_id=1063967201]
+[node name="barrel-sprite" type="Sprite2D" parent="top-lid" unique_id=878952594]
+position = Vector2(0, -13)
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(224, 192, 32, 6)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody" unique_id=1993126864]
+[node name="barrel-collider" type="CollisionShape2D" parent="top-lid" unique_id=484733131]
+position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_kdu0b")
 
-[node name="barrel-rigidbody2" type="RigidBody2D" parent="." unique_id=1782424429]
+[node name="bottom-lid" type="RigidBody2D" parent="." unique_id=673359194]
+position = Vector2(0, 2)
+rotation = 3.1415927
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody2" unique_id=1720648949]
+[node name="barrel-sprite" type="Sprite2D" parent="bottom-lid" unique_id=545193554]
+position = Vector2(0, -13)
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(224, 192, 32, 6)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody2" unique_id=1851124731]
+[node name="barrel-collider" type="CollisionShape2D" parent="bottom-lid" unique_id=1406267427]
+position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_kdu0b")
 
-[node name="barrel-rigidbody3" type="RigidBody2D" parent="." unique_id=855073776]
+[node name="wood-plank" type="RigidBody2D" parent="." unique_id=1951667943]
+position = Vector2(-10, 1)
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody3" unique_id=280128931]
+[node name="barrel-sprite" type="Sprite2D" parent="wood-plank" unique_id=915291995]
+scale = Vector2(1, 2.75)
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(234, 205, 12, 8)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody3" unique_id=46720249]
-shape = SubResource("RectangleShape2D_kdu0b")
+[node name="barrel-collider" type="CollisionShape2D" parent="wood-plank" unique_id=1367498623]
+shape = SubResource("RectangleShape2D_51wqt")
 
-[node name="barrel-rigidbody4" type="RigidBody2D" parent="." unique_id=1902823368]
+[node name="wood-plank2" type="RigidBody2D" parent="." unique_id=1412584557]
+position = Vector2(0, 1)
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody4" unique_id=1447910378]
+[node name="barrel-sprite" type="Sprite2D" parent="wood-plank2" unique_id=634271966]
+scale = Vector2(1, 2.75)
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(234, 205, 12, 8)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody4" unique_id=1845914526]
-shape = SubResource("RectangleShape2D_kdu0b")
+[node name="barrel-collider" type="CollisionShape2D" parent="wood-plank2" unique_id=953748626]
+shape = SubResource("RectangleShape2D_51wqt")
 
-[node name="barrel-rigidbody5" type="RigidBody2D" parent="." unique_id=2085543630]
+[node name="wood-plank3" type="RigidBody2D" parent="." unique_id=956548714]
+position = Vector2(10, 1)
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody5" unique_id=2018067405]
+[node name="barrel-sprite" type="Sprite2D" parent="wood-plank3" unique_id=348948644]
+scale = Vector2(1, 2.75)
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(234, 205, 12, 8)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody5" unique_id=1464851729]
-shape = SubResource("RectangleShape2D_kdu0b")
+[node name="barrel-collider" type="CollisionShape2D" parent="wood-plank3" unique_id=1695226732]
+shape = SubResource("RectangleShape2D_51wqt")
 
-[node name="barrel-rigidbody6" type="RigidBody2D" parent="." unique_id=125158182]
+[node name="upper-ring" type="RigidBody2D" parent="." unique_id=1782424429]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody6" unique_id=1078440367]
+[node name="barrel-sprite" type="Sprite2D" parent="upper-ring" unique_id=1720648949]
+position = Vector2(0, -5)
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(224, 200, 32, 6)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody6" unique_id=822166841]
+[node name="barrel-collider" type="CollisionShape2D" parent="upper-ring" unique_id=1851124731]
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_kdu0b")
 
-[node name="barrel-rigidbody7" type="RigidBody2D" parent="." unique_id=209732370]
+[node name="lower-ring" type="RigidBody2D" parent="." unique_id=855073776]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody7" unique_id=1726713935]
+[node name="barrel-sprite" type="Sprite2D" parent="lower-ring" unique_id=280128931]
+position = Vector2(0, 7)
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(224, 212, 32, 6)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody7" unique_id=1254673757]
+[node name="barrel-collider" type="CollisionShape2D" parent="lower-ring" unique_id=46720249]
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_kdu0b")
 
-[node name="barrel-rigidbody8" type="RigidBody2D" parent="." unique_id=1051819438]
+[node name="wood-block" type="RigidBody2D" parent="." unique_id=2085543630]
+position = Vector2(0, 1)
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody8" unique_id=1878384978]
+[node name="barrel-sprite" type="Sprite2D" parent="wood-block" unique_id=2018067405]
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(234, 204, 12, 10)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody8" unique_id=1069782300]
-shape = SubResource("RectangleShape2D_kdu0b")
+[node name="barrel-collider" type="CollisionShape2D" parent="wood-block" unique_id=1464851729]
+shape = SubResource("RectangleShape2D_qtfpr")
 
-[node name="barrel-rigidbody9" type="RigidBody2D" parent="." unique_id=1292214565]
+[node name="wood-block2" type="RigidBody2D" parent="." unique_id=963862194]
+position = Vector2(10, 1)
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody9" unique_id=1059437229]
+[node name="barrel-sprite" type="Sprite2D" parent="wood-block2" unique_id=116833445]
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(234, 204, 12, 10)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody9" unique_id=1949688076]
-shape = SubResource("RectangleShape2D_kdu0b")
+[node name="barrel-collider" type="CollisionShape2D" parent="wood-block2" unique_id=1363282176]
+shape = SubResource("RectangleShape2D_qtfpr")
 
-[node name="barrel-rigidbody10" type="RigidBody2D" parent="." unique_id=1264687017]
+[node name="wood-block3" type="RigidBody2D" parent="." unique_id=730309201]
+position = Vector2(-10, 1)
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_tp2vf")
 
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody10" unique_id=583399590]
+[node name="barrel-sprite" type="Sprite2D" parent="wood-block3" unique_id=1790858616]
 texture = ExtResource("1_5y8kr")
 region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
+region_rect = Rect2(234, 204, 12, 10)
 
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody10" unique_id=1623217842]
-shape = SubResource("RectangleShape2D_kdu0b")
-
-[node name="barrel-rigidbody11" type="RigidBody2D" parent="." unique_id=1508408361]
-script = ExtResource("1_tp2vf")
-
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody11" unique_id=503788445]
-texture = ExtResource("1_5y8kr")
-region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
-
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody11" unique_id=1711898008]
-shape = SubResource("RectangleShape2D_kdu0b")
-
-[node name="barrel-rigidbody12" type="RigidBody2D" parent="." unique_id=737911921]
-script = ExtResource("1_tp2vf")
-
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody12" unique_id=1581246641]
-texture = ExtResource("1_5y8kr")
-region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
-
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody12" unique_id=1494569573]
-shape = SubResource("RectangleShape2D_kdu0b")
-
-[node name="barrel-rigidbody13" type="RigidBody2D" parent="." unique_id=1112674749]
-script = ExtResource("1_tp2vf")
-
-[node name="barrel-sprite" type="Sprite2D" parent="barrel-rigidbody13" unique_id=878952594]
-texture = ExtResource("1_5y8kr")
-region_enabled = true
-region_rect = Rect2(224, 192, 32, 32)
-
-[node name="barrel-collider" type="CollisionShape2D" parent="barrel-rigidbody13" unique_id=484733131]
-shape = SubResource("RectangleShape2D_kdu0b")
+[node name="barrel-collider" type="CollisionShape2D" parent="wood-block3" unique_id=1602327839]
+shape = SubResource("RectangleShape2D_qtfpr")

@@ -11,6 +11,7 @@ const CLIMBING_SPEED = -300
 const DESCENDING_SPEED = 400
 
 const BURP_CLOUD = preload("uid://pk1n1jjrqdji")
+var exploding_barrel_scene = preload("res://assets/Particles/exploding_barrel.tscn")
 
 @export var speed_boost := 200
 
@@ -291,7 +292,27 @@ func _on_toot_timer_timeout() -> void:
 	can_toot = true
 	current_speed_boost = 0
 
-
+# not super happy with this code - might be able to simplify
+func burp_hit_check(direction: float) -> void:
+	var tiles = get_node_or_null("/root/main/levelRoot/TileMapLayer")
+	if !tiles:
+		print("error - no tilemap found by burp!")
+		return
+	var checkHere = Vector2(global_position.x+(direction * 40),global_position.y)
+	var mapXY = tiles.local_to_map(tiles.to_local(checkHere))
+	var id: int = tiles.get_cell_source_id(mapXY)
+	var tileXY = tiles.get_cell_atlas_coords(mapXY)
+	if id == -1:
+		print("burp hit nothing at mapXY "+str(mapXY.x)+","+str(mapXY.y))
+	else:
+		print("burp hit tile "+str(tileXY.x)+","+str(tileXY.y)+ " at mapXY "+str(mapXY.x)+","+str(mapXY.y))
+		if tileXY.x==7 and tileXY.y==6: # BARREL!
+			print("burp hit a barrel!!!")
+			tiles.set_cell(mapXY,-1) # clear tile
+			var explosion = exploding_barrel_scene.instantiate()
+			explosion.position = tiles.to_global(tiles.to_local(mapXY))
+			add_child(explosion)
+	
 func burp(direction: float) -> void:
 	## todo: implement gameplay as above
 	can_burp = false
@@ -306,7 +327,7 @@ func burp(direction: float) -> void:
 	if signf(direction) >= 0.0:
 		burp_instance.rotation = PI
 		burp_instance.direction = 1.0
-
+	burp_hit_check(direction)
 
 func _on_burp_timer_timeout() -> void:
 	can_burp = true
