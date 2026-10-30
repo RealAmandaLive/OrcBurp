@@ -28,7 +28,6 @@ var can_burp = true
 var current_speed_boost := 0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var death_sound: AudioStreamPlayer2D = $DeathSound
 @onready var landingFX: CPUParticles2D = $LandingFX
 @onready var landingSound: AudioStreamPlayer2D = $LandingSound
 @onready var jumpingSound: AudioStreamPlayer2D = $JumpingSound
@@ -261,7 +260,7 @@ func find_throw_target(distance: float) -> Vector2:
 func die() -> void:
 	if not alive: return
 	Main.data.inc("deathCount")
-	death_sound.play()
+	AudioManager.play_death_sound("fall")
 	animated_sprite_2d.animation = "hitFront"
 	alive = false
 	died.emit()

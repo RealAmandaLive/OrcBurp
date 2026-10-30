@@ -19,6 +19,7 @@ config/icon="uid://cwblmm1mbp4n3"
 
 ItemDb="*uid://jdm4oxt1he5x"
 CostumeDb="*uid://dcyjc17774ryp"
+AudioManager="*uid://qbjaxqn4ns0k"
 
 [display]
 
