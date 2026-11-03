@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://dfsv82ujl0obr"]
 
+[ext_resource type="PackedScene" uid="uid://dq4t3g6lvhx13" path="res://assets/Environment/infinite_parallax_background.tscn" id="1_76toy"]
 [ext_resource type="Texture2D" uid="uid://cqcooocdmyuv8" path="res://assets/Environment/plain_grey.png" id="1_yqkch"]
 [ext_resource type="TileSet" uid="uid://d0shdn727s4lt" path="res://assets/tile_set.tres" id="2_6ep0u"]
 [ext_resource type="PackedScene" uid="uid://dt05y8puojmjs" path="res://scenes/vfx_fire-with-smoke.tscn" id="3_6ep0u"]
@@ -17,6 +18,8 @@ size = Vector2(57, 48)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6ep0u"]
 
 [node name="levelRoot" type="Node2D" unique_id=867802413]
+
+[node name="InfiniteParallaxBackground" parent="." unique_id=410498437 instance=ExtResource("1_76toy")]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2067434519]
 offset_right = 1280.0

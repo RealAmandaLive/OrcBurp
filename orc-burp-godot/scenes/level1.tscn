@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://beo12qtqt2ps2"]
 
+[ext_resource type="PackedScene" uid="uid://dq4t3g6lvhx13" path="res://assets/Environment/infinite_parallax_background.tscn" id="1_i8kv5"]
 [ext_resource type="Texture2D" uid="uid://cqcooocdmyuv8" path="res://assets/Environment/plain_grey.png" id="1_m7ahb"]
 [ext_resource type="TileSet" uid="uid://d0shdn727s4lt" path="res://assets/tile_set.tres" id="2_6sh32"]
 [ext_resource type="PackedScene" uid="uid://c60yffkq7g188" path="res://scenes/vfx_fire-tiny.tscn" id="3_6sh32"]
@@ -23,6 +24,8 @@ size = Vector2(62, 421)
 
 [node name="levelRoot" type="Node2D" unique_id=867802413]
 metadata/_edit_vertical_guides_ = [640.0]
+
+[node name="InfiniteParallaxBackground" parent="." unique_id=410498437 instance=ExtResource("1_i8kv5")]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2067434519]
 offset_right = 1280.0

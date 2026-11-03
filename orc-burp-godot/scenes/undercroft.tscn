@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://dwjcj14sdhpe2"]
 
+[ext_resource type="PackedScene" uid="uid://dq4t3g6lvhx13" path="res://assets/Environment/infinite_parallax_background.tscn" id="1_5d5r4"]
 [ext_resource type="Texture2D" uid="uid://c0vythxiyw4oh" path="res://assets/Environment/UndercroftTilemap32x32.png" id="1_08ffw"]
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="2_q21pe"]
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="3_ydwlj"]
@@ -505,6 +506,8 @@ corner_radius_bottom_left = 5
 shadow_size = 5
 
 [node name="levelRoot" type="Node2D" unique_id=322404555]
+
+[node name="InfiniteParallaxBackground" parent="." unique_id=410498437 instance=ExtResource("1_5d5r4")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=686981279]
 position = Vector2(5, 119)

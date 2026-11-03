@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dq4t3g6lvhx13"]
+
+[ext_resource type="Texture2D" uid="uid://4adjtsbyphnc" path="res://assets/Environment/darkBgBrick.png" id="1_k21tu"]
+
+[node name="InfiniteParallaxBackground" type="Parallax2D" unique_id=410498437]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(192, 192)
+repeat_times = 64
+
+[node name="DarkBGBrick" type="Sprite2D" parent="." unique_id=1760882438]
+scale = Vector2(2, 2)
+texture = ExtResource("1_k21tu")
+centered = false
