@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dnxgh6v7ecrjd"
-path="res://.godot/imported/lidCloseCeramic1.wav-5c44604a99800edd3da9320489782ecd.sample"
+path="res://.godot/imported/lidCloseCeramic1.wav-26e206554fab5388000c3c4f88a75fc5.sample"
 
 [deps]
 
-source_file="res://assets/Audio/lidCloseCeramic1.wav"
-dest_files=["res://.godot/imported/lidCloseCeramic1.wav-5c44604a99800edd3da9320489782ecd.sample"]
+source_file="res://assets/Audio/SFX/lidCloseCeramic1.wav"
+dest_files=["res://.godot/imported/lidCloseCeramic1.wav-26e206554fab5388000c3c4f88a75fc5.sample"]
 
 [params]
 

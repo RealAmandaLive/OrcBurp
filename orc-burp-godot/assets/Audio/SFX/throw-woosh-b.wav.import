@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://coi27kgmmu0b0"
-path="res://.godot/imported/throw-woosh-b.wav-d90acf18477415ce4c55263cc46eccb4.sample"
+path="res://.godot/imported/throw-woosh-b.wav-c2fdb79d58c7483e0bd71037fc2afac1.sample"
 
 [deps]
 
-source_file="res://assets/Audio/throw-woosh-b.wav"
-dest_files=["res://.godot/imported/throw-woosh-b.wav-d90acf18477415ce4c55263cc46eccb4.sample"]
+source_file="res://assets/Audio/SFX/throw-woosh-b.wav"
+dest_files=["res://.godot/imported/throw-woosh-b.wav-c2fdb79d58c7483e0bd71037fc2afac1.sample"]
 
 [params]
 

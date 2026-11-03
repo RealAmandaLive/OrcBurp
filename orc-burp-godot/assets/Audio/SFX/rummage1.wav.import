@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bsedp821di11o"
-path="res://.godot/imported/rummage1.wav-6cadc47a2c493fb08b63dc31a1fa540f.sample"
+path="res://.godot/imported/rummage1.wav-2ef51a71223f858337d339f9d81b9102.sample"
 
 [deps]
 
-source_file="res://assets/Audio/rummage1.wav"
-dest_files=["res://.godot/imported/rummage1.wav-6cadc47a2c493fb08b63dc31a1fa540f.sample"]
+source_file="res://assets/Audio/SFX/rummage1.wav"
+dest_files=["res://.godot/imported/rummage1.wav-2ef51a71223f858337d339f9d81b9102.sample"]
 
 [params]
 

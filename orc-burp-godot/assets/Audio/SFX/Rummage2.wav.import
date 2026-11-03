@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b2yfdkdslrn3p"
-path="res://.godot/imported/Rummage2.wav-6d16ed81d43bc27fe85cf2fbc149571d.sample"
+path="res://.godot/imported/Rummage2.wav-2796b9f7422b02132627785429193238.sample"
 
 [deps]
 
-source_file="res://assets/Audio/Rummage2.wav"
-dest_files=["res://.godot/imported/Rummage2.wav-6d16ed81d43bc27fe85cf2fbc149571d.sample"]
+source_file="res://assets/Audio/SFX/Rummage2.wav"
+dest_files=["res://.godot/imported/Rummage2.wav-2796b9f7422b02132627785429193238.sample"]
 
 [params]
 

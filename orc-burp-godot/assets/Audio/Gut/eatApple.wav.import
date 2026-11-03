@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b0m06n8adkodc"
-path="res://.godot/imported/eatApple.wav-92a175ea069641102e15a82111cb7708.sample"
+path="res://.godot/imported/eatApple.wav-bb13fb5417395e32c1c7ec11b3e0fc6c.sample"
 
 [deps]
 
-source_file="res://assets/Audio/eatApple.wav"
-dest_files=["res://.godot/imported/eatApple.wav-92a175ea069641102e15a82111cb7708.sample"]
+source_file="res://assets/Audio/Gut/eatApple.wav"
+dest_files=["res://.godot/imported/eatApple.wav-bb13fb5417395e32c1c7ec11b3e0fc6c.sample"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ck417tnqls6mp"
-path="res://.godot/imported/brickNoise2.wav-30dcb25bbb539a6ffcc335ce7c48a9c9.sample"
+path="res://.godot/imported/brickNoise2.wav-8de29c5eed8a4b118579ea67f7081849.sample"
 
 [deps]
 
-source_file="res://assets/Audio/brickNoise2.wav"
-dest_files=["res://.godot/imported/brickNoise2.wav-30dcb25bbb539a6ffcc335ce7c48a9c9.sample"]
+source_file="res://assets/Audio/SFX/brickNoise2.wav"
+dest_files=["res://.godot/imported/brickNoise2.wav-8de29c5eed8a4b118579ea67f7081849.sample"]
 
 [params]
 

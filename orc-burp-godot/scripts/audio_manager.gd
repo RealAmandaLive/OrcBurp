@@ -1,6 +1,6 @@
 extends Node
 
-const FALLING_SOUND = preload("res://assets/Audio/fall_3.wav")
+const FALLING_SOUND = preload("res://assets/Audio/SFX/fall_3.wav")
 
 func play_death_sound(death_cause: String) -> void:
 	if death_cause == "fall":

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://tivsvdy7gorb"
-path="res://.godot/imported/fall_2.wav-2a4c4ce8734bceb38911d3981ad80ead.sample"
+path="res://.godot/imported/fall_2.wav-a442ef21f49132f83590efee4a2f07fd.sample"
 
 [deps]
 
-source_file="res://assets/Audio/fall_2.wav"
-dest_files=["res://.godot/imported/fall_2.wav-2a4c4ce8734bceb38911d3981ad80ead.sample"]
+source_file="res://assets/Audio/SFX/fall_2.wav"
+dest_files=["res://.godot/imported/fall_2.wav-a442ef21f49132f83590efee4a2f07fd.sample"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bof2rqsvbl7ab"
-path="res://.godot/imported/brickDrag1.wav-0fda365014691cb412544364c8c07f82.sample"
+path="res://.godot/imported/brickDrag1.wav-14c7b03976c6ecc0849996cb6b004baf.sample"
 
 [deps]
 
-source_file="res://assets/Audio/brickDrag1.wav"
-dest_files=["res://.godot/imported/brickDrag1.wav-0fda365014691cb412544364c8c07f82.sample"]
+source_file="res://assets/Audio/SFX/brickDrag1.wav"
+dest_files=["res://.godot/imported/brickDrag1.wav-14c7b03976c6ecc0849996cb6b004baf.sample"]
 
 [params]
 
