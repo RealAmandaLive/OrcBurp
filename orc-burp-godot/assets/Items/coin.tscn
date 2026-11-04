@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bqsuibrisleob"]
+
+[ext_resource type="Texture2D" uid="uid://c65oacwf3jgsi" path="res://assets/Items/coin.png" id="1_k5821"]
+[ext_resource type="Script" uid="uid://0q42rdg56qpy" path="res://scripts/coin_spin.gd" id="2_bvmma"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bvmma"]
+radius = 8.0
+
+[node name="coin" type="Node2D" unique_id=510127483]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=212879617]
+collision_layer = 0
+collision_mask = 16
+lock_rotation = true
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=1635969298]
+scale = Vector2(2, 2)
+texture = ExtResource("1_k5821")
+script = ExtResource("2_bvmma")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1103574871]
+rotation = 0.7853982
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("CircleShape2D_bvmma")

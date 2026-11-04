@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://b1v47klesm0x1" path="res://scripts/area-ko-player.gd" id="7_bradm"]
 [ext_resource type="Script" uid="uid://bsq7tbdsyjokd" path="res://scripts/hazard_spawner.gd" id="8_5mhml"]
 [ext_resource type="PackedScene" uid="uid://5ffw8vuki4an" path="res://scenes/chandelier.tscn" id="9_rupth"]
+[ext_resource type="PackedScene" uid="uid://bqsuibrisleob" path="res://assets/Items/coin.tscn" id="11_qewby"]
+[ext_resource type="PackedScene" uid="uid://lj0ngrqbkd4t" path="res://assets/Items/gem.tscn" id="12_bradm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6ep0u"]
 
@@ -76,5 +78,11 @@ position = Vector2(185, 271)
 script = ExtResource("8_5mhml")
 scene_to_spawn = ExtResource("9_rupth")
 metadata/_custom_type_script = "uid://bsq7tbdsyjokd"
+
+[node name="coin" parent="." unique_id=510127483 instance=ExtResource("11_qewby")]
+position = Vector2(76, 567)
+
+[node name="gem" parent="." unique_id=169440988 instance=ExtResource("12_bradm")]
+position = Vector2(132, 556)
 
 [connection signal="hazard_triggered" from="Hazards/HazardTrigger" to="Hazards/HazardSpawner" method="_on_hazard_triggerd"]
