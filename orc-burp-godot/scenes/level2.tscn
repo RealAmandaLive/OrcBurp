@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://6qg0amtiyqjm" path="res://scripts/level_exit.gd" id="5_hrcei"]
 [ext_resource type="Script" uid="uid://b1v47klesm0x1" path="res://scripts/area-ko-player.gd" id="6_yqkch"]
 [ext_resource type="PackedScene" uid="uid://cw3c22e81pyar" path="res://scenes/steamHazard.tscn" id="7_xa7n4"]
+[ext_resource type="AudioStream" uid="uid://dkjpol4llr4eu" path="res://assets/Audio/SFX/ghost-1-1.wav" id="8_8g4ke"]
 [ext_resource type="PackedScene" uid="uid://ckoodxpdp0v3e" path="res://scenes/falling_platform.tscn" id="10_bo4dx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ep0u"]
@@ -64,6 +65,11 @@ scale = Vector2(2, 2)
 [node name="ghost" parent="Enemies" unique_id=605315991 instance=ExtResource("4_xa7n4")]
 position = Vector2(-203.5, -124.5)
 scale = Vector2(1, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Enemies/ghost" unique_id=1339020425]
+stream = ExtResource("8_8g4ke")
+volume_db = -14.093
+autoplay = true
 
 [node name="Hazards" type="Node2D" parent="." unique_id=1505172853]
 position = Vector2(881, 535)
