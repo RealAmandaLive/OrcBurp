@@ -12,13 +12,19 @@ func _input(event):
 			get_tree().paused = true
 			inventory_ui.show()
 	
-	if event.is_action_pressed("ui_accept"):
-		if get_tree().paused:
-			var main: Main = get_parent()
-			main.data.add_item_to_inventory("key", 1)
-			main.data.add_costume_to_collection("top_hat")
-	
-	if event.is_action_pressed("ui_up"):
-		if get_tree().paused:
-			var main: Main = get_parent()
-			main.data.remove_item_from_inventory("key", 1)
+	# -----
+	# for debugging inventory function only
+	# -----
+	#if event.is_action_pressed("ui_accept"):
+		#if get_tree().paused:
+			#var main: Main = get_parent()
+			#main.data.add_item_to_inventory("key", 1)
+			#main.data.add_costume_to_collection("top_hat")
+	#
+	#if event.is_action_pressed("ui_up"):
+		#if get_tree().paused:
+			#var main: Main = get_parent()
+			#main.data.remove_item_from_inventory("key", 1)
+	# ----
+	# end
+	# ---
