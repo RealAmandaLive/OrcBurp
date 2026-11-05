@@ -36,6 +36,10 @@ var applesCollected: int = 0
 @export var trapCount: int = 0
 @export var killCount: int = 0
 
+# Inventory items and costumes data - {item_name: qty}
+@export var inventory_items: Dictionary[String, int] = {}
+@export var costumes_collection: Dictionary[String, int] = {}
+
 # use this to increment counters and things
 # it will automatically emit the changed event, which will let
 # the HUD know it needs to update
@@ -70,3 +74,24 @@ func has_level_key() -> bool:
 
 func record_level_key() -> void:
 	levelKeys[levelName] = true
+
+func add_item_to_inventory(item_name, qty) -> void:
+	if inventory_items.has(item_name):
+		inventory_items[item_name] += qty
+	else:
+		inventory_items[item_name] = qty
+	emit_changed()
+
+func remove_item_from_inventory(item_name, qty) -> void:
+	if not inventory_items.has(item_name): return
+	
+	if inventory_items[item_name]-qty <= 0:
+		inventory_items.erase(item_name)
+	else:
+		inventory_items[item_name] -= qty
+		
+	emit_changed()
+
+func add_costume_to_collection(costume) -> void:
+	costumes_collection[costume] = 1
+	emit_changed()

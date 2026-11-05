@@ -30,6 +30,11 @@ func set_item_data(data):
 		amount_label.text = "%d" % item_data.amount
 	item_texture_rect.texture = data.texture
 
+func clear():
+	item_data = null
+	amount_label.text = ""
+	item_texture_rect.texture = null
+
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

@@ -10,15 +10,14 @@ extends HBoxContainer
 @onready var chara_preview = $Page/MarginContainer/HBoxContainer/CharaPreview
 
 var selected_item : ItemSlot
-
-var costumes = {
-	"top_hat": 1,
-	"wizard_hat": 1,
-	"fez_hat": 1
-}
+var item_slots
 
 func _ready() -> void:
-	var item_slots = item_grid.get_children()
+	item_slots = item_grid.get_children()
+	reset()
+
+func set_items(costumes):
+	clear_items()
 	
 	var keys = costumes.keys()
 	
@@ -32,8 +31,10 @@ func _ready() -> void:
 			"texture": item_data.texture
 		}
 		item_slot.set_item_data(item)
-	
-	reset()
+
+func clear_items():
+	for slot in item_slots:
+		slot.clear()
 
 func fold():
 	$Page.hide()

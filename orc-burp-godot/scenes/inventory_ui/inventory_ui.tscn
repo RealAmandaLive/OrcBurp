@@ -111,7 +111,6 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Page" type="TextureRect" parent="MarginContainer/HBoxContainer/InventoryScroll" unique_id=531908259]
-visible = false
 custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -318,6 +317,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Page" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll" unique_id=12117967]
+visible = false
 custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
 size_flags_horizontal = 0
