@@ -14,7 +14,7 @@ var item_texture : Texture
 var item_data
 
 func _ready() -> void:
-	print(root_parent.has_method("_on_item_slot_selected"))
+	#print(root_parent.has_method("_on_item_slot_selected"))
 	selected.connect(root_parent._on_item_slot_selected)
 
 func toggle():

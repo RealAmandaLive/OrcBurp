@@ -71,9 +71,14 @@ func _physics_process(delta: float) -> void:
 	
 	## JUMPING
 	if Input.is_action_just_pressed("jump") and is_on_floor_now:
-		Main.data.inc("jumpCount")
-		jumpingSound.play()
-		velocity.y = JUMP_VELOCITY
+		if Input.is_action_pressed("descend") and _is_on_one_way_floor():
+			# drop us down below the tile we're standing on if it's one-way and they're pressing down
+			# this lets us drop through stairs or one-way platforms
+			position.y += 32
+		else:
+			Main.data.inc("jumpCount")
+			jumpingSound.play()
+			velocity.y = JUMP_VELOCITY
 	
 	## DOUBLE JUMP
 	if Input.is_action_just_pressed("jump") and not is_on_floor_now and can_double_jump and not climbing:
@@ -138,6 +143,24 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	was_on_floor_last_frame = is_on_floor_now
+
+
+## Some tiles have the "one way collision" bit set on their collision polygon (e.g. stairs)
+## This finds the specific tile we're standing on, and returns true if that bit is set
+func _is_on_one_way_floor() -> bool:
+	if not is_on_floor():
+		return false
+	var last_collision := get_last_slide_collision()
+	if not last_collision:
+		return false
+	if last_collision.get_collider() is not TileMapLayer:
+		return false
+	var body: TileMapLayer = last_collision.get_collider()
+	var map_coords: Vector2i = body.local_to_map(body.to_local(last_collision.get_position()))
+	var tile_data: TileData = body.get_cell_tile_data(map_coords)
+	if not tile_data or tile_data.get_collision_polygons_count(0) == 0:
+		return false
+	return tile_data.is_collision_polygon_one_way(0, 0)
 
 
 func _set_state(state: PlayerStates) -> void:

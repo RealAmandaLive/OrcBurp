@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://c4dvcr37ef1cy" path="res://scripts/gut.gd" id="1_mq6y6"]
 [ext_resource type="PackedScene" uid="uid://bbxk1xg5yi17m" path="res://scenes/gut_sprite.tscn" id="2_u2ds8"]
 [ext_resource type="Texture2D" uid="uid://bpyyhgt1vf7sj" path="res://assets/Particles/dust-cloud.png" id="4_j6fd1"]
-[ext_resource type="AudioStream" uid="uid://cisg4cu7a5uax" path="res://assets/Audio/bump.wav" id="5_j6fd1"]
-[ext_resource type="AudioStream" uid="uid://b0m06n8adkodc" path="res://assets/Audio/eatApple.wav" id="6_kwhhm"]
+[ext_resource type="AudioStream" uid="uid://cisg4cu7a5uax" path="res://assets/Audio/SFX/bump.wav" id="5_j6fd1"]
+[ext_resource type="AudioStream" uid="uid://b0m06n8adkodc" path="res://assets/Audio/Gut/eatApple.wav" id="6_kwhhm"]
 [ext_resource type="AudioStream" uid="uid://dg5h6ipw5v1nl" path="res://assets/Player/orc-sounds/toot-small.wav" id="6_lcva8"]
-[ext_resource type="AudioStream" uid="uid://dqci48bo8ys4x" path="res://assets/Audio/footstep.wav" id="7_uy3vc"]
+[ext_resource type="AudioStream" uid="uid://dqci48bo8ys4x" path="res://assets/Audio/SFX/footstep.wav" id="7_uy3vc"]
 [ext_resource type="AudioStream" uid="uid://ccolqgqc6emw4" path="res://assets/Player/all_toot_sounds.tres" id="8_3ao6n"]
 [ext_resource type="AudioStream" uid="uid://ch3ndpipgbxim" path="res://assets/Player/all_burp_sounds.tres" id="9_4k4mm"]
 
@@ -29,6 +29,8 @@ stream_0/stream = ExtResource("7_uy3vc")
 
 [node name="Gut" type="CharacterBody2D" unique_id=1676850674 groups=["Player"]]
 collision_layer = 2
+floor_max_angle = 1.0471976
+floor_snap_length = 16.0
 script = ExtResource("1_mq6y6")
 
 [node name="AnimatedSprite2D" parent="." unique_id=253259514 instance=ExtResource("2_u2ds8")]
