@@ -15,16 +15,14 @@ func _input(event):
 	# -----
 	# for debugging inventory function only
 	# -----
-	#if event.is_action_pressed("ui_accept"):
-		#if get_tree().paused:
-			#var main: Main = get_parent()
-			#main.data.add_item_to_inventory("key", 1)
-			#main.data.add_costume_to_collection("top_hat")
-	#
-	#if event.is_action_pressed("ui_up"):
-		#if get_tree().paused:
-			#var main: Main = get_parent()
-			#main.data.remove_item_from_inventory("key", 1)
+	
+	if event.is_action_pressed("ui_accept"):
+		if get_tree().paused:
+			for item in ItemDb.items:
+				Main.data.add_item_to_inventory(item.id, 1)
+			for costume in CostumeDb.costumes:
+				Main.data.add_costume_to_collection(costume.id)
+
 	# ----
 	# end
 	# ---

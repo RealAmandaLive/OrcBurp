@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://chagka2o2ctov"]
+
+[ext_resource type="Script" uid="uid://cvpdjdp4q3hi1" path="res://scripts/collectable_item.gd" id="1_cb4fd"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6th7o"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iynve"]
+radius = 32.0
+
+[node name="CollectableItem" type="Node2D" unique_id=830070358]
+script = ExtResource("1_cb4fd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1518717617]
+texture = SubResource("PlaceholderTexture2D_6th7o")
+
+[node name="PickupArea" type="Area2D" parent="." unique_id=129846408]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1112683604]
+shape = SubResource("CircleShape2D_iynve")

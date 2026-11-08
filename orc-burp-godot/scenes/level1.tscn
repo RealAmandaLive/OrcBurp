@@ -15,6 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://ctrkq22vo835m" path="res://scenes/fireHazard.tscn" id="12_gnai3"]
 [ext_resource type="PackedScene" uid="uid://btgtlq828wo4m" path="res://assets/Environment/mushroom_cluster_big.tscn" id="13_f31uk"]
 [ext_resource type="PackedScene" uid="uid://dw0bd77g064wy" path="res://assets/Environment/window_light_shaft.tscn" id="14_gnai3"]
+[ext_resource type="PackedScene" uid="uid://chagka2o2ctov" path="res://scenes/collectable_item.tscn" id="16_14jow"]
+[ext_resource type="Resource" uid="uid://d074ed0tow40f" path="res://resources/items/potion.tres" id="17_mvsps"]
+[ext_resource type="PackedScene" uid="uid://b7porle6n1kqc" path="res://scenes/collectable_costume.tscn" id="18_jvkml"]
+[ext_resource type="Resource" uid="uid://1dq3pvtrygh7" path="res://resources/costumes/wizard_hat.tres" id="19_3w4mx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
@@ -120,3 +124,11 @@ position = Vector2(937, 470)
 
 [node name="window-light-shaft4" parent="window light shafts" unique_id=1716078657 instance=ExtResource("14_gnai3")]
 position = Vector2(1065, 470)
+
+[node name="Potion" parent="." unique_id=830070358 instance=ExtResource("16_14jow")]
+position = Vector2(740.35944, 217.17796)
+item_data = ExtResource("17_mvsps")
+
+[node name="WizardCostume" parent="." unique_id=1405239428 instance=ExtResource("18_jvkml")]
+position = Vector2(968.6719, 218.46062)
+costume_data = ExtResource("19_3w4mx")
