@@ -3,14 +3,16 @@ extends HBoxContainer
 @onready var item_name_label = %NameLabel
 @onready var item_amount_label = %AmountLabel
 @onready var item_description_label = %DescriptionLabel
-@onready var button_primary = %ButtonPrimary
-@onready var button_secondary = %ButtonSecondary
+@onready var button_primary: Control = %ButtonPrimary
+@onready var button_secondary: Control = %ButtonSecondary
 
 var selected_item : ItemSlot
 var item_slots
 
 func _ready() -> void:
 	item_slots = %ItemsGrid.get_children()
+	button_primary.gui_input.connect(_on_primary_button_pressed)
+	button_secondary.gui_input.connect(_on_secondary_button_pressed)
 	reset()
 
 func set_items(items):
@@ -70,3 +72,21 @@ func _on_item_slot_selected(item_slot: ItemSlot, data):
 		item_description_label.text = ""
 		button_primary.hide()
 		button_secondary.hide()
+
+
+func _on_primary_button_pressed(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed and selected_item:
+			# TODO: play a sound
+			var item: ItemData = ItemDb.get_item(selected_item.item_data.id)
+			if item:
+				item.apply_item_effect()
+			Main.data.remove_item_from_inventory(selected_item.item_data.id, 1)
+
+
+func _on_secondary_button_pressed(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			# TODO: play a sound
+			# TODO: does the item need to go back into the world as a collectable?
+			Main.data.remove_item_from_inventory(selected_item.item_data.id, 1)

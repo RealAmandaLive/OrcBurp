@@ -9,4 +9,5 @@ id = "potion"
 name = "Potion"
 description = "An edible ruby gem that rapidly restores health."
 texture = ExtResource("2_36hb1")
+heals_hp = 10
 metadata/_custom_type_script = "uid://d34t1wwbfowtv"
