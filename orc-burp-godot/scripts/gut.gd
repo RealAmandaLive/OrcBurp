@@ -289,7 +289,7 @@ func die() -> void:
 	alive = false
 	died.emit()
 	p("died.")
-	
+
 
 func enable_climbing() -> void:
 	can_climb = true

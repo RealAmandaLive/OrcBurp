@@ -95,3 +95,7 @@ func remove_item_from_inventory(item_name, qty) -> void:
 func add_costume_to_collection(costume) -> void:
 	costumes_collection[costume] = 1
 	emit_changed()
+
+
+func reset_player_health() -> void:
+	playerHealth = STARTING_HEALTH
