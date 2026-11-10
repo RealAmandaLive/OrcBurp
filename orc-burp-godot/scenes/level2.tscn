@@ -12,9 +12,18 @@
 [ext_resource type="PackedScene" uid="uid://cw3c22e81pyar" path="res://scenes/steamHazard.tscn" id="7_xa7n4"]
 [ext_resource type="AudioStream" uid="uid://dkjpol4llr4eu" path="res://assets/Audio/SFX/ghost-1-1.wav" id="8_8g4ke"]
 [ext_resource type="PackedScene" uid="uid://ckoodxpdp0v3e" path="res://scenes/falling_platform.tscn" id="10_bo4dx"]
+[ext_resource type="AudioStream" uid="uid://db4bo4qy6ao4u" path="res://assets/Audio/SFX/steam-1-1.wav" id="10_cleqw"]
+[ext_resource type="AudioStream" uid="uid://bh7bl2fw56qsh" path="res://assets/Audio/SFX/steam-1-2.wav" id="11_wvb8j"]
+[ext_resource type="AudioStream" uid="uid://deryux6lylkid" path="res://assets/Audio/SFX/steam-1-3.wav" id="12_g8vcy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ep0u"]
 size = Vector2(57, 48)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8g4ke"]
+streams_count = 3
+stream_0/stream = ExtResource("10_cleqw")
+stream_1/stream = ExtResource("11_wvb8j")
+stream_2/stream = ExtResource("12_g8vcy")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6ep0u"]
 
@@ -78,6 +87,10 @@ scale = Vector2(2, 2)
 [node name="steamHazard" parent="Hazards" unique_id=2018447066 instance=ExtResource("7_xa7n4")]
 position = Vector2(-35, -32.5)
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Hazards/steamHazard" unique_id=216973596]
+stream = SubResource("AudioStreamRandomizer_8g4ke")
+volume_db = -14.094
+
 [node name="Apples" type="Node2D" parent="." unique_id=1166098253]
 
 [node name="apple" parent="Apples" unique_id=763179813 instance=ExtResource("5_bo4dx")]
@@ -120,3 +133,6 @@ position = Vector2(532, 585)
 position = Vector2(565, 585)
 
 [connection signal="body_entered" from="Enemies/ghost" to="Gut" method="_on_ghost_body_entered"]
+[connection signal="animation_looped" from="Hazards/steamHazard/steamCloud" to="Hazards/steamHazard/AudioStreamPlayer2D" method="play"]
+
+[editable path="Hazards/steamHazard"]
