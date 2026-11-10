@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bqsuibrisleob"]
 
+[ext_resource type="Script" uid="uid://br4vbdc0clldo" path="res://scripts/mini_loot_magnetic.gd" id="1_hrslk"]
 [ext_resource type="Texture2D" uid="uid://c65oacwf3jgsi" path="res://assets/Items/coin.png" id="1_k5821"]
 [ext_resource type="Script" uid="uid://0q42rdg56qpy" path="res://scripts/coin_spin.gd" id="2_bvmma"]
 
@@ -7,6 +8,7 @@
 radius = 8.0
 
 [node name="coin" type="Node2D" unique_id=510127483]
+script = ExtResource("1_hrslk")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=212879617]
 collision_layer = 0

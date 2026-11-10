@@ -159,3 +159,4 @@ func _on_gut_died():
 		push_warning("Gut died while level changing. Check if this is intended behavior")
 		
 	await load_level(current_level_path, false)
+	data.reset_player_health()
