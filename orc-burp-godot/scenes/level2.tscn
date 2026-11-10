@@ -44,6 +44,7 @@ position = Vector2(240.5, 339)
 position = Vector2(367.5, 403)
 
 [node name="Gut" parent="." unique_id=1676850674 instance=ExtResource("3_hrcei")]
+unique_name_in_owner = true
 top_level = true
 position = Vector2(22, 541)
 

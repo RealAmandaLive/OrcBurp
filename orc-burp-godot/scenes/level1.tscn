@@ -75,6 +75,7 @@ scale = Vector2(2, 2)
 position = Vector2(743, 483)
 
 [node name="Gut" parent="." unique_id=1676850674 instance=ExtResource("3_m7ahb")]
+unique_name_in_owner = true
 position = Vector2(597, 484)
 
 [node name="exit" type="Area2D" parent="." unique_id=1569906749]
