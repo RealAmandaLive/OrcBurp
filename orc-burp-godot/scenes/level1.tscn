@@ -26,6 +26,8 @@ size = Vector2(57, 48)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxf03"]
 size = Vector2(62, 421)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_igtbe"]
+
 [node name="levelRoot" type="Node2D" unique_id=867802413]
 metadata/_edit_vertical_guides_ = [640.0]
 
@@ -76,7 +78,7 @@ position = Vector2(743, 483)
 
 [node name="Gut" parent="." unique_id=1676850674 instance=ExtResource("3_m7ahb")]
 unique_name_in_owner = true
-position = Vector2(597, 484)
+position = Vector2(620, 214)
 
 [node name="exit" type="Area2D" parent="." unique_id=1569906749]
 position = Vector2(1076, 634)
@@ -100,8 +102,14 @@ shape = SubResource("RectangleShape2D_yxf03")
 [node name="swinging_hazard" parent="." unique_id=611701400 instance=ExtResource("9_conm7")]
 position = Vector2(245, 59)
 
+[node name="SpinSound2" parent="swinging_hazard" index="1" unique_id=1734897146]
+volume_db = -26.243
+
 [node name="swinging_hazard_short" parent="." unique_id=2040382496 instance=ExtResource("10_d3jkd")]
 position = Vector2(467, 127)
+
+[node name="SpinSound2" parent="swinging_hazard_short" index="1" unique_id=1383124720]
+stream = SubResource("AudioStreamRandomizer_igtbe")
 
 [node name="spinning_hazard" parent="." unique_id=988105865 instance=ExtResource("11_u3awl")]
 position = Vector2(370, 123)
@@ -133,3 +141,7 @@ item_data = ExtResource("17_mvsps")
 [node name="WizardCostume" parent="." unique_id=1405239428 instance=ExtResource("18_jvkml")]
 position = Vector2(968.6719, 218.46062)
 costume_data = ExtResource("19_3w4mx")
+
+[editable path="swinging_hazard"]
+[editable path="swinging_hazard_short"]
+[editable path="spinning_hazard"]

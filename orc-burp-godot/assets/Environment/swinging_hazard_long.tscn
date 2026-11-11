@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://idmb02gsp5ay" path="res://assets/Environment/swinging_hazards.gd" id="1_nj0kg"]
 [ext_resource type="Texture2D" uid="uid://w11bevxv4kdq" path="res://assets/Environment/swinging-hazard-long.png" id="2_yvilw"]
 [ext_resource type="Script" uid="uid://dpqs0jg1n4jy1" path="res://scripts/hazardous_area2D.gd" id="3_3gp0e"]
-[ext_resource type="AudioStream" uid="uid://dvcx2wlhnv52r" path="res://assets/Audio/throw-woosh-a.wav" id="4_h50ae"]
+[ext_resource type="AudioStream" uid="uid://dvcx2wlhnv52r" path="res://assets/Audio/SFX/throw-woosh-a.wav" id="4_h50ae"]
 [ext_resource type="Texture2D" uid="uid://bpyyhgt1vf7sj" path="res://assets/Particles/dust-cloud.png" id="5_igtbe"]
+[ext_resource type="AudioStream" uid="uid://dlqvh2vcn8xn" path="res://assets/Audio/SFX/spinning2.wav" id="6_h50ae"]
+[ext_resource type="AudioStream" uid="uid://b1k8caous1mrv" path="res://assets/Audio/SFX/spinning3.wav" id="7_igtbe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3x8i1"]
 radius = 12.0
@@ -16,6 +18,13 @@ metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_dhvvp"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aqnng"]
+random_pitch = 1.1673603
+random_volume_offset_db = 5.24
+streams_count = 2
+stream_0/stream = ExtResource("6_h50ae")
+stream_1/stream = ExtResource("7_igtbe")
 
 [node name="swinging_hazard" type="Node2D" unique_id=611701400]
 scale = Vector2(2, 2)
@@ -59,5 +68,9 @@ initial_velocity_max = 150.0
 angle_max = 360.0
 scale_amount_curve = SubResource("Curve_iuywl")
 color_ramp = SubResource("Gradient_dhvvp")
+
+[node name="SpinSound2" type="AudioStreamPlayer2D" parent="." unique_id=1734897146]
+stream = SubResource("AudioStreamRandomizer_aqnng")
+volume_db = -5.345
 
 [connection signal="body_entered" from="chain/Hazardous" to="chain/Hazardous" method="_on_body_entered"]
