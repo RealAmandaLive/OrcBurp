@@ -7,7 +7,9 @@ extends RigidBody2D
 @export var spin_strength: float = 1200.0
 
 func _ready() -> void:
-	
+	# leave parent so it moves independently
+	reparent.call_deferred(get_parent().get_parent())
+
 	# FLING!!!!
 	# var random_dir = Vector2(randf_range(-1.0, 1.0),randf_range(-1.0, 1.0)) # any dir
 	var random_dir = Vector2(randf_range(-1.0, 1.0),randf_range(-2.0, -1.0)) # only upwards

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dvkb104ariipx" path="res://assets/Particles/delete_after_delay.gd" id="1_4feuc"]
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="1_5y8kr"]
 [ext_resource type="Script" uid="uid://kqp3ngfs1nby" path="res://assets/Particles/fling.gd" id="1_tp2vf"]
+[ext_resource type="PackedScene" uid="uid://bqsuibrisleob" path="res://assets/Items/coin.tscn" id="2_ymhct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdu0b"]
 size = Vector2(32, 6)
@@ -15,6 +16,14 @@ size = Vector2(12, 10)
 
 [node name="exploding-barrel" type="Node2D" unique_id=13198126]
 script = ExtResource("1_4feuc")
+
+[node name="coin" parent="." unique_id=510127483 instance=ExtResource("2_ymhct")]
+
+[node name="coin2" parent="." unique_id=176877894 instance=ExtResource("2_ymhct")]
+
+[node name="coin3" parent="." unique_id=959785566 instance=ExtResource("2_ymhct")]
+
+[node name="coin4" parent="." unique_id=1189182327 instance=ExtResource("2_ymhct")]
 
 [node name="top-lid" type="RigidBody2D" parent="." unique_id=1112674749]
 collision_layer = 32768

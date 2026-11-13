@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://br4vbdc0clldo" path="res://scripts/mini_loot_magnetic.gd" id="1_hrslk"]
 [ext_resource type="Texture2D" uid="uid://c65oacwf3jgsi" path="res://assets/Items/coin.png" id="1_k5821"]
 [ext_resource type="Script" uid="uid://0q42rdg56qpy" path="res://scripts/coin_spin.gd" id="2_bvmma"]
+[ext_resource type="Script" uid="uid://kqp3ngfs1nby" path="res://scripts/fling.gd" id="2_ncpdi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvmma"]
 radius = 8.0
@@ -14,6 +15,7 @@ script = ExtResource("1_hrslk")
 collision_layer = 0
 collision_mask = 16
 lock_rotation = true
+script = ExtResource("2_ncpdi")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=1635969298]
 scale = Vector2(2, 2)

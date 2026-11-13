@@ -318,6 +318,7 @@ func _on_toot_timer_timeout() -> void:
 # not super happy with this code - might be able to simplify
 func burp_hit_check(direction: float) -> void:
 	var tiles = get_node_or_null("/root/main/levelRoot/TileMapLayer")
+	if !tiles: tiles = get_node_or_null("/root/levelRoot/TileMapLayer")
 	if !tiles:
 		print("error - no tilemap found by burp!")
 		return
