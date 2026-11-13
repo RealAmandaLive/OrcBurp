@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dqci48bo8ys4x" path="res://assets/Audio/SFX/footstep.wav" id="7_uy3vc"]
 [ext_resource type="AudioStream" uid="uid://ccolqgqc6emw4" path="res://assets/Player/all_toot_sounds.tres" id="8_3ao6n"]
 [ext_resource type="AudioStream" uid="uid://ch3ndpipgbxim" path="res://assets/Player/all_burp_sounds.tres" id="9_4k4mm"]
+[ext_resource type="Texture2D" uid="uid://bsg168p11mxpo" path="res://assets/Player/hats/wizard_hat.png" id="10_kwhhm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhrd0"]
 radius = 16.0
@@ -100,3 +101,10 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
+
+[node name="CostumeSprite" type="Sprite2D" parent="." unique_id=1564200387]
+position = Vector2(7, -28)
+scale = Vector2(2, 2)
+texture = ExtResource("10_kwhhm")
+hframes = 3
+frame = 1

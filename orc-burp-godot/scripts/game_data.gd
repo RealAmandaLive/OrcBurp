@@ -2,6 +2,7 @@ class_name GameData
 extends Resource
 
 signal health_changed(new_health: int)
+signal costume_changed(new_costume: String)
 
 const STARTING_HEALTH = 10
 const MAX_HEALTH = 10
@@ -35,6 +36,12 @@ var applesCollected: int = 0
 @export var deathCount: int = 0
 @export var trapCount: int = 0
 @export var killCount: int = 0
+
+@export var active_costume: String = "":
+	set(v):
+		if v == "" or costumes_collection.has(v):
+			active_costume = v
+			costume_changed.emit(v)
 
 # Inventory items and costumes data - {item_name: qty}
 @export var inventory_items: Dictionary[String, int] = {}

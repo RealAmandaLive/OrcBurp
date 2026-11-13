@@ -15,6 +15,7 @@ var exploding_barrel_scene = preload("res://assets/Particles/exploding_barrel.ts
 
 @export var speed_boost := 200
 
+var active_costume: CostumeData = null
 var player_state = PlayerStates.IDLE: set = _set_state
 var alive = true
 var can_move = true
@@ -36,6 +37,7 @@ var current_speed_boost := 0
 @onready var tootSounds: AudioStreamPlayer2D = $TootSounds
 @onready var burpSounds: AudioStreamPlayer2D = $BurpSounds
 @onready var eatAppleSound: AudioStreamPlayer2D = $EatAppleSound
+@onready var costume_sprite: Sprite2D = $CostumeSprite
 
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
@@ -45,6 +47,8 @@ func _ready() -> void:
 	%TootTimer.timeout.connect(_on_toot_timer_timeout)
 	%BurpTimer.timeout.connect(_on_burp_timer_timeout)
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
+	Main.data.costume_changed.connect(_on_costume_changed)
+	_on_costume_changed(Main.data.active_costume)
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -360,3 +364,15 @@ func _on_burp_timer_timeout() -> void:
 func _on_animation_finished() -> void:
 	if player_state == PlayerStates.TOOTING or player_state == PlayerStates.BURPING:
 		player_state = PlayerStates.IDLE
+
+
+func _on_costume_changed(costume_id: String) -> void:
+	if costume_id == "":
+		active_costume = null
+		costume_sprite.hide()
+	else:
+		active_costume = CostumeDb.get_costume(costume_id)
+		costume_sprite.show()
+		# TODO: I think we'll need to be smarter here about hats vs other costumes 
+		# and probably dialing in the offsets a little more
+		costume_sprite.texture = active_costume.texture

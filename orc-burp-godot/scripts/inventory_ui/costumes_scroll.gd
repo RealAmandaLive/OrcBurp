@@ -81,3 +81,16 @@ func _on_toggle_button_toggled(toggled_on: bool) -> void:
 	else:
 		item_details.hide()
 		chara_preview.show()
+
+
+func _on_primary_button_pressed(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed and selected_item:
+			Main.data.active_costume = selected_item.item_data.id
+
+
+func _on_secondary_button_pressed(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			# TODO: play a sound
+			Main.data.active_costume = ""

@@ -516,4 +516,6 @@ texture_normal = ExtResource("8_rmxcj")
 
 [connection signal="gui_input" from="MarginContainer/HBoxContainer/InventoryScroll" to="." method="_on_inventory_scroll_gui_input"]
 [connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll" to="." method="_on_costumes_scroll_gui_input"]
+[connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonPrimary/Label" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_primary_button_pressed"]
+[connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonSecondary/Label" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_secondary_button_pressed"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/ToggleButton" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_toggle_button_toggled"]
