@@ -174,8 +174,9 @@ item_data = ExtResource("17_mvsps")
 position = Vector2(968.6719, 218.46062)
 costume_data = ExtResource("19_3w4mx")
 
-[node name="Gate" parent="." unique_id=545575167 instance=ExtResource("20_1ooyw")]
+[node name="Gate" parent="." unique_id=545575167 node_paths=PackedStringArray("buttons") instance=ExtResource("20_1ooyw")]
 position = Vector2(1252, 260)
+buttons = [NodePath("../TriggerButton")]
 
 [node name="TriggerButton" parent="." unique_id=414267978 instance=ExtResource("21_u068y")]
 position = Vector2(544, 260)

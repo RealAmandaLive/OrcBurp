@@ -21,8 +21,9 @@ var starting_pos: Vector2
 
 func _ready() -> void:
 	for b in buttons:
-		b.triggered.connect(_on_button_trigger)
-		b.rearmed.connect(_on_button_rearm)
+		if b and b is TriggerButton:
+			b.triggered.connect(_on_button_trigger)
+			b.rearmed.connect(_on_button_rearm)
 	starting_pos = position
 
 func _on_button_trigger() -> void:
