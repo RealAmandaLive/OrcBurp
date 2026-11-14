@@ -4,29 +4,32 @@
 [ext_resource type="Texture2D" uid="uid://bh46qxa8t3hee" path="res://assets/Environment/beam32x10.png" id="1_l3rcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
-size = Vector2(32, 10)
+size = Vector2(64, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57qmd"]
-size = Vector2(30, 1)
+size = Vector2(50, 5)
 
 [node name="fallingPlatform" type="AnimatableBody2D" unique_id=662641348]
-collision_layer = 2
 collision_mask = 2
 sync_to_physics = false
 script = ExtResource("1_eyv7q")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1284132392]
+position = Vector2(32, 10)
+scale = Vector2(2, 2)
 texture = ExtResource("1_l3rcd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=948340944]
+position = Vector2(32, 10)
 shape = SubResource("RectangleShape2D_yf5fn")
+one_way_collision = true
 
 [node name="playerDetectionZone" type="Area2D" parent="." unique_id=2098009762]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="playerDetectionZone" unique_id=2100551308]
-position = Vector2(1, -6)
+position = Vector2(32, -3)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [connection signal="body_entered" from="playerDetectionZone" to="." method="_on_player_detection_zone_body_entered"]
