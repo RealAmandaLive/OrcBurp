@@ -37,6 +37,9 @@ script = ExtResource("1_mq6y6")
 [node name="AnimatedSprite2D" parent="." unique_id=253259514 instance=ExtResource("2_u2ds8")]
 unique_name_in_owner = true
 position = Vector2(3, 4)
+animation = &"tooting"
+frame = 0
+frame_progress = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2112153789]
 position = Vector2(3, 4)
@@ -103,8 +106,9 @@ wait_time = 3.0
 one_shot = true
 
 [node name="CostumeSprite" type="Sprite2D" parent="." unique_id=1564200387]
-position = Vector2(7, -28)
+position = Vector2(5, -30)
 scale = Vector2(2, 2)
 texture = ExtResource("10_kwhhm")
+offset = Vector2(1, 0)
 hframes = 3
 frame = 1

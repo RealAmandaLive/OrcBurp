@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c53ra2xyq2gj2" path="res://assets/UI/button_secondary_lg.png" id="8_rmxcj"]
 [ext_resource type="Script" uid="uid://ca7gd5onqnsfi" path="res://scripts/inventory_ui/costumes_scroll.gd" id="10_4iaw1"]
 [ext_resource type="Texture2D" uid="uid://dx0l3igha4652" path="res://assets/UI/project-icon.png" id="12_2k7ee"]
+[ext_resource type="Texture2D" uid="uid://bsg168p11mxpo" path="res://assets/Player/hats/wizard_hat.png" id="12_4iaw1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ibdg1"]
 font = ExtResource("2_1dxi5")
@@ -328,12 +329,14 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page" unique_id=477915492]
+custom_maximum_size = Vector2(760, -1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1.0
-offset_bottom = -30.0
+offset_top = -13.0
+offset_right = -20.0
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 110
@@ -356,38 +359,47 @@ columns = 3
 [node name="ItemSlot" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1467767772 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="ItemSlot2" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=842171268 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="ItemSlot3" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1532816788 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="ItemSlot4" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=2024960075 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="ItemSlot5" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=573263505 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="ItemSlot6" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1146994939 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="ItemSlot7" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=441760979 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="ItemSlot8" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1245687616 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="ItemSlot9" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/GridContainer" unique_id=1434424399 node_paths=PackedStringArray("root_parent") instance=ExtResource("4_t5bre")]
 layout_mode = 2
 root_parent = NodePath("../../../../..")
+is_costume = true
 
 [node name="Divider" type="ColorRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=2090113882]
 custom_minimum_size = Vector2(4, 420)
@@ -439,6 +451,7 @@ theme_override_constants/separation = 6
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 0
 texture = ExtResource("7_rg5pf")
 patch_margin_left = 14
 patch_margin_top = 10
@@ -462,6 +475,7 @@ uppercase = true
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 0
 texture = ExtResource("8_rmxcj")
 patch_margin_left = 14
 patch_margin_top = 10
@@ -482,6 +496,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="CharaPreview" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=1381192438]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 28
@@ -493,6 +508,13 @@ layout_mode = 2
 texture = ExtResource("12_2k7ee")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="HatSprite" type="Sprite2D" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview" unique_id=1142731209]
+unique_name_in_owner = true
+position = Vector2(125, 20)
+scale = Vector2(8, 8)
+texture = ExtResource("12_4iaw1")
+hframes = 3
 
 [node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview" unique_id=767510716]
 layout_mode = 2
@@ -507,7 +529,46 @@ root_parent = NodePath("../../../../../..")
 layout_mode = 2
 root_parent = NodePath("../../../../../..")
 
+[node name="CharaPreview2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer" unique_id=409543253]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview2" unique_id=1372987800]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+texture = ExtResource("12_2k7ee")
+expand_mode = 4
+stretch_mode = 3
+
+[node name="HatSprite" type="Sprite2D" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview2/TextureRect" unique_id=1625178315]
+position = Vector2(116, -20)
+scale = Vector2(8, 8)
+texture = ExtResource("12_4iaw1")
+hframes = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview2" unique_id=1866423165]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview2/VBoxContainer2" unique_id=914873476]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "ITem name"
+label_settings = SubResource("LabelSettings_3avjn")
+uppercase = true
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/CharaPreview2/VBoxContainer2" unique_id=1167988842]
+custom_minimum_size = Vector2(0, 90)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 2
+text = "Brunch wolf tbh selfies hoodie jomo craft copper."
+label_settings = SubResource("LabelSettings_aig6x")
+autowrap_mode = 3
+
 [node name="ToggleButton" type="TextureButton" parent="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer" unique_id=726708455]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -516,6 +577,8 @@ texture_normal = ExtResource("8_rmxcj")
 
 [connection signal="gui_input" from="MarginContainer/HBoxContainer/InventoryScroll" to="." method="_on_inventory_scroll_gui_input"]
 [connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll" to="." method="_on_costumes_scroll_gui_input"]
+[connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonPrimary" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_primary_button_pressed"]
 [connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonPrimary/Label" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_primary_button_pressed"]
+[connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonSecondary" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_secondary_button_pressed"]
 [connection signal="gui_input" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/HBoxContainer/ItemDetails/VBoxContainer/ButtonSecondary/Label" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_secondary_button_pressed"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/CostumesScroll/Page/MarginContainer/ToggleButton" to="MarginContainer/HBoxContainer/CostumesScroll" method="_on_toggle_button_toggled"]

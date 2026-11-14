@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://b7porle6n1kqc"]
 
 [ext_resource type="Script" uid="uid://bniwd4k88jk8d" path="res://scripts/collectable_costume.gd" id="1_jwte8"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6th7o"]
-size = Vector2(32, 32)
+[ext_resource type="Texture2D" uid="uid://bsg168p11mxpo" path="res://assets/Player/hats/wizard_hat.png" id="2_rs7kl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iynve"]
 radius = 32.0
@@ -12,7 +10,9 @@ radius = 32.0
 script = ExtResource("1_jwte8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1518717617]
-texture = SubResource("PlaceholderTexture2D_6th7o")
+scale = Vector2(2, 2)
+texture = ExtResource("2_rs7kl")
+hframes = 3
 
 [node name="PickupArea" type="Area2D" parent="." unique_id=129846408]
 collision_layer = 0

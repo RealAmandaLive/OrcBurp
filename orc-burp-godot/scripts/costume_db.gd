@@ -10,7 +10,7 @@ func _ready() -> void:
 		if costume:
 			lookup[costume.id] = costume
 
-func get_costume(id: String):
+func get_costume(id: String) -> CostumeData:
 	if lookup.has(id):
 		return lookup[id]
 	

@@ -10,6 +10,19 @@ const JUMP_VELOCITY = -650.0
 const CLIMBING_SPEED = -400
 const DESCENDING_SPEED = 400
 
+const LEFT_OFFSET = Vector2(-3, 0)
+const RIGHT_OFFSET = Vector2(1, 0)
+const COSTUME_FRAME_OFFSETS = {
+	"idle:1": Vector2(0, 1),
+	"idle:3": Vector2(0, 1),
+	"idle:5": Vector2(0, 1),
+	"climbing:1": Vector2(0, 1),
+	"hitFront:1": Vector2(0, 1),
+	"hitRunning:1": Vector2(0, 1),
+	"hitRunning:3": Vector2(0, 1),
+	"running:1": Vector2(0, 1),
+}
+
 const BURP_CLOUD = preload("uid://pk1n1jjrqdji")
 var exploding_barrel_scene = preload("res://assets/Particles/exploding_barrel.tscn")
 
@@ -119,10 +132,10 @@ func _physics_process(delta: float) -> void:
 		player_state = PlayerStates.WALKING
 	elif velocity.y != 0 and not climbing: 
 		player_state = PlayerStates.JUMPING
-	elif velocity.y != 0 and can_double_jump: 
-		player_state = PlayerStates.DOUBLEJUMPING
 	elif velocity.y != 0 and climbing:
 		player_state = PlayerStates.CLIMBING
+	elif velocity.y != 0 and can_double_jump: 
+		player_state = PlayerStates.DOUBLEJUMPING
 
 	## FOOTSTEPS
 	if player_state == PlayerStates.WALKING and is_on_floor_now:
@@ -147,6 +160,30 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	was_on_floor_last_frame = is_on_floor_now
+	
+	if active_costume:
+		if (
+			animated_sprite_2d.animation == "climbing" or
+			animated_sprite_2d.animation == "onLadder"
+		):
+			costume_sprite.frame = 2
+		elif (
+			animated_sprite_2d.animation == "hitFront" or
+			animated_sprite_2d.animation == "jumpFront" or
+			animated_sprite_2d.animation == "idle"
+		):
+			costume_sprite.frame = 0
+		else:
+			costume_sprite.frame = 1
+		var frame_key: String = animated_sprite_2d.animation + ":" + str(animated_sprite_2d.frame)
+		var frame_offset: Vector2 = COSTUME_FRAME_OFFSETS.get(frame_key, Vector2.ZERO)
+		costume_sprite.offset = active_costume.texture_offset + frame_offset
+		costume_sprite.flip_h = animated_sprite_2d.flip_h
+		if costume_sprite.frame == 1:
+			if costume_sprite.flip_h:
+				costume_sprite.offset += LEFT_OFFSET
+			else:
+				costume_sprite.offset += RIGHT_OFFSET
 
 
 ## Some tiles have the "one way collision" bit set on their collision polygon (e.g. stairs)
@@ -169,7 +206,7 @@ func _is_on_one_way_floor() -> bool:
 
 func _set_state(state: PlayerStates) -> void:
 	player_state = state
-	
+	#p(state)
 	match player_state:
 		PlayerStates.IDLE: 
 			#animated_sprite_2d.animation = "idle"
@@ -367,12 +404,12 @@ func _on_animation_finished() -> void:
 
 
 func _on_costume_changed(costume_id: String) -> void:
+	p("changing costume to " + costume_id)
 	if costume_id == "":
 		active_costume = null
 		costume_sprite.hide()
 	else:
 		active_costume = CostumeDb.get_costume(costume_id)
 		costume_sprite.show()
-		# TODO: I think we'll need to be smarter here about hats vs other costumes 
-		# and probably dialing in the offsets a little more
 		costume_sprite.texture = active_costume.texture
+		costume_sprite.offset = active_costume.texture_offset

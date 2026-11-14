@@ -4,6 +4,7 @@ class_name ItemSlot
 signal selected(node, data)
 
 @export var root_parent : Control
+@export var is_costume := false
 
 @onready var amount_label = $AmountLabel
 @onready var item_texture_rect = $ItemTexture
@@ -28,7 +29,13 @@ func set_item_data(data):
 	item_data = data
 	if item_data.has("amount"):
 		amount_label.text = "%d" % item_data.amount
-	item_texture_rect.texture = data.texture
+	if is_costume:
+		var atlas: AtlasTexture = AtlasTexture.new()
+		atlas.atlas = data.texture
+		atlas.region = Rect2(0, 0, 32, 32)
+		item_texture_rect.texture = atlas
+	else:
+		item_texture_rect.texture = data.texture
 
 func clear():
 	item_data = null

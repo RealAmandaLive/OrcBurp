@@ -8,3 +8,4 @@ enum CostumeType { Hat, Clothe }
 @export_multiline var description: String
 @export var type: CostumeType
 @export var texture : Texture
+@export var texture_offset: Vector2

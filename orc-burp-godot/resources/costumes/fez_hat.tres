@@ -9,4 +9,5 @@ id = "fez_hat"
 name = "Fez Hat"
 description = "It blooms on your head."
 texture = ExtResource("2_2grpo")
+texture_offset = Vector2(0, 1)
 metadata/_custom_type_script = "uid://bif87h15k681b"
