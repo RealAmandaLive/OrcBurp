@@ -19,10 +19,8 @@
 [ext_resource type="Resource" uid="uid://d074ed0tow40f" path="res://resources/items/potion.tres" id="17_mvsps"]
 [ext_resource type="PackedScene" uid="uid://b7porle6n1kqc" path="res://scenes/collectable_costume.tscn" id="18_jvkml"]
 [ext_resource type="Resource" uid="uid://1dq3pvtrygh7" path="res://resources/costumes/wizard_hat.tres" id="19_3w4mx"]
-[ext_resource type="Texture2D" uid="uid://c00pkguviuhi4" path="res://assets/Environment/gate.png" id="20_3w4mx"]
-[ext_resource type="Script" uid="uid://crvrxy00jbvb4" path="res://scenes/gate/gate.gd" id="20_u068y"]
-[ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="22_1ooyw"]
-[ext_resource type="Script" uid="uid://nt65kagef0cy" path="res://scenes/gate/button.gd" id="22_ai3nx"]
+[ext_resource type="PackedScene" uid="uid://dmlv6462nbnby" path="res://scenes/gate/gate.tscn" id="20_1ooyw"]
+[ext_resource type="PackedScene" uid="uid://qkh7ccrm8si7" path="res://scenes/gate/trigger_button.tscn" id="21_u068y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
@@ -31,12 +29,6 @@ size = Vector2(57, 48)
 size = Vector2(62, 421)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_igtbe"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iynve"]
-size = Vector2(52, 128)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7t1d"]
-size = Vector2(36, 20)
 
 [node name="levelRoot" type="Node2D" unique_id=867802413]
 metadata/_edit_vertical_guides_ = [640.0]
@@ -182,36 +174,11 @@ item_data = ExtResource("17_mvsps")
 position = Vector2(968.6719, 218.46062)
 costume_data = ExtResource("19_3w4mx")
 
-[node name="Gate" type="StaticBody2D" parent="." unique_id=58058178 node_paths=PackedStringArray("buttons")]
+[node name="Gate" parent="." unique_id=545575167 instance=ExtResource("20_1ooyw")]
 position = Vector2(1252, 260)
-script = ExtResource("20_u068y")
-buttons = [NodePath("../Button")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Gate" unique_id=351775597]
-position = Vector2(0, -64)
-scale = Vector2(4, 4)
-texture = ExtResource("20_3w4mx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate" unique_id=1311176962]
-position = Vector2(-2, -64)
-shape = SubResource("RectangleShape2D_iynve")
-
-[node name="Button" type="Area2D" parent="." unique_id=182373127]
+[node name="TriggerButton" parent="." unique_id=414267978 instance=ExtResource("21_u068y")]
 position = Vector2(544, 260)
-collision_layer = 0
-collision_mask = 6
-script = ExtResource("22_ai3nx")
-
-[node name="Sprite2D" type="Sprite2D" parent="Button" unique_id=1856188466]
-position = Vector2(0, -8)
-scale = Vector2(2, 2)
-texture = ExtResource("22_1ooyw")
-region_enabled = true
-region_rect = Rect2(392, 174, 18, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Button" unique_id=1186191521]
-position = Vector2(0, -10)
-shape = SubResource("RectangleShape2D_l7t1d")
 
 [editable path="swinging_hazard"]
 [editable path="swinging_hazard_short"]

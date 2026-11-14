@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dmlv6462nbnby"]
+
+[ext_resource type="Script" uid="uid://crvrxy00jbvb4" path="res://scenes/gate/gate.gd" id="1_316ya"]
+[ext_resource type="Texture2D" uid="uid://c00pkguviuhi4" path="res://assets/Environment/gate.png" id="2_7pidu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iynve"]
+size = Vector2(52, 128)
+
+[node name="Gate" type="StaticBody2D" unique_id=545575167 node_paths=PackedStringArray("buttons")]
+script = ExtResource("1_316ya")
+buttons = [NodePath("")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1939782106]
+position = Vector2(0, -64)
+scale = Vector2(4, 4)
+texture = ExtResource("2_7pidu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=321898642]
+position = Vector2(-2, -64)
+shape = SubResource("RectangleShape2D_iynve")
