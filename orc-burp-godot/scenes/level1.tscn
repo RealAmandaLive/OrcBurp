@@ -114,7 +114,7 @@ horizontal_alignment = 1
 position = Vector2(1520, 240)
 collision_mask = 2
 script = ExtResource("7_bbk5w")
-target_level = "res://scenes/level2.tscn"
+target_level = "res://scenes/undercroft.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit2" unique_id=1880614044]
 position = Vector2(21.5, -14)
