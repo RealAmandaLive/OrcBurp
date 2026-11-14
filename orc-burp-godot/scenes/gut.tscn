@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://bsg168p11mxpo" path="res://assets/Player/hats/wizard_hat.png" id="10_kwhhm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhrd0"]
-radius = 16.0
 height = 58.0
 
 [sub_resource type="Curve" id="Curve_kdu0b"]
@@ -46,6 +45,8 @@ position = Vector2(3, 4)
 shape = SubResource("CapsuleShape2D_dhrd0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=826353914]
+position = Vector2(0, 2)
+zoom = Vector2(1.4, 1.4)
 limit_left = 0
 limit_top = 0
 
