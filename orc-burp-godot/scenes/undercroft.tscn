@@ -614,7 +614,7 @@ position = Vector2(72, 221)
 position = Vector2(971, 474)
 
 [node name="rat2" parent="enemies" unique_id=852203932 instance=ExtResource("11_u2s5j")]
-position = Vector2(1729, 1140)
+position = Vector2(1729, 1152)
 
 [node name="ghost" parent="enemies" unique_id=1970705971 instance=ExtResource("11_5k86l")]
 position = Vector2(569, 1181)
