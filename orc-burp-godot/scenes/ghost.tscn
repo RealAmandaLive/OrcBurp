@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dl4g2a5hqsoge" path="res://scripts/ghost.gd" id="1_l5lq6"]
 [ext_resource type="Texture2D" uid="uid://c5bwmjow5heqn" path="res://assets/Enemies/ghostIdle.png" id="2_l5lq6"]
+[ext_resource type="Script" uid="uid://cemj7kevlg7h6" path="res://scenes/knockback_applier.gd" id="3_bbnym"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbnym"]
 atlas = ExtResource("2_l5lq6")
@@ -66,6 +67,10 @@ wait_time = 2.0
 autostart = true
 
 [node name="Trappable" type="Node2D" parent="." unique_id=907219492]
+
+[node name="KnockbackApplier" type="Node" parent="." unique_id=199698805 node_paths=PackedStringArray("body")]
+script = ExtResource("3_bbnym")
+body = NodePath("..")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
