@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 		# Make sure knocking isn't going to cause falling off (unless we want this later)
 		var knock_align:float = knockback_applier.direction * direction
 		if (knock_align and not ray_cast_right.is_colliding()) or \
-			(knock_align and not ray_cast_left.is_colliding()):
+			(not knock_align and not ray_cast_left.is_colliding()):
 				knockback_applier.stop()
 		return
 		
