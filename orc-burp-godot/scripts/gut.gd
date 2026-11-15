@@ -292,16 +292,16 @@ func throw_trap() -> void:
 	## Lambda function to remove physics behavior but retain the Trap node.
 	var reparent_trap: Callable = func():
 		trap.reparent(node_to_parent_trap)
-		if trap_physics:
+		if is_instance_valid(trap_physics):
 			trap_physics.queue_free()
 		print("Reparented trap")
 	
 	## When the trap is triggered, remove the physics behavior.
-	trap.triggered.connect(reparent_trap.unbind(1))
+	trap.triggered.connect(reparent_trap.unbind(1), CONNECT_DEFERRED)
 	
 	## When the physics object has collision with ground/wall,
 	## preserve the Trap itself by reparenting it, and remove physics behavior.
-	trap_physics.body_entered.connect(reparent_trap.unbind(1))
+	trap_physics.body_entered.connect(reparent_trap.unbind(1), CONNECT_DEFERRED)
 	
 	
 	var throw_direction: float = 1.0 ## HACK TESTING
