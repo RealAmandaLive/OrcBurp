@@ -89,6 +89,7 @@ func load_level(level_path: String, first_load: bool) -> void:
 	
 	#fadeout
 	if not first_load:
+		hud.set_fade_color(Color.BLACK)
 		await hud.fade_to(1.0).finished
 	
 	if current_level_root:

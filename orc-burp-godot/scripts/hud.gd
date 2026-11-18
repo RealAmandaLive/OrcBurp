@@ -20,16 +20,18 @@ func force_screen_faded() -> void:
 	fade_rect.modulate.a = 1.0
 
 ## Used to adjust the screen fade transparency. 1.0 for full coverage, 0.0 for totally clear.
-func fade_to(alpha: float) -> Tween:
+func fade_to(alpha: float, seconds = 1.5) -> Tween:
 	if _fade_tween:
 		_fade_tween.kill()
 	
 	_fade_tween = create_tween()
 	_fade_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	_fade_tween.tween_property(fade_rect, "modulate:a", alpha, 1.5)
+	_fade_tween.tween_property(fade_rect, "modulate:a", alpha, seconds)
 	
 	## Return the tween, so we can `await` the `finished` signal. 
 	## It's easier to read elsewhere
 	## by returning the tween so you actually see the "finished" verbiage
 	return _fade_tween
-	
+
+func set_fade_color(c: Color) -> void:
+	fade_rect.color = c
