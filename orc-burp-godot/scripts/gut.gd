@@ -344,6 +344,7 @@ func toot() -> void:
 	## todo: spawn particles, check hitboxes, etc maybe in their own scene we instantiate
 	## for now this just plays a random toot sound from a pool
 	can_toot = false
+	VFX.shake(VFX.LONG, VFX.QUAKE)
 	%TootTimer.start()
 	player_state = PlayerStates.TOOTING
 	current_speed_boost = speed_boost
@@ -379,9 +380,9 @@ func burp_hit_check(direction: float) -> void:
 			add_child(explosion)
 	
 func burp(direction: float) -> void:
-	## todo: implement gameplay as above
 	can_burp = false
 	%BurpTimer.start()
+	VFX.shake(VFX.SHORT, VFX.TREMOR)
 	player_state = PlayerStates.BURPING
 	Main.data.inc("burpCount")
 	await get_tree().create_timer(0.2).timeout
