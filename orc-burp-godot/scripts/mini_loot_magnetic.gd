@@ -20,19 +20,22 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 
-	if not %Gut: #this should always be true?! hmmm.....
+	# FIXME: this seems very inefficient
+	var plr = get_tree().root.find_child("Gut", true, false)
+	
+	if not plr: #this should always be true?! hmmm.....
 		print("mini loot can't find the player node!")
 		return # make sure player exists
 
 	age += delta
-	var dist = %Gut.global_position.distance_to(myRB.global_position)
+	var dist = plr.global_position.distance_to(myRB.global_position)
 	# print("loot age: "+str(int(age))+" dist:"+str(int(dist)))
 	
 	if age >= magnet_delay:
 		if dist <= magnet_distance:
 			# print("pulling loot towards the player!")
 			myRB.freeze = true # turn off physics so we can move it around manually
-			myRB.global_position = myRB.global_position.move_toward(%Gut.global_position, (1.0-dist/magnet_distance)*magnet_power*delta)
+			myRB.global_position = myRB.global_position.move_toward(plr.global_position, (1.0-dist/magnet_distance)*magnet_power*delta)
 			
 	if dist <= pickup_distance:
 		print("mini loot picked up!")
