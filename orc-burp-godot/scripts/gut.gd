@@ -51,6 +51,7 @@ var current_speed_boost := 0
 @onready var burpSounds: AudioStreamPlayer2D = $BurpSounds
 @onready var eatAppleSound: AudioStreamPlayer2D = $EatAppleSound
 @onready var costume_sprite: Sprite2D = $CostumeSprite
+@onready var coinSound: AudioStreamPlayer2D = $coinSound
 
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
@@ -257,6 +258,9 @@ func collect_apple(health_increased: int) -> void:
 	p("collected an apple for %d health; new current health is %d." % [health_increased, Main.data.playerHealth])
 	eatAppleSound.play()
 
+func collect_coin(gold_amount:int = 1) -> void:
+	Main.data.inc("goldCount",gold_amount)
+	coinSound.play()
 
 func throw_trap() -> void:
 	const THROW_IMPULSE_VELOCITY: float = 768.0 ## pixels per second

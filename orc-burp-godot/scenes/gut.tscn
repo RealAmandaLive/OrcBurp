@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dqci48bo8ys4x" path="res://assets/Audio/SFX/footstep.wav" id="7_uy3vc"]
 [ext_resource type="AudioStream" uid="uid://ccolqgqc6emw4" path="res://assets/Player/all_toot_sounds.tres" id="8_3ao6n"]
 [ext_resource type="AudioStream" uid="uid://ch3ndpipgbxim" path="res://assets/Player/all_burp_sounds.tres" id="9_4k4mm"]
+[ext_resource type="AudioStream" uid="uid://dgnbta5k06hlw" path="res://assets/Audio/SFX/coins.wav" id="10_36lld"]
 [ext_resource type="Texture2D" uid="uid://bsg168p11mxpo" path="res://assets/Player/hats/wizard_hat.png" id="10_kwhhm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhrd0"]
@@ -95,6 +96,9 @@ stream = ExtResource("8_3ao6n")
 [node name="BurpSounds" type="AudioStreamPlayer2D" parent="." unique_id=1726292481]
 position = Vector2(3, 1)
 stream = ExtResource("9_4k4mm")
+
+[node name="coinSound" type="AudioStreamPlayer2D" parent="." unique_id=2059424918]
+stream = ExtResource("10_36lld")
 
 [node name="TootTimer" type="Timer" parent="." unique_id=625050423]
 unique_name_in_owner = true
