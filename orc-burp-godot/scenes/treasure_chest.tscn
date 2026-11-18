@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://gkbsvoyd0lhg" path="res://assets/Items/chest.png" id="1_75h8e"]
 [ext_resource type="Script" uid="uid://b74khvq10dwpm" path="res://scripts/treasure_chest.gd" id="1_ybsko"]
+[ext_resource type="PackedScene" uid="uid://bqsuibrisleob" path="res://assets/Items/coin.tscn" id="2_b1w43"]
 [ext_resource type="AudioStream" uid="uid://cdlq6dfk2min6" path="res://assets/Audio/SFX/treasure-chest-open.wav" id="3_4lyqs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ybsko"]
@@ -79,6 +80,9 @@ size = Vector2(128, 52)
 
 [node name="TreasureChest" type="Area2D" unique_id=281251642]
 script = ExtResource("1_ybsko")
+spawn_when_opened1 = ExtResource("2_b1w43")
+spawn_when_opened2 = ExtResource("2_b1w43")
+spawn_when_opened3 = ExtResource("2_b1w43")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1867081655]
 scale = Vector2(2, 2)
