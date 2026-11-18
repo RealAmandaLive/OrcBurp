@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://mmtquu1o5mn5"]
+
+[ext_resource type="Script" uid="uid://e4l7axhtv480" path="res://scenes/steam_hazard.gd" id="2_awmkw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_03ldd"]
+
+[node name="pitHazard" type="Node2D" unique_id=195360368]
+
+[node name="hazardArea" type="Area2D" parent="." unique_id=2018447066]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_awmkw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hazardArea" unique_id=708552823]
+position = Vector2(1, 10)
+shape = SubResource("RectangleShape2D_03ldd")
+
+[connection signal="body_entered" from="hazardArea" to="hazardArea" method="_on_body_entered"]
