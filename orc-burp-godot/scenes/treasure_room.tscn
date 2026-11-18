@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bdxl3fiobls6m" path="res://scripts/tile_map_inits.gd" id="5_cxiwj"]
 [ext_resource type="PackedScene" uid="uid://bqsuibrisleob" path="res://assets/Items/coin.tscn" id="5_p5xdb"]
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="6_0tocw"]
+[ext_resource type="PackedScene" uid="uid://dqvbys7jla4gj" path="res://scenes/barrel.tscn" id="7_7ih38"]
 [ext_resource type="PackedScene" uid="uid://bh48owtr6pdcy" path="res://scenes/treasure_chest.tscn" id="7_ndp0d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kdu0b"]
@@ -41,6 +42,7 @@ tile_map_data = PackedByteArray("AAAAABIAAAAAAAMAAAABABIAAAAAAAMAAAACABIAAAAAAAM
 tile_set = ExtResource("4_7ih38")
 script = ExtResource("5_cxiwj")
 tile_to_scene = Dictionary[Vector2i, PackedScene]({
+Vector2i(7, 6): ExtResource("7_7ih38"),
 Vector2i(9, 6): ExtResource("7_ndp0d")
 })
 

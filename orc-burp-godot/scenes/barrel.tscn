@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dqvbys7jla4gj"]
+
+[ext_resource type="Script" uid="uid://bw4pu8m0ta25t" path="res://scripts/barrel.gd" id="1_mhtw8"]
+[ext_resource type="PackedScene" uid="uid://ccu50fhrnc0j8" path="res://assets/Particles/exploding_barrel.tscn" id="2_mhtw8"]
+[ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="3_mhtw8"]
+[ext_resource type="AudioStream" uid="uid://cnpl4614orw0a" path="res://assets/Audio/SFX/damage-001.wav" id="4_mhtw8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdu0b"]
+size = Vector2(128, 52)
+
+[node name="Barrel" type="Area2D" unique_id=281251642]
+script = ExtResource("1_mhtw8")
+spawn_when_opened1 = ExtResource("2_mhtw8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1415193596]
+scale = Vector2(2, 2)
+texture = ExtResource("3_mhtw8")
+region_enabled = true
+region_rect = Rect2(224, 192, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1568273092]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="OpenTriggerArea" type="Area2D" parent="." unique_id=229271711]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenTriggerArea" unique_id=2105382295]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_kdu0b")
+
+[node name="openSound" type="AudioStreamPlayer2D" parent="." unique_id=1843778431]
+stream = ExtResource("4_mhtw8")
+
+[connection signal="body_entered" from="OpenTriggerArea" to="." method="_on_body_entered"]
