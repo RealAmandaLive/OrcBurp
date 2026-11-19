@@ -63,6 +63,7 @@ var current_speed_boost: float = 0.0
 @onready var costume_sprite: Sprite2D = $CostumeSprite
 @onready var coinSound: AudioStreamPlayer2D = $coinSound
 @onready var toot_particles: CPUParticles2D = $TootParticles
+@onready var damageSound: AudioStreamPlayer2D = $DamageSound
 
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
@@ -288,6 +289,7 @@ func take_damage(amount: int) -> void:
 	VFX.shake(VFX.SHORT, VFX.TREMOR)
 	VFX.flash(VFX.SHORT, VFX.TREMOR, VFX.Flash.LIGHT)
 	VFX.slomo(VFX.SHORT, VFX.TREMOR)
+	damageSound.play()
 
 	p("took %d damage, new health is %d." % [amount, Main.data.playerHealth])
 	if Main.data.playerHealth == 0:

@@ -14,6 +14,10 @@
 [ext_resource type="AudioStream" uid="uid://ch3ndpipgbxim" path="res://assets/Player/all_burp_sounds.tres" id="9_4k4mm"]
 [ext_resource type="AudioStream" uid="uid://dgnbta5k06hlw" path="res://assets/Audio/SFX/coins.wav" id="10_36lld"]
 [ext_resource type="Texture2D" uid="uid://bsg168p11mxpo" path="res://assets/Player/hats/wizard_hat.png" id="10_kwhhm"]
+[ext_resource type="AudioStream" uid="uid://cnpl4614orw0a" path="res://assets/Audio/SFX/damage-001.wav" id="15_83d0j"]
+[ext_resource type="AudioStream" uid="uid://bypbft25mqfxe" path="res://assets/Audio/SFX/damage-002.wav" id="16_1kcfs"]
+[ext_resource type="AudioStream" uid="uid://d0lwnwupruoiw" path="res://assets/Audio/SFX/damage-003.wav" id="17_sh8ba"]
+[ext_resource type="AudioStream" uid="uid://c8hstlffy8bbu" path="res://assets/Audio/SFX/damage-004.wav" id="18_t5wrc"]
 
 [sub_resource type="Curve" id="Curve_lqax3"]
 _data = [Vector2(0, 1), 0.0, -0.042799283, 0, 0, Vector2(0.9897959, 0), 0.06840326, 0.0, 0, 0]
@@ -391,6 +395,13 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("7_uy3vc")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2xerb"]
+streams_count = 4
+stream_0/stream = ExtResource("15_83d0j")
+stream_1/stream = ExtResource("16_1kcfs")
+stream_2/stream = ExtResource("17_sh8ba")
+stream_3/stream = ExtResource("18_t5wrc")
+
 [node name="Gut" type="CharacterBody2D" unique_id=1676850674 groups=["Player"]]
 collision_layer = 2
 floor_max_angle = 1.0471976
@@ -503,3 +514,6 @@ texture = ExtResource("10_kwhhm")
 offset = Vector2(1, 0)
 hframes = 3
 frame = 1
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="." unique_id=80583310]
+stream = SubResource("AudioStreamRandomizer_2xerb")
