@@ -240,13 +240,17 @@ func _set_state(state: PlayerStates) -> void:
 
 # called by hazardous_area2d swinging chains etc
 func get_bumped(amountVector) -> void:
-	print("player got bumped")
+	p("player got bumped")
 	velocity += amountVector
 
 func take_damage(amount: int) -> void:
 	if not alive: return
 	
 	Main.data.playerHealth -= amount
+	VFX.shake(VFX.SHORT, VFX.TREMOR)
+	VFX.flash(VFX.SHORT, VFX.TREMOR, VFX.Flash.LIGHT)
+	VFX.slomo(VFX.SHORT, VFX.TREMOR)
+
 	p("took %d damage, new health is %d." % [amount, Main.data.playerHealth])
 	if Main.data.playerHealth == 0:
 		die()
@@ -316,8 +320,8 @@ func throw_trap() -> void:
 
 ## Return a target within a bounding box using the current facing direction.
 ## If no target is found, returns [Vector2.ZERO].
-func find_throw_target(distance: float) -> Vector2:
-	var current_facing_direction: float = signf(velocity.x)
+func find_throw_target(_distance: float) -> Vector2:
+	#var current_facing_direction: float = signf(velocity.x)
 	
 	return Vector2.ZERO
 

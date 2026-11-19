@@ -36,7 +36,7 @@ func set_shake_volume(value: float) -> void:
 
 
 ## Screen shake with optional controller shake
-func shake(seconds = MID, intensity = QUAKE, controller_shake = true) -> void:
+func shake(seconds: float = MID, intensity: float = QUAKE, controller_shake: bool = true) -> void:
 	var new_strength = intensity * STRENGTH_MULTIPLIER * shake_volume_setting
 	if new_strength <= shake_strength or seconds <= 0.0:
 		return
@@ -54,7 +54,7 @@ func shake(seconds = MID, intensity = QUAKE, controller_shake = true) -> void:
 
 
 ## Screen flash
-func flash(seconds = MID, intensity = QUAKE, type = Flash.LIGHT) -> Tween:
+func flash(seconds: float = MID, intensity: float = QUAKE, type: Flash = Flash.LIGHT) -> Tween:
 	var hud: HUD = get_tree().root.get_node_or_null("/root/main/HUD")
 	if hud:
 		var color = Color.WHITE if type == Flash.LIGHT else Color.BLACK
@@ -66,7 +66,7 @@ func flash(seconds = MID, intensity = QUAKE, type = Flash.LIGHT) -> Tween:
 
 var slomo_tween: Tween
 func slomo(seconds = MID, intensity = QUAKE) -> Tween:
-	Engine.time_scale = lerpf(1.0, 0.1, intensity)
+	Engine.time_scale = lerpf(1.0, 0.1, ease(intensity, 0.6))
 	return tween_time_scale(1.0, seconds)
 
 
