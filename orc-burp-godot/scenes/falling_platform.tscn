@@ -32,4 +32,9 @@ collision_mask = 2
 position = Vector2(32, -3)
 shape = SubResource("RectangleShape2D_57qmd")
 
+[node name="ReappearTimer" type="Timer" parent="." unique_id=289538004]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="body_entered" from="playerDetectionZone" to="." method="_on_player_detection_zone_body_entered"]
+[connection signal="body_exited" from="playerDetectionZone" to="." method="_on_player_detection_zone_body_exited"]

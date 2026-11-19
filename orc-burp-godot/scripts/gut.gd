@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 signal died
 
-enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING, TOOTING, BURPING}
+enum PlayerStates{IDLE, WALKING, JUMPING, CLIMBING, ON_LADDER, DOUBLEJUMPING, TOOTING, BURPING, DAMAGE_IFRAMES}
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -650.0
@@ -62,6 +62,7 @@ var current_speed_boost: float = 0.0
 @onready var eatAppleSound: AudioStreamPlayer2D = $EatAppleSound
 @onready var costume_sprite: Sprite2D = $CostumeSprite
 @onready var coinSound: AudioStreamPlayer2D = $coinSound
+@onready var toot_particles: CPUParticles2D = $TootParticles
 
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
@@ -70,9 +71,10 @@ func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
 func _ready() -> void:
 	%TootTimer.timeout.connect(_on_toot_timer_timeout)
 	%BurpTimer.timeout.connect(_on_burp_timer_timeout)
-	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
+	animated_sprite_2d.animation_finished.connect(_on_animation_finished)
 	Main.data.costume_changed.connect(_on_costume_changed)
 	_on_costume_changed(Main.data.active_costume)
+	toot_particles.emitting = false
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -138,7 +140,11 @@ func _physics_process(delta: float) -> void:
 		climbing = false
 
 	## STATE DETERMINATION
-	if player_state == PlayerStates.TOOTING or player_state == PlayerStates.BURPING:
+	if (
+		player_state == PlayerStates.TOOTING 
+		or player_state == PlayerStates.BURPING 
+		or player_state == PlayerStates.DAMAGE_IFRAMES
+	):
 		pass
 	elif velocity == Vector2.ZERO:
 		player_state = PlayerStates.IDLE
@@ -237,11 +243,11 @@ func _is_on_one_way_floor() -> bool:
 func _set_state(state: PlayerStates) -> void:
 	player_state = state
 	#p(state)
-	animated_sprite_2d.speed_scale = 1.0
 	match player_state:
+		PlayerStates.DAMAGE_IFRAMES:
+			animated_sprite_2d.play("hitRunning")
 		PlayerStates.TOOTING:
 			animated_sprite_2d.play("tooting")
-			animated_sprite_2d.speed_scale = 2.0
 		PlayerStates.BURPING:
 			animated_sprite_2d.play("burping")
 		PlayerStates.IDLE: 
@@ -291,10 +297,13 @@ func take_damage(amount: int) -> void:
 		remaining_iframe_time = DAMAGE_IFRAMES_SEC
 		modulate = Color.REBECCA_PURPLE
 		modulate.a = 0.5
+		player_state = PlayerStates.DAMAGE_IFRAMES
 
 func stop_iframes() -> void:
 	can_take_damage = true
 	remaining_iframe_time = 0.0
+	if player_state == PlayerStates.DAMAGE_IFRAMES:
+		player_state = PlayerStates.IDLE
 
 func collect_apple(health_increased: int) -> void:
 	Main.data.playerHealth += health_increased
@@ -405,6 +414,7 @@ func toot() -> void:
 	current_speed_boost = speed_boost
 	velocity.x = TOOT_IMPULSE * last_walk_dir
 	tootSounds.play()
+	toot_particles.emitting = true
 
 
 func _on_toot_timer_timeout() -> void:

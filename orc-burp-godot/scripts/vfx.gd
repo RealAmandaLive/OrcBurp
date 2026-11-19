@@ -89,17 +89,19 @@ func _get_fade_screen_rect() -> ColorRect:
 	return get_tree().get_first_node_in_group("fade_screen")
 
 
+func get_shake_offset(speed: float = SHAKE_SPEED, extra_offset: float = 0.0) -> Vector2:
+		var noise_idx := float(Time.get_ticks_msec()) * speed + extra_offset
+		return Vector2(
+			noise.get_noise_2d(1.0, noise_idx),
+			noise.get_noise_2d(100.0, noise_idx),
+		)
+
 func _process(delta: float) -> void:
 	var cam = get_viewport().get_camera_2d()
 	if not cam: return
 	if shake_strength > 0.0:
 		shake_strength = move_toward(shake_strength, 0.0, shake_decay * delta)
-		var noise_idx := Time.get_ticks_msec() * SHAKE_SPEED
-		var shake_offset := Vector2(
-			noise.get_noise_2d(1, noise_idx),
-			noise.get_noise_2d(100, noise_idx),
-		)
-		cam.offset = shake_offset * shake_strength
+		cam.offset = get_shake_offset() * shake_strength
 
 
 # This is just for testing. We should remove it before release
