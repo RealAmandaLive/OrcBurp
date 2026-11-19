@@ -102,7 +102,7 @@ stream = ExtResource("10_36lld")
 
 [node name="TootTimer" type="Timer" parent="." unique_id=625050423]
 unique_name_in_owner = true
-wait_time = 3.0
+wait_time = 1.5
 one_shot = true
 
 [node name="BurpTimer" type="Timer" parent="." unique_id=990167523]

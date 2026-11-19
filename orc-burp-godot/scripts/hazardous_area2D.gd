@@ -17,7 +17,7 @@ func _ready():
 		body_entered.connect(_on_body_entered)
 	
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and body.can_take_damage:
 		#print("PLAYER TOUCHED A HAZARD!")
 		
 		# push the player to the side and up just a little, for feedback/juice

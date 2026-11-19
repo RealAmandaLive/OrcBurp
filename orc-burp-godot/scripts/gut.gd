@@ -9,6 +9,13 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -650.0
 const CLIMBING_SPEED = -400
 const DESCENDING_SPEED = 400
+const DAMAGE_IFRAMES_SEC = 1.0
+const TOOT_IFRAMES_SEC = 1.0
+const ACCEL_FACTOR = 15.0
+const DECEL_FACTOR = 3.0
+const DECEL_SCALE_FACTOR = 2.0
+const TOOT_IMPULSE = 2000.0
+const TOOT_WHITE_BOOST = 4.0
 
 const LEFT_OFFSET = Vector2(-3, 0)
 const RIGHT_OFFSET = Vector2(1, 0)
@@ -30,17 +37,20 @@ var exploding_barrel_scene = preload("res://assets/Particles/exploding_barrel.ts
 
 var active_costume: CostumeData = null
 var player_state = PlayerStates.IDLE: set = _set_state
-var alive = true
-var can_move = true
-var can_climb = false
-var climbing = false
+var alive: bool = true
+var can_move: bool = true
+var can_climb: bool = false
+var climbing: bool = false
 var was_on_floor_last_frame = false # to detect landings
 var can_throw_traps: bool = true
-var can_double_jump = true
-var can_toot = true
-var can_burp = true
+var can_double_jump: bool = true
+var can_toot: bool = true
+var can_burp: bool = true
+var can_take_damage: bool = true
+var remaining_iframe_time: float = 0.0
 
-var current_speed_boost := 0
+var last_walk_dir: float = 1.0
+var current_speed_boost: float = 0.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var landingFX: CPUParticles2D = $LandingFX
@@ -76,14 +86,17 @@ func _physics_process(delta: float) -> void:
 	## DIRECTION
 	var direction := Input.get_axis("left", "right")
 	if direction:
-		velocity.x = direction * (SPEED + current_speed_boost)
+		velocity.x = move_toward(velocity.x, direction * (SPEED + current_speed_boost), SPEED * ACCEL_FACTOR * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED * DECEL_FACTOR * delta * remap(absf(velocity.x), 0.0, 300.0, 1.0, DECEL_SCALE_FACTOR))
+
 	
 	if signf(direction) == 1.0:
 		animated_sprite_2d.flip_h = false
+		last_walk_dir = 1.0
 	elif signf(direction) == -1.0:
 		animated_sprite_2d.flip_h = true
+		last_walk_dir = -1.0
 	
 	var is_on_floor_now = is_on_floor()
 	
@@ -152,7 +165,7 @@ func _physics_process(delta: float) -> void:
 		burp(direction)
 
 	## GRAVITY
-	if not can_climb:
+	if not can_climb and player_state != PlayerStates.TOOTING:
 		velocity += get_gravity() * delta
 	elif can_climb and not climbing:
 		velocity.y = 0
@@ -161,7 +174,23 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	was_on_floor_last_frame = is_on_floor_now
-	
+
+func _process(delta: float) -> void:
+	if can_take_damage:
+		modulate = Color.WHITE
+	else:
+		#modulate.a = 0.4
+		#modulate.a = inverse_lerp(-1.0, 1.0, sin(remaining_iframe_time * IFRAMES_FLASH_SPEED))
+		#modulate.a = ease(inverse_lerp(-1.0, 1.0, sin(remaining_iframe_time * IFRAMES_FLASH_SPEED)), -5.0) * 0.5
+		#modulate.a = 0.0 if sin(remaining_iframe_time * IFRAMES_FLASH_SPEED) < 0.0 else 0.5
+		modulate.r = move_toward(modulate.r, 1.0, delta * TOOT_WHITE_BOOST)
+		modulate.g = move_toward(modulate.g, 1.0, delta * TOOT_WHITE_BOOST)
+		modulate.b = move_toward(modulate.b, 1.0, delta * TOOT_WHITE_BOOST)
+		modulate.a = move_toward(modulate.a, 1.0, delta * 0.5)
+		remaining_iframe_time -= delta
+		if remaining_iframe_time < 0.0:
+			stop_iframes()
+		
 	if active_costume:
 		if (
 			animated_sprite_2d.animation == "climbing" or
@@ -208,36 +237,38 @@ func _is_on_one_way_floor() -> bool:
 func _set_state(state: PlayerStates) -> void:
 	player_state = state
 	#p(state)
+	animated_sprite_2d.speed_scale = 1.0
 	match player_state:
+		PlayerStates.TOOTING:
+			animated_sprite_2d.play("tooting")
+			animated_sprite_2d.speed_scale = 2.0
+		PlayerStates.BURPING:
+			animated_sprite_2d.play("burping")
 		PlayerStates.IDLE: 
 			#animated_sprite_2d.animation = "idle"
-			%AnimatedSprite2D.play("idle")
+			animated_sprite_2d.play("idle")
 			can_throw_traps = true
 		PlayerStates.WALKING:
-			%AnimatedSprite2D.play("running")
+			animated_sprite_2d.play("running")
 			can_throw_traps = true
 		PlayerStates.JUMPING:
 			if velocity.x > 1 or velocity.x < -1:
-				%AnimatedSprite2D.play("jumpRunning")
+				animated_sprite_2d.play("jumpRunning")
 			else:
-				%AnimatedSprite2D.play("jumpFront")
+				animated_sprite_2d.play("jumpFront")
 			can_throw_traps = true
 		PlayerStates.CLIMBING:
-			%AnimatedSprite2D.play("climbing")
-			can_throw_traps = false
-		PlayerStates.ON_LADDER:
-			%AnimatedSprite2D.play('onLadder')
+			animated_sprite_2d.play("climbing")
 			can_throw_traps = false
 		PlayerStates.DOUBLEJUMPING:
 			if velocity.x > 1 or velocity.x < -1:
-				%AnimatedSprite2D.play("jumpRunning")
+				animated_sprite_2d.play("jumpRunning")
 			else:
-				%AnimatedSprite2D.play("jumpFront")
+				animated_sprite_2d.play("jumpFront")
 				can_throw_traps = true
-		PlayerStates.TOOTING:
-			%AnimatedSprite2D.play("tooting")
-		PlayerStates.BURPING:
-			%AnimatedSprite2D.play("burping")
+		PlayerStates.ON_LADDER:
+			animated_sprite_2d.play('onLadder')
+			can_throw_traps = false
 
 # called by hazardous_area2d swinging chains etc
 func get_bumped(amountVector) -> void:
@@ -245,7 +276,7 @@ func get_bumped(amountVector) -> void:
 	velocity += amountVector
 
 func take_damage(amount: int) -> void:
-	if not alive: return
+	if not alive or not can_take_damage: return
 	
 	Main.data.playerHealth -= amount
 	VFX.shake(VFX.SHORT, VFX.TREMOR)
@@ -255,6 +286,15 @@ func take_damage(amount: int) -> void:
 	p("took %d damage, new health is %d." % [amount, Main.data.playerHealth])
 	if Main.data.playerHealth == 0:
 		die()
+	else:
+		can_take_damage = false
+		remaining_iframe_time = DAMAGE_IFRAMES_SEC
+		modulate = Color.REBECCA_PURPLE
+		modulate.a = 0.5
+
+func stop_iframes() -> void:
+	can_take_damage = true
+	remaining_iframe_time = 0.0
 
 func collect_apple(health_increased: int) -> void:
 	Main.data.playerHealth += health_increased
@@ -352,18 +392,25 @@ func toot() -> void:
 	## todo: spawn particles, check hitboxes, etc maybe in their own scene we instantiate
 	## for now this just plays a random toot sound from a pool
 	can_toot = false
-	VFX.shake(VFX.LONG, VFX.QUAKE)
 	%TootTimer.start()
-	player_state = PlayerStates.TOOTING
-	current_speed_boost = speed_boost
 	Main.data.inc("tootCount")
-	await get_tree().create_timer(0.5).timeout
+	player_state = PlayerStates.TOOTING
+	velocity.y = 0.0
+		
+	await get_tree().create_timer(0.3).timeout
+	can_take_damage = false
+	remaining_iframe_time = TOOT_IFRAMES_SEC
+	modulate = Color(TOOT_WHITE_BOOST, TOOT_WHITE_BOOST, TOOT_WHITE_BOOST)
+	VFX.shake(VFX.LONG , VFX.TREMOR)
+	current_speed_boost = speed_boost
+	velocity.x = TOOT_IMPULSE * last_walk_dir
 	tootSounds.play()
 
 
 func _on_toot_timer_timeout() -> void:
 	can_toot = true
-	current_speed_boost = 0
+	can_take_damage = true
+	modulate = Color.WHITE
 
 # not super happy with this code - might be able to simplify
 func burp_hit_check(direction: float) -> void:
