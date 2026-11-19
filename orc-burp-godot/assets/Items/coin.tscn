@@ -4,12 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://c65oacwf3jgsi" path="res://assets/Items/coin.png" id="1_k5821"]
 [ext_resource type="Script" uid="uid://0q42rdg56qpy" path="res://scripts/coin_spin.gd" id="2_bvmma"]
 [ext_resource type="Script" uid="uid://kqp3ngfs1nby" path="res://scripts/fling.gd" id="2_ncpdi"]
+[ext_resource type="AudioStream" uid="uid://dgnbta5k06hlw" path="res://assets/Audio/SFX/coins.wav" id="5_kf73k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvmma"]
 radius = 8.0
 
 [node name="coin" type="Node2D" unique_id=510127483]
 script = ExtResource("1_hrslk")
+
+[node name="pickupSound" type="AudioStreamPlayer2D" parent="." unique_id=102407578]
+stream = ExtResource("5_kf73k")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=212879617]
 collision_layer = 0

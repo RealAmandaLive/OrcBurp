@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dvkb104ariipx" path="res://assets/Particles/delete_after_delay.gd" id="1_4feuc"]
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="1_5y8kr"]
-[ext_resource type="Script" uid="uid://kqp3ngfs1nby" path="res://assets/Particles/fling.gd" id="1_tp2vf"]
+[ext_resource type="Script" uid="uid://kqp3ngfs1nby" path="res://scripts/fling.gd" id="1_tp2vf"]
 [ext_resource type="PackedScene" uid="uid://bqsuibrisleob" path="res://assets/Items/coin.tscn" id="2_ymhct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdu0b"]
@@ -18,14 +18,19 @@ size = Vector2(12, 10)
 script = ExtResource("1_4feuc")
 
 [node name="coin" parent="." unique_id=510127483 instance=ExtResource("2_ymhct")]
+position = Vector2(-20, -20)
 
 [node name="coin2" parent="." unique_id=176877894 instance=ExtResource("2_ymhct")]
+position = Vector2(-10, -20)
 
 [node name="coin3" parent="." unique_id=959785566 instance=ExtResource("2_ymhct")]
+position = Vector2(10, -20)
 
 [node name="coin4" parent="." unique_id=1189182327 instance=ExtResource("2_ymhct")]
+position = Vector2(20, -20)
 
 [node name="top-lid" type="RigidBody2D" parent="." unique_id=1112674749]
+scale = Vector2(2, 2)
 collision_layer = 32768
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -41,8 +46,9 @@ position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_kdu0b")
 
 [node name="bottom-lid" type="RigidBody2D" parent="." unique_id=673359194]
-position = Vector2(0, 2)
-rotation = 3.1415927
+position = Vector2(0, 4)
+rotation = -3.1415925
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -58,7 +64,8 @@ position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_kdu0b")
 
 [node name="wood-plank" type="RigidBody2D" parent="." unique_id=1951667943]
-position = Vector2(-10, 1)
+position = Vector2(-20, 2)
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -73,7 +80,8 @@ region_rect = Rect2(234, 205, 12, 8)
 shape = SubResource("RectangleShape2D_51wqt")
 
 [node name="wood-plank2" type="RigidBody2D" parent="." unique_id=1412584557]
-position = Vector2(0, 1)
+position = Vector2(0, 2)
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -88,7 +96,8 @@ region_rect = Rect2(234, 205, 12, 8)
 shape = SubResource("RectangleShape2D_51wqt")
 
 [node name="wood-plank3" type="RigidBody2D" parent="." unique_id=956548714]
-position = Vector2(10, 1)
+position = Vector2(20, 2)
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -103,6 +112,7 @@ region_rect = Rect2(234, 205, 12, 8)
 shape = SubResource("RectangleShape2D_51wqt")
 
 [node name="upper-ring" type="RigidBody2D" parent="." unique_id=1782424429]
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -118,6 +128,7 @@ position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_kdu0b")
 
 [node name="lower-ring" type="RigidBody2D" parent="." unique_id=855073776]
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -133,7 +144,8 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_kdu0b")
 
 [node name="wood-block" type="RigidBody2D" parent="." unique_id=2085543630]
-position = Vector2(0, 1)
+position = Vector2(0, 2)
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -147,7 +159,8 @@ region_rect = Rect2(234, 204, 12, 10)
 shape = SubResource("RectangleShape2D_qtfpr")
 
 [node name="wood-block2" type="RigidBody2D" parent="." unique_id=963862194]
-position = Vector2(10, 1)
+position = Vector2(20, 2)
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
@@ -161,7 +174,8 @@ region_rect = Rect2(234, 204, 12, 10)
 shape = SubResource("RectangleShape2D_qtfpr")
 
 [node name="wood-block3" type="RigidBody2D" parent="." unique_id=730309201]
-position = Vector2(-10, 1)
+position = Vector2(-20, 2)
+scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_tp2vf")
