@@ -22,9 +22,9 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		# push the player to the side and up just a little, for feedback/juice
 		# note: if it's the wrong strength, you might exit the trigger and get hit again the very next frame
-		var sign = 1;
-		if (global_position.x > body.position.x): sign = -1
-		var bumpImpulse = Vector2(sign * bumpPower, bumpExtraUp)
+		var _sign = 1;
+		if (global_position.x > body.position.x): _sign = -1
+		var bumpImpulse = Vector2(_sign * bumpPower, bumpExtraUp)
 		body.get_bumped(bumpImpulse)
 			
 		# old version: just a little hop
