@@ -27,7 +27,11 @@ func _on_body_entered(body) -> void:
 			Main.get_instance().load_level.call_deferred(target_level, false)
 
 func _input(event: InputEvent) -> void:
-	if label and event.is_action_pressed("interact") and label.visible:
+	if label and label.visible and (
+		event.is_action_pressed("interact")
+		or event.is_action_pressed("climb")
+		or event.is_action_pressed("descend")
+	):
 		player_entered.emit.call_deferred(target_level)
 		Main.get_instance().load_level.call_deferred(target_level, false)
 
