@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://1dq3pvtrygh7" path="res://resources/costumes/wizard_hat.tres" id="19_3w4mx"]
 [ext_resource type="PackedScene" uid="uid://dmlv6462nbnby" path="res://scenes/gate/gate.tscn" id="20_1ooyw"]
 [ext_resource type="PackedScene" uid="uid://qkh7ccrm8si7" path="res://scenes/gate/trigger_button.tscn" id="21_u068y"]
+[ext_resource type="Resource" uid="uid://bidr43qchmn86" path="res://resources/items/blanket_trap.tres" id="23_ai3nx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ahb"]
 size = Vector2(57, 48)
@@ -189,6 +190,10 @@ buttons = [NodePath("../TriggerButton")]
 
 [node name="TriggerButton" parent="." unique_id=414267978 instance=ExtResource("21_u068y")]
 position = Vector2(544, 260)
+
+[node name="CollectableItem" parent="." unique_id=398973522 instance=ExtResource("16_14jow")]
+position = Vector2(872, 224)
+item_data = ExtResource("23_ai3nx")
 
 [editable path="swinging_hazard"]
 [editable path="swinging_hazard_short"]
