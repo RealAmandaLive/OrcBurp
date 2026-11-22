@@ -18,15 +18,17 @@ func _ready() -> void:
 
 func _on_data_changed() -> void:
 	apple_label.text = "Apples Collected: %s" % Main.data.applesCollected
-	score_label.text = "Score: %d" % Main.data.get_score()
-	if Main.data.active_trap:
-		active_trap_count.show()
-		active_trap_icon.show()
-		active_trap_count.text = "x %d" % Main.data.inventory_items.get(Main.data.active_trap, 0)
-		active_trap_icon.texture = ItemDb.get_item(Main.data.active_trap).texture
-	else:
-		active_trap_count.hide()
-		active_trap_icon.hide()
+	if score_label:
+		score_label.text = "Score: %d" % Main.data.get_score()
+	if active_trap_count:
+		if Main.data.active_trap:
+			active_trap_count.show()
+			active_trap_icon.show()
+			active_trap_count.text = "x %d" % Main.data.inventory_items.get(Main.data.active_trap, 0)
+			active_trap_icon.texture = ItemDb.get_item(Main.data.active_trap).texture
+		else:
+			active_trap_count.hide()
+			active_trap_icon.hide()
 
 
 ## Used to set the screen to e.g. full-black.
