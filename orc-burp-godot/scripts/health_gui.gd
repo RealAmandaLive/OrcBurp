@@ -1,5 +1,5 @@
 class_name HealthGUI
-extends CanvasLayer
+extends HBoxContainer
 
 var player: Player
 
@@ -8,13 +8,11 @@ const HEART_FULL = preload("res://assets/HUD/heartGUI/fullHeart.png")
 const HEART_HALF = preload("res://assets/HUD/heartGUI/halfHeart.png")
 const HEART_EMPTY = preload("res://assets/HUD/heartGUI/emptyHeart.png")
 
-@onready var heart_container: HBoxContainer = $heartContainer
-
 func _ready() -> void:
 	Main.data.health_changed.connect(_update_health)
 	
 func _update_health(new_health: int) -> void:
-	var hearts = heart_container.get_children()
+	var hearts = get_children()
 	var max_hearts = len(hearts)
 	var full = int(new_health / HEART_SIZE)
 	var half = 1 if (new_health % HEART_SIZE) > 0 else 0

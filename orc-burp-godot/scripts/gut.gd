@@ -321,6 +321,10 @@ func throw_trap() -> void:
 	const THROW_IMPULSE_VELOCITY: float = 768.0 ## pixels per second
 	const THROWN_COLLISION_RADIUS: float = 16.0 ## pixels; we could also just get this from the sprite...
 	
+	if !Main.data.active_trap or Main.data.inventory_items.get(Main.data.active_trap, 0) <= 0:
+		p("No traps to throw")
+		return
+
 	var node_to_parent_trap: Node = Main.get_instance().current_level_root
 	
 	## Make a physics object to throw in that direction, which will carry the trap.
@@ -345,7 +349,10 @@ func throw_trap() -> void:
 	
 	## Make the Trap object itself which has the logic for hurting enemies or the player.
 	#var trap := Trap.new()
-	var trap = preload("uid://0iaf024fbyk8").instantiate() ## HACK TESTING
+	# TODO: cache these
+	var trap_item: ItemData = ItemDb.get_item(Main.data.active_trap)
+	var trap = load(trap_item.trap_scene).instantiate()
+	Main.data.remove_item_from_inventory(Main.data.active_trap, 1)
 	trap_physics.add_child(trap)
 	
 	## Lambda function to remove physics behavior but retain the Trap node.

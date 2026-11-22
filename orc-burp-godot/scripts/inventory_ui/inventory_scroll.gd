@@ -78,10 +78,13 @@ func _on_primary_button_pressed(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed and selected_item:
 			# TODO: play a sound
+			# TODO: hide the inventory UI
 			var item: ItemData = ItemDb.get_item(selected_item.item_data.id)
 			if item:
-				item.apply_item_effect()
-			Main.data.remove_item_from_inventory(selected_item.item_data.id, 1)
+				var should_remove := item.apply_item_effect()
+				if should_remove:
+					Main.data.remove_item_from_inventory(selected_item.item_data.id, 1)
+
 
 
 func _on_secondary_button_pressed(event: InputEvent) -> void:

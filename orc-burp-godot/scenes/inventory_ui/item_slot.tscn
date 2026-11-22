@@ -34,6 +34,17 @@ texture = ExtResource("2_fa8gv")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="ItemTexture" type="TextureRect" parent="." unique_id=1591625464]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 85.0
+offset_bottom = 85.0
+texture = ExtResource("5_8m25n")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="AmountLabel" type="Label" parent="." unique_id=408260646]
 layout_mode = 1
 anchors_preset = 3
@@ -50,16 +61,5 @@ grow_vertical = 0
 label_settings = SubResource("LabelSettings_34amj")
 horizontal_alignment = 2
 vertical_alignment = 2
-
-[node name="ItemTexture" type="TextureRect" parent="." unique_id=1591625464]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 1
-offset_left = 15.0
-offset_top = 15.0
-offset_right = 85.0
-offset_bottom = 85.0
-texture = ExtResource("5_8m25n")
-expand_mode = 1
-stretch_mode = 5
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

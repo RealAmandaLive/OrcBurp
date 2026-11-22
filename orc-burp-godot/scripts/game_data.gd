@@ -43,6 +43,12 @@ var applesCollected: int = 0
 			active_costume = v
 			costume_changed.emit(v)
 
+@export var active_trap: String = "":
+	set(v):
+		if v == "" or inventory_items.has(v):
+			active_trap = v
+			changed.emit()
+
 # Inventory items and costumes data - {item_name: qty}
 @export var inventory_items: Dictionary[String, int] = {}
 @export var costumes_collection: Dictionary[String, int] = {}
@@ -106,3 +112,7 @@ func add_costume_to_collection(costume) -> void:
 
 func reset_player_health() -> void:
 	playerHealth = STARTING_HEALTH
+
+
+func get_score() -> int:
+	return 42

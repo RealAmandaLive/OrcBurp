@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bidr43qchmn86"]
+
+[ext_resource type="Script" uid="uid://d34t1wwbfowtv" path="res://resources/ItemData.gd" id="1_kbs2a"]
+[ext_resource type="Texture2D" uid="uid://d1htmqtf5x71j" path="res://assets/Items/blanketTrap.png" id="2_whobu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11bk3"]
+atlas = ExtResource("2_whobu")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_kbs2a")
+id = "blanket_trap"
+name = "Blanket Trap"
+description = "asdfasdfasdf"
+texture = SubResource("AtlasTexture_11bk3")
+trap_scene = "res://scenes/blanket-trap.tscn"
+metadata/_custom_type_script = "uid://d34t1wwbfowtv"

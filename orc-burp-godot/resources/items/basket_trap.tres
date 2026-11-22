@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cac4g2n20bafy"]
+
+[ext_resource type="Script" uid="uid://d34t1wwbfowtv" path="res://resources/ItemData.gd" id="1_j0lt8"]
+[ext_resource type="Texture2D" uid="uid://dde3brad2vns3" path="res://assets/Items/basketTrap.png" id="2_35d75"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qby4j"]
+atlas = ExtResource("2_35d75")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_j0lt8")
+id = "basket_trap"
+name = "Basket Trap"
+description = "afsdfasdf asdfasd"
+texture = SubResource("AtlasTexture_qby4j")
+trap_scene = "res://scenes/basket_trap.tscn"
+metadata/_custom_type_script = "uid://d34t1wwbfowtv"

@@ -2,6 +2,10 @@ class_name HUD extends CanvasLayer
 
 @onready var apple_label: Label = $ApplesCollected/appleLabel
 @onready var fade_rect: ColorRect = $fade
+@onready var score_label: Label = %ScoreLabel
+@onready var active_trap_icon: TextureRect = %ActiveTrapIcon
+@onready var active_trap_count: Label = %ActiveTrapCount
+
 
 #------
 # FADE
@@ -10,9 +14,20 @@ var _fade_tween: Tween
 
 func _ready() -> void:
 	Main.data.changed.connect(_on_data_changed)
+	_on_data_changed()
 
 func _on_data_changed() -> void:
 	apple_label.text = "Apples Collected: %s" % Main.data.applesCollected
+	score_label.text = "Score: %d" % Main.data.get_score()
+	if Main.data.active_trap:
+		active_trap_count.show()
+		active_trap_icon.show()
+		active_trap_count.text = "x %d" % Main.data.inventory_items.get(Main.data.active_trap, 0)
+		active_trap_icon.texture = ItemDb.get_item(Main.data.active_trap).texture
+	else:
+		active_trap_count.hide()
+		active_trap_icon.hide()
+
 
 ## Used to set the screen to e.g. full-black.
 ## Primary use case is for starting the game scene.

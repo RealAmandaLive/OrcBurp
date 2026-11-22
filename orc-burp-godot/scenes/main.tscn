@@ -6,7 +6,9 @@
 [ext_resource type="FontFile" uid="uid://psrbjtoc002x" path="res://assets/Fonts/gijsuy-gijsuy-400.ttf" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dg20u65m3dgde" path="res://scenes/healthGUI.tscn" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://c5d8byhbqnra1" path="res://scripts/debug_stats.gd" id="6_tefeu"]
+[ext_resource type="Theme" uid="uid://4aac2eghy08u" path="res://resources/ui_theme.tres" id="7_choun"]
 [ext_resource type="Script" uid="uid://c4xanjeq74cpd" path="res://scripts/pause_node.gd" id="7_tipki"]
+[ext_resource type="Texture2D" uid="uid://d1htmqtf5x71j" path="res://assets/Items/blanketTrap.png" id="7_ya4ey"]
 [ext_resource type="Script" uid="uid://b6a7a13ftdbup" path="res://scripts/inventory_node.gd" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://b6fea3qf5x286" path="res://scenes/inventory_ui/inventory_ui.tscn" id="9_85g3d"]
 
@@ -21,6 +23,10 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_choun"]
+atlas = ExtResource("7_ya4ey")
+region = Rect2(0, 0, 32, 32)
 
 [node name="main" type="Node2D" unique_id=576664166]
 script = ExtResource("1_0wfyh")
@@ -42,9 +48,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-
-[node name="healthGUI" parent="HUD" unique_id=598769528 instance=ExtResource("4_tbgi4")]
-unique_name_in_owner = true
 
 [node name="ApplesCollected" type="Panel" parent="HUD" unique_id=2040360600]
 visible = false
@@ -76,15 +79,58 @@ theme_override_font_sizes/font_size = 24
 text = "Apples Collected: 0"
 
 [node name="DebugStats" type="Label" parent="HUD" unique_id=163348262]
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = -468.0
-offset_bottom = 23.0
+offset_top = -23.0
 grow_horizontal = 0
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-16, -16)
 text = "Debug: 0 burps, 0 toots, 0 jumps, 0 doubles, 0 traps, 0 deaths"
 horizontal_alignment = 2
 script = ExtResource("6_tefeu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD" unique_id=1154034900]
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="healthGUI" parent="HUD/HBoxContainer" unique_id=598769528 instance=ExtResource("4_tbgi4")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ActiveTrapIcon" type="TextureRect" parent="HUD/HBoxContainer" unique_id=881724648]
+unique_name_in_owner = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 0)
+offset_transform_scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_choun")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="ActiveTrapCount" type="Label" parent="HUD/HBoxContainer" unique_id=928120502]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_choun")
+text = "x 0"
+
+[node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer" unique_id=380608632]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("7_choun")
+text = "Score: 0"
+horizontal_alignment = 2
 
 [node name="PauseNode" type="Node" parent="." unique_id=93329242]
 process_mode = 3
