@@ -39,6 +39,10 @@ Player=""
 Enemy=""
 inventory=""
 
+[gui]
+
+theme/custom="uid://4aac2eghy08u"
+
 [input]
 
 left={

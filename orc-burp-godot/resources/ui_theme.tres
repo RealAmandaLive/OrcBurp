@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://4aac2eghy08u"]
+
+[ext_resource type="FontFile" uid="uid://txmaua63f8vq" path="res://assets/Fonts/Jersey10-Regular.ttf" id="1_cviax"]
+
+[resource]
+default_font = ExtResource("1_cviax")
+default_font_size = 48
+Label/constants/outline_size = 8
