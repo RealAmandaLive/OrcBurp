@@ -64,6 +64,7 @@ var current_speed_boost: float = 0.0
 @onready var coinSound: AudioStreamPlayer2D = $coinSound
 @onready var toot_particles: CPUParticles2D = $TootParticles
 @onready var damageSound: AudioStreamPlayer2D = $DamageSound
+@onready var climbingSound: AudioStreamPlayer2D = $ClimbingSound
 
 
 func p(args): print_rich("[bgcolor=green][color=black]Player : ", args)
@@ -162,6 +163,11 @@ func _physics_process(delta: float) -> void:
 	if player_state == PlayerStates.WALKING and is_on_floor_now:
 		if not walkingSound.playing: # don't play too often
 			walkingSound.play() # uses random pitch variation
+
+	## LADDER FOOTSTEPS
+	if player_state == PlayerStates.CLIMBING:
+		if not climbingSound.playing:
+			climbingSound.play()
 			
 	## TOOTS
 	if Input.is_action_just_pressed("toot") and can_toot:

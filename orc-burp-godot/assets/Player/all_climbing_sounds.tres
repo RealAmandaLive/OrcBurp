@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cpnapsx85i345"]
+
+[ext_resource type="AudioStream" uid="uid://dk1g86l5nejjr" path="res://assets/Audio/SFX/foot step up ladder-2.wav" id="1_1rljr"]
+
+[resource]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("1_1rljr")
