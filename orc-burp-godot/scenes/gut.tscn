@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b8rd8r06geslx" path="res://assets/Player/gut_32_toot.png" id="5_jpnpm"]
 [ext_resource type="AudioStream" uid="uid://b0m06n8adkodc" path="res://assets/Audio/Gut/eatApple.wav" id="6_kwhhm"]
 [ext_resource type="AudioStream" uid="uid://dg5h6ipw5v1nl" path="res://assets/Player/orc-sounds/toot-small.wav" id="6_lcva8"]
+[ext_resource type="Script" uid="uid://b7wlp08i16plg" path="res://scripts/camera_manager.gd" id="7_83d0j"]
 [ext_resource type="AudioStream" uid="uid://dqci48bo8ys4x" path="res://assets/Audio/SFX/footstep.wav" id="7_uy3vc"]
 [ext_resource type="AudioStream" uid="uid://ccolqgqc6emw4" path="res://assets/Player/all_toot_sounds.tres" id="8_3ao6n"]
 [ext_resource type="AudioStream" uid="uid://ch3ndpipgbxim" path="res://assets/Player/all_burp_sounds.tres" id="9_4k4mm"]
@@ -441,10 +442,11 @@ position = Vector2(3, 4)
 shape = SubResource("CapsuleShape2D_dhrd0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=826353914]
-position = Vector2(0, 2)
+process_mode = 3
 zoom = Vector2(1.4, 1.4)
 limit_left = 0
 limit_top = 0
+script = ExtResource("7_83d0j")
 
 [node name="LandingFX" type="CPUParticles2D" parent="." unique_id=314591769]
 position = Vector2(0, 32)

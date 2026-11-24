@@ -29,12 +29,21 @@ func _ready() -> void:
 func _on_button_trigger() -> void:
 	if not is_open:
 		is_open = true
-		open()
-	
+		open_with_camera_pan.call_deferred()
+
 func _on_button_rearm() -> void:
 	if is_open and autoclose:
 		is_open = false
-		close()
+		close.call_deferred()
+
+func open_with_camera_pan() -> void:
+	var cam = get_viewport().get_camera_2d()
+	if cam and cam is CameraManager:
+		process_mode = Node.PROCESS_MODE_ALWAYS
+		await cam.showcase_location(self, 1.0, open)
+		process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		open()
 
 func open() -> void:
 	if tween and tween.is_running():
@@ -43,6 +52,7 @@ func open() -> void:
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, "position", starting_pos + open_offset, tween_seconds)
+	await tween.finished
 
 func close() -> void:
 	if tween and tween.is_running():
@@ -51,3 +61,4 @@ func close() -> void:
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, "position", starting_pos, tween_seconds)
+	await tween.finished
