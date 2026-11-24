@@ -429,6 +429,7 @@ func toot() -> void:
 func _on_toot_timer_timeout() -> void:
 	can_toot = true
 	can_take_damage = true
+	current_speed_boost = 0.0
 	modulate = Color.WHITE
 
 # not super happy with this code - might be able to simplify
