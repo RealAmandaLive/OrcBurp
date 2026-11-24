@@ -11,11 +11,6 @@ radius = 8.0
 
 [node name="coin" type="Node2D" unique_id=510127483]
 script = ExtResource("1_hrslk")
-gold_amount = null
-pickup_distance = null
-magnet_delay = null
-magnet_distance = null
-magnet_power = null
 
 [node name="bounceSound" type="AudioStreamPlayer2D" parent="." unique_id=102407578]
 stream = ExtResource("2_kf73k")

@@ -6,6 +6,9 @@ extends RigidBody2D
 @export var fling_strength: float = 600.0
 @export var spin_strength: float = 1200.0
 
+var prev_vel = Vector2(0,0)
+var minBounceForSound = 40
+
 func _ready() -> void:
 	# leave parent so it moves independently
 	reparent.call_deferred(get_parent().get_parent())
@@ -18,3 +21,14 @@ func _ready() -> void:
 	# TWIRL!!!!
 	var random_spin = randf_range(-spin_strength, spin_strength)
 	apply_torque_impulse(random_spin)
+
+func maybe_bounce() -> void:
+	var velDelta = linear_velocity.distance_to(prev_vel)
+	if abs(velDelta)>minBounceForSound:
+		# print("bounce strength = "+str(velDelta))
+		if $bounceSound: 
+			if not $bounceSound.playing:
+				$bounceSound.play()
+
+func _process(delta: float) -> void:
+	maybe_bounce()

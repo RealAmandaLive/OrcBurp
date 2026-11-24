@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="1_5y8kr"]
 [ext_resource type="Script" uid="uid://kqp3ngfs1nby" path="res://scripts/fling.gd" id="1_tp2vf"]
 [ext_resource type="PackedScene" uid="uid://bqsuibrisleob" path="res://assets/Items/coin.tscn" id="2_ymhct"]
+[ext_resource type="AudioStream" uid="uid://ksow75p3fcb" path="res://assets/Audio/SFX/wood hitting floor.wav" id="5_bfs8j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdu0b"]
 size = Vector2(32, 6)
@@ -45,6 +46,9 @@ region_rect = Rect2(224, 192, 32, 6)
 position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_kdu0b")
 
+[node name="bounceSound" type="AudioStreamPlayer2D" parent="top-lid" unique_id=1053447531]
+stream = ExtResource("5_bfs8j")
+
 [node name="bottom-lid" type="RigidBody2D" parent="." unique_id=673359194]
 position = Vector2(0, 4)
 rotation = -3.1415925
@@ -78,6 +82,9 @@ region_rect = Rect2(234, 205, 12, 8)
 
 [node name="barrel-collider" type="CollisionShape2D" parent="wood-plank" unique_id=1367498623]
 shape = SubResource("RectangleShape2D_51wqt")
+
+[node name="bounceSound" type="AudioStreamPlayer2D" parent="wood-plank" unique_id=1381875862]
+stream = ExtResource("5_bfs8j")
 
 [node name="wood-plank2" type="RigidBody2D" parent="." unique_id=1412584557]
 position = Vector2(0, 2)
@@ -157,6 +164,9 @@ region_rect = Rect2(234, 204, 12, 10)
 
 [node name="barrel-collider" type="CollisionShape2D" parent="wood-block" unique_id=1464851729]
 shape = SubResource("RectangleShape2D_qtfpr")
+
+[node name="bounceSound" type="AudioStreamPlayer2D" parent="wood-block" unique_id=845667285]
+stream = ExtResource("5_bfs8j")
 
 [node name="wood-block2" type="RigidBody2D" parent="." unique_id=963862194]
 position = Vector2(20, 2)
