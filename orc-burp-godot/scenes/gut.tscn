@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://ch3ndpipgbxim" path="res://assets/Player/all_burp_sounds.tres" id="9_4k4mm"]
 [ext_resource type="AudioStream" uid="uid://dgnbta5k06hlw" path="res://assets/Audio/SFX/coins.wav" id="10_36lld"]
 [ext_resource type="Texture2D" uid="uid://bsg168p11mxpo" path="res://assets/Player/hats/wizard_hat.png" id="10_kwhhm"]
+[ext_resource type="AudioStream" uid="uid://cpnapsx85i345" path="res://assets/Player/all_climbing_sounds.tres" id="12_1kcfs"]
 [ext_resource type="AudioStream" uid="uid://ba6ao30btfq8k" path="res://assets/Audio/SFX/damage-1.wav" id="15_nkjqi"]
 [ext_resource type="AudioStream" uid="uid://dl0iatxo3ljll" path="res://assets/Audio/SFX/damage-2.wav" id="16_83d0j"]
 [ext_resource type="AudioStream" uid="uid://ciiegindeus00" path="res://assets/Audio/SFX/damage-3.wav" id="17_1kcfs"]
@@ -485,6 +486,10 @@ volume_db = -10.0
 position = Vector2(3, 1)
 stream = SubResource("AudioStreamRandomizer_krm34")
 volume_db = -25.0
+
+[node name="ClimbingSound" type="AudioStreamPlayer2D" parent="." unique_id=1891922306]
+position = Vector2(3, 1)
+stream = ExtResource("12_1kcfs")
 
 [node name="TootSounds" type="AudioStreamPlayer2D" parent="." unique_id=1458196425]
 position = Vector2(3, 1)
