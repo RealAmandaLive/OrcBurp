@@ -15,7 +15,9 @@ var gut : Node2D
 var myRB : RigidBody2D
 var thePlayer : Node2D
 var pickupSound: AudioStreamPlayer2D
+
 var prev_vel = Vector2(0,0)
+var minBounceForSound = 40
 
 func _ready() -> void:
 	# print("mini loot "+name+" spawned at "+str(int(position.x))+","+str(int(position.y)))
@@ -23,7 +25,9 @@ func _ready() -> void:
 	pickupSound = $pickupSound
 
 func maybe_bounce() -> void:
-	if (myRB.linear_velocity.distance_to(prev_vel)>0.5):
+	var velDelta = myRB.linear_velocity.distance_to(prev_vel)
+	if abs(velDelta)>minBounceForSound:
+		# print("bounce strength = "+str(velDelta))
 		if $bounceSound: 
 			if not $bounceSound.playing:
 				$bounceSound.play()
