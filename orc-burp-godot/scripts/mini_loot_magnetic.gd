@@ -15,11 +15,18 @@ var gut : Node2D
 var myRB : RigidBody2D
 var thePlayer : Node2D
 var pickupSound: AudioStreamPlayer2D
+var prev_vel = Vector2(0,0)
 
 func _ready() -> void:
 	# print("mini loot "+name+" spawned at "+str(int(position.x))+","+str(int(position.y)))
 	myRB = $RigidBody2D
 	pickupSound = $pickupSound
+
+func maybe_bounce() -> void:
+	if (myRB.linear_velocity.distance_to(prev_vel)>0.5):
+		if $bounceSound: 
+			if not $bounceSound.playing:
+				$bounceSound.play()
 
 func _process(delta: float) -> void:
 
@@ -33,6 +40,9 @@ func _process(delta: float) -> void:
 	age += delta
 	var dist = thePlayer.global_position.distance_to(myRB.global_position)
 	# print("loot age: "+str(int(age))+" dist:"+str(int(dist)))
+	
+	# bounce sound if move dir changed a lot
+	maybe_bounce()
 	
 	if age >= magnet_delay:
 		if dist <= magnet_distance:

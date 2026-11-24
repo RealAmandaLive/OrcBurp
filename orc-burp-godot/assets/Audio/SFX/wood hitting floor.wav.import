@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ksow75p3fcb"
+path="res://.godot/imported/wood hitting floor.wav-1ec502ca28ce04645d93a7f94e9de1ce.sample"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/wood hitting floor.wav"
+dest_files=["res://.godot/imported/wood hitting floor.wav-1ec502ca28ce04645d93a7f94e9de1ce.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
