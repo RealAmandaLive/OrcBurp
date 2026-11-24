@@ -53,30 +53,65 @@ scale = Vector2(2, 2)
 [node name="coin" parent="many coins" unique_id=510127483 instance=ExtResource("5_p5xdb")]
 position = Vector2(589.5, 377)
 scale = Vector2(0.5, 0.5)
+gold_amount = 1
+pickup_distance = 8.0
+magnet_delay = 1.0
+magnet_distance = 320.0
+magnet_power = 600.0
 
 [node name="coin2" parent="many coins" unique_id=395271881 instance=ExtResource("5_p5xdb")]
 position = Vector2(555, 339)
 scale = Vector2(0.5, 0.5)
+gold_amount = 1
+pickup_distance = 8.0
+magnet_delay = 1.0
+magnet_distance = 320.0
+magnet_power = 600.0
 
 [node name="coin3" parent="many coins" unique_id=1189862687 instance=ExtResource("5_p5xdb")]
 position = Vector2(601.5, 347)
 scale = Vector2(0.5, 0.5)
+gold_amount = 1
+pickup_distance = 8.0
+magnet_delay = 1.0
+magnet_distance = 320.0
+magnet_power = 600.0
 
 [node name="coin4" parent="many coins" unique_id=624806247 instance=ExtResource("5_p5xdb")]
 position = Vector2(688.5, 295.5)
 scale = Vector2(0.5, 0.5)
+gold_amount = 1
+pickup_distance = 8.0
+magnet_delay = 1.0
+magnet_distance = 320.0
+magnet_power = 600.0
 
 [node name="coin5" parent="many coins" unique_id=314147936 instance=ExtResource("5_p5xdb")]
 position = Vector2(679.5, 326)
 scale = Vector2(0.5, 0.5)
+gold_amount = 1
+pickup_distance = 8.0
+magnet_delay = 1.0
+magnet_distance = 320.0
+magnet_power = 600.0
 
 [node name="coin12" parent="many coins" unique_id=896561889 instance=ExtResource("5_p5xdb")]
 position = Vector2(371, 495.5)
 scale = Vector2(0.5, 0.5)
+gold_amount = 1
+pickup_distance = 8.0
+magnet_delay = 1.0
+magnet_distance = 320.0
+magnet_power = 600.0
 
 [node name="coin13" parent="many coins" unique_id=557380215 instance=ExtResource("5_p5xdb")]
 position = Vector2(406.5, 467)
 scale = Vector2(0.5, 0.5)
+gold_amount = 1
+pickup_distance = 8.0
+magnet_delay = 1.0
+magnet_distance = 320.0
+magnet_power = 600.0
 
 [node name="Gut" parent="." unique_id=1676850674 instance=ExtResource("6_0tocw")]
 unique_name_in_owner = true

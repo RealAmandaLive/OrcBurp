@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://de8sj0fxjoidi"
+path="res://.godot/imported/foot step up ladder-1.wav-82b2e0e31a53f864ca78ac5d7f03b520.sample"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/foot step up ladder-1.wav"
+dest_files=["res://.godot/imported/foot step up ladder-1.wav-82b2e0e31a53f864ca78ac5d7f03b520.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
