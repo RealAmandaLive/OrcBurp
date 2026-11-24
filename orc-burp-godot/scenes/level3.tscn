@@ -5,7 +5,10 @@
 [ext_resource type="TileSet" uid="uid://d0shdn727s4lt" path="res://assets/tile_set.tres" id="2_5mhml"]
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="4_6qt4k"]
 [ext_resource type="PackedScene" uid="uid://phl2ejbd72da" path="res://scenes/rat.tscn" id="4_b72m1"]
+[ext_resource type="Script" uid="uid://bdxl3fiobls6m" path="res://scripts/tile_map_inits.gd" id="4_e40mx"]
+[ext_resource type="PackedScene" uid="uid://dqvbys7jla4gj" path="res://scenes/barrel.tscn" id="5_a114e"]
 [ext_resource type="PackedScene" uid="uid://c85ri8voce3r8" path="res://scenes/apple.tscn" id="6_qewby"]
+[ext_resource type="PackedScene" uid="uid://bh48owtr6pdcy" path="res://scenes/treasure_chest.tscn" id="6_y1e0c"]
 [ext_resource type="PackedScene" uid="uid://rbl6ykqsalcp" path="res://scenes/hazard_trigger.tscn" id="7_b72m1"]
 [ext_resource type="Script" uid="uid://b1v47klesm0x1" path="res://scripts/area-ko-player.gd" id="7_bradm"]
 [ext_resource type="Script" uid="uid://bsq7tbdsyjokd" path="res://scripts/hazard_spawner.gd" id="8_5mhml"]
@@ -30,6 +33,11 @@ position = Vector2(4, -444)
 scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAAAABIAAAADAAMAAAABABIAAAADAAMAAAACABIAAAADAAMAAAADABIAAAADAAMAAAAFABIAAAADAAMAAAAJABIAAAADAAMAAAALABIAAAADAAMAAAAMABIAAAADAAMAAAANABIAAAADAAMAAAAOABIAAAADAAMAAAAPABIAAAADAAMAAAARABIAAAADAAMAAAASABIAAAADAAMAAAATABIAAAADAAMAAAAOAAcAAAAEAAUAAAAPAAcAAAAEAAUAAAAQAAcAAAAEAAUAAAADAAsAAAAEAAUAAAAAABEAAAADAAMAAAABABEAAAADAAMAAAACABEAAAADAAMAAAADABEAAAADAAMAAAAFABEAAAADAAMAAAAJABEAAAADAAMAAAALABEAAAADAAMAAAAMABEAAAADAAMAAAANABEAAAADAAMAAAAOABEAAAADAAMAAAAPABEAAAADAAMAAAARABEAAAADAAMAAAASABEAAAADAAMAAAATABEAAAADAAMAAAAAABAAAAADAAMAAAABABAAAAADAAMAAAACABAAAAADAAMAAAADABAAAAADAAMAAAAJABAAAAADAAMAAAALABAAAAADAAMAAAAMABAAAAADAAMAAAANABAAAAADAAMAAAAOABAAAAADAAMAAAAPABAAAAADAAMAAAARABAAAAADAAMAAAASABAAAAADAAMAAAATABAAAAADAAMAAAAFABAAAAADAAMAAAABAAwAAAAEAAUAAAAFAAwAAAAEAAUAAAAGAAwAAAAEAAUAAAAHAAwAAAAEAAUAAAAEAAsAAAAEAAUAAAACAAsAAAAEAAUAAAADAAwAAAAEAAUAAAAHABAAAAADAAMAAAAGABAAAAADAAMAAAAHABEAAAADAAMAAAAGABEAAAADAAMAAAAGABIAAAADAAMAAAAHABIAAAADAAMAAAAIABIAAAADAAMAAAAIABEAAAADAAMAAAAIABAAAAADAAMAAAAEAAwAAAAEAAUAAAAAAAgAAAAEAAAAAAABAAgAAAAEAAAAAAACAAgAAAAEAAAAAAADAAgAAAAEAAAAAAADAAcAAAAEAAAAAAACAAcAAAAEAAAAAAABAAcAAAAEAAAAAAAAAAcAAAAEAAAAAAAAAAkAAAAEAAAAAAABAAkAAAAEAAAAAAACAAkAAAAEAAAAAAADAAkAAAAEAAAAAAADAAoAAAAEAAAAAAACAAoAAAAEAAAAAAABAAoAAAAEAAAAAAAAAAoAAAAEAAAAAAA=")
 tile_set = ExtResource("2_5mhml")
+script = ExtResource("4_e40mx")
+tile_to_scene = Dictionary[Vector2i, PackedScene]({
+Vector2i(7, 6): ExtResource("5_a114e"),
+Vector2i(9, 6): ExtResource("6_y1e0c")
+})
 
 [node name="Gut" parent="." unique_id=1676850674 instance=ExtResource("4_6qt4k")]
 unique_name_in_owner = true
