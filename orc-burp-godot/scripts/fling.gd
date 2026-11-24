@@ -30,5 +30,5 @@ func maybe_bounce() -> void:
 			if not $bounceSound.playing:
 				$bounceSound.play()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	maybe_bounce()

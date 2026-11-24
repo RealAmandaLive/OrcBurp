@@ -1,6 +1,7 @@
 extends Area2D
 
-@export var speed : float = 100
+@export var speed : float = 250
+@export var drag : float = 0.7
 
 var direction : float = -1.0
 
@@ -21,6 +22,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	global_position.x += delta * horizontal_force
+	speed -= speed * drag * delta
 
 
 func _on_body_entered(body: Node2D) -> void:

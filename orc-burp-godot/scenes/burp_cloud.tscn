@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ckun11ev2sofc" path="res://scripts/burp_cloud.gd" id="1_uic2d"]
 [ext_resource type="Shader" uid="uid://chftu8fyqea61" path="res://scripts/knockback_shockwave.gdshader" id="1_vbkno"]
+[ext_resource type="Texture2D" uid="uid://u7s1sfg2ai0s" path="res://assets/Environment/glow64.png" id="3_61ekc"]
+[ext_resource type="Texture2D" uid="uid://vfhvif1whr01" path="res://assets/Items/collectedAnimation.png" id="4_bqurq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uic2d"]
 shader = ExtResource("1_vbkno")
@@ -16,12 +18,30 @@ shader_parameter/pixellize_size = 45.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_le5v6"]
 size = Vector2(32, 32)
 
+[sub_resource type="Gradient" id="Gradient_iynve"]
+offsets = PackedFloat32Array(0, 0.9112426)
+colors = PackedColorArray(1, 1, 1, 0.22352941, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_bqurq"]
+colors = PackedColorArray(0.8627451, 0.6117647, 0.31764707, 1, 0.4141354, 0.6597316, 0.41907158, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_61ekc"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_l7t1d"]
+offsets = PackedFloat32Array(0.112426035, 0.2751479)
+colors = PackedColorArray(1, 1, 1, 0.29803923, 1, 1, 1, 0)
+
 [node name="BurpCloud" type="Area2D" unique_id=647644205]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_uic2d")
 
 [node name="ShockwaveEffect" type="ColorRect" parent="." unique_id=8719665]
+z_index = 2
 material = SubResource("ShaderMaterial_uic2d")
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,3 +62,43 @@ shape = SubResource("RectangleShape2D_le5v6")
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="StenchParticles" type="CPUParticles2D" parent="." unique_id=374369205]
+position = Vector2(-23, 0)
+amount = 40
+texture = ExtResource("3_61ekc")
+lifetime = 3.0
+explosiveness = 0.7
+direction = Vector2(-1, 0)
+spread = 20.0
+gravity = Vector2(0, -100)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+damping_min = 25.212
+damping_max = 46.411
+scale_amount_min = 0.5
+color_ramp = SubResource("Gradient_iynve")
+color_initial_ramp = SubResource("Gradient_bqurq")
+
+[node name="BubbleParticles" type="CPUParticles2D" parent="." unique_id=1518238010]
+material = SubResource("CanvasItemMaterial_61ekc")
+position = Vector2(-2, 0)
+amount = 24
+texture = ExtResource("4_bqurq")
+lifetime = 3.0
+explosiveness = 0.3
+randomness = 0.2
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(-1, 0)
+spread = 40.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 120.0
+scale_amount_min = 0.3
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_l7t1d")
+anim_speed_min = 4.0
+anim_speed_max = 8.0

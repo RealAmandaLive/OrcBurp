@@ -169,7 +169,7 @@ func _physics_process(delta: float) -> void:
 
 	## BURPS
 	if Input.is_action_just_pressed("burp") and can_burp:
-		burp(direction)
+		burp(last_walk_dir)
 
 	## GRAVITY
 	if not can_climb and player_state != PlayerStates.TOOTING:
@@ -414,12 +414,13 @@ func toot() -> void:
 	Main.data.inc("tootCount")
 	player_state = PlayerStates.TOOTING
 	velocity.y = 0.0
+	VFX.slomo(VFX.SHORT, VFX.TREMOR)
 		
 	await get_tree().create_timer(0.3).timeout
 	can_take_damage = false
 	remaining_iframe_time = TOOT_IFRAMES_SEC
 	modulate = Color(TOOT_WHITE_BOOST, TOOT_WHITE_BOOST, TOOT_WHITE_BOOST)
-	VFX.shake(VFX.LONG , VFX.TREMOR)
+	VFX.shake(VFX.LONG, VFX.TREMOR)
 	current_speed_boost = speed_boost
 	velocity.x = TOOT_IMPULSE * last_walk_dir
 	tootSounds.play()
@@ -463,7 +464,7 @@ func burp(direction: float) -> void:
 	await get_tree().create_timer(0.2).timeout
 	burpSounds.play()
 	var burp_instance = BURP_CLOUD.instantiate()
-	burp_instance.global_position = global_position
+	burp_instance.global_position = global_position + Vector2(0, -10)
 	add_sibling(burp_instance)
 	if signf(direction) >= 0.0:
 		burp_instance.rotation = PI
