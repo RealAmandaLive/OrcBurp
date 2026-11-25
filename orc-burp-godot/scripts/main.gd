@@ -7,6 +7,9 @@ static func get_instance() -> Main:
 	assert(instance)
 	return instance
 
+static func get_player() -> Player:
+	return get_instance().current_level_root.get_tree().get_first_node_in_group(PLAYER_GROUP)
+
 static var data: GameData = GameData.new()
 
 @export_file_path("*.tscn") var first_level: String
@@ -104,11 +107,19 @@ func load_level(level_path: String, first_load: bool = false, fade_color: Color 
 	Main.data.levelName = level_path.get_file().get_basename()
 	current_level_root = load(level_path).instantiate()
 	p("loaded %s (%s)" % [level_path, Main.data.levelName])
-	
+
 	add_child(current_level_root)
 	current_level_root.name = "levelRoot"
 	_setup_level(current_level_root)
-	
+
+	var light_switch: LevelExit = _find_light_switch()
+	if light_switch and Main.data.has_turned_on_lights():
+		is_changing_level = false
+		await hud.tween_fade_color(light_switch.fade_color).finished
+		await load_level(light_switch.target_level, true, light_switch.fade_color)
+		# we don't want to fade out again because the load_level call already did it
+		return
+		
 	## Freeze our new scene's Gut
 	## I'm leaving this commented out because I'm not sure it's desired. I think
 	## it's good when leaving the scene but it feels sticky when entering one.
@@ -121,6 +132,12 @@ func load_level(level_path: String, first_load: bool = false, fade_color: Color 
 	
 	is_changing_level = false
 	set_player_frozen(false)
+
+func _find_light_switch() -> LevelExit:
+	for node in current_level_root.get_children():
+		if node is LevelExit and node.light_switch:
+			return node
+	return null
 
 func _setup_level(level_root: Node) -> void:
 	p("setting up level...")
@@ -145,6 +162,8 @@ func _setup_level(level_root: Node) -> void:
 		for node in players:
 			if node is Player:
 				node.died.connect(_on_gut_died)
+				if Main.data.has_last_location():
+					node.global_position = Main.data.get_last_location()
 	
 	p("level setup done.")
 

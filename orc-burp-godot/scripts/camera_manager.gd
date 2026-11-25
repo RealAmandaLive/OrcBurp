@@ -3,9 +3,8 @@ extends Camera2D
 
 
 func _ready() -> void:
-	var path: Path2D = get_parent().get_node_or_null("CameraPathOnLoad")
-	if path:
-		showcase_path.call_deferred(path)
+	_do_initial_showcase.call_deferred()
+
 
 func _wait_a_bit() -> void:
 	await get_tree().create_timer(0.5).timeout
@@ -18,6 +17,11 @@ func tween_to_location(gpos: Vector2, seconds: float = 1.0) -> Tween:
 	t.tween_property(self, "global_position", gpos, seconds)
 	return t
 
+
+func _do_initial_showcase() -> void:
+	var path: Path2D = get_parent().get_node_or_null("CameraPathOnLoad")
+	if path and not Main.data.has_last_location():
+		showcase_path(path)
 
 func showcase_path(path: Path2D, seconds: float = 0.0) -> void:
 	get_tree().paused = true

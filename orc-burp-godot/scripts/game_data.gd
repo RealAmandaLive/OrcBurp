@@ -22,6 +22,8 @@ var applesCollected: int = 0
 @export var solvedPuzzles: Dictionary[String, bool] = {}
 # Key=levelName, Value=has the player turned on the lights?
 @export var turnedOnLights: Dictionary[String, bool] = {}
+@export var lastLocation: Dictionary[String, Vector2] = {}
+@export var unlockedDoors: Dictionary[String, bool] = {}
 
 @export var levelName: String
 
@@ -97,6 +99,30 @@ func has_turned_on_lights() -> bool:
 
 func record_lights_turned_on() -> void:
 	turnedOnLights[levelName] = true
+
+
+func record_location(global_pos: Vector2) -> void:
+	lastLocation[levelName] = global_pos
+
+
+func get_last_location() -> Vector2:
+	return lastLocation.get(levelName, Vector2.INF)
+
+
+func has_last_location() -> bool:
+	return lastLocation.has(levelName)
+
+
+func _get_door_key(node: LevelExit) -> String:
+	return "%s:%s" % [levelName, _get_item_key(node)]
+
+
+func has_unlocked_door(exitNode: LevelExit) -> bool:
+	return unlockedDoors.get(_get_door_key(exitNode), false)
+
+
+func record_unlocked_door(exitNode: LevelExit) -> void:
+	unlockedDoors[_get_door_key(exitNode)] = true
 
 
 func get_key_count() -> int:

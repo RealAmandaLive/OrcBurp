@@ -62,3 +62,16 @@ func fade_to(alpha: float, seconds = 1.5) -> Tween:
 
 func set_fade_color(c: Color) -> void:
 	fade_rect.color = c
+
+func tween_fade_color(c: Color, seconds = 0.5) -> Tween:
+	if _fade_tween:
+		_fade_tween.kill()
+	
+	_fade_tween = create_tween()
+	_fade_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	_fade_tween.tween_property(fade_rect, "color", c, seconds)
+	
+	## Return the tween, so we can `await` the `finished` signal. 
+	## It's easier to read elsewhere
+	## by returning the tween so you actually see the "finished" verbiage
+	return _fade_tween
