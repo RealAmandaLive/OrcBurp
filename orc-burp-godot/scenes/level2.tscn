@@ -69,12 +69,21 @@ position = Vector2(22, 541)
 position = Vector2(1166, 569)
 collision_mask = 2
 script = ExtResource("5_hrcei")
-target_level = "res://scenes/level3.tscn"
+target_level = "res://scenes/level2_lights.tscn"
+fade_color = Color(1, 1, 1, 1)
 metadata/_custom_type_script = "uid://6qg0amtiyqjm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=1406801131]
 position = Vector2(21.5, -14)
 shape = SubResource("RectangleShape2D_6ep0u")
+
+[node name="Label" type="Label" parent="exit" unique_id=434894997]
+offset_left = -16.0
+offset_top = -136.0
+offset_right = 74.0
+offset_bottom = -84.0
+theme_type_variation = &"TooltipLabel"
+text = "Turn on the lights"
 
 [node name="Enemies" type="Node2D" parent="." unique_id=153438615]
 position = Vector2(830, 546)

@@ -78,7 +78,7 @@ func _input(event: InputEvent) -> void:
 #-------------
 
 ## Loads a level and fires a signal when finished.
-func load_level(level_path: String, first_load: bool) -> void:
+func load_level(level_path: String, first_load: bool = false, fade_color: Color = Color.BLACK) -> void:
 	if is_changing_level:
 		push_error("Load Level called while already changing levels.")
 		return
@@ -89,7 +89,7 @@ func load_level(level_path: String, first_load: bool) -> void:
 	
 	#fadeout
 	if not first_load:
-		hud.set_fade_color(Color.BLACK)
+		hud.set_fade_color(fade_color)
 		await hud.fade_to(1.0).finished
 	
 	if current_level_root:

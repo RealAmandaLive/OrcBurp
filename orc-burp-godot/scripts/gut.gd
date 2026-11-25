@@ -12,7 +12,7 @@ const DESCENDING_SPEED = 400
 const DAMAGE_IFRAMES_SEC = 1.0
 const TOOT_IFRAMES_SEC = 1.0
 const ACCEL_FACTOR = 15.0
-const DECEL_FACTOR = 3.0
+const DECEL_FACTOR = 4.0
 const DECEL_SCALE_FACTOR = 2.0
 const TOOT_IMPULSE = 2000.0
 const TOOT_WHITE_BOOST = 4.0
@@ -122,6 +122,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		can_double_jump = false
 		player_state = PlayerStates.DOUBLEJUMPING
+		landingFX.restart()
 		
 	## LANDING
 	if not was_on_floor_last_frame and is_on_floor_now:
@@ -464,7 +465,7 @@ func burp_hit_check(direction: float) -> void:
 func burp(direction: float) -> void:
 	can_burp = false
 	%BurpTimer.start()
-	VFX.shake(VFX.SHORT, VFX.TREMOR)
+	VFX.shake(VFX.MID, VFX.QUAKE)
 	player_state = PlayerStates.BURPING
 	Main.data.inc("burpCount")
 	await get_tree().create_timer(0.2).timeout
