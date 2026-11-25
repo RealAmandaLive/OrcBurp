@@ -8,6 +8,10 @@ extends Node2D
 		update_texture()
 @export var quantity: int = 1
 
+@export var enabled: bool = true:
+	set(v):
+		enabled = v
+		_update_enabled_state()
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var pickup_area: Area2D = $PickupArea
@@ -16,6 +20,7 @@ extends Node2D
 func _ready() -> void:
 	pickup_area.body_entered.connect(_on_body_entered)
 	update_texture.call_deferred()
+	_update_enabled_state()
 
 	# if this item was previously collected and we're loading
 	# a saved game or revisiting this room after the initial collection
@@ -26,6 +31,10 @@ func _ready() -> void:
 			queue_free()
 
 
+func _update_enabled_state() -> void:
+	visible = enabled
+	pickup_area.monitoring = enabled
+	
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		# TODO play a sound

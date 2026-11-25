@@ -17,6 +17,7 @@ signal puzzle_won
 @onready var game_canvas_layer: CanvasLayer = $GameCanvasLayer
 @onready var background_screen: ColorRect = %BackgroundScreen
 @onready var game_container: Control = %GameContainer
+@onready var collectable_key: CollectableItem = $CollectableKey
 
 var puzzle_instance: GridLockPuzzle
 var player: Player
@@ -27,10 +28,11 @@ func p(args): print_rich("[color=purple]GridlockTriggerTile : ", args)
 
 func _ready() -> void:
 	label.hide()
+	collectable_key.enabled = false
 
 
 func _on_interaction_zone_body_entered(body: Node2D) -> void:
-	if body is Player and not Main.data.has_level_key():
+	if body is Player and not Main.data.has_solved_puzzle():
 		player = body
 		label.show()
 
@@ -58,7 +60,8 @@ func _input(event: InputEvent) -> void:
 func _on_puzzle_complete() -> void:
 	hide_puzzle()
 	puzzle_won.emit.call_deferred()
-	Main.data.record_level_key()
+	Main.data.record_puzzle_solved()
+	collectable_key.enabled = true
 
 
 func show_puzzle() -> void:

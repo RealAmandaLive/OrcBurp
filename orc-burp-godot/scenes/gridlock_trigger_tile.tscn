@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cifkxjtf0boej" path="res://scripts/gridlock_trigger_tile.gd" id="1_rknjc"]
 [ext_resource type="PackedScene" uid="uid://dcj8sudacr0hx" path="res://scenes/gridlock_puzzle.tscn" id="2_wn0pv"]
+[ext_resource type="PackedScene" uid="uid://chagka2o2ctov" path="res://scenes/collectable_item.tscn" id="3_i6y82"]
+[ext_resource type="Resource" uid="uid://b5hv60akxici8" path="res://resources/items/key.tres" id="4_cjxjb"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iynve"]
 size = Vector2(32, 32)
@@ -63,6 +65,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.7137255)
 metadata/_edit_use_anchors_ = true
+
+[node name="CollectableKey" parent="." unique_id=830070358 instance=ExtResource("3_i6y82")]
+position = Vector2(-80, 0)
+item_data = ExtResource("4_cjxjb")
+enabled = null
 
 [connection signal="body_entered" from="InteractionZone" to="." method="_on_interaction_zone_body_entered"]
 [connection signal="body_exited" from="InteractionZone" to="." method="_on_interaction_zone_body_exited"]

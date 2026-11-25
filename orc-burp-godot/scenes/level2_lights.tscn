@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dt05y8puojmjs" path="res://scenes/vfx_fire-with-smoke.tscn" id="7_orvi2"]
 [ext_resource type="PackedScene" uid="uid://d3fuykihqywg" path="res://scenes/gut.tscn" id="8_vgote"]
 [ext_resource type="Script" uid="uid://6qg0amtiyqjm" path="res://scripts/level_exit.gd" id="9_7m2il"]
+[ext_resource type="PackedScene" uid="uid://dienwbqy3rey4" path="res://scenes/gridlock_trigger_tile.tscn" id="12_ena1y"]
 [ext_resource type="PackedScene" uid="uid://c85ri8voce3r8" path="res://scenes/apple.tscn" id="16_sc5f4"]
 [ext_resource type="Script" uid="uid://b1v47klesm0x1" path="res://scripts/area-ko-player.gd" id="17_lgr5o"]
 
@@ -66,6 +67,7 @@ position = Vector2(459, 557)
 collision_mask = 2
 script = ExtResource("9_7m2il")
 target_level = "res://scenes/level3.tscn"
+requires_key = true
 metadata/_custom_type_script = "uid://6qg0amtiyqjm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit" unique_id=1406801131]
@@ -102,3 +104,6 @@ metadata/_custom_type_script = "uid://b1v47klesm0x1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallBoundary" unique_id=271377038]
 shape = SubResource("WorldBoundaryShape2D_6ep0u")
+
+[node name="GridlockTriggerTile" parent="." unique_id=905078554 instance=ExtResource("12_ena1y")]
+position = Vector2(419, 277)

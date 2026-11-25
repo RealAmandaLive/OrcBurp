@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d1htmqtf5x71j" path="res://assets/Items/blanketTrap.png" id="7_ya4ey"]
 [ext_resource type="Script" uid="uid://b6a7a13ftdbup" path="res://scripts/inventory_node.gd" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://b6fea3qf5x286" path="res://scenes/inventory_ui/inventory_ui.tscn" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://cb5wu7xj2ln44" path="res://assets/Items/key.png" id="9_eb6dy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhrd0"]
 bg_color = Color(0.80784315, 0.16862746, 0.14117648, 1)
@@ -119,6 +120,22 @@ expand_mode = 3
 stretch_mode = 3
 
 [node name="ActiveTrapCount" type="Label" parent="HUD/HBoxContainer" unique_id=928120502]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_choun")
+text = "x 0"
+
+[node name="KeyIcon" type="TextureRect" parent="HUD/HBoxContainer" unique_id=1457365401]
+unique_name_in_owner = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 0)
+offset_transform_scale = Vector2(2, 2)
+texture = ExtResource("9_eb6dy")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="KeyCount" type="Label" parent="HUD/HBoxContainer" unique_id=1414881665]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_choun")

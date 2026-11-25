@@ -5,6 +5,8 @@ class_name HUD extends CanvasLayer
 @onready var score_label: Label = %ScoreLabel
 @onready var active_trap_icon: TextureRect = %ActiveTrapIcon
 @onready var active_trap_count: Label = %ActiveTrapCount
+@onready var key_icon: TextureRect = %KeyIcon
+@onready var key_count: Label = %KeyCount
 
 
 #------
@@ -29,6 +31,14 @@ func _on_data_changed() -> void:
 		else:
 			active_trap_count.hide()
 			active_trap_icon.hide()
+	if key_count:
+		if Main.data.get_key_count() > 0:
+			key_icon.show()
+			key_count.show()
+			key_count.text = "x %d" % Main.data.get_key_count()
+		else:
+			key_icon.hide()
+			key_count.hide()
 
 
 ## Used to set the screen to e.g. full-black.

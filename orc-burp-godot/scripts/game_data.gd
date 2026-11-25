@@ -18,8 +18,10 @@ var applesCollected: int = 0
 # The key of the dictionary is the levelName
 # The value is a list of item paths that have already been collected
 @export var levelItems: Dictionary[String, Array] = {}
-# Key=levelName, Value=has the player collected the key?
-@export var levelKeys: Dictionary[String, bool] = {}
+# Key=levelName, Value=has the player solved the puzzle?
+@export var solvedPuzzles: Dictionary[String, bool] = {}
+# Key=levelName, Value=has the player turned on the lights?
+@export var turnedOnLights: Dictionary[String, bool] = {}
 
 @export var levelName: String
 
@@ -81,12 +83,25 @@ func record_item_taken(item_node: Node) -> void:
 		levelItems[levelName].append(item_key)
 
 
-func has_level_key() -> bool:
-	return levelKeys.get(levelName, false)
+func has_solved_puzzle() -> bool:
+	return solvedPuzzles.get(levelName, false)
 
 
-func record_level_key() -> void:
-	levelKeys[levelName] = true
+func record_puzzle_solved() -> void:
+	solvedPuzzles[levelName] = true
+
+
+func has_turned_on_lights() -> bool:
+	return turnedOnLights.get(levelName, false)
+
+
+func record_lights_turned_on() -> void:
+	turnedOnLights[levelName] = true
+
+
+func get_key_count() -> int:
+	return inventory_items.get("key", 0)
+
 
 func add_item_to_inventory(item_name, qty) -> void:
 	if inventory_items.has(item_name):

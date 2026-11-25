@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://ct1dsosdmg4iv" path="res://scripts/gridlock_puzzle.gd" id="1_j8qjq"]
 [ext_resource type="AudioStream" uid="uid://bprg1j15j4n4k" path="res://assets/Player/orc-sounds/toot-tiny.wav" id="2_6osue"]
 [ext_resource type="PackedScene" uid="uid://l864t6lop0gt" path="res://scenes/gridlock_puzzle_piece.tscn" id="3_6ppqd"]
-[ext_resource type="AudioStream" uid="uid://b3d3wkyhfft3f" path="res://assets/Audio/splat.wav" id="3_ui5xj"]
+[ext_resource type="AudioStream" uid="uid://b3d3wkyhfft3f" path="res://assets/Audio/SFX/splat.wav" id="3_ui5xj"]
 [ext_resource type="Texture2D" uid="uid://cb5wu7xj2ln44" path="res://assets/Items/key.png" id="4_h5rmh"]
 [ext_resource type="Texture2D" uid="uid://b5yb3nsk6mt6b" path="res://assets/Environment/Tilemap32x32.png" id="4_n00mx"]
 [ext_resource type="Texture2D" uid="uid://d0sbeqpj3ek8v" path="res://assets/Gridlock/GridlockBrickCrackOverlayA160x80.png" id="4_nff62"]
