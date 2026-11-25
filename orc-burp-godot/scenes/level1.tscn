@@ -90,7 +90,7 @@ position = Vector2(743, 483)
 
 [node name="Gut" parent="." unique_id=1676850674 instance=ExtResource("3_m7ahb")]
 unique_name_in_owner = true
-position = Vector2(620, 214)
+position = Vector2(607, 486)
 
 [node name="exit" type="Area2D" parent="." unique_id=1569906749]
 position = Vector2(1076, 634)
