@@ -8,6 +8,7 @@ var item:PackedScene
 @export
 var item_properties:Dictionary[StringName, Variant]
 
+## The weight for this entry - higher values increase the probability of spawn relative to others in the loot table
 @export_range(0.0, 1e9, 0.1, "or_greater")
 var weight:float = 1.0
 
