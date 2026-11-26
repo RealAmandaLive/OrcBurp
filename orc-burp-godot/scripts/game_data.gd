@@ -71,15 +71,11 @@ func inc(property: StringName, by = 1) -> void:
 
 
 func _get_item_key(item_node: Node) -> String:
-	# TODO: This doesn't work for treasure chest or barrel state spawned items
-	# Instead we will have to track the "opened state" of those
-	# Not sure of why we skip to the 4th element in nodepath but this returns null for those
-	# so just return empty in that case and skip in caller
+	#Slice(3) here strips off the prefix to the TileMap - e.g. when clicking "Play": /root/levelRoot/GridlockTriggerTile/<itemPath...>
 	var sliced_path:NodePath = item_node.get_path().slice(3)
 	if sliced_path:
 		return sliced_path.get_concatenated_names()
 	else:
-		# TODO: Remove this warning once this case is handled
 		push_warning("GameData: Could not get sliced path for node=%s" % item_node.get_path())
 		return ""
 
@@ -95,6 +91,7 @@ func record_item_taken(item_node: Node) -> void:
 		levelItems[levelName] = []
 	var item_key: String = _get_item_key(item_node)
 	if item_key and levelItems[levelName].find(item_key) < 0:
+		print_debug("Record item(%s:%s) taken in level=%s" % [item_key, item_node.get_path(), levelName])
 		levelItems[levelName].append(item_key)
 
 

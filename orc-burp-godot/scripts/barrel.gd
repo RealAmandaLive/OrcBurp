@@ -11,6 +11,11 @@ func _enter_tree() -> void:
 	# Cannot refer to @onready variable as it is set in ready which is too late since child ready already fired
 	$LootSpawner.config = loot_config
 	
+func _ready() -> void:
+	if Main.data.is_item_taken(self):
+		hide()
+		queue_free()
+		
 func _on_body_entered(body: Node2D) -> void:
 		
 		if currentlyOpen: return # can only be opened once
@@ -28,6 +33,8 @@ func _on_body_entered(body: Node2D) -> void:
 	
 		# spawn stuff outside this event to prevent errors
 		_loot_spawner.spawn.call_deferred(position, get_parent())
+		
+		Main.data.record_item_taken(self)
 		
 		# destroy self but wait for enough time to play the sound in full
 		await get_tree().create_timer(2.0).timeout

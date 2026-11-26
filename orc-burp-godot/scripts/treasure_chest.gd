@@ -4,13 +4,18 @@ extends Area2D
 
 @onready var _loot_spawner: LootSpawner = $LootSpawner
 
+var currentlyOpen = false
+
+		
 func _enter_tree() -> void:
 	# Assign in enter tree so it is valid when ready is called
 	# Cannot refer to @onready variable as it is set in ready which is too late since child ready already fired
 	$LootSpawner.config = loot_config
-
-
-var currentlyOpen = false
+	
+func _ready() -> void:
+	if Main.data.is_item_taken(self):
+		currentlyOpen = true
+		_open_chest()
 
 func _on_body_entered(body: Node2D) -> void:
 		
@@ -24,8 +29,13 @@ func _on_body_entered(body: Node2D) -> void:
 		# play a sound effect
 		if $openSound: $openSound.play()
 		
-		# trigger the chest opening animation
-		if $AnimatedSprite2D: $AnimatedSprite2D.play("open")
+		_open_chest()
 	
 		# spawn stuff outside this event to prevent errors
-		_loot_spawner.spawn.call_deferred(position, get_parent())	
+		_loot_spawner.spawn.call_deferred(position, get_parent())
+		
+		Main.data.record_item_taken(self)
+
+func _open_chest() -> void:
+	# trigger the chest opening animation
+	if $AnimatedSprite2D: $AnimatedSprite2D.play("open")
