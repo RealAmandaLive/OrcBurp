@@ -26,9 +26,10 @@ func maybe_bounce() -> void:
 	var velDelta = linear_velocity.distance_to(prev_vel)
 	if abs(velDelta)>minBounceForSound:
 		# print("bounce strength = "+str(velDelta))
-		if $bounceSound: 
-			if not $bounceSound.playing:
-				$bounceSound.play()
+		var bounce_sound:Node = get_node_or_null("bounceSound")
+		if bounce_sound: 
+			if not bounce_sound.playing:
+				bounce_sound.play()
 
 func _process(_delta: float) -> void:
 	maybe_bounce()

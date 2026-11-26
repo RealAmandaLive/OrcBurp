@@ -22,7 +22,7 @@ var minBounceForSound = 40
 func _ready() -> void:
 	# print("mini loot "+name+" spawned at "+str(int(position.x))+","+str(int(position.y)))
 	myRB = $RigidBody2D
-	pickupSound = $pickupSound
+	pickupSound = get_node_or_null("pickupSound")
 
 func maybe_bounce() -> void:
 	var velDelta = myRB.linear_velocity.distance_to(prev_vel)
