@@ -57,6 +57,10 @@ var applesCollected: int = 0
 @export var inventory_items: Dictionary[String, int] = {}
 @export var costumes_collection: Dictionary[String, int] = {}
 
+var player_is_full_health:bool:
+	get:
+		return playerHealth >= MAX_HEALTH
+		
 # use this to increment counters and things
 # it will automatically emit the changed event, which will let
 # the HUD know it needs to update
