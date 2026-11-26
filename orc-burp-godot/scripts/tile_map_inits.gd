@@ -22,7 +22,15 @@ func replace_tiles_with_scenes() -> void:
 			# print("this tile needs a replacement!")
 			var scene: PackedScene = tile_to_scene[atlas_coords]
 			erase_cell(cell_coords) # remove the placeholder tile
+			
 			var instance := scene.instantiate() as Node2D
+			# Give the instance a stable name so that item tracking works as expected
+			instance.name = _get_tile_name(scene, cell_coords)
+			
 			var world_pos := map_to_local(cell_coords)
 			instance.global_position = to_global(world_pos)
 			target_parent.add_child(instance) # add to game scene
+
+static func _get_tile_name(scene:PackedScene, cell_coords:Vector2i) -> String:
+	var root_node_name:String = scene.get_state().get_node_name(0)
+	return "%s_%d_%d" % [root_node_name, cell_coords.x, cell_coords.y]
