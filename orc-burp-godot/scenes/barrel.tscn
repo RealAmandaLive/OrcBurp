@@ -11,9 +11,10 @@ size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdu0b"]
 size = Vector2(128, 52)
 
-[node name="Barrel" type="Area2D" unique_id=281251642]
+[node name="Barrel" type="Area2D" unique_id=1432174647]
 script = ExtResource("1_mhtw8")
 loot_config = ExtResource("2_mhtw8")
+metadata/_custom_type_script = "uid://bw4pu8m0ta25t"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1415193596]
 scale = Vector2(2, 2)

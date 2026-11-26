@@ -79,9 +79,10 @@ size = Vector2(64, 52)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdu0b"]
 size = Vector2(128, 52)
 
-[node name="TreasureChest" type="Area2D" unique_id=281251642]
+[node name="TreasureChest" type="Area2D" unique_id=1582345727]
 script = ExtResource("1_ybsko")
 loot_config = ExtResource("2_tymi3")
+metadata/_custom_type_script = "uid://b74khvq10dwpm"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1867081655]
 scale = Vector2(2, 2)

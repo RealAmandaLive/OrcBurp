@@ -1,4 +1,4 @@
-extends Area2D
+class_name TreasureChest extends Area2D
 
 @export var loot_config:LootTable
 
