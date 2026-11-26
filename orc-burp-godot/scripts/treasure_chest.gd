@@ -1,8 +1,14 @@
 extends Area2D
 
-@export var spawn_when_opened1: PackedScene
-@export var spawn_when_opened2: PackedScene
-@export var spawn_when_opened3: PackedScene
+@export var loot_config:LootTable
+
+@onready var _loot_spawner: LootSpawner = $LootSpawner
+
+func _enter_tree() -> void:
+	# Assign in enter tree so it is valid when ready is called
+	# Cannot refer to @onready variable as it is set in ready which is too late since child ready already fired
+	$LootSpawner.config = loot_config
+
 
 var currentlyOpen = false
 
@@ -22,20 +28,4 @@ func _on_body_entered(body: Node2D) -> void:
 		if $AnimatedSprite2D: $AnimatedSprite2D.play("open")
 	
 		# spawn stuff outside this event to prevent errors
-		call_deferred("spawn_loot")	
-
-func spawn_loot() -> void:
-		# spawn up to three things (particles, loot, pickups, etc)
-		if spawn_when_opened1: 
-			var loot1 = spawn_when_opened1.instantiate()
-			loot1.position = position
-			get_parent().add_child(loot1)
-		if spawn_when_opened2: 
-			var loot2 = spawn_when_opened2.instantiate()
-			loot2.position = position
-			get_parent().add_child(loot2)
-		if spawn_when_opened3: 
-			var loot3 = spawn_when_opened3.instantiate()
-			loot3.position = position
-			get_parent().add_child(loot3)
-	
+		_loot_spawner.spawn.call_deferred(position, get_parent())	

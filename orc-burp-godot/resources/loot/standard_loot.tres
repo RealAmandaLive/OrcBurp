@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="LootTable" format=3 uid="uid://cam88hxdncp7b"]
+
+[ext_resource type="Script" uid="uid://802iwj8g8ar4" path="res://resources/loot_table_entry.gd" id="1_l6bxn"]
+[ext_resource type="Script" uid="uid://d0ploqmc555cy" path="res://resources/loot_table.gd" id="2_6h3r6"]
+[ext_resource type="PackedScene" uid="uid://bqsuibrisleob" path="res://assets/Items/coin.tscn" id="2_uetl1"]
+[ext_resource type="PackedScene" uid="uid://chagka2o2ctov" path="res://scenes/collectable_item.tscn" id="3_hursd"]
+[ext_resource type="Resource" uid="uid://d074ed0tow40f" path="res://resources/items/potion.tres" id="4_rqlh6"]
+
+[sub_resource type="Resource" id="Resource_jno30"]
+script = ExtResource("1_l6bxn")
+item = ExtResource("2_uetl1")
+weight = 2.0
+metadata/_custom_type_script = "uid://802iwj8g8ar4"
+
+[sub_resource type="Resource" id="Resource_bufut"]
+script = ExtResource("1_l6bxn")
+item = ExtResource("3_hursd")
+item_properties = Dictionary[StringName, Variant]({
+&"item_data": ExtResource("4_rqlh6")
+})
+metadata/_custom_type_script = "uid://802iwj8g8ar4"
+
+[resource]
+script = ExtResource("2_6h3r6")
+entries = Array[ExtResource("1_l6bxn")]([SubResource("Resource_jno30"), SubResource("Resource_bufut")])
+max_count = 3
+metadata/_custom_type_script = "uid://d0ploqmc555cy"

@@ -2,8 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://gkbsvoyd0lhg" path="res://assets/Items/chest.png" id="1_75h8e"]
 [ext_resource type="Script" uid="uid://b74khvq10dwpm" path="res://scripts/treasure_chest.gd" id="1_ybsko"]
-[ext_resource type="PackedScene" uid="uid://bqsuibrisleob" path="res://assets/Items/coin.tscn" id="2_b1w43"]
+[ext_resource type="Resource" uid="uid://cam88hxdncp7b" path="res://resources/loot/standard_loot.tres" id="2_tymi3"]
 [ext_resource type="AudioStream" uid="uid://cdlq6dfk2min6" path="res://assets/Audio/SFX/treasure-chest-open.wav" id="3_4lyqs"]
+[ext_resource type="Script" uid="uid://d3hc5udy7uob5" path="res://scripts/loot_spawner.gd" id="5_tymi3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ybsko"]
 atlas = ExtResource("1_75h8e")
@@ -80,9 +81,7 @@ size = Vector2(128, 52)
 
 [node name="TreasureChest" type="Area2D" unique_id=281251642]
 script = ExtResource("1_ybsko")
-spawn_when_opened1 = ExtResource("2_b1w43")
-spawn_when_opened2 = ExtResource("2_b1w43")
-spawn_when_opened3 = ExtResource("2_b1w43")
+loot_config = ExtResource("2_tymi3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1867081655]
 scale = Vector2(2, 2)
@@ -104,5 +103,8 @@ shape = SubResource("RectangleShape2D_kdu0b")
 
 [node name="openSound" type="AudioStreamPlayer2D" parent="." unique_id=1843778431]
 stream = ExtResource("3_4lyqs")
+
+[node name="LootSpawner" type="Node" parent="." unique_id=1799556324]
+script = ExtResource("5_tymi3")
 
 [connection signal="body_entered" from="OpenTriggerArea" to="." method="_on_body_entered"]
