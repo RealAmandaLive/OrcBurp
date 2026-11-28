@@ -12,6 +12,7 @@ var min_count:int = 1
 var max_count:int = 1
 
 var _init:bool
+var _rand_gen := RandomNumberGenerator.new()
 
 func spawn() -> Array[Node2D]:
 	if not _init:
@@ -33,19 +34,13 @@ func spawn() -> Array[Node2D]:
 		return spawned
 	
 	var count:int = randi_range(min_count, max_count)
-	var chances := _compute_chances(viable_entries)
+	var entry_weights := _compute_weights(viable_entries)
 	
 	for i in count:
-		var prob:float = randf()
-		for index in viable_entries.size():
-			var chance:float = chances[index]
-			if prob <= chance:
-				var entry := viable_entries[index]
-				spawned.push_back(entry.spawn())
-				break
-			# Check next most likely
-			else:
-				prob -= chance
+		var choice:int = _rand_gen.rand_weighted(entry_weights)
+		if choice != -1:
+			var entry := viable_entries[choice]
+			spawned.push_back(entry.spawn())
 	
 	if OS.is_debug_build():
 		print_debug("%s: Requesting spawn: %s from count of %d" % [resource_path, spawned, count])
@@ -58,11 +53,6 @@ func _initialize() -> void:
 		if not entries[i].validate():
 			entries.remove_at(i)
 	
-	# Sort so most likely entries come first
-	entries.sort_custom(func(a:LootTableEntry, b:LootTableEntry) -> bool:
-		return a.weight > b.weight
-	)
-	
 	# Swap so min <= max
 	if max_count < min_count:
 		push_warning("%s: min_count < max_count - applied swap" % resource_path)
@@ -74,18 +64,15 @@ func _initialize() -> void:
 		
 	_init = true
 
-static func _compute_chances(values:Array[LootTableEntry]) -> PackedFloat32Array:
-	var chances:PackedFloat32Array
-	chances.resize(values.size())
+static func _compute_weights(values:Array[LootTableEntry]) -> PackedFloat32Array:
+	var weights:PackedFloat32Array
+	weights.resize(values.size())
 	
-	var weight_sum:float = 0.0
-	for entry in values:
-		weight_sum += entry.weight
-	
-	if weight_sum > 0:		
-		for i in values.size():
-			chances[i] = values[i].weight / weight_sum
+	# If all weights are 0 then make them all 1 as otherwise rand_weighted won't pick anything
+	if values.all(func(entry) -> bool: return is_zero_approx(entry.weight)):
+		weights.fill(1.0)
 	else:
-		chances.fill(1.0 / values.size())
+		for i in values.size():
+			weights[i] = values[i].weight
 
-	return chances
+	return weights
